@@ -58,6 +58,19 @@ zoekhulp of index bestaat. Verwijs de bezoeker eerst daarheen.
 > Let op: de officiële website kan wijzigen. Controleer bij twijfel of een
 > zoekhulp, index of URL nog actueel is voordat je die overneemt.
 
+### Netwerkbeperking in de bouwomgeving
+
+In deze omgeving is **directe toegang tot `nationaalarchief.nl` geblokkeerd**:
+de host staat niet op de allowlist (shell-`curl` geeft "Host not in allowlist"),
+en `WebFetch` wordt door de site met HTTP 403 geweerd. Het werkende kanaal is
+**`WebSearch`** (met `allowed_domains: ["nationaalarchief.nl"]`), dat de inhoud
+van de zoekhulpen wel indexeert.
+
+Gevolg: feiten die via WebSearch zijn verzameld (toegangsnummers,
+inventarisnummers, index-id's) zijn samenvattingen en kunnen kleine fouten
+bevatten. Markeer ze als **te verifiëren** en laat een archivaris ze tegen de
+officiële zoekhulp controleren voordat materiaal publiek wordt gebruikt.
+
 ## Mappenstructuur
 
 Output bewaren we als markdown, geordend per thema/onderwerp:

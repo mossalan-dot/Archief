@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wegwijzer militairen en marinepersoneel — Nationaal Archief</title>
+<style>
+  :root{
+    --na-blue:#0a2b4e; --na-accent:#c8102e; --bg:#f4f6f8; --card:#fff;
+    --ink:#1a1a1a; --muted:#5a6470; --line:#dde3ea; --soft:#eef3f8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.55}
+  header{background:var(--na-blue);color:#fff;padding:1.4rem 1rem}
+  header .wrap{max-width:820px;margin:0 auto}
+  header h1{margin:0 0 .25rem;font-size:1.4rem}
+  header p{margin:0;color:#cdd8e4;font-size:.95rem}
+  main{max-width:820px;margin:0 auto;padding:1rem}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:1.1rem 1.2rem;margin:1rem 0;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+  .question{font-size:1.15rem;font-weight:600;margin:.2rem 0 .9rem}
+  .hint{color:var(--muted);font-size:.92rem;margin:-.5rem 0 1rem}
+  .options{display:flex;flex-direction:column;gap:.55rem}
+  button.opt{text-align:left;cursor:pointer;border:1px solid var(--line);background:var(--soft);
+    border-radius:8px;padding:.75rem .9rem;font-size:1rem;color:var(--ink);transition:.12s}
+  button.opt:hover{border-color:var(--na-blue);background:#e3edf7}
+  button.opt .sub{display:block;color:var(--muted);font-size:.85rem;margin-top:.15rem}
+  button.opt.unsure{background:#fff;border-style:dashed}
+  .crumbs{font-size:.85rem;color:var(--muted);margin:.2rem 0 .6rem;display:flex;flex-wrap:wrap;gap:.35rem;align-items:center}
+  .crumbs .c{background:var(--soft);border:1px solid var(--line);border-radius:20px;padding:.1rem .6rem}
+  .nav{display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap}
+  .nav button{cursor:pointer;border:1px solid var(--line);background:#fff;border-radius:8px;
+    padding:.5rem .9rem;font-size:.92rem;color:var(--na-blue)}
+  .nav button:hover{background:var(--soft)}
+  .result h2{font-size:1.2rem;margin:.1rem 0 .3rem;color:var(--na-blue)}
+  .result .lead{color:var(--muted);margin:.2rem 0 1rem}
+  .src{border:1px solid var(--line);border-left:4px solid var(--na-accent);border-radius:8px;
+    padding:.85rem 1rem;margin:.8rem 0;background:#fff}
+  .src h3{margin:.1rem 0 .35rem;font-size:1.05rem}
+  .src .tag{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.03em;
+    text-transform:uppercase;color:#fff;background:var(--na-blue);border-radius:4px;padding:.1rem .4rem;margin-right:.4rem;vertical-align:middle}
+  .src .tag.index{background:#1d6b3a}
+  .src dl{margin:.5rem 0;display:grid;grid-template-columns:auto 1fr;gap:.2rem .7rem;font-size:.92rem}
+  .src dt{color:var(--muted)}
+  .src .tips{font-size:.9rem;background:var(--soft);border-radius:6px;padding:.5rem .7rem;margin-top:.5rem}
+  .src .links{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.5rem}
+  .src .links a{font-size:.9rem;text-decoration:none;color:#fff;background:var(--na-blue);
+    border-radius:6px;padding:.4rem .7rem}
+  .src .links a.alt{background:#fff;color:var(--na-blue);border:1px solid var(--na-blue)}
+  .callout{background:#fff7e6;border:1px solid #f0d089;border-radius:8px;padding:.7rem .9rem;font-size:.92rem;margin:.8rem 0}
+  footer{max-width:820px;margin:1rem auto 3rem;padding:0 1rem;color:var(--muted);font-size:.82rem}
+  footer a{color:var(--na-blue)}
+  a.toplink{color:#cdd8e4;font-size:.85rem}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Wegwijzer militairen en marinepersoneel</h1>
+    <p>Beantwoord een paar vragen en kom uit bij de juiste archieftoegang en inventarisnummers van het Nationaal Archief.</p>
+  </div>
+</header>
+
+<main>
+  <div id="crumbs" class="crumbs" hidden></div>
+  <div id="stage" class="panel"></div>
+  <div class="nav">
+    <button id="backBtn" hidden>&larr; Vorige vraag</button>
+    <button id="restartBtn" hidden>Opnieuw beginnen</button>
+  </div>
+</main>
+
+<footer>
+  <p><strong>Hoe gebruik je een gevonden toegang?</strong> Een <em>toegang</em> (ook wel
+  archief- of toegangsnummer, bijv. <code>2.13.09</code>) is de inventaris van één archief.
+  Daarbinnen vind je een persoon meestal via een <em>index</em> (naamlijst) of via het
+  <em>inventarisnummer</em> van het juiste stamboek. Klik in een resultaat op de knop om
+  rechtstreeks naar de zoekhulp, de index of de inventaris op nationaalarchief.nl te gaan.</p>
+  <p>Bron van alle verwijzingen: de zoekhulpen op
+  <a href="https://www.nationaalarchief.nl/onderzoeken/zoekhulpen/militairen-en-marinepersoneel" target="_blank" rel="noopener">nationaalarchief.nl &rsaquo; Militairen en marinepersoneel</a>.
+  Toegangsnummers en indices kunnen wijzigen — controleer bij twijfel op de officiële website.</p>
+</footer>
+
+<script>
+const BASE = "https://www.nationaalarchief.nl/onderzoeken";
+const zh = s => `${BASE}/zoekhulpen/${s}`;
+const ar = s => `${BASE}/archief/${s}`;
+const ix = s => `${BASE}/index/${s}`;
+
+/* ---- Brondefinities (resultaatkaarten) ---- */
+function card(o){ return o; }
+
+const SRC = {
+  landmacht_minderen: card({
+    type:"inventaris", titel:"Stamboeken Onderofficieren en Minderen van de Landmacht",
+    toegang:"2.13.09", periode:"1813–1924 (deels tot 1940)",
+    ingang:"Gedigitaliseerd, met naamindex per regiment",
+    tip:"Het hele archief is online. Handig om te weten bij welk <strong>regiment</strong> iemand diende (infanterie, cavalerie, artillerie, genie of marechaussee): je kiest eerst het wapen/regiment en daarna de naamindex van de juiste indienst­tredingsperiode. Weet je het regiment niet? Begin dan met de infanterie (verreweg de grootste groep).",
+    zoek:zh("militairen-onderofficieren-en-soldaten-landmacht-nederland-1813-1940"),
+    archief:ar("2.13.09")
+  }),
+  landmacht_officieren: card({
+    type:"inventaris", titel:"Dienststaten en stamboeken der Officieren van de Landmacht",
+    toegang:"2.13.04", periode:"(1750) 1814–1945",
+    ingang:"Drie naamindices: officieren 1813–1924 (invnr 1–613), officieren KNIL 1815–1950 (invnr 383–415, 437–439, 614–690), supplement BRIOP 1750–1950 (invnr 701–783)",
+    tip:"Zoek op achternaam in de index. Let op: stamboeken van officieren geboren tussen 1905 en 1924 zijn nog niet digitaal beschikbaar.",
+    zoek:zh("militairen-officieren-van-de-landmacht-1813-1940-1945"),
+    archief:ar("2.13.04")
+  }),
+  staten_van_dienst: card({
+    type:"inventaris", titel:"Staten van Dienst van de Koninklijke Landmacht (20e eeuw)",
+    toegang:"2.13.259 / 2.13.260",
+    periode:"Geboortejaren ca. 1900–1947",
+    ingang:"2.13.259: geboortejaren 1911–1920 · 2.13.260: geboortejaren (1871) 1900–1947",
+    tip:"Deze staten van dienst sluiten aan op de oudere stamboeken en zijn vooral nuttig voor wie weet wanneer de militair geboren is. Kies de toegang die bij het geboortejaar past.",
+    zoek:zh("militairen-onderofficieren-en-soldaten-landmacht-nederland-1813-1940"),
+    archief:ar("2.13.260")
+  }),
+  bataafs_landmacht: card({
+    type:"inventaris", titel:"Landmacht in de Bataafs-Franse tijd",
+    toegang:"2.01.15", periode:"ca. 1795–1813",
+    ingang:"Stamboeken, naamlijsten, conduite- en pensioenstaten van officieren, onderofficieren en minderen",
+    tip:"Eén toegang voor alle rangen in deze overgangsperiode. Raadpleeg de zoekhulp voor de opbouw van het archief.",
+    zoek:zh("militairen-in-de-bataafs-franse-tijd-1795-1813"),
+    archief:ar("2.01.15")
+  }),
+  marine_officieren: card({
+    type:"index", titel:"Marine: Stamboeken Officieren",
+    toegang:"2.12.14 (index nt00293)", periode:"1813–1940",
+    ingang:"Doorzoekbare naamindex op de stamboeken van marineofficieren",
+    tip:"Bepaal eerst in welke periode iemand in dienst trad en zoek op achternaam.",
+    zoek:zh("marinepersoneel-1795-1945"), index:ix("nt00293"), archief:ar("2.12.14")
+  }),
+  marine_schepelingen: card({
+    type:"index", titel:"Marine: Stamboeken Schepelingen en Onderofficieren",
+    toegang:"2.12.14 (index nt00294)", periode:"1813–1940",
+    ingang:"Doorzoekbare naamindex op schepelingen en onderofficieren",
+    tip:"Voor matrozen en onderofficieren van de zeemacht. Zoek op achternaam.",
+    zoek:zh("marinepersoneel-1795-1945"), index:ix("nt00294"), archief:ar("2.12.14")
+  }),
+  marine_mariniers: card({
+    type:"index", titel:"Marine: Stamboeken Mariniers",
+    toegang:"2.12.14 (index nt00295)", periode:"1813–1940",
+    ingang:"Doorzoekbare naamindex op mariniers (Korps Mariniers)",
+    tip:"Diende iemand bij het Korps Mariniers, gebruik dan deze aparte index.",
+    zoek:zh("marinepersoneel-1795-1945"), index:ix("nt00295"), archief:ar("2.12.14")
+  }),
+  marine_1795: card({
+    type:"inventaris", titel:"Stamboeken van Marineofficieren en Minderen",
+    toegang:"2.01.31", periode:"1795–1813",
+    ingang:"Stamboeken van de marine in de Bataafs-Franse tijd",
+    tip:"Voor marinepersoneel dat vóór 1813 in dienst trad. Raadpleeg de zoekhulp voor de indeling.",
+    zoek:zh("marinepersoneel-1795-1945"), archief:ar("2.01.31")
+  }),
+  marine_pensioen: card({
+    type:"inventaris", titel:"Pensioenregisters Marine",
+    toegang:"2.12.38", periode:"1814–1946",
+    ingang:"Aanvullende bron als iemand pensioen ontving",
+    tip:"Vond je iemand niet in de stamboeken? De pensioenregisters kunnen aanvullende gegevens bevatten.",
+    zoek:zh("marinepersoneel-1795-1945"), archief:ar("2.12.38")
+  }),
+  knil_minderen: card({
+    type:"inventaris", titel:"Stamboeken Onderofficieren en Minderen KNIL (Oost-Indië)",
+    toegang:"2.10.50.01 · 2.10.50 (invnr 334–443) · 2.10.50.02 (SAIP)",
+    periode:"1815–1950 (stamboeken vanaf 1832)",
+    ingang:"Naamindex op de KNIL-stamboeken; daarnaast de index 'Oost-Indië – Suppletiefolio’s'",
+    tip:"Gedigitaliseerd; klik in de index op een naam voor de scan. Let op de privacygrens: in de index zijn namen uit invnr 334–423 doorzoekbaar; de laatste nummers (424–443) nog niet i.v.m. privacywetgeving.",
+    zoek:zh("militairen-nederlands-indie-knil-1815-1950-onderofficieren-en-soldaten"),
+    archief:ar("2.10.50.01")
+  }),
+  knil_officieren: card({
+    type:"inventaris", titel:"KNIL-officieren (Oost-Indië)",
+    toegang:"2.13.04 (index officieren KNIL: invnr 383–415, 437–439, 614–690)",
+    periode:"1815–1950",
+    ingang:"Stamboeken van KNIL-officieren zijn opgenomen in de officiersindex van de Landmacht",
+    tip:"Voor officieren van het KNIL gebruik je de zoekhulp KNIL-officieren én de officiersindex van toegang 2.13.04.",
+    zoek:zh("militairen-nederlands-indie-knil-1815-1950-officieren"),
+    archief:ar("2.13.04")
+  }),
+  westindie: card({
+    type:"inventaris", titel:"Leger in West-Indië: onderofficieren en soldaten",
+    toegang:"2.10.50", periode:"1815–1950",
+    ingang:"Stamboeken van de troepenmacht in West-Indië (Suriname, Antillen) in het archief van het Ministerie van Koloniën",
+    tip:"Het West-Indische leger valt onder dezelfde koloniale toegang als het KNIL. Volg de zoekhulp voor de juiste inventarisnummers.",
+    zoek:zh("militairen-onderofficieren-en-soldaten-bij-het-leger-in-west-indie-1815-1950"),
+    archief:ar("2.10.50")
+  }),
+  staats_officieren_hoog: card({
+    type:"inventaris", titel:"Staatse leger: officieren (kapitein en hoger) — Commissieboeken",
+    toegang:"1.01.19 (invnr 1523–1543)", periode:"1581–1790",
+    ingang:"Index 'Raad van State: Commissieboeken' — aanstellingsbesluiten van officieren vanaf de rang kapitein",
+    tip:"Voor hogere officieren onder de Republiek. Zoek via de index op de Commissieboeken van de Raad van State.",
+    zoek:zh("het-staatse-leger-militairen-voor-1795"), archief:ar("1.01.19")
+  }),
+  staats_allen: card({
+    type:"index", titel:"Staatse Militairen: officieren, onderofficieren en manschappen",
+    toegang:"1.01.19 (invnr 1933–2028, index nt00366)", periode:"1707–1795",
+    ingang:"Index 'Landmacht: Officieren, Onderofficieren en Manschappen (Staatse Militairen)' — conduitestaten, rangeerlijsten en stamboeken",
+    tip:"De breedste ingang voor het Staatse leger 1707–1795, voor alle rangen. Zoek op naam in de index.",
+    zoek:zh("het-staatse-leger-militairen-voor-1795"), index:ix("nt00366"), archief:ar("1.01.19")
+  }),
+  staats_holland: card({
+    type:"inventaris", titel:"Subalterne officieren in Holland (papieren index)",
+    toegang:"3.01.04.01 (invnr 1815)", periode:"1625–1725",
+    ingang:"Papieren index op aanstelling en ontslag van subalterne officieren (Staten van Holland)",
+    tip:"Aanvullend, voor lagere officieren in Holland. Deze index is niet digitaal; vraag inventarisnummer 1815 aan in de studiezaal.",
+    zoek:zh("het-staatse-leger-militairen-voor-1795"), archief:ar("3.01.04.01")
+  }),
+  onderscheidingen: card({
+    type:"inventaris", titel:"Onderscheidingen (medailles en lintjes)",
+    toegang:"2.13.184", periode:"1815–1993",
+    ingang:"Archieven van het Bureau Onderscheidingen e.a., met naamindices; registratiekaarten van de Kanselarij der Nederlandse Orden (met datum/nummer van het Koninklijk Besluit)",
+    tip:"De Militaire Willems-Orde (sinds 1815) was tot 1946 voorbehouden aan militairen. Zoek de toekenning via de naamindices en de registratiekaarten.",
+    zoek:zh("onderscheidingen-1815-1993"), archief:ar("2.13.184")
+  }),
+  krijgsgevangenen: card({
+    type:"inventaris", titel:"Krijgsgevangenen (Tweede Wereldoorlog)",
+    toegang:"2.13.98", periode:"1940–1946",
+    ingang:"Collectie betreffende krijgsgevangenen (vooral officieren), per kamp in Duitsland",
+    tip:"De krijgsgevangenenkaarten van militairen uit 1943 (invnr 542–637) zijn op naam doorzoekbaar via de website van het NIMH (Nederlands Instituut voor Militaire Historie); zij vullen deze collectie aan.",
+    zoek:zh("militairen-en-marinepersoneel"), archief:ar("2.13.98")
+  }),
+  interneringskaarten: card({
+    type:"index", titel:"Japanse interneringskaarten: KNIL en marine",
+    toegang:"2.10.50.03 (index nt00425)", periode:"1942–1945",
+    ingang:"Index 'Japanse Interneringskaarten' — doorzoekbaar op naam, geboortedatum, kampnaam, datum en doodsoorzaak",
+    tip:"Voor KNIL- en marinemilitairen die door Japan geïnterneerd werden. De kaarten horen bij het SAIP-archief.",
+    zoek:zh("japanse-interneringskaarten-knil-en-marine-1942-1945"), index:ix("nt00425"), archief:ar("2.10.50.03")
+  }),
+  rodekruis_indie: card({
+    type:"inventaris", titel:"Burgers en militairen in Nederlands-Indië en Indonesië",
+    toegang:"2.19.278 e.a.", periode:"1940–1962",
+    ingang:"Oorlogsarchief van het Nederlandse Rode Kruis; o.a. de Centraal Indische Cartotheek (CIC, ca. 417.000 kaarten)",
+    tip:"Voor het lot van burgers én militairen in Indië rond WO II en de Bersiap-periode. Er zijn aparte gebruikersgidsen. Zoek via de indices op de Rode Kruis-collecties.",
+    zoek:zh("oorlogsarchief-rode-kruis-nederlands-indie"), archief:ar("2.19.278")
+  }),
+  voc: card({
+    type:"index", titel:"VOC: Opvarenden",
+    toegang:"1.04.02 (index nt00444)", periode:"1699–1794",
+    ingang:"Index 'VOC: Opvarenden' op de scheepssoldijboeken; militairen vanaf de rang sergeant ook in de monsterrollen",
+    tip:"Diende iemand vóór 1795 bij het leger van de VOC in Azië, dan begin je in de personeelsadministratie van de VOC. Alleen de rollen van de Kamers Amsterdam en Zeeland zijn bewaard gebleven.",
+    zoek:zh("voc-opvarenden-1699-1794"), index:ix("nt00444"), archief:ar("1.04.02")
+  })
+};
+
+/* ---- Resultaatgroepen ---- */
+const RESULTS = {
+  r_landmacht_officieren:{lead:"Officier bij de landmacht (1813–1940). Begin in de officiersindex:",src:["landmacht_officieren"]},
+  r_landmacht_minderen:{lead:"Onderofficier of soldaat bij de landmacht (1813–1924/40). Begin hier:",src:["landmacht_minderen"]},
+  r_landmacht_rang_onbekend:{lead:"Rang onbekend? De meeste militairen waren 'minderen' (gewone soldaten/onderofficieren). Begin daarom met de eerste toegang; vind je de persoon daar niet, probeer dan de officiersindex.",src:["landmacht_minderen","landmacht_officieren"]},
+  r_statenvandienst:{lead:"Voor militairen van wie je het geboortejaar (ca. 1900–1947) kent, sluiten de staten van dienst aan op de stamboeken:",src:["staten_van_dienst","landmacht_minderen"]},
+  r_bataafs_landmacht:{lead:"Landmacht in de Bataafs-Franse tijd (1795–1813), alle rangen:",src:["bataafs_landmacht"]},
+  r_marine_officieren:{lead:"Marineofficier (1813–1940):",src:["marine_officieren","marine_pensioen"]},
+  r_marine_schepelingen:{lead:"Schepeling of onderofficier bij de marine (1813–1940):",src:["marine_schepelingen","marine_pensioen"]},
+  r_marine_mariniers:{lead:"Marinier (1813–1940):",src:["marine_mariniers","marine_pensioen"]},
+  r_marine_1795:{lead:"Marinepersoneel dat vóór 1813 in dienst trad:",src:["marine_1795"]},
+  r_marine_alle:{lead:"Functie/rang onbekend? De marine heeft aparte naamindices. Probeer ze achter elkaar — begin met schepelingen/onderofficieren (de grootste groep):",src:["marine_schepelingen","marine_officieren","marine_mariniers","marine_pensioen"]},
+  r_knil_officieren:{lead:"KNIL-officier (Oost-Indië, 1815–1950):",src:["knil_officieren"]},
+  r_knil_minderen:{lead:"Onderofficier of soldaat bij het KNIL (Oost-Indië, 1815–1950):",src:["knil_minderen"]},
+  r_knil_alle:{lead:"Rang onbekend? Begin met onderofficieren en minderen (de grootste groep); vind je de persoon niet, probeer dan de officiersingang:",src:["knil_minderen","knil_officieren"]},
+  r_westindie:{lead:"Leger in West-Indië (Suriname/Antillen), onderofficieren en soldaten:",src:["westindie"]},
+  r_staats_officieren_hoog:{lead:"Hogere officier (kapitein en hoger) in het Staatse leger:",src:["staats_officieren_hoog","staats_allen"]},
+  r_staats_allen:{lead:"Staatse leger 1707–1795, alle rangen:",src:["staats_allen","staats_holland"]},
+  r_staats_alle:{lead:"Rang of periode onbekend in het Staatse leger? Begin met de brede index op alle rangen (1707–1795):",src:["staats_allen","staats_officieren_hoog","staats_holland"]},
+  r_onderscheidingen:{lead:"Een onderscheiding (medaille of lintje), zoals de Militaire Willems-Orde:",src:["onderscheidingen"]},
+  r_krijgsgevangenen:{lead:"Krijgsgevangenschap tijdens de Tweede Wereldoorlog (Europa):",src:["krijgsgevangenen"]},
+  r_interneringskaarten:{lead:"Internering in een Japans kamp (Indië, 1942–1945) — KNIL en marine:",src:["interneringskaarten"]},
+  r_rodekruis_indie:{lead:"Lot van burgers en militairen in Nederlands-Indië rond WO II en de Bersiap-periode:",src:["rodekruis_indie"]},
+  r_voc:{lead:"Dienst bij het leger van de VOC in Azië (vóór 1795):",src:["voc"]}
+};
+
+/* ---- Vragenboom ---- */
+const Q = {
+  start:{q:"Wat zoek je over deze militair?",
+    hint:"Kies wat het dichtst in de buurt komt. Weet je het niet zeker? Kies de bovenste optie — de militaire loopbaan.",
+    opts:[
+      {t:"De militaire loopbaan / persoonsgegevens",s:"Stamboek of dienststaat: geboorte, ouders, signalement, loopbaan",go:"q_onderdeel"},
+      {t:"Een onderscheiding (medaille of lintje)",s:"Bijv. de Militaire Willems-Orde",result:"r_onderscheidingen"},
+      {t:"Krijgsgevangenschap (WO II, Europa)",s:"Krijgsgevangen militairen 1940–1946",result:"r_krijgsgevangenen"},
+      {t:"Internering in een Japans kamp (Indië, WO II)",s:"KNIL en marine, 1942–1945",result:"r_interneringskaarten"},
+      {t:"Lot in Indië rond WO II / Bersiap",s:"Rode Kruis-collecties, burgers én militairen 1940–1962",result:"r_rodekruis_indie"},
+      {t:"Dienst bij de VOC (vóór 1795, Oost-Indië)",s:"Soldaten op VOC-schepen en in Azië",result:"r_voc"}
+    ]},
+  q_onderdeel:{q:"Bij welk onderdeel diende de militair?",
+    hint:"Niet zeker? Kies 'Weet ik niet' — dan help ik je het te bepalen.",
+    opts:[
+      {t:"Landmacht in Nederland",s:"Het gewone leger in het Koninkrijk / de Republiek",go:"q_periode_landmacht"},
+      {t:"Marine (zeemacht)",s:"Koninklijke Marine, inclusief mariniers",go:"q_periode_marine"},
+      {t:"KNIL — leger in Oost-Indië",s:"Koninklijk Nederlandsch-Indisch Leger",go:"q_rang_knil"},
+      {t:"Leger in West-Indië",s:"Troepenmacht in Suriname en de Antillen",result:"r_westindie"},
+      {u:true,t:"Weet ik niet",s:"Ik weet niet bij welk onderdeel hij/zij diende",go:"q_onderdeel_onbekend"}
+    ]},
+  q_onderdeel_onbekend:{q:"Geen probleem. Wat weet je wél?",
+    hint:"Aanwijzingen voor het onderdeel: een geboorte- of woonplaats in Indië wijst vaak op het KNIL; 'aan boord' of een schip op de marine; verder meestal de landmacht in Nederland.",
+    opts:[
+      {t:"Er is een band met Nederlands-Indië",s:"Geboren/gewoond in Indië, of daar gediend",go:"q_rang_knil"},
+      {t:"Het ging om de zeemacht / een schip",s:"Marine of mariniers",go:"q_periode_marine"},
+      {t:"Waarschijnlijk het gewone leger in Nederland",s:"Begin bij de landmacht",go:"q_periode_landmacht"}
+    ]},
+  q_periode_landmacht:{q:"Wanneer diende de militair (landmacht)?",
+    hint:"Weet je het jaar niet? Schat het via het geboortejaar: mensen traden meestal rond hun 18e–25e in dienst.",
+    opts:[
+      {t:"Vóór 1795 (Republiek / Staatse leger)",s:"",go:"q_rang_staats"},
+      {t:"1795–1813 (Bataafs-Franse tijd)",s:"",result:"r_bataafs_landmacht"},
+      {t:"1813 – ca. 1940 (Koninkrijk)",s:"De grootste en best ontsloten periode",go:"q_rang_landmacht"},
+      {t:"Geboren ca. 1900–1947",s:"Staten van dienst van de 20e eeuw",result:"r_statenvandienst"},
+      {u:true,t:"Weet ik niet",s:"Toon de meest gebruikte ingang (1813–1940)",go:"q_rang_landmacht"}
+    ]},
+  q_rang_landmacht:{q:"Welke rang had de militair?",
+    hint:"Officieren vormden een kleine minderheid. Weet je het niet? Kies 'Weet ik niet'.",
+    opts:[
+      {t:"Officier",s:"Bijv. luitenant, kapitein, majoor",result:"r_landmacht_officieren"},
+      {t:"Onderofficier of soldaat (minderen)",s:"Bijv. soldaat, korporaal, sergeant",result:"r_landmacht_minderen"},
+      {u:true,t:"Weet ik niet",s:"Begin bij de grootste groep en toon ook de officiersindex",result:"r_landmacht_rang_onbekend"}
+    ]},
+  q_periode_marine:{q:"Wanneer diende de militair bij de marine?",
+    hint:"Weet je het niet precies? Kies 'Weet ik niet'.",
+    opts:[
+      {t:"1795–1813",s:"Bataafs-Franse tijd",result:"r_marine_1795"},
+      {t:"1813–1940",s:"Koninklijke Marine",go:"q_rang_marine"},
+      {u:true,t:"Weet ik niet",s:"Toon de marine-indices (1813–1940)",go:"q_rang_marine"}
+    ]},
+  q_rang_marine:{q:"Welke functie of rang bij de marine?",
+    hint:"De marine heeft aparte naamindices per groep.",
+    opts:[
+      {t:"Officier",s:"",result:"r_marine_officieren"},
+      {t:"Schepeling of onderofficier",s:"Matroos, bootsman, enz.",result:"r_marine_schepelingen"},
+      {t:"Marinier",s:"Korps Mariniers",result:"r_marine_mariniers"},
+      {u:true,t:"Weet ik niet",s:"Toon alle marine-indices",result:"r_marine_alle"}
+    ]},
+  q_rang_knil:{q:"Welke rang had de KNIL-militair?",
+    hint:"Niet zeker? Kies 'Weet ik niet' — de meeste KNIL'ers waren onderofficier of soldaat.",
+    opts:[
+      {t:"Officier",s:"",result:"r_knil_officieren"},
+      {t:"Onderofficier of soldaat",s:"",result:"r_knil_minderen"},
+      {u:true,t:"Weet ik niet",s:"Begin bij de grootste groep, toon ook de officiersingang",result:"r_knil_alle"}
+    ]},
+  q_rang_staats:{q:"Welke rang in het Staatse leger (vóór 1795)?",
+    hint:"Niet zeker? Kies 'Weet ik niet' — dan begin je met de brede index.",
+    opts:[
+      {t:"Hogere officier (kapitein en hoger)",s:"Commissieboeken 1581–1790",result:"r_staats_officieren_hoog"},
+      {t:"Officier, onderofficier of soldaat (1707–1795)",s:"Brede index op alle rangen",result:"r_staats_allen"},
+      {u:true,t:"Weet ik niet",s:"Toon de brede ingang voor alle rangen",result:"r_staats_alle"}
+    ]}
+};
+
+/* ---- Engine ---- */
+const stage=document.getElementById('stage');
+const crumbsEl=document.getElementById('crumbs');
+const backBtn=document.getElementById('backBtn');
+const restartBtn=document.getElementById('restartBtn');
+let path=[]; // {node, label}
+
+function start(){ path=[{node:"start",label:null}]; render(); }
+
+function go(node,label){ path.push({node,label}); render(); }
+
+function render(){
+  const cur=path[path.length-1];
+  // crumbs
+  const labels=path.map(p=>p.label).filter(Boolean);
+  if(labels.length){ crumbsEl.hidden=false;
+    crumbsEl.innerHTML=labels.map(l=>`<span class="c">${l}</span>`).join('<span>&rsaquo;</span>'); }
+  else crumbsEl.hidden=true;
+  backBtn.hidden = path.length<2;
+  restartBtn.hidden = path.length<2;
+
+  if(cur.node.startsWith('r_')||cur.node.startsWith('result:')){ renderResult(cur.node); return; }
+  if(RESULTS[cur.node]){ renderResult(cur.node); return; }
+  renderQuestion(Q[cur.node]);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderQuestion(node){
+  let h=`<div class="question">${node.q}</div>`;
+  if(node.hint) h+=`<div class="hint">${node.hint}</div>`;
+  h+=`<div class="options">`;
+  node.opts.forEach((o,i)=>{
+    h+=`<button class="opt${o.u?' unsure':''}" data-i="${i}">${o.t}${o.s?`<span class="sub">${o.s}</span>`:''}</button>`;
+  });
+  h+=`</div>`;
+  stage.innerHTML=h;
+  stage.querySelectorAll('button.opt').forEach(b=>{
+    b.onclick=()=>{const o=node.opts[+b.dataset.i];
+      const target=o.result||o.go;
+      go(target,o.t);};
+  });
+}
+
+function renderResult(key){
+  const r=RESULTS[key];
+  let h=`<div class="result"><h2>Dit is je ingang</h2><p class="lead">${r.lead}</p>`;
+  r.src.forEach(id=>{ h+=renderSrc(SRC[id]); });
+  h+=`<div class="callout"><strong>Niets gevonden?</strong> Controleer of je de juiste periode en rang hebt gekozen, probeer een andere spelling van de achternaam, of ga via 'Vorige vraag' terug en kies 'Weet ik niet' voor een bredere ingang. Twijfel je over actualiteit? Kijk op de officiële zoekhulp.</div>`;
+  h+=`</div>`;
+  stage.innerHTML=h;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderSrc(s){
+  const tag = s.type==='index'?`<span class="tag index">Index</span>`:`<span class="tag">Inventaris</span>`;
+  let dl=`<dl>`;
+  if(s.toegang) dl+=`<dt>Toegang</dt><dd><code>${s.toegang}</code></dd>`;
+  if(s.periode) dl+=`<dt>Periode</dt><dd>${s.periode}</dd>`;
+  if(s.ingang) dl+=`<dt>Ingang</dt><dd>${s.ingang}</dd>`;
+  dl+=`</dl>`;
+  let links=`<div class="links">`;
+  if(s.index) links+=`<a href="${s.index}" target="_blank" rel="noopener">Naar de index &rsaquo;</a>`;
+  if(s.archief) links+=`<a class="alt" href="${s.archief}" target="_blank" rel="noopener">Bekijk de inventaris</a>`;
+  if(s.zoek) links+=`<a class="alt" href="${s.zoek}" target="_blank" rel="noopener">Lees de zoekhulp</a>`;
+  links+=`</div>`;
+  return `<div class="src">${tag}<h3>${s.titel}</h3>${dl}`+
+         (s.tip?`<div class="tips">💡 ${s.tip}</div>`:'')+links+`</div>`;
+}
+
+backBtn.onclick=()=>{ if(path.length>1){ path.pop(); render(); } };
+restartBtn.onclick=start;
+start();
+</script>
+</body>
+</html>
