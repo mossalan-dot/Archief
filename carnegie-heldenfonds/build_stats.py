@@ -27,6 +27,7 @@ HIGHLIGHTS = [
  ("⚡","Door de bliksem getroffen","Vier kinderen gered uit een woning die door de bliksem was getroffen.","Zelhem, 1942",5784),
  ("👶","De kinderwagen","Een moeder trok de kinderwagen met haar baby weg van een vallende benzinetank.","Rotterdam, 1954",643),
  ("🏅","36 levens — afgewezen","Jeremias van Doorn zou in zijn leven 36 mensen hebben gered; zijn aanvraag werd niettemin afgewezen.","1954",1502),
+ ("🌍","Een zeldzaam spoor","Mehmet Cakici redde een kind uit het water — een van de zeer weinige redders met een naam die wijst op de naoorlogse arbeidsmigratie. In de rest van het bestand blijft die geschiedenis vrijwel onzichtbaar.","Hengelo, 1984",9232),
 ]
 def _hl(emo,title,text,place,nr):
     na = f"https://www.nationaalarchief.nl/onderzoeken/archief/2.19.364/invnr/{nr}"
