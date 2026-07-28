@@ -256,13 +256,13 @@ TPL = r"""<!doctype html>
       <summary>Afloop</summary>
       <label class="toggle"><input type="checkbox" id="resOk" checked> ✅ geslaagde redding <span class="ct" id="ctOk"></span></label>
       <label class="toggle"><input type="checkbox" id="resPog" checked> ⭕ poging / omgekomen <span class="ct" id="ctPog"></span></label>
-      <label class="toggle"><input type="checkbox" id="afg" checked> ⚖️ ook afgewezen aanvragen <span class="ct" id="ctAfg"></span></label>
-      <label class="toggle"><input type="checkbox" id="steunTog" checked> 🤝 ook ondersteuning nabestaanden <span class="ct" id="ctSteun"></span></label>
+      <label class="toggle"><input type="checkbox" id="afg" checked> ⚖️ afgewezen aanvragen <span class="ct" id="ctAfg"></span></label>
+      <label class="toggle"><input type="checkbox" id="steunTog" checked> 🤝 ondersteuning nabestaanden <span class="ct" id="ctSteun"></span></label>
     </details>
     <details class="acc">
       <summary>Openbaarheid</summary>
-      <label class="toggle"><input type="checkbox" id="opOpen" checked> 🔓 openbaar <span class="ct" id="ctOpen"></span></label>
-      <label class="toggle"><input type="checkbox" id="opRestr" checked> 🔒 beperkt openbaar <span class="ct" id="ctRestr"></span></label>
+      <label class="toggle"><input type="checkbox" id="opOpen" checked> 👁️ openbaar <span class="ct" id="ctOpen"></span></label>
+      <label class="toggle"><input type="checkbox" id="opRestr" checked> 🔒 niet openbaar <span class="ct" id="ctRestr"></span></label>
     </details>
     <div class="foot" style="justify-content:space-between">
       <a href="./stats" style="font-weight:700">📊 Inzichten &amp; statistiek</a>
@@ -407,7 +407,7 @@ function popupHtml(p){
   if(p.afg) b+=`<span class="badge" style="background:#b91c1c">afgewezen</span>`;
   if(p.steun) b+=`<span class="badge" style="background:#78716c">🤝 ondersteuning nabestaanden</span>`;
   if(p.foto) b+=`<span class="badge" style="background:#059669">foto's</span>`;
-  if(p.openb) b+=`<span class="badge" style="background:#6b7280">beperkt openbaar tot ${esc(p.openb)}</span>`;
+  if(p.openb) b+=`<span class="badge" style="background:#6b7280">niet openbaar tot ${esc(p.openb)}</span>`;
   b+=`</div>`;
   b+=`<div style="margin-top:8px"><a href="${url}" target="_blank" rel="noopener">Bekijk in Nationaal Archief ↗</a></div>`;
   const durl=delpherURL(p);

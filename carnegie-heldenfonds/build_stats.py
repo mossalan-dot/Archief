@@ -140,14 +140,14 @@ HTML = r"""<!doctype html>
       <p class="cap">Ruim driekwart is een redding <b>uit het water</b> — Nederland is een waterland.</p>
       <div class="cwrap"><canvas id="cAard"></canvas></div></div>
 
-    <div class="card"><div class="h2row"><h2>Reddingen door de tijd</h2>
+    <div class="card wide"><div class="h2row"><h2>Reddingen door de tijd</h2>
       <span class="seg" id="segRed"><button data-g="jaar" class="on">per jaar</button><button data-g="dec">per decennium</button></span></div>
-      <p class="cap">Alle aanvragen per periode, gesplitst in <b>toegekend</b> en <b>afgewezen</b>. Het totaal piekt in de <b>jaren '50</b>; het afgewezen-aandeel groeit daarna mee.</p>
+      <p class="cap">Alle aanvragen per periode (vanaf 1910), gesplitst in <b>toegekend</b> en <b>afgewezen</b>. Het totaal piekt in de <b>jaren '50</b>; het afgewezen-aandeel groeit daarna mee.</p>
       <div class="cwrap"><canvas id="cTime"></canvas></div></div>
 
     <div class="card wide"><h2>Van paard naar auto</h2>
-      <p class="cap">Reddingen van <b>op hol geslagen paarden</b> verdwijnen na de jaren '50, terwijl reddingen
-      uit een <b>te water geraakte auto</b> juist toenemen met de opkomst van de auto — de tijdgeest in twee lijnen.</p>
+      <p class="cap">Als <b>aandeel van alle reddingen</b> per decennium (zo telt het ongelijke aantal dossiers per periode niet mee): reddingen van
+      <b>op hol geslagen paarden</b> verdwijnen na de jaren '50, terwijl <b>auto's te water</b> juist opkomen — de tijdgeest in twee lijnen.</p>
       <div class="cwrap"><canvas id="cShift"></canvas></div></div>
 
     <div class="card"><h2>Hoe gevaarlijk was elke redding?</h2>
@@ -254,37 +254,46 @@ function timeChart(canvas, seg, yData, dData, color, unit){
   });
   draw('jaar');
 }
-// Reddingen door de tijd — gestapeld: toegekend + afgewezen (jaar/decennium)
+// Reddingen door de tijd — gestapeld: toegekend + afgewezen (per jaar vanaf 1910 / decennium)
 (function(){
+  const yi = S.years.findIndex(y=>y>=1910);      // per jaar vanaf 1910
+  const yrL = S.years.slice(yi), yrC = S.year_counts.slice(yi), yrR = S.year_rej.slice(yi);
+  const di = S.decades.findIndex(d=>d>=1910);    // decennia vanaf 1910
+  const decL = decLabels.slice(di), decC = S.decade_counts.slice(di), decR = S.decade_rej.slice(di);
   let chart;
   function draw(g){
     if(chart) chart.destroy();
-    const jaar=g==='jaar';
-    const tot=jaar?S.year_counts:S.decade_counts, rej=jaar?S.year_rej:S.decade_rej;
-    const toeg=tot.map((t,i)=>t-rej[i]);
-    chart=new Chart(cTime,{type:'bar',data:{labels:jaar?yearLabels:decLabels,datasets:[
-      {label:'Toegekend',data:toeg,backgroundColor:ACC,stack:'s',maxBarThickness:34},
-      {label:'Afgewezen',data:rej,backgroundColor:'#eb6834',stack:'s',maxBarThickness:34}]},
+    const jaar = g==='jaar';
+    const labels = jaar?yrL:decL, tot = jaar?yrC:decC, rej = jaar?yrR:decR;
+    const toeg = tot.map((t,i)=>t-rej[i]);
+    chart=new Chart(cTime,{type:'bar',data:{labels,datasets:[
+      {label:'Toegekend',data:toeg,backgroundColor:ACC,stack:'s',maxBarThickness:44},
+      {label:'Afgewezen',data:rej,backgroundColor:'#eb6834',stack:'s',maxBarThickness:44}]},
       options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
         plugins:{legend:{position:'top',labels:{color:INK,usePointStyle:true,boxWidth:10}},
           tooltip:{...tip,callbacks:{title:c=>jaar?c[0].label:("Jaren "+c[0].label),
             footer:it=>{const t=it.reduce((s,i)=>s+i.raw,0);const r=it.find(i=>i.dataset.label==='Afgewezen');
               return t?"totaal "+money(t)+" · "+Math.round(100*(r?r.raw:0)/t)+"% afgewezen":"";}}}},
-        scales:{x:{...noGrid,stacked:true,ticks:{color:MUT,autoSkip:true,maxTicksLimit:jaar?11:9,maxRotation:0}},
+        scales:{x:{...noGrid,stacked:true,ticks:{color:MUT,autoSkip:false,maxRotation:0,
+                  callback:jaar?function(v,i){const y=labels[i];return y%5===0?y:'';}:undefined}},
                 y:{...gridX,stacked:true,beginAtZero:true,ticks:{color:MUT,callback:v=>money(v)}}}}});
   }
   segRed.querySelectorAll('button').forEach(b=>b.onclick=()=>{segRed.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');draw(b.dataset.g);});
   draw('jaar');
 })();
 
-// 3. Paard -> auto (two lines, decennium)
-new Chart(cShift,{type:'line',data:{labels:decLabels,datasets:[
-  {label:"🐴 Op hol geslagen paard",data:S.cat_decade.dier,borderColor:"#4a3aa7",backgroundColor:"#4a3aa7",tension:.35,borderWidth:2.5,pointRadius:3,pointHoverRadius:6},
-  {label:"🚗 Auto te water",data:S.cat_decade.auto,borderColor:"#e34948",backgroundColor:"#e34948",tension:.35,borderWidth:2.5,pointRadius:3,pointHoverRadius:6}]},
+// 3. Paard -> auto — als AANDEEL van alle reddingen per decennium (vanaf 1910),
+//    zodat het ongelijke totaalvolume per periode het beeld niet vertekent.
+{const di=S.decades.findIndex(d=>d>=1910);
+ const dl=decLabels.slice(di), tot=S.decade_counts.slice(di);
+ const pct=arr=>arr.slice(di).map((n,i)=>tot[i]?Math.round(1000*n/tot[i])/10:0);
+new Chart(cShift,{type:'line',data:{labels:dl,datasets:[
+  {label:"🐴 Op hol geslagen paard",data:pct(S.cat_decade.dier),borderColor:"#4a3aa7",backgroundColor:"#4a3aa7",tension:.35,borderWidth:2.5,pointRadius:3,pointHoverRadius:6},
+  {label:"🚗 Auto te water",data:pct(S.cat_decade.auto),borderColor:"#e34948",backgroundColor:"#e34948",tension:.35,borderWidth:2.5,pointRadius:3,pointHoverRadius:6}]},
   options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
     plugins:{legend:{position:'top',labels:{color:INK,usePointStyle:true,pointStyle:'line',boxWidth:22}},
-      tooltip:{...tip,callbacks:{title:c=>"Jaren "+c[0].label}}},
-    scales:{x:noGrid,y:{...gridX,beginAtZero:true,ticks:{color:MUT}}}}});
+      tooltip:{...tip,callbacks:{title:c=>"Jaren "+c[0].label,label:c=>c.dataset.label+": "+c.raw+"% van de reddingen"}}},
+    scales:{x:noGrid,y:{...gridX,beginAtZero:true,ticks:{color:MUT,callback:v=>v+"%"}}}}});}
 
 // 4. Wie werd gered — donut
 {const vl=[["kind","Kind","#eda100"],["volwassene","Volwassene","#2a78d6"],["beide","Kind + volwassene","#4a3aa7"],["onbekend","Onbekend","#c9c9c4"]];
