@@ -241,7 +241,7 @@ HTML = r"""<!doctype html>
       <div class="cwrap tall"><canvas id="cLand"></canvas></div></div>
 
     <div class="card wide"><h2>Wanneer wordt het archief openbaar?</h2>
-      <p class="cap">Nu is <b>__OPENPCT__%</b> van de dossiers openbaar; de rest opent geleidelijk (veelal ~75 jaar na de redding, om privacyredenen). Pas rond <b>2085</b> is alles vrij raadpleegbaar.</p>
+      <p class="cap">Nu is <b>__OPENPCT__%</b> van de dossiers openbaar; de rest opent geleidelijk (veelal ~75 jaar na de redding, om privacyredenen). Pas rond <b>2085</b> is alles openbaar.</p>
       <div class="cwrap"><canvas id="cOpenb"></canvas></div></div>
   </div>
 
