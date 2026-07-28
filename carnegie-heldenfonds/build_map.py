@@ -25,16 +25,25 @@ for r in recs:
         continue
     n_range += 1
     det = r.get("detail")
-    cat = categorize(r["desc"], det)
     res = outcome(r["desc"])
     steun = is_steun(r["desc"])
     who = extract_person(r["desc"])
+    # meerdere reddingsdaden per dossier (gescheiden door ';'): categoriseer per daad
+    segs = r["desc"].split(";")
+    def seg_for(place):
+        for s in segs:
+            if place in s or ("te " + place) in s:
+                return s
+        return r["desc"]
     placed_any = False
     for p in r["places"]:
         g = cache.get(p)
         if not g:
             continue
         placed_any = True
+        seg = seg_for(p)                       # de reddingsdaad die bij deze plaats hoort
+        cat = categorize(seg, det)
+        res = outcome(seg)
         # prefer street/waterway-level coordinate if we have a good one
         prec = "plaats"; lat = g["lat"]; lon = g["lon"]
         if det:
@@ -189,6 +198,18 @@ TPL = r"""<!doctype html>
   .leaflet-popup-content-wrapper{border-radius:12px}
   .credit{position:absolute;z-index:1000;bottom:8px;left:14px;font-size:10px;color:#374151;background:#ffffffcc;
     padding:3px 8px;border-radius:7px}
+  /* welkomst-overlay (eerste bezoek) */
+  #welcome{position:fixed;inset:0;z-index:2000;background:#0b0b0bcc;backdrop-filter:blur(2px);display:none;place-items:center;padding:20px}
+  #welcome.show{display:grid}
+  #welcome .box{background:#fff;border-radius:18px;max-width:440px;width:100%;padding:22px 26px;box-shadow:0 24px 70px #0007}
+  #welcome .wlogo{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:25px;margin-bottom:10px;background:linear-gradient(135deg,#0e7490,#0891b2);box-shadow:0 2px 8px #0e749055}
+  #welcome h2{margin:0 0 4px;font-size:19px;letter-spacing:-.01em}
+  #welcome .wsub{color:#6b7280;font-size:13px;margin:0 0 14px;line-height:1.5}
+  #welcome ul{margin:0 0 18px;padding-left:20px;font-size:13.5px;line-height:1.65}
+  #welcome .wfoot{display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap}
+  #welcome label{font-size:12.5px;color:#6b7280;display:flex;gap:6px;align-items:center;cursor:pointer}
+  #welcome button{background:var(--accent);color:#fff;border:none;padding:10px 18px;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px}
+  #welcome button:hover{background:#0b5c73}
   @media(max-width:600px){#panel{width:calc(100vw - 28px)} #listp{width:calc(100vw - 28px)}}
 </style>
 </head>
@@ -236,7 +257,7 @@ TPL = r"""<!doctype html>
       <label class="toggle"><input type="checkbox" id="opRestr" checked> 🔒 beperkt openbaar <span class="ct" id="ctRestr"></span></label>
     </details>
     <div class="foot" style="justify-content:space-between">
-      <a href="./stats" style="font-weight:700">📊 Inzichten &amp; statistiek →</a>
+      <a href="./stats" style="font-weight:700">📊 Inzichten &amp; statistiek</a>
       <a href="./over" style="color:#6b7280">ℹ️ Over</a>
     </div>
   </div>
@@ -253,6 +274,21 @@ TPL = r"""<!doctype html>
 
 <div class="credit">Kaart &copy; OpenStreetMap-bijdragers &middot; data: Nationaal Archief 2.19.364</div>
 
+<div id="welcome"><div class="box">
+  <div class="wlogo">🛟</div>
+  <h2>Carnegie Heldenfonds op de kaart</h2>
+  <p class="wsub">Ruim 9.600 beloonde reddingen (1903–1987), gestructureerd uit het archief van het Nationaal Archief.</p>
+  <ul>
+    <li><b>Filter</b> links op aard van de redding, periode, afloop en openbaarheid.</li>
+    <li>Klik een <b>stads-cluster</b> voor een doorzoekbare dossierlijst.</li>
+    <li>Klik een <b>marker</b> voor de omschrijving, de archieflink en een krantenzoekopdracht.</li>
+  </ul>
+  <div class="wfoot">
+    <label><input type="checkbox" id="wHide"> niet meer tonen</label>
+    <button id="wClose">Kaart verkennen →</button>
+  </div>
+</div></div>
+
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 <script>
@@ -263,7 +299,7 @@ const CATS_FULL = __CATSFULL__;
 const COL  = __COL__;
 const EMO  = __EMO__;
 
-const map = L.map('map',{preferCanvas:true}).setView([52.13,5.25],8);
+const map = L.map('map',{preferCanvas:true,zoomControl:false}).setView([52.13,5.25],8);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:''}).addTo(map);
 
 // build category chips (with per-category counts)
@@ -482,6 +518,15 @@ zoomAll.onAdd=function(){
   return d;
 };
 zoomAll.addTo(map);
+
+// welkomst-overlay bij eerste bezoek
+const welcome=document.getElementById('welcome');
+if(!localStorage.getItem('carnegieWelcomeHidden')) welcome.classList.add('show');
+document.getElementById('wClose').onclick=()=>{
+  if(document.getElementById('wHide').checked) localStorage.setItem('carnegieWelcomeHidden','1');
+  welcome.classList.remove('show');
+};
+welcome.addEventListener('click',e=>{ if(e.target===welcome) welcome.classList.remove('show'); });
 </script>
 </body>
 </html>"""

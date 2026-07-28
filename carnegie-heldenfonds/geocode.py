@@ -32,6 +32,7 @@ ALIAS = {
     "Wansum": "Wanssum",                 # -> Limburg (was VK)
     "Wychen": "Wijchen",                 # -> Gelderland (was Polen)
     "Camp": "Bergen, Noord-Holland",     # "Camp (Bergen)" Noordzee (was Texas)
+    "Snek": "Sneek",                     # bron-typfout
 }
 # European-NL bounding box so nl-queries never return Caribbean "Nederland" (Curaçao etc.)
 NL_VIEWBOX = "3.2,53.7,7.4,50.6"

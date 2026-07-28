@@ -113,12 +113,22 @@ def is_place_start(t):
         return True
     return False
 
+PLACE_VERB = re.compile(r'\b(redde(?:n)?|poogde(?:n)?|probeerde(?:n)?|bracht(?:en)?|nam(?:en)?|gedroegen|'
+                        r'hielp(?:en)?|verrichtte(?:n)?|trok(?:ken)?|verloste(?:n)?|maakte|assisteerde|'
+                        r'voorkwam|bevrijdde|redt|snelde|schoot|dook)\b')
 def extract_places(desc):
     places = []
     # normalise the 'te te' typo and split article-apostrophe hyphen artefacts
     d = re.sub(r'\bte te\b', 'te', desc)
     d = re.sub(r"(['’][sStT])-\s+", r"\1-", d)   # "'s- Gravenhage" -> "'s-Gravenhage"
-    for mm in re.finditer(r'\b(?:te|nabij)\s+', d):
+    vm = PLACE_VERB.search(d)                     # positie van het reddingswerkwoord
+    for mm in re.finditer(r'\b(te|nabij)\s+', d):
+        # naam-partikel "te" (Wilhelmus te Pas) zit vóór het werkwoord en volgt op een hoofdletter-naam;
+        # echte reddingsplaatsen ("in 1931 te Amsterdam", "uit de Gouwe te Boskoop") staan ná het werkwoord.
+        if mm.group(1) == "te" and vm and mm.start() < vm.start():
+            pre = re.search(r'(\S+)\s*$', d[:mm.start()])
+            if pre and re.match(r"^[A-ZÀ-Þ][a-zà-ÿ'’.-]*$", pre.group(1)):
+                continue
         start = mm.end()
         rest = d[start:]
         toks = rest.split()

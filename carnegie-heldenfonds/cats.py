@@ -5,14 +5,14 @@ import re
 
 # volgorde/labels/kleuren/emoji — één bron van waarheid (ondersteuning is GEEN aard-categorie
 # maar een aparte vlag; de daad van de overleden redder wordt zelf gecategoriseerd)
-CAT_ORDER = ["water","zee","ijs","auto","trein","brand","dier","onbekend","overig"]
+CAT_ORDER = ["water","zee","ijs","auto","trein","vliegtuig","brand","dier","onbekend","overig"]
 CAT_LABEL = {"water":"Water","zee":"Zee/kust","ijs":"IJs","auto":"Auto","trein":"Trein/spoor",
-             "brand":"Brand","dier":"Op hol/dier","onbekend":"Onvermeld","overig":"Overig"}
+             "vliegtuig":"Vliegtuig","brand":"Brand","dier":"Op hol/dier","onbekend":"Onvermeld","overig":"Overig"}
 CAT_FULL  = {"water":"Binnenwater","zee":"Zee / kust","ijs":"IJs","auto":"Auto te water","trein":"Trein / spoor",
-             "brand":"Brand","dier":"Op hol / dier","onbekend":"Aard onvermeld","overig":"Overig"}
+             "vliegtuig":"Vliegtuigongeval","brand":"Brand","dier":"Op hol / dier","onbekend":"Aard onvermeld","overig":"Overig"}
 CAT_COL   = {"water":"#2563eb","zee":"#0e7490","ijs":"#06b6d4","auto":"#dc2626","trein":"#a16207",
-             "brand":"#ea580c","dier":"#7c3aed","onbekend":"#a8a29e","overig":"#6b7280"}
-CAT_EMO   = {"water":"🌊","zee":"🚢","ijs":"🧊","auto":"🚗","trein":"🚂","brand":"🔥","dier":"🐴",
+             "vliegtuig":"#0284c7","brand":"#ea580c","dier":"#7c3aed","onbekend":"#a8a29e","overig":"#6b7280"}
+CAT_EMO   = {"water":"🌊","zee":"🚢","ijs":"🧊","auto":"🚗","trein":"🚂","vliegtuig":"✈️","brand":"🔥","dier":"🐴",
              "onbekend":"❔","overig":"🆘"}
 
 # administratieve/steun-dossiers (aan het begin herkenbaar)
@@ -39,6 +39,9 @@ def categorize(desc, detail=None):
         return "auto"
     if re.search(r'\btrein|spoorweg|spoorlijn|spoorbaan|\boverweg|\brails\b|locomotief|het spoor|spoorrails', d):
         return "trein"
+    if re.search(r'vliegtuig|zweefvliegtuig|\bpiloot|neergestort|neerstort|luchtvaart|vliegramp|straaljager|'
+                 r'sportvliegtuig|vliegongeval', d):
+        return "vliegtuig"
     if re.search(r'brand|vuur|vlammen|in brand|brandende', d):
         return "brand"
     if re.search(r'op hol|hol geslagen|hollende?|dolle hond|aangevallen door (?:een )?(?:hond|stier|dier|koe)|'
@@ -46,10 +49,11 @@ def categorize(desc, detail=None):
         return "dier"
     if re.search(r'noordzee|waddenzee|zuiderzee|\bzee\b|op zee|schipbreuk|schip\b|vrachtschip|binnenschip|'
                  r'zeeschip|opvarende|coaster|sleepboot|duwbak|scheepsramp|bemanning|reddingb?oot|reddingsboot|'
-                 r'\bstrand|branding|\bkust|\bkotter|vissersvaartuig', d):
+                 r'gezonken|\bzonk\b|stoomschip|\bs\.?s\.?\b|\bstrand|branding|\bkust|\bkotter|vissersvaartuig', d):
         return "zee"
     if re.search(r'water|gracht|haven|kanaal|sloot|vaart|rivier|singel|plas|meer|kolk|wiel|dok|dijk|'
-                 r'kade|wetering|tocht|boezem|drenkel|verdrink|verdronk|te water', d):
+                 r'kade|wetering|tocht|boezem|drenkel|verdrink|verdronk|te water|'
+                 r'\bboot|bootje|roeiboot|sloep|schuit|praam|\bkano|kajak|punter|schipper|\bjol\b', d):
         return "water"
     if ONBEKEND.search(d):
         return "onbekend"

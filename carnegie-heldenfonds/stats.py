@@ -108,6 +108,24 @@ for x in recs:
     group["meerdere" if " en " in head else "solo"] += 1
 
 decades = sorted(d for d in decade_counts)
+
+# openbaarheid door de tijd: wanneer wordt elk (beperkt) dossier openbaar?
+tot = len(recs)
+reeds_open = sum(1 for x in recs if not x["openbaar_tot"])
+open_years = sorted(int(x["openbaar_tot"][-4:]) for x in recs if x["openbaar_tot"])
+oy_from, oy_to = 1988, (max(open_years) if open_years else 2000)
+openb_years = list(range(oy_from, oy_to + 1))
+openb_pct = []
+for Y in openb_years:
+    openbaar = reeds_open + sum(1 for oy in open_years if oy <= Y)
+    openb_pct.append(round(100 * openbaar / tot, 1))
+
+# provincie per 100.000 inwoners (volkstelling 1947, in duizenden; Flevoland bestond nog niet)
+POP1947 = {"Groningen":452,"Friesland":465,"Drenthe":267,"Overijssel":621,"Gelderland":1066,
+           "Utrecht":561,"Noord-Holland":1868,"Zuid-Holland":2190,"Zeeland":255,"Noord-Brabant":1145,"Limburg":700}
+prov_pc = sorted(([p, round(prov_counts[p] / POP1947[p] * 100, 1)] for p in prov_counts if p in POP1947),
+                 key=lambda t: -t[1])
+
 stats = {
     "totaal": len(recs),
     "geplot": sum(1 for x in recs if any(cache.get(p) for p in x["places"])),
@@ -132,6 +150,10 @@ stats = {
     "provinces": prov_counts.most_common() + [["Buitenland", bl_counts["buitenland"]]],
     "binnenbuiten": {"binnenland": bl_counts["binnenland"], "buitenland": bl_counts["buitenland"]},
     "landen": land_counts.most_common(),
+    "provinces_pc": prov_pc,
+    "reeds_open": reeds_open,
+    "openb_years": openb_years,
+    "openb_pct": openb_pct,
     "top_waters": water_counts.most_common(15),
 }
 json.dump(stats, open(f"{WORK}/stats.json","w",encoding="utf-8"), ensure_ascii=False, indent=1)

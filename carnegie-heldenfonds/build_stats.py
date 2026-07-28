@@ -124,6 +124,10 @@ HTML = r"""<!doctype html>
       <p class="cap">De waterrijke <b>Randstad</b> (Zuid- en Noord-Holland) domineert; onderaan de reddingen in het <b>buitenland</b>.</p>
       <div class="cwrap tall"><canvas id="cProv"></canvas></div></div>
 
+    <div class="card"><h2>Per provincie — per 100.000 inwoners</h2>
+      <p class="cap">Relatief gezien voert de <b>Randstad</b> ook per hoofd van de bevolking aan, maar <b>Drenthe</b> en <b>Zeeland</b> stijgen. Indicatief (t.o.v. de volkstelling 1947; Flevoland bestond nog niet).</p>
+      <div class="cwrap tall"><canvas id="cProvPC"></canvas></div></div>
+
     <div class="card"><h2>In welk water?</h2>
       <p class="cap">Waar een specifieke gracht/haven/rivier genoemd is — de <b>Noordzee</b> bovenaan.</p>
       <div class="cwrap tall"><canvas id="cWater"></canvas></div></div>
@@ -136,6 +140,10 @@ HTML = r"""<!doctype html>
       <span class="seg" id="segRej"><button data-g="jaar" class="on">per jaar</button><button data-g="dec">per decennium</button></span></div>
       <p class="cap">Het <b>aantal afgewezen</b> aanvragen; als aandeel van alle aanvragen loopt dit op van ~14% (voor de oorlog) tot ~40% (jaren '50–'60).</p>
       <div class="cwrap"><canvas id="cReject"></canvas></div></div>
+
+    <div class="card"><h2>Wanneer wordt het archief openbaar?</h2>
+      <p class="cap">Nu is <b>__OPENPCT__%</b> van de dossiers openbaar; de rest opent geleidelijk (veelal ~75 jaar na de redding, om privacyredenen). Pas rond <b>2085</b> is alles vrij raadpleegbaar.</p>
+      <div class="cwrap"><canvas id="cOpenb"></canvas></div></div>
   </div>
 
   <footer>
@@ -237,6 +245,15 @@ hbar(cPlaces,S.top_places.slice(0,12),"reddingen");
 hbar(cProv,S.provinces,"reddingen");
 hbar(cWater,S.top_waters.slice(0,12),"reddingen","#0891b2");
 hbar(cLand,S.landen,"reddingen","#4a3aa7");
+hbar(cProvPC,S.provinces_pc,"per 100.000 inw.","#7c3aed");
+
+// Openbaarheid door de tijd (cumulatief % openbaar)
+new Chart(cOpenb,{type:'line',data:{labels:S.openb_years,datasets:[{data:S.openb_pct,
+  borderColor:ACC,backgroundColor:ACC+"22",fill:true,tension:.25,borderWidth:2.5,pointRadius:0,pointHoverRadius:5}]},
+  options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+    plugins:{legend:{display:false},tooltip:{...tip,callbacks:{title:c=>"in "+c[0].label,label:c=>c.raw+"% openbaar"}}},
+    scales:{x:{...noGrid,ticks:{color:MUT,autoSkip:true,maxTicksLimit:9,maxRotation:0}},
+            y:{...gridX,beginAtZero:true,max:100,ticks:{color:MUT,callback:v=>v+"%"}}}}});
 </script>
 </body>
 </html>"""
@@ -252,7 +269,8 @@ h = (HTML.replace("__CC__", odict(CAT_COL)).replace("__CL__", odict(CAT_FULL)).r
         .replace("__MEER__", str(meer_pct))
         .replace("__PLA__", f"{S['plaatsen']:,}".replace(",", "."))
         .replace("__BINNEN__", f"{S['binnenbuiten']['binnenland']:,}".replace(",", "."))
-        .replace("__BUITEN__", str(S['binnenbuiten']['buitenland'])))
+        .replace("__BUITEN__", str(S['binnenbuiten']['buitenland']))
+        .replace("__OPENPCT__", str(round(S['openb_pct'][0]))))
 open(out, "w", encoding="utf-8").write(h)
 print("geschreven:", out, "| bytes", len(h))
 print(f"tiles: totaal={S['totaal']} geslaagd={geslaagd_pct}% kind={kind_pct}% vrouw={vrouw_pct}% meer={meer_pct}% plaatsen={S['plaatsen']}")
