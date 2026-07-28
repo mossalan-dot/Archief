@@ -41,6 +41,8 @@ def land(place):
     return tail or "onbekend"
 
 CATS = CAT_ORDER
+# Elfstedentocht-jaren = culturele marker van een strenge (ijs)winter
+ELF = {1909, 1912, 1917, 1929, 1933, 1940, 1941, 1942, 1947, 1954, 1956, 1963, 1985, 1986, 1997}
 def decade(y): return (y//10)*10 if y else None
 
 CHILD = re.compile(r'\b(kind|kinderen|jongen|meisje|meisjes|jongens|baby|kleuter|peuter|zuigeling|schooljongen|schoolkind)\b', re.I)
@@ -71,6 +73,7 @@ land_counts = Counter()                  # buitenland -> land
 cat_pog = Counter()                      # categorie -> aantal poging/omgekomen
 cat_gen = defaultdict(Counter)           # categorie -> geslacht
 cat_afg = Counter()                      # categorie -> aantal afgewezen
+iceyear = Counter()                      # jaar -> aantal ijsreddingen
 
 for x in recs:
     det = x.get("detail")
@@ -101,6 +104,7 @@ for x in recs:
     vic_counts[victim(x["desc"])] += 1
     if y:
         year_counts[y] += 1
+        if cat == "ijs": iceyear[y] += 1
         if x["afgewezen"]: year_rej[y] += 1
     if dec:
         decade_counts[dec] += 1
@@ -158,6 +162,11 @@ stats = {
     "year_rej": [year_rej[y] for y in yy],
     "decade_rej": [rej_decade[d][0] for d in decades],
     "year_rej_pct": [round(100*year_rej[y]/year_counts[y],1) if year_counts[y] else 0 for y in yy],
+    "ice_year": [iceyear[y] for y in yy],
+    "ice_share_year": [round(100*iceyear[y]/year_counts[y],1) if year_counts[y] else 0 for y in yy],
+    "elf_years": sorted(ELF & set(yy)),
+    "ice_elf_pct": round(100*sum(iceyear[y] for y in yy if y in ELF)/max(sum(year_counts[y] for y in yy if y in ELF),1),1),
+    "ice_other_pct": round(100*sum(iceyear[y] for y in yy if y not in ELF)/max(sum(year_counts[y] for y in yy if y not in ELF),1),1),
     "reject_cat": sorted(([c, round(100*cat_afg[c]/cat_counts[c],1)] for c in CATS
                           if cat_counts[c] >= 40 and c != "onbekend"), key=lambda t:-t[1]),
     "victim": {k: vic_counts[k] for k in ("kind","volwassene","beide","onbekend")},

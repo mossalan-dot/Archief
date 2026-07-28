@@ -184,6 +184,10 @@ HTML = r"""<!doctype html>
       <b>op hol geslagen paarden</b> verdwijnen na de jaren '50, terwijl <b>auto's te water</b> juist opkomen — de tijdgeest in twee lijnen.</p>
       <div class="cwrap"><canvas id="cShift"></canvas></div></div>
 
+    <div class="card wide"><h2>IJsreddingen en strenge winters</h2>
+      <p class="cap">Het <b>aandeel</b> ijsreddingen per jaar (niet het absolute aantal — dat volgt vooral het totale dossiervolume). In <b>Elfstedentocht-jaren</b> <span style="color:#0e8ba8;font-weight:700">(blauw)</span> — dé graadmeter voor een strenge winter — was gemiddeld <b>__ICEELF__%</b> van alle reddingen een ijsredding, tegen <b>__ICEOTH__%</b> in andere jaren: ruim anderhalf keer zoveel. De hoogste pieken vallen op beruchte ijswinters als <b>1929</b>, <b>1963</b> en de sneeuwwinter van <b>1979</b>.</p>
+      <div class="cwrap"><canvas id="cIce"></canvas></div></div>
+
     <div class="card"><h2>Hoe gevaarlijk was elke redding?</h2>
       <p class="cap">Aandeel dat een <b>poging</b> bleef of de redder het leven kostte. Uit het <b>binnenwater</b> lukte het bijna altijd; <b>op hol geslagen paarden</b>, <b>auto's te water</b> en de <b>zee</b> waren veel gevaarlijker.</p>
       <div class="cwrap"><canvas id="cDanger"></canvas></div></div>
@@ -330,6 +334,18 @@ new Chart(cShift,{type:'line',data:{labels:dl,datasets:[
       tooltip:{...tip,callbacks:{title:c=>"Jaren "+c[0].label,label:c=>c.dataset.label+": "+c.raw+"% van de reddingen"}}},
     scales:{x:noGrid,y:{...gridX,beginAtZero:true,ticks:{color:MUT,callback:v=>v+"%"}}}}});}
 
+// 3b. IJsreddingen als AANDEEL per jaar; Elfstedentocht-jaren (strenge winter) uitgelicht
+{const ys=S.years, elf=new Set(S.elf_years);
+new Chart(cIce,{type:'bar',data:{labels:ys,datasets:[{data:S.ice_share_year,
+  backgroundColor:ys.map(y=>elf.has(y)?CATCOL.ijs:"#d7dde3"),
+  borderRadius:3,borderSkipped:false,maxBarThickness:14}]},
+  options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+    plugins:{legend:{display:false},tooltip:{...tip,callbacks:{
+      title:c=>c[0].label+(elf.has(+c[0].label)?" · Elfstedentocht":""),
+      label:c=>c.raw+"% ijs ("+S.ice_year[c.dataIndex]+" van "+S.year_counts[c.dataIndex]+" reddingen)"}}},
+    scales:{x:{...noGrid,ticks:{color:MUT,autoSkip:true,maxTicksLimit:10,maxRotation:0}},
+            y:{...gridX,beginAtZero:true,ticks:{color:MUT,callback:v=>v+"%"}}}}});}
+
 // 4. Wie werd gered — donut
 {const vl=[["kind","Kind","#eda100"],["volwassene","Volwassene","#2a78d6"],["beide","Kind + volwassene","#4a3aa7"],["onbekend","Onbekend","#c9c9c4"]];
 const tot=vl.reduce((s,x)=>s+S.victim[x[0]],0);
@@ -462,6 +478,8 @@ h = (HTML.replace("__CC__", odict(CAT_COL)).replace("__CL__", odict(CAT_FULL)).r
         .replace("__GEPLOTN__", f"{S['geplot']:,}".replace(",", "."))
         .replace("__GEPLOT__", str(geplot_pct))
         .replace("__NIETPLOT__", f"{nietplot_n:,}".replace(",", "."))
+        .replace("__ICEELF__", str(S["ice_elf_pct"]).replace(".", ","))
+        .replace("__ICEOTH__", str(S["ice_other_pct"]).replace(".", ","))
         .replace("__BINNEN__", f"{S['binnenbuiten']['binnenland']:,}".replace(",", "."))
         .replace("__BUITEN__", str(S['binnenbuiten']['buitenland']))
         .replace("__OPENPCT__", str(round(S['openb_pct'][0])))
