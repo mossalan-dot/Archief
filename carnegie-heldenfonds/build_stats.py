@@ -28,6 +28,11 @@ HIGHLIGHTS = [
  ("👶","De kinderwagen","Een moeder trok de kinderwagen met haar baby weg van een vallende benzinetank.","Rotterdam, 1954",643),
  ("🏅","36 levens — afgewezen","Jeremias van Doorn zou in zijn leven 36 mensen hebben gered; zijn aanvraag werd niettemin afgewezen.","1954",1502),
  ("🌍","Een zeldzaam spoor","Mehmet Cakici redde een kind uit het water — een van de zeer weinige redders met een naam die wijst op de naoorlogse arbeidsmigratie. In de rest van het bestand blijft die geschiedenis vrijwel onzichtbaar.","Hengelo, 1984",9232),
+ ("🏖️","Held op Mallorca","R. ten Cate redde een Engelsman uit zee bij het strand van El Arenal en kreeg er een bronzen medaille en oorkonde voor van de Spaanse reddingsbond — een Nederlandse held, onderscheiden in den vreemde.","Mallorca, 1967",9261),
+ ("🌏","Schipbreuk bij Sumatra","Anton Kortlandt redde verscheidene opvarenden van een schipbreuk voor de kust van Sumatra. Ver van huis, en tóch: zijn aanvraag werd afgewezen.","Sumatra, Indonesië",4235),
+ ("🔥","Zes kinderen uit het vuur","Anna Cornelia Dijkman zou zes kinderen uit een brandend huis hebben gered. Wat het fonds haar toekende, is in het dossier onbekend gebleven.","Amsterdam, 1922",1752),
+ ("👧","Voor haar broertje en zusje","Antonia Maria Grootaert haalde haar eigen broertje en zusje uit een brandend pand.","Rijsenhout, 1966",2409),
+ ("🤝","Samen uit het water","Saida Errouk en Annemarie Veldhuizen redden samen met omstanders een drenkeling — twee vrouwen aan het hoofd van de reddersploeg, en meteen een tweede zeldzaam migratie­spoor in het bestand.","Vlijmen, 1982",1945),
 ]
 def _hl(emo,title,text,place,nr):
     na = f"https://www.nationaalarchief.nl/onderzoeken/archief/2.19.364/invnr/{nr}"
