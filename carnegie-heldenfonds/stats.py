@@ -68,6 +68,9 @@ group = Counter()                        # solo / meerdere
 vic_counts = Counter()
 bl_counts = Counter()                    # binnenland / buitenland
 land_counts = Counter()                  # buitenland -> land
+cat_pog = Counter()                      # categorie -> aantal poging/omgekomen
+cat_gen = defaultdict(Counter)           # categorie -> geslacht
+cat_afg = Counter()                      # categorie -> aantal afgewezen
 
 for x in recs:
     det = x.get("detail")
@@ -79,6 +82,9 @@ for x in recs:
     cat_counts[cat] += 1
     out_counts[res] += 1
     gen_counts[gen] += 1
+    if res == "poging": cat_pog[cat] += 1
+    cat_gen[cat][gen] += 1
+    if x["afgewezen"]: cat_afg[cat] += 1
     if det: water_counts[det] += 1
     for p in x["places"]:
         place_counts[p] += 1
@@ -142,6 +148,9 @@ stats = {
     "year_counts": [year_counts[y] for y in yy],
     "year_rej": [year_rej[y] for y in yy],
     "decade_rej": [rej_decade[d][0] for d in decades],
+    "year_rej_pct": [round(100*year_rej[y]/year_counts[y],1) if year_counts[y] else 0 for y in yy],
+    "reject_cat": sorted(([c, round(100*cat_afg[c]/cat_counts[c],1)] for c in CATS
+                          if cat_counts[c] >= 40 and c != "onbekend"), key=lambda t:-t[1]),
     "victim": {k: vic_counts[k] for k in ("kind","volwassene","beide","onbekend")},
     "cat_decade": {c: [cat_decade[d][c] for d in decades] for c in CATS},
     "gender_decade_vrouwpct": [round(100*gender_decade[d]["vrouw"]/max(sum(gender_decade[d].values()),1),1) for d in decades],
@@ -150,6 +159,11 @@ stats = {
     "provinces": prov_counts.most_common() + [["Buitenland", bl_counts["buitenland"]]],
     "binnenbuiten": {"binnenland": bl_counts["binnenland"], "buitenland": bl_counts["buitenland"]},
     "landen": land_counts.most_common(),
+    "danger": sorted(([c, round(100*cat_pog[c]/cat_counts[c],1)] for c in CATS
+                       if cat_counts[c] >= 40 and c not in ("onbekend","overig")), key=lambda t:-t[1]),
+    "gender_cat": sorted(([c, round(100*cat_gen[c]["vrouw"]/max(cat_gen[c]["man"]+cat_gen[c]["vrouw"],1),1)]
+                          for c in CATS if cat_gen[c]["man"]+cat_gen[c]["vrouw"] >= 40 and c not in ("onbekend","overig")),
+                         key=lambda t:-t[1]),
     "provinces_pc": prov_pc,
     "reeds_open": reeds_open,
     "openb_years": openb_years,

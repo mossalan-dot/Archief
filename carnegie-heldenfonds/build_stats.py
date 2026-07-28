@@ -142,13 +142,17 @@ HTML = r"""<!doctype html>
 
     <div class="card"><div class="h2row"><h2>Reddingen door de tijd</h2>
       <span class="seg" id="segRed"><button data-g="jaar" class="on">per jaar</button><button data-g="dec">per decennium</button></span></div>
-      <p class="cap">Het aantal beloonde reddingen piekt in het midden van de <b>jaren '50</b>.</p>
+      <p class="cap">Alle aanvragen per periode, gesplitst in <b>toegekend</b> en <b>afgewezen</b>. Het totaal piekt in de <b>jaren '50</b>; het afgewezen-aandeel groeit daarna mee.</p>
       <div class="cwrap"><canvas id="cTime"></canvas></div></div>
 
     <div class="card wide"><h2>Van paard naar auto</h2>
       <p class="cap">Reddingen van <b>op hol geslagen paarden</b> verdwijnen na de jaren '50, terwijl reddingen
       uit een <b>te water geraakte auto</b> juist toenemen met de opkomst van de auto — de tijdgeest in twee lijnen.</p>
       <div class="cwrap"><canvas id="cShift"></canvas></div></div>
+
+    <div class="card"><h2>Hoe gevaarlijk was elke redding?</h2>
+      <p class="cap">Aandeel dat een <b>poging</b> bleef of de redder het leven kostte. Uit het <b>binnenwater</b> lukte het bijna altijd; <b>op hol geslagen paarden</b>, <b>auto's te water</b> en de <b>zee</b> waren veel gevaarlijker.</p>
+      <div class="cwrap"><canvas id="cDanger"></canvas></div></div>
 
     <div class="card"><h2>Wie werd er gered?</h2>
       <p class="cap">In verreweg de meeste dossiers gaat het om een <b>kind</b> — vaak te water geraakt.</p>
@@ -162,6 +166,10 @@ HTML = r"""<!doctype html>
     <div class="card wide"><h2>Aandeel vrouwelijke redders door de tijd</h2>
       <p class="cap">Na de Tweede Wereldoorlog stijgt het geschatte aandeel vrouwelijke redders van ~4% naar ~14%.</p>
       <div class="cwrap"><canvas id="cVrouwtijd"></canvas></div></div>
+
+    <div class="card"><h2>Wie redt wat? — geslacht per aard</h2>
+      <p class="cap">Geschat aandeel vrouwen per soort redding: vrouwen redden relatief vaker uit <b>water, ijs en brand</b>; mannen vaker bij <b>auto, paard, trein en zee</b>.</p>
+      <div class="cwrap"><canvas id="cGenderCat"></canvas></div></div>
 
     <div class="card"><h2>Waar wordt gered? — top-plaatsen</h2>
       <p class="cap">De grote steden voeren de lijst aan; <b>Amsterdam</b> en <b>Den Haag</b> springen eruit.</p>
@@ -180,10 +188,9 @@ HTML = r"""<!doctype html>
       <p class="cap">Bijna alles speelt zich in Nederland af (<b>__BINNEN__</b>), maar <b>__BUITEN__</b> reddingen gebeurden erbuiten — door Nederlanders op zee, in de koloniën of op reis.</p>
       <div class="cwrap tall"><canvas id="cLand"></canvas></div></div>
 
-    <div class="card"><div class="h2row"><h2>Afwijzingen door de tijd</h2>
-      <span class="seg" id="segRej"><button data-g="jaar" class="on">per jaar</button><button data-g="dec">per decennium</button></span></div>
-      <p class="cap">Het <b>aantal afgewezen</b> aanvragen; als aandeel van alle aanvragen loopt dit op van ~14% (voor de oorlog) tot ~40% (jaren '50–'60).</p>
-      <div class="cwrap"><canvas id="cReject"></canvas></div></div>
+    <div class="card"><h2>Welke reddingen werden afgewezen?</h2>
+      <p class="cap"><b>Auto te water</b> werd het vaakst afgewezen (~37%); <b>op hol geslagen paarden</b> — de klassieke heldendaad — juist het minst (~17%).</p>
+      <div class="cwrap"><canvas id="cRejectCat"></canvas></div></div>
 
     <div class="card"><h2>Wanneer wordt het archief openbaar?</h2>
       <p class="cap">Nu is <b>__OPENPCT__%</b> van de dossiers openbaar; de rest opent geleidelijk (veelal ~75 jaar na de redding, om privacyredenen). Pas rond <b>2085</b> is alles vrij raadpleegbaar.</p>
@@ -246,8 +253,28 @@ function timeChart(canvas, seg, yData, dData, color, unit){
   });
   draw('jaar');
 }
-timeChart(cTime, segRed, S.year_counts, S.decade_counts, ACC, "reddingen");
-timeChart(cReject, segRej, S.year_rej, S.decade_rej, "#eb6834", "afgewezen");
+// Reddingen door de tijd — gestapeld: toegekend + afgewezen (jaar/decennium)
+(function(){
+  let chart;
+  function draw(g){
+    if(chart) chart.destroy();
+    const jaar=g==='jaar';
+    const tot=jaar?S.year_counts:S.decade_counts, rej=jaar?S.year_rej:S.decade_rej;
+    const toeg=tot.map((t,i)=>t-rej[i]);
+    chart=new Chart(cTime,{type:'bar',data:{labels:jaar?yearLabels:decLabels,datasets:[
+      {label:'Toegekend',data:toeg,backgroundColor:ACC,stack:'s',maxBarThickness:34},
+      {label:'Afgewezen',data:rej,backgroundColor:'#eb6834',stack:'s',maxBarThickness:34}]},
+      options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+        plugins:{legend:{position:'top',labels:{color:INK,usePointStyle:true,boxWidth:10}},
+          tooltip:{...tip,callbacks:{title:c=>jaar?c[0].label:("Jaren "+c[0].label),
+            footer:it=>{const t=it.reduce((s,i)=>s+i.raw,0);const r=it.find(i=>i.dataset.label==='Afgewezen');
+              return t?"totaal "+money(t)+" · "+Math.round(100*(r?r.raw:0)/t)+"% afgewezen":"";}}}},
+        scales:{x:{...noGrid,stacked:true,ticks:{color:MUT,autoSkip:true,maxTicksLimit:jaar?11:9,maxRotation:0}},
+                y:{...gridX,stacked:true,beginAtZero:true,ticks:{color:MUT,callback:v=>money(v)}}}}});
+  }
+  segRed.querySelectorAll('button').forEach(b=>b.onclick=()=>{segRed.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');draw(b.dataset.g);});
+  draw('jaar');
+})();
 
 // 3. Paard -> auto (two lines, decennium)
 new Chart(cShift,{type:'line',data:{labels:decLabels,datasets:[
@@ -285,6 +312,17 @@ function hbar(cv,pairs,unit,color){const L=pairs.map(p=>p[0]),D=pairs.map(p=>p[1
 new Chart(cv,{type:'bar',data:{labels:L,datasets:[{data:D,backgroundColor:color||ACC,borderRadius:5,borderSkipped:false,maxBarThickness:20}]},
   options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
     tooltip:{...tip,callbacks:{label:c=>money(c.raw)+" "+unit}}},scales:{x:{...gridX,ticks:{color:MUT,callback:v=>money(v)}},y:noGrid}}});}
+// categorie-gekleurde horizontale balk (emoji-labels), waarde in %
+function catbar(cv,pairs){
+  new Chart(cv,{type:'bar',data:{labels:pairs.map(p=>CATEMO[p[0]]+" "+CATLBL[p[0]]),
+    datasets:[{data:pairs.map(p=>p[1]),backgroundColor:pairs.map(p=>CATCOL[p[0]]),borderRadius:5,borderSkipped:false,maxBarThickness:22}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+      tooltip:{...tip,callbacks:{label:c=>c.raw+"%"}}},
+      scales:{x:{...gridX,ticks:{color:MUT,callback:v=>v+"%"}},y:noGrid}}});
+}
+catbar(cDanger,S.danger);
+catbar(cGenderCat,S.gender_cat);
+catbar(cRejectCat,S.reject_cat);
 hbar(cPlaces,S.top_places.slice(0,12),"reddingen");
 hbar(cWater,S.top_waters.slice(0,12),"reddingen","#0891b2");
 hbar(cLand,S.landen,"reddingen","#4a3aa7");

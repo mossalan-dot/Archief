@@ -288,8 +288,8 @@ TPL = r"""<!doctype html>
   <p class="wsub">Ruim 9.600 beloonde reddingen (1903–1987), gestructureerd uit het archief van het Nationaal Archief.</p>
   <ul>
     <li><b>Filter</b> links op aard van de redding, periode, afloop en openbaarheid.</li>
-    <li>Klik een <b>stads-cluster</b> voor een doorzoekbare dossierlijst.</li>
-    <li>Klik een <b>marker</b> voor de omschrijving, de archieflink en een krantenzoekopdracht.</li>
+    <li>Klik op een <b>stads-cluster</b> voor een doorzoekbare dossierlijst.</li>
+    <li>Klik op een <b>marker</b> voor de omschrijving, de archieflink en een krantenzoekopdracht.</li>
   </ul>
   <div class="wfoot">
     <label><input type="checkbox" id="wHide"> niet meer tonen</label>
