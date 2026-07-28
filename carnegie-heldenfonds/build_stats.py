@@ -16,6 +16,25 @@ v = S["victim"]
 kind_pct = pct(v["kind"], v["kind"]+v["volwassene"]+v["beide"])
 data_json = json.dumps(S, ensure_ascii=False, separators=(",",":"))
 
+# gecureerde bijzondere gevallen (emoji, titel, tekst, plaats/jaar, inv.nr.)
+HIGHLIGHTS = [
+ ("🦁","Een ontsnapte leeuw","Drie kinderen bedreigd door een leeuw die was ontsnapt uit de dresseerkooi van het Duitse circus Barnum.","Haps, 1974",218),
+ ("🐻","Uit de klauwen","Twee mannen probeerden de eigenaar van dierentuin Put te redden uit de klauwen van twee Himalaya­beren.","Apeldoorn, 1959",446),
+ ("🐺","De wolfskooi","Een kind stak haar hand door de tralies van een wolfskooi en werd door de wolf beetgepakt; de redder bevrijdde haar.","Doornspijk, 1951",1559),
+ ("🌊","Circa 300 drenkelingen","Jacob ‘Tabbie’ Bakker redde als lid van de reddingsbrigade in zijn leven zo’n 300 schipbreukelingen.","reddingsbrigade, ~1932",316),
+ ("🚢","70 van de ‘Eastwell’","Mattheüs van der Put hielp 70 mensen redden toen het Engelse stoomschip zonk — zijn aanvraag werd tóch afgewezen.","IJmuiden, 1913",6203),
+ ("👥","Een ploeg van 21","Een van de grootste reddersploegen van het hele bestand: eenentwintig mensen tegelijk beloond voor één redding.","1923",7317),
+ ("⚡","Door de bliksem getroffen","Vier kinderen gered uit een woning die door de bliksem was getroffen.","Zelhem, 1942",5784),
+ ("👶","De kinderwagen","Een moeder trok de kinderwagen met haar baby weg van een vallende benzinetank.","Rotterdam, 1954",643),
+ ("🏅","36 levens — afgewezen","Jeremias van Doorn zou in zijn leven 36 mensen hebben gered; zijn aanvraag werd niettemin afgewezen.","1954",1502),
+]
+def _hl(emo,title,text,place,nr):
+    na = f"https://www.nationaalarchief.nl/onderzoeken/archief/2.19.364/invnr/{nr}"
+    return (f'<div class="hlcard"><div class="em">{emo}</div><div><h3>{title}</h3>'
+            f'<p>{text}</p><div class="meta">{place} &middot; '
+            f'<a href="{na}" target="_blank" rel="noopener">nr. {nr} &#8599;</a></div></div></div>')
+highlights_html = "".join(_hl(*h) for h in HIGHLIGHTS)
+
 HTML = r"""<!doctype html>
 <html lang="nl">
 <head>
@@ -45,6 +64,16 @@ HTML = r"""<!doctype html>
   .tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px;box-shadow:var(--shadow)}
   .tile .n{font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1}
   .tile .l{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.3}
+  /* bijzondere gevallen */
+  .hlsec{margin:0 0 26px}
+  .hlsec .lbl2{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 12px}
+  .hlgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:12px}
+  .hlcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 15px;box-shadow:var(--shadow);display:flex;gap:11px}
+  .hlcard .em{font-size:24px;line-height:1;flex:none}
+  .hlcard h3{margin:0 0 3px;font-size:13.5px;letter-spacing:-.01em}
+  .hlcard p{margin:0 0 6px;font-size:12.5px;color:#374151;line-height:1.45}
+  .hlcard .meta{font-size:11px;color:var(--muted)}
+  .hlcard .meta a{color:var(--accent);text-decoration:none;font-weight:600}
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px 14px;box-shadow:var(--shadow)}
   .card.wide{grid-column:1/-1}
@@ -86,6 +115,11 @@ HTML = r"""<!doctype html>
     <div class="tile"><div class="n">__VRPCT__%</div><div class="l">van de redders vrouw <span style="opacity:.7">(schatting)</span></div></div>
     <div class="tile"><div class="n">__MEER__%</div><div class="l">met meerdere redders</div></div>
     <div class="tile"><div class="n">__PLA__</div><div class="l">verschillende plaatsen</div></div>
+  </div>
+
+  <div class="hlsec">
+    <div class="lbl2">Bijzondere gevallen</div>
+    <div class="hlgrid">__HIGHLIGHTS__</div>
   </div>
 
   <div class="grid">
@@ -285,7 +319,8 @@ h = (HTML.replace("__CC__", odict(CAT_COL)).replace("__CL__", odict(CAT_FULL)).r
         .replace("__PLA__", f"{S['plaatsen']:,}".replace(",", "."))
         .replace("__BINNEN__", f"{S['binnenbuiten']['binnenland']:,}".replace(",", "."))
         .replace("__BUITEN__", str(S['binnenbuiten']['buitenland']))
-        .replace("__OPENPCT__", str(round(S['openb_pct'][0]))))
+        .replace("__OPENPCT__", str(round(S['openb_pct'][0])))
+        .replace("__HIGHLIGHTS__", highlights_html))
 open(out, "w", encoding="utf-8").write(h)
 print("geschreven:", out, "| bytes", len(h))
 print(f"tiles: totaal={S['totaal']} geslaagd={geslaagd_pct}% kind={kind_pct}% vrouw={vrouw_pct}% meer={meer_pct}% plaatsen={S['plaatsen']}")
