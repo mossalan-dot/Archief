@@ -33,6 +33,32 @@ ALIAS = {
     "Wychen": "Wijchen",                 # -> Gelderland (was Polen)
     "Camp": "Bergen, Noord-Holland",     # "Camp (Bergen)" Noordzee (was Texas)
     "Snek": "Sneek",                     # bron-typfout
+    # bron-/OCR-typefouten -> juiste spelling
+    "'s-Gravenhagen": "'s-Gravenhage", "'s-Gravenhag": "'s-Gravenhage",
+    "Herenveen": "Heerenveen", "Veendendaal": "Veenendaal", "Eindhoen": "Eindhoven",
+    "Yrseke": "Yerseke", "Warfum": "Warffum", "Standaarbuiten": "Standdaarbuiten",
+    "Rijsburg": "Rijnsburg", "Etten-Leuk": "Etten-Leur", "St Michielgestel": "Sint-Michielsgestel",
+    "Nieuw-Ginniken": "Ginneken", "Nieuwehoorn": "Nieuwenhoorn", "Balkburg": "Balkbrug",
+    "Veenwoude": "Veenwouden", "Bennebroer": "Bennebroek", "Nijholtpa": "Nijeholtpade",
+    "Jutpaas": "Jutphaas", "Bassingerhorn": "Barsingerhorn", "Kootsertille": "Kootstertille",
+    "Bergummerdam": "Burgum", "Wijntjeterp": "Wijnjeterp", "Breukelen-Neijenrode": "Breukelen",
+    "Emmercompascuum": "Emmer-Compascuum", "Gasselte-Nijveen": "Gasselternijveen",
+    "Harbrinkbroek": "Harbrinkhoek", "Nieuwelande": "Nieuwlande", "Rinsumageest": "Rinsumageast",
+    "Terheijde aan Zee": "Ter Heijde", "Dirkland": "Dirksland", "Wervershoef": "Wervershoof",
+    "Otterleek": "Oterleek", "Wiedum": "Weidum", "Lijtshuizen": "IJlst",
+    "Ouderwerk aan den IJssel": "Ouderkerk aan den IJssel", "Nieuw-Pekela": "Nieuwe Pekela, Groningen",
+    "Breukelerveen": "Breukeleveen", "Limmel-Meerssen": "Limmel, Maastricht",
+    # voormalige (Friese/Groningse) gemeenten -> representatieve hoofdplaats
+    "Wymbritseradeel": "IJlst", "Wonseradeel": "Witmarsum", "Oostdongeradeel": "Metslawier",
+    "Dantumadeel": "Damwoude", "Datumadeel": "Damwoude", "Hennaarderadeel": "Wommels",
+    "Achtkaspelen": "Buitenpost", "Franekeradeel": "Franeker", "Zwollerkerspel": "Zwolle",
+    "Bellingwedde": "Wedde",
+}
+# buitenland-aliassen: gecodeerd met abroad=True (niet NL-begrensd)
+ALIAS_ABROAD = {
+    "Norresunby": "Nørresundby, Danmark", "Tandjong Priok": "Tanjung Priok, Jakarta",
+    "Tjipatoedjah": "Cipatujah, Indonesia", "Campos de Jordao in Brazilië": "Campos do Jordão, Brazil",
+    "Flambourough Head": "Flamborough Head, England", "Haiming Titol": "Haiming, Tirol",
 }
 # European-NL bounding box so nl-queries never return Caribbean "Nederland" (Curaçao etc.)
 NL_VIEWBOX = "3.2,53.7,7.4,50.6"
@@ -58,6 +84,8 @@ def candidates(p):
     out = []
     if p in ALIAS:
         add(ALIAS[p], False)                       # known correction, NL only
+    if p in ALIAS_ABROAD:
+        add(ALIAS_ABROAD[p], True)                 # known foreign correction, abroad allowed
     add(p, True)                                   # full string, abroad allowed
     n = re.sub(r'\bSt\.?\b', 'Sint', p)            # St / St. -> Sint
     if n != p: add(n, True)

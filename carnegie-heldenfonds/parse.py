@@ -163,6 +163,22 @@ def extract_places(desc):
                     places.append(place)
     return places
 
+# --- fallback: plaats-aanwijzingen buiten het strakke "te [Plaats]"-patroon ---
+# (alleen gebruikt als extract_places niets vond, zodat bestaande records ongemoeid blijven)
+_CAP = r"[A-ZÀ-Þ][\wäöüéèëï.'’-]+"
+FB_TERHOOGTE = re.compile(r'ter hoogte van\s+(' + _CAP + r'(?:\s+' + _CAP + r'){0,2})')
+FB_GEM_PRE   = re.compile(r'\b(' + _CAP + r')\s+gemeente\s+' + _CAP)   # dorp vóór "gemeente X"
+FB_GEM       = re.compile(r'\bgemeente\s+(' + _CAP + r')')
+FB_HAVEN     = re.compile(r'haven van\s+(' + _CAP + r')')
+def extract_places_fallback(desc):
+    for rx in (FB_TERHOOGTE, FB_GEM_PRE, FB_HAVEN, FB_GEM):
+        m = rx.search(desc)
+        if m:
+            p = m.group(1).strip(" .,;-")
+            if p:
+                return [p]
+    return []
+
 # --- location detail (waterway / street) extraction ---
 # Anchor on a water/ice word so we don't catch surname particles like "van den Akker".
 WATERWORDS = (r'water|ijs|wak|gracht|kanaal|haven|vaart|sloot|singel|plas|meer|kolk|wiel|'
@@ -195,7 +211,7 @@ def normalize_desc(desc):
 
 for r in records:
     r["desc"] = normalize_desc(r["desc"])
-    r["places"] = extract_places(r["desc"])
+    r["places"] = extract_places(r["desc"]) or extract_places_fallback(r["desc"])
     r["detail"] = extract_detail(r["desc"])
     r["afgewezen"] = bool(re.search(r'afgewezen|afwijzen|afgewe zen', r["desc"], re.I))
     # first year as int
