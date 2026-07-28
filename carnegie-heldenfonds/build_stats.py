@@ -120,13 +120,10 @@ HTML = r"""<!doctype html>
       <p class="cap">De grote steden voeren de lijst aan; <b>Amsterdam</b> en <b>Den Haag</b> springen eruit.</p>
       <div class="cwrap tall"><canvas id="cPlaces"></canvas></div></div>
 
-    <div class="card"><h2>Per provincie</h2>
-      <p class="cap">De waterrijke <b>Randstad</b> (Zuid- en Noord-Holland) domineert; onderaan de reddingen in het <b>buitenland</b>.</p>
+    <div class="card"><div class="h2row"><h2>Per provincie</h2>
+      <span class="seg" id="segProv"><button data-g="abs" class="on">absoluut</button><button data-g="pc">per 100.000 inw.</button></span></div>
+      <p class="cap">De waterrijke <b>Randstad</b> domineert — ook <b>per hoofd</b> van de bevolking (indicatief, t.o.v. de volkstelling 1947). Bij 'absoluut' onderaan de reddingen in het <b>buitenland</b>.</p>
       <div class="cwrap tall"><canvas id="cProv"></canvas></div></div>
-
-    <div class="card"><h2>Per provincie — per 100.000 inwoners</h2>
-      <p class="cap">Relatief gezien voert de <b>Randstad</b> ook per hoofd van de bevolking aan, maar <b>Drenthe</b> en <b>Zeeland</b> stijgen. Indicatief (t.o.v. de volkstelling 1947; Flevoland bestond nog niet).</p>
-      <div class="cwrap tall"><canvas id="cProvPC"></canvas></div></div>
 
     <div class="card"><h2>In welk water?</h2>
       <p class="cap">Waar een specifieke gracht/haven/rivier genoemd is — de <b>Noordzee</b> bovenaan.</p>
@@ -242,10 +239,28 @@ new Chart(cv,{type:'bar',data:{labels:L,datasets:[{data:D,backgroundColor:color|
   options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
     tooltip:{...tip,callbacks:{label:c=>money(c.raw)+" "+unit}}},scales:{x:{...gridX,ticks:{color:MUT,callback:v=>money(v)}},y:noGrid}}});}
 hbar(cPlaces,S.top_places.slice(0,12),"reddingen");
-hbar(cProv,S.provinces,"reddingen");
 hbar(cWater,S.top_waters.slice(0,12),"reddingen","#0891b2");
 hbar(cLand,S.landen,"reddingen","#4a3aa7");
-hbar(cProvPC,S.provinces_pc,"per 100.000 inw.","#7c3aed");
+
+// Per provincie met toggle absoluut / per 100.000 inwoners
+(function(){
+  let chart;
+  function draw(g){
+    if(chart) chart.destroy();
+    const pairs = g==='pc' ? S.provinces_pc : S.provinces;
+    const unit = g==='pc' ? 'per 100.000 inw.' : 'reddingen';
+    chart=new Chart(cProv,{type:'bar',data:{labels:pairs.map(p=>p[0]),
+      datasets:[{data:pairs.map(p=>p[1]),backgroundColor:ACC,borderRadius:5,borderSkipped:false,maxBarThickness:20}]},
+      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+        tooltip:{...tip,callbacks:{label:c=>money(c.raw)+" "+unit}}},
+        scales:{x:{...gridX,ticks:{color:MUT,callback:v=>money(v)}},y:noGrid}}});
+  }
+  segProv.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+    segProv.querySelectorAll('button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on'); draw(b.dataset.g);
+  });
+  draw('abs');
+})();
 
 // Openbaarheid door de tijd (cumulatief % openbaar)
 new Chart(cOpenb,{type:'line',data:{labels:S.openb_years,datasets:[{data:S.openb_pct,

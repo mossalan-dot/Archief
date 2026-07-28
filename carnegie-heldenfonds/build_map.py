@@ -41,9 +41,15 @@ for r in recs:
         if not g:
             continue
         placed_any = True
-        seg = seg_for(p)                       # de reddingsdaad die bij deze plaats hoort
+        # de reddingsdaad die bij deze plaats hoort (segment-index; -1 = enkel/volledig)
+        segi = -1
+        for i, s in enumerate(segs):
+            if p in s or ("te " + p) in s:
+                segi = i; break
+        seg = segs[segi] if segi >= 0 else r["desc"]
         cat = categorize(seg, det)
         res = outcome(seg)
+        seg_hl = segi if len(segs) > 1 and segi >= 0 else -1
         # prefer street/waterway-level coordinate if we have a good one
         prec = "plaats"; lat = g["lat"]; lon = g["lon"]
         if det:
@@ -67,6 +73,7 @@ for r in recs:
             "prec": prec,
             "res": res,
             "steun": steun,
+            "seg": seg_hl,
         })
     if placed_any:
         n_placed += 1
@@ -191,6 +198,7 @@ TPL = r"""<!doctype html>
   .emoji-marker:hover div{transform:scale(1.25)}
   .lp{font-size:13px;line-height:1.4}
   .lp .nr{background:var(--accent);color:#fff;border-radius:6px;padding:2px 7px;font-weight:700;font-size:12px}
+  .lp .hl{background:#fff3cd;text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:2px;border-radius:3px;padding:0 2px}
   .lp .badges{margin-top:8px}
   .lp .badge{display:inline-block;font-size:10px;padding:2px 7px;border-radius:20px;margin:2px 3px 0 0;color:#fff;font-weight:600}
   .lp a{color:var(--accent);font-weight:600;text-decoration:none}
@@ -362,6 +370,12 @@ function iconFor(cat,res){
   iconCache[key]=ic; return ic;
 }
 function esc(s){return (s||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));}
+// bij meerdere reddingsdaden (';'): volledige beschrijving tonen, de relevante daad onderstrepen
+function descHtml(p){
+  if(p.seg==null || p.seg<0) return esc(p.desc);
+  const parts=p.desc.split(';');
+  return parts.map((s,i)=> i===p.seg ? `<span class="hl">${esc(s)}</span>` : esc(s)).join(';');
+}
 // Build a targeted Delpher query: "<eerste voornaam> <achternaam>" + plaats + water/straat-detail.
 // (volledige doopnamen geven 0 treffers; naam+plaats+detail vindt het reddingsbericht zelf.)
 const TUSSEN=new Set(["van","de","der","den","ten","ter","te","op","aan","bij","in","het","'t","'s","vande","vander","uit","la","le","du"]);
@@ -383,7 +397,7 @@ function delpherURL(p){
 function popupHtml(p){
   const url=`https://www.nationaalarchief.nl/onderzoeken/archief/2.19.364/invnr/${p.nr}`;
   let b=`<div class="lp"><span class="nr">nr. ${p.nr}</span> &nbsp;<b>${esc(p.place)}</b>`;
-  b+=`<div style="margin:6px 0">${esc(p.desc)}</div>`;
+  b+=`<div style="margin:6px 0">${descHtml(p)}</div>`;
   b+=`<div style="color:#6b7280;font-size:12px">Jaar: ${esc(p.year||'?')}`;
   if(p.det) b+=` &middot; locatie: ${esc(p.det)}`;
   b+=` &middot; <span title="nauwkeurigheid van de marker">${p.prec==='straat'?'📍 straat/water':'🏙️ plaatsniveau'}</span></div>`;

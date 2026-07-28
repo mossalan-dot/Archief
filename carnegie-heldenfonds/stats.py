@@ -113,7 +113,7 @@ decades = sorted(d for d in decade_counts)
 tot = len(recs)
 reeds_open = sum(1 for x in recs if not x["openbaar_tot"])
 open_years = sorted(int(x["openbaar_tot"][-4:]) for x in recs if x["openbaar_tot"])
-oy_from, oy_to = 1988, (max(open_years) if open_years else 2000)
+oy_from, oy_to = 2026, (max(open_years) if open_years else 2030)   # 2026 = jaar van overdracht aan het NA
 openb_years = list(range(oy_from, oy_to + 1))
 openb_pct = []
 for Y in openb_years:
