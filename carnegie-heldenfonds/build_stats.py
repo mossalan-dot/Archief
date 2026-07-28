@@ -124,14 +124,16 @@ HTML = r"""<!doctype html>
   <b>jaar</b>, <b>afloop</b>, <b>wie er gered werd</b> en (bij benadering) het <b>geslacht van de redder</b>
   afgeleid. Dat levert bijna een eeuw reddingsgeschiedenis in cijfers.</p>
 
-  <div class="tiles">
+  <div class="tiles" style="margin-bottom:12px">
     <div class="tile"><div class="n">__TOT__</div><div class="l">reddingsdossiers</div></div>
     <div class="tile"><div class="n">__GEPLOT__%</div><div class="l">als punt op de kaart geplot</div></div>
+    <div class="tile"><div class="n">__PLA__</div><div class="l">verschillende plaatsen</div></div>
+  </div>
+  <div class="tiles">
     <div class="tile"><div class="n">__GESL__%</div><div class="l">geslaagde reddingen</div></div>
     <div class="tile"><div class="n">__KIND__%</div><div class="l">van de geredden was een kind</div></div>
     <div class="tile"><div class="n">__VRPCT__%</div><div class="l">van de redders vrouw <span style="opacity:.7">(schatting)</span></div></div>
     <div class="tile"><div class="n">__MEER__%</div><div class="l">met meerdere redders</div></div>
-    <div class="tile"><div class="n">__PLA__</div><div class="l">verschillende plaatsen</div></div>
   </div>
 
   <div class="card"><h2>Wat staat er op de kaart?</h2>
