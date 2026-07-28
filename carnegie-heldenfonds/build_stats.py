@@ -167,12 +167,13 @@ HTML = r"""<!doctype html>
       <p class="cap">Na de Tweede Wereldoorlog stijgt het geschatte aandeel vrouwelijke redders van ~4% naar ~14%.</p>
       <div class="cwrap"><canvas id="cVrouwtijd"></canvas></div></div>
 
-    <div class="card"><h2>Wie redt wat? — geslacht per aard</h2>
-      <p class="cap">Geschat aandeel vrouwen per soort redding: vrouwen redden relatief vaker uit <b>water, ijs en brand</b>; mannen vaker bij <b>auto, paard, trein en zee</b>.</p>
+    <div class="card"><h2>Man of vrouw? — geslacht per aard</h2>
+      <p class="cap">Absoluut aantal <b>mannelijke</b> en <b>vrouwelijke</b> redders per soort redding (geschat). Water levert veruit de meeste redders; het vrouwaandeel is overal een minderheid, maar relatief het grootst bij <b>water, ijs en brand</b>.</p>
       <div class="cwrap"><canvas id="cGenderCat"></canvas></div></div>
 
-    <div class="card"><h2>Waar wordt gered? — top-plaatsen</h2>
-      <p class="cap">De grote steden voeren de lijst aan; <b>Amsterdam</b> en <b>Den Haag</b> springen eruit.</p>
+    <div class="card"><div class="h2row"><h2>Waar wordt gered? — top-plaatsen</h2>
+      <span class="seg" id="segPlace"><button data-g="abs" class="on">absoluut</button><button data-g="pc">per 100.000 inw.</button></span></div>
+      <p class="cap">Absoluut voeren de grote steden de lijst aan (<b>Amsterdam</b>, <b>Den Haag</b>). <b>Per hoofd</b> van de bevolking draaien de waterstadjes de rollen om: <b>Dordrecht</b>, <b>Leiden</b> en <b>Delft</b> bovenaan, Amsterdam en Rotterdam juist laag (indicatief, inwonertal rond 1947).</p>
       <div class="cwrap tall"><canvas id="cPlaces"></canvas></div></div>
 
     <div class="card"><div class="h2row"><h2>Per provincie</h2>
@@ -321,11 +322,40 @@ function catbar(cv,pairs){
       scales:{x:{...gridX,ticks:{color:MUT,callback:v=>v+"%"}},y:noGrid}}});
 }
 catbar(cDanger,S.danger);
-catbar(cGenderCat,S.gender_cat);
 catbar(cRejectCat,S.reject_cat);
-hbar(cPlaces,S.top_places.slice(0,12),"reddingen");
 hbar(cWater,S.top_waters.slice(0,12),"reddingen","#0891b2");
 hbar(cLand,S.landen,"reddingen","#4a3aa7");
+
+// Geslacht per aard — gestapelde absolute man/vrouw-balk
+{const G=S.gender_cat_abs, L=G.map(r=>CATEMO[r[0]]+" "+CATLBL[r[0]]);
+new Chart(cGenderCat,{type:'bar',data:{labels:L,datasets:[
+  {label:'Man',data:G.map(r=>r[1]),backgroundColor:"#2a78d6",borderRadius:4,borderSkipped:false,maxBarThickness:22,stack:'g'},
+  {label:'Vrouw',data:G.map(r=>r[2]),backgroundColor:"#1baf7a",borderRadius:4,borderSkipped:false,maxBarThickness:22,stack:'g'}]},
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{position:'top',labels:{color:INK,usePointStyle:true,boxWidth:10}},
+      tooltip:{...tip,callbacks:{label:c=>c.dataset.label+": "+money(c.raw)+
+        " ("+Math.round(100*c.raw/(G[c.dataIndex][1]+G[c.dataIndex][2]))+"%)"}}},
+    scales:{x:{...gridX,stacked:true,ticks:{color:MUT,callback:v=>money(v)}},y:{...noGrid,stacked:true}}}});}
+
+// Top-plaatsen met toggle absoluut / per 100.000 inwoners
+(function(){
+  let chart;
+  function draw(g){
+    if(chart) chart.destroy();
+    const pairs = g==='pc' ? S.top_places_pc : S.top_places.slice(0,12);
+    const unit = g==='pc' ? 'per 100.000 inw.' : 'reddingen';
+    chart=new Chart(cPlaces,{type:'bar',data:{labels:pairs.map(p=>p[0]),
+      datasets:[{data:pairs.map(p=>p[1]),backgroundColor:ACC,borderRadius:5,borderSkipped:false,maxBarThickness:20}]},
+      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+        tooltip:{...tip,callbacks:{label:c=>money(c.raw)+" "+unit}}},
+        scales:{x:{...gridX,ticks:{color:MUT,callback:v=>money(v)}},y:noGrid}}});
+  }
+  segPlace.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+    segPlace.querySelectorAll('button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on'); draw(b.dataset.g);
+  });
+  draw('abs');
+})();
 
 // Per provincie met toggle absoluut / per 100.000 inwoners
 (function(){

@@ -132,6 +132,15 @@ POP1947 = {"Groningen":452,"Friesland":465,"Drenthe":267,"Overijssel":621,"Gelde
 prov_pc = sorted(([p, round(prov_counts[p] / POP1947[p] * 100, 1)] for p in prov_counts if p in POP1947),
                  key=lambda t: -t[1])
 
+# stad per 100.000 inwoners — inwonertal rond de volkstelling 1947 (in duizenden, indicatief).
+# Zelfde basis als de provincie-grafiek; historische cijfers, afgerond.
+CITYPOP1947 = {"Amsterdam":803,"'s-Gravenhage":551,"Rotterdam":612,"Utrecht":195,"Haarlem":162,
+               "Groningen":144,"Tilburg":116,"Breda":104,"Leiden":91,"Maastricht":80,
+               "Dordrecht":75,"Schiedam":74,"'s-Hertogenbosch":66,"Delft":62,"Den Helder":55}
+top15 = place_counts.most_common(15)
+places_pc = sorted(([p, round(n / CITYPOP1947[p] * 100, 1)] for p, n in top15 if p in CITYPOP1947),
+                   key=lambda t: -t[1])
+
 stats = {
     "totaal": len(recs),
     "geplot": sum(1 for x in recs if any(cache.get(p) for p in x["places"])),
@@ -161,10 +170,11 @@ stats = {
     "landen": land_counts.most_common(),
     "danger": sorted(([c, round(100*cat_pog[c]/cat_counts[c],1)] for c in CATS
                        if cat_counts[c] >= 40 and c not in ("onbekend","overig")), key=lambda t:-t[1]),
-    "gender_cat": sorted(([c, round(100*cat_gen[c]["vrouw"]/max(cat_gen[c]["man"]+cat_gen[c]["vrouw"],1),1)]
+    "gender_cat_abs": sorted(([c, cat_gen[c]["man"], cat_gen[c]["vrouw"]]
                           for c in CATS if cat_gen[c]["man"]+cat_gen[c]["vrouw"] >= 40 and c not in ("onbekend","overig")),
-                         key=lambda t:-t[1]),
+                         key=lambda t:-(t[1]+t[2])),
     "provinces_pc": prov_pc,
+    "top_places_pc": places_pc,
     "reeds_open": reeds_open,
     "openb_years": openb_years,
     "openb_pct": openb_pct,
