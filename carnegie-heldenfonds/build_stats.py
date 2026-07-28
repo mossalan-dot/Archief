@@ -30,9 +30,9 @@ HIGHLIGHTS = [
 ]
 def _hl(emo,title,text,place,nr):
     na = f"https://www.nationaalarchief.nl/onderzoeken/archief/2.19.364/invnr/{nr}"
-    return (f'<div class="hlcard"><div class="em">{emo}</div><div><h3>{title}</h3>'
+    return (f'<div class="cslide"><div class="hlcard"><div class="em">{emo}</div><div><h3>{title}</h3>'
             f'<p>{text}</p><div class="meta">{place} &middot; '
-            f'<a href="{na}" target="_blank" rel="noopener">nr. {nr} &#8599;</a></div></div></div>')
+            f'<a href="{na}" target="_blank" rel="noopener">nr. {nr} &#8599;</a></div></div></div></div>')
 highlights_html = "".join(_hl(*h) for h in HIGHLIGHTS)
 
 HTML = r"""<!doctype html>
@@ -64,16 +64,24 @@ HTML = r"""<!doctype html>
   .tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px;box-shadow:var(--shadow)}
   .tile .n{font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1}
   .tile .l{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.3}
-  /* bijzondere gevallen */
+  /* bijzondere gevallen — carrousel */
   .hlsec{margin:0 0 26px}
   .hlsec .lbl2{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 12px}
-  .hlgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:12px}
-  .hlcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 15px;box-shadow:var(--shadow);display:flex;gap:11px}
-  .hlcard .em{font-size:24px;line-height:1;flex:none}
-  .hlcard h3{margin:0 0 3px;font-size:13.5px;letter-spacing:-.01em}
-  .hlcard p{margin:0 0 6px;font-size:12.5px;color:#374151;line-height:1.45}
-  .hlcard .meta{font-size:11px;color:var(--muted)}
+  .carousel{display:flex;align-items:stretch;gap:10px}
+  .cbtn{flex:none;width:42px;border:1px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-size:22px;color:var(--muted);box-shadow:var(--shadow);line-height:1}
+  .cbtn:hover{color:var(--ink);border-color:#cbd5e1}
+  .cviewport{flex:1;min-width:0;overflow:hidden;border-radius:14px}
+  .ctrack{display:flex;transition:transform .35s ease}
+  .cslide{flex:0 0 100%;min-width:0;padding:0 1px;box-sizing:border-box}
+  .hlcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 24px;box-shadow:var(--shadow);display:flex;gap:16px;align-items:center;min-height:118px;box-sizing:border-box}
+  .hlcard .em{font-size:40px;line-height:1;flex:none}
+  .hlcard h3{margin:0 0 4px;font-size:16px;letter-spacing:-.01em}
+  .hlcard p{margin:0 0 7px;font-size:14px;color:#374151;line-height:1.5}
+  .hlcard .meta{font-size:12px;color:var(--muted)}
   .hlcard .meta a{color:var(--accent);text-decoration:none;font-weight:600}
+  .cdots{display:flex;justify-content:center;gap:6px;margin-top:12px}
+  .cdot{width:7px;height:7px;border-radius:50%;background:#d1d5db;border:none;cursor:pointer;padding:0;transition:.2s}
+  .cdot.on{background:var(--accent);width:18px;border-radius:4px}
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px 14px;box-shadow:var(--shadow)}
   .card.wide{grid-column:1/-1}
@@ -119,7 +127,12 @@ HTML = r"""<!doctype html>
 
   <div class="hlsec">
     <div class="lbl2">Bijzondere gevallen</div>
-    <div class="hlgrid">__HIGHLIGHTS__</div>
+    <div class="carousel">
+      <button class="cbtn" id="cPrev" aria-label="vorige">&lsaquo;</button>
+      <div class="cviewport"><div class="ctrack" id="ctrack">__HIGHLIGHTS__</div></div>
+      <button class="cbtn" id="cNext" aria-label="volgende">&rsaquo;</button>
+    </div>
+    <div class="cdots" id="cdots"></div>
   </div>
 
   <div class="grid">
@@ -303,6 +316,23 @@ new Chart(cOpenb,{type:'line',data:{labels:S.openb_years,datasets:[{data:S.openb
     plugins:{legend:{display:false},tooltip:{...tip,callbacks:{title:c=>"in "+c[0].label,label:c=>c.raw+"% openbaar"}}},
     scales:{x:{...noGrid,ticks:{color:MUT,autoSkip:true,maxTicksLimit:9,maxRotation:0}},
             y:{...gridX,beginAtZero:true,max:100,ticks:{color:MUT,callback:v=>v+"%"}}}}});
+
+// Carrousel 'Bijzondere gevallen'
+(function(){
+  const slides=[...document.querySelectorAll('.cslide')], track=document.getElementById('ctrack'), dots=document.getElementById('cdots');
+  if(!slides.length) return;
+  let ci=0, timer=null;
+  slides.forEach((_,i)=>{const b=document.createElement('button');b.className='cdot';b.setAttribute('aria-label','ga naar '+(i+1));b.onclick=()=>{go(i);restart();};dots.appendChild(b);});
+  function go(i){ci=(i+slides.length)%slides.length;track.style.transform=`translateX(-${ci*100}%)`;
+    [...dots.children].forEach((d,j)=>d.classList.toggle('on',j===ci));}
+  function restart(){clearInterval(timer);timer=setInterval(()=>go(ci+1),6000);}
+  document.getElementById('cPrev').onclick=()=>{go(ci-1);restart();};
+  document.getElementById('cNext').onclick=()=>{go(ci+1);restart();};
+  const car=document.querySelector('.carousel');
+  car.addEventListener('mouseenter',()=>clearInterval(timer));
+  car.addEventListener('mouseleave',restart);
+  go(0);restart();
+})();
 </script>
 </body>
 </html>"""
