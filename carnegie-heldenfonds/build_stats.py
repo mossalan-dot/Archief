@@ -14,6 +14,8 @@ vrouw_pct = pct(S["gender"]["vrouw"], S["gender"]["man"]+S["gender"]["vrouw"])
 meer_pct = pct(S["group"].get("meerdere",0), S["totaal"])
 v = S["victim"]
 kind_pct = pct(v["kind"], v["kind"]+v["volwassene"]+v["beide"])
+geplot_pct = pct(S["geplot"], S["totaal"])
+nietplot_n = S["totaal"] - S["geplot"]
 data_json = json.dumps(S, ensure_ascii=False, separators=(",",":"))
 
 # gecureerde bijzondere gevallen (emoji, titel, tekst, plaats/jaar, inv.nr.)
@@ -124,11 +126,23 @@ HTML = r"""<!doctype html>
 
   <div class="tiles">
     <div class="tile"><div class="n">__TOT__</div><div class="l">reddingsdossiers</div></div>
+    <div class="tile"><div class="n">__GEPLOT__%</div><div class="l">als punt op de kaart geplot</div></div>
     <div class="tile"><div class="n">__GESL__%</div><div class="l">geslaagde reddingen</div></div>
     <div class="tile"><div class="n">__KIND__%</div><div class="l">van de geredden was een kind</div></div>
     <div class="tile"><div class="n">__VRPCT__%</div><div class="l">van de redders vrouw <span style="opacity:.7">(schatting)</span></div></div>
     <div class="tile"><div class="n">__MEER__%</div><div class="l">met meerdere redders</div></div>
     <div class="tile"><div class="n">__PLA__</div><div class="l">verschillende plaatsen</div></div>
+  </div>
+
+  <div class="card"><h2>Wat staat er op de kaart?</h2>
+    <p class="cap">Van de __TOT__ dossiers staan er <b>__GEPLOTN__</b> (__GEPLOT__%) als punt op de kaart. Waar de beschrijving een gracht, haven of straat noemt, staat de marker dáár; anders in het centrum van de genoemde plaats.</p>
+    <p class="cap">De overige <b>__NIETPLOT__</b> laten we bewust weg, om drie redenen:</p>
+    <ul class="cap" style="margin:2px 0 0;padding-left:20px">
+      <li><b>Geen reddingsplaats.</b> Administratieve dossiers en ondersteuning van nabestaanden noemen geen plek van handeling.</li>
+      <li><b>Open water.</b> Reddingen "voor de kust", op de Noordzee of het IJsselmeer hebben geen precies punt.</li>
+      <li><b>Te onzeker.</b> Een handvol plaatsnamen kregen we niet betrouwbaar thuisgebracht (bijv. <i>St. Lucia</i>, <i>Sluis-Buitenlust</i>); die plotten we liever niet dan verkeerd.</li>
+    </ul>
+    <p class="note" style="margin-top:10px">Verantwoording en methode staan op de <a href="../over">over-pagina</a>.</p>
   </div>
 
   <div class="hlsec">
@@ -431,6 +445,9 @@ h = (HTML.replace("__CC__", odict(CAT_COL)).replace("__CL__", odict(CAT_FULL)).r
         .replace("__VRPCT__", str(vrouw_pct))
         .replace("__MEER__", str(meer_pct))
         .replace("__PLA__", f"{S['plaatsen']:,}".replace(",", "."))
+        .replace("__GEPLOTN__", f"{S['geplot']:,}".replace(",", "."))
+        .replace("__GEPLOT__", str(geplot_pct))
+        .replace("__NIETPLOT__", f"{nietplot_n:,}".replace(",", "."))
         .replace("__BINNEN__", f"{S['binnenbuiten']['binnenland']:,}".replace(",", "."))
         .replace("__BUITEN__", str(S['binnenbuiten']['buitenland']))
         .replace("__OPENPCT__", str(round(S['openb_pct'][0])))
