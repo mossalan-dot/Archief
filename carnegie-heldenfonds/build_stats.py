@@ -71,20 +71,23 @@ HTML = r"""<!doctype html>
   .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:12px;margin-bottom:26px}
   .tile{position:relative;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px;box-shadow:var(--shadow)}
   .tile .n{font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1}
-  .qm{position:absolute;top:9px;right:10px;width:18px;height:18px;border-radius:50%;background:#eef1f4;color:#6b7280;
+  .qm{width:18px;height:18px;border-radius:50%;background:#eef1f4;color:#6b7280;flex:none;
       font-size:11px;font-weight:700;display:grid;place-items:center;cursor:help;user-select:none;border:1px solid var(--line)}
-  .qm:hover,.tile:focus-within .qm{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .tile .qm{position:absolute;top:9px;right:10px}
+  .qm:hover,.tile:focus-within .qm,.help:focus-within .qm{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .help{position:relative;margin-left:auto;display:inline-grid;place-items:center}
   .tt{position:absolute;top:calc(100% + 6px);left:0;z-index:40;width:340px;text-align:left;
       background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 6px 26px #0000001f;
       padding:13px 15px;font-size:12.5px;line-height:1.5;color:#374151;opacity:0;visibility:hidden;
       transform:translateY(-4px);transition:opacity .14s,transform .14s}
-  .tile:hover .tt,.tile:focus-within .tt{opacity:1;visibility:visible;transform:none}
+  .help .tt{left:auto;right:0}
+  .tile:hover .tt,.tile:focus-within .tt,.help:hover .tt,.help:focus-within .tt{opacity:1;visibility:visible;transform:none}
   .tt b{color:var(--ink)} .tt ul{margin:6px 0 0;padding-left:18px} .tt li{margin:3px 0}
   .tt .src{margin-top:9px;font-size:11.5px;color:var(--muted)}
   .tile .l{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.3}
   /* bijzondere gevallen — carrousel */
-  .hlsec{margin:0 0 26px}
-  .hlsec .lbl2{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 12px}
+  .hlsec{margin:26px 0 30px;background:linear-gradient(135deg,#faf6ea,#f6efe0);border:1px solid #ece0c8;border-radius:20px;padding:16px 18px 18px}
+  .hlsec .lbl2{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#a07d3c;margin:0 0 12px}
   .carousel{display:flex;align-items:stretch;gap:10px}
   .cbtn{flex:none;width:42px;border:1px solid var(--line);background:#fff;border-radius:12px;cursor:pointer;font-size:22px;color:var(--muted);box-shadow:var(--shadow);line-height:1}
   .cbtn:hover{color:var(--ink);border-color:#cbd5e1}
@@ -174,6 +177,10 @@ HTML = r"""<!doctype html>
       <p class="cap">Ruim driekwart is een redding <b>uit het water</b> — Nederland is een waterland.</p>
       <div class="cwrap"><canvas id="cAard"></canvas></div></div>
 
+    <div class="card"><h2>Hoe gevaarlijk was elke redding?</h2>
+      <p class="cap">Aandeel dat een <b>poging</b> bleef of de redder het leven kostte. Uit het <b>binnenwater</b> lukte het bijna altijd; <b>op hol geslagen paarden</b>, <b>auto's te water</b> en de <b>zee</b> waren veel gevaarlijker.</p>
+      <div class="cwrap"><canvas id="cDanger"></canvas></div></div>
+
     <div class="card wide"><div class="h2row"><h2>Reddingen door de tijd</h2>
       <span class="seg" id="segRed"><button data-g="jaar" class="on">per jaar</button><button data-g="dec">per decennium</button></span></div>
       <p class="cap">Alle aanvragen per periode (vanaf 1910), gesplitst in <b>toegekend</b> en <b>afgewezen</b>. Het totaal piekt in de <b>jaren '50</b>; het afgewezen-aandeel groeit daarna mee.</p>
@@ -184,13 +191,15 @@ HTML = r"""<!doctype html>
       <b>op hol geslagen paarden</b> verdwijnen na de jaren '50, terwijl <b>auto's te water</b> juist opkomen — de tijdgeest in twee lijnen.</p>
       <div class="cwrap"><canvas id="cShift"></canvas></div></div>
 
-    <div class="card wide"><h2>IJsreddingen en strenge winters</h2>
-      <p class="cap">Het <b>aandeel</b> ijsreddingen per jaar (niet het absolute aantal — dat volgt vooral het totale dossiervolume). In <b>Elfstedentocht-jaren</b> <span style="color:#0e8ba8;font-weight:700">(blauw)</span> — dé graadmeter voor een strenge winter — was gemiddeld <b>__ICEELF__%</b> van alle reddingen een ijsredding, tegen <b>__ICEOTH__%</b> in andere jaren: ruim anderhalf keer zoveel. De hoogste pieken vallen op beruchte ijswinters als <b>1929</b>, <b>1963</b> en de sneeuwwinter van <b>1979</b>.</p>
+    <div class="card wide"><div class="h2row"><h2>IJsreddingen en strenge winters</h2>
+      <span class="help" tabindex="0"><span class="qm" aria-hidden="true">?</span>
+        <div class="tt" role="tooltip">
+          <b>Waarom het aandeel en niet het aantal?</b> Het absolute aantal ijsreddingen volgt vooral het totale dossiervolume (piek in de jaren '50); het <b>aandeel per jaar</b> legt de winters pas bloot.
+          <div style="margin-top:7px">In <b>Elfstedentocht-jaren</b> was <b>__ICEELF__%</b> van alle reddingen een ijsredding, tegen <b>__ICEOTH__%</b> in andere jaren — ruim 1,7×.</div>
+          <div class="src">De Elfstedentocht dient hier als graadmeter voor een strenge winter: we markeren de jaren waarin een tocht werd gehouden (de bekende lijst, 1909–1997). Jaren met weinig dossiers (bijv. 1985: 5) kunnen uitschieten — de tooltip per staaf toont de aantallen.</div>
+        </div></span></div>
+      <p class="cap">Het <b>aandeel</b> ijsreddingen per jaar. In <b>Elfstedentocht-jaren</b> <span style="color:#0e8ba8;font-weight:700">(blauw)</span> — graadmeter voor een strenge winter — was dat aandeel ruim <b>anderhalf keer</b> zo groot; de pieken vallen op ijswinters als <b>1929</b>, <b>1963</b> en <b>1979</b>.</p>
       <div class="cwrap"><canvas id="cIce"></canvas></div></div>
-
-    <div class="card"><h2>Hoe gevaarlijk was elke redding?</h2>
-      <p class="cap">Aandeel dat een <b>poging</b> bleef of de redder het leven kostte. Uit het <b>binnenwater</b> lukte het bijna altijd; <b>op hol geslagen paarden</b>, <b>auto's te water</b> en de <b>zee</b> waren veel gevaarlijker.</p>
-      <div class="cwrap"><canvas id="cDanger"></canvas></div></div>
 
     <div class="card"><h2>Wie werd er gered?</h2>
       <p class="cap">In verreweg de meeste dossiers gaat het om een <b>kind</b> — vaak te water geraakt.</p>
@@ -208,6 +217,10 @@ HTML = r"""<!doctype html>
     <div class="card"><h2>Man of vrouw? — geslacht per aard</h2>
       <p class="cap">Absoluut aantal <b>mannelijke</b> en <b>vrouwelijke</b> redders per soort redding (geschat). Water levert veruit de meeste redders; het vrouwaandeel is overal een minderheid, maar relatief het grootst bij <b>water, ijs en brand</b>.</p>
       <div class="cwrap"><canvas id="cGenderCat"></canvas></div></div>
+
+    <div class="card"><h2>Welke reddingen werden afgewezen?</h2>
+      <p class="cap"><b>Auto te water</b> werd het vaakst afgewezen (~37%); <b>op hol geslagen paarden</b> — de klassieke heldendaad — juist het minst (~17%).</p>
+      <div class="cwrap"><canvas id="cRejectCat"></canvas></div></div>
 
     <div class="card"><div class="h2row"><h2>Waar wordt gered? — top-plaatsen</h2>
       <span class="seg" id="segPlace"><button data-g="abs" class="on">absoluut</button><button data-g="pc">per 100.000 inw.</button></span></div>
@@ -227,11 +240,7 @@ HTML = r"""<!doctype html>
       <p class="cap">Bijna alles speelt zich in Nederland af (<b>__BINNEN__</b>), maar <b>__BUITEN__</b> reddingen gebeurden erbuiten — door Nederlanders op zee, in de koloniën of op reis.</p>
       <div class="cwrap tall"><canvas id="cLand"></canvas></div></div>
 
-    <div class="card"><h2>Welke reddingen werden afgewezen?</h2>
-      <p class="cap"><b>Auto te water</b> werd het vaakst afgewezen (~37%); <b>op hol geslagen paarden</b> — de klassieke heldendaad — juist het minst (~17%).</p>
-      <div class="cwrap"><canvas id="cRejectCat"></canvas></div></div>
-
-    <div class="card"><h2>Wanneer wordt het archief openbaar?</h2>
+    <div class="card wide"><h2>Wanneer wordt het archief openbaar?</h2>
       <p class="cap">Nu is <b>__OPENPCT__%</b> van de dossiers openbaar; de rest opent geleidelijk (veelal ~75 jaar na de redding, om privacyredenen). Pas rond <b>2085</b> is alles vrij raadpleegbaar.</p>
       <div class="cwrap"><canvas id="cOpenb"></canvas></div></div>
   </div>
