@@ -219,6 +219,7 @@ Chart.defaults.font.size=12; Chart.defaults.color=MUT;
 const decLabels = S.decades.map(d=>d+"–"+String(d+9).slice(-2));   // Dutch decade notation
 const yearLabels = S.years;
 const money = n => n.toLocaleString('nl');
+const withUnit = (n,unit) => money(n)+" "+(n===1 && unit==='reddingen' ? 'redding' : unit);
 const gridX = {grid:{color:GRID,drawTicks:false},border:{display:false},ticks:{color:MUT}};
 const noGrid = {grid:{display:false},border:{display:false},ticks:{color:MUT}};
 const tip = {backgroundColor:"#111",padding:10,cornerRadius:8,titleFont:{weight:'700'},boxPadding:4};
@@ -228,7 +229,7 @@ const tip = {backgroundColor:"#111",padding:10,cornerRadius:8,titleFont:{weight:
 new Chart(cAard,{type:'bar',data:{labels:cats.map(c=>CATEMO[c]+" "+CATLBL[c]),
   datasets:[{data:cats.map(c=>S.cat[c]),backgroundColor:cats.map(c=>CATCOL[c]),borderRadius:5,borderSkipped:false,maxBarThickness:26}]},
   options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
-    tooltip:{...tip,callbacks:{label:c=>money(c.raw)+" reddingen"}}},
+    tooltip:{...tip,callbacks:{label:c=>withUnit(c.raw,'reddingen')}}},
     scales:{x:{...gridX,ticks:{color:MUT,callback:v=>money(v)}},y:noGrid}}});}
 
 // 2 & 10. time charts with per jaar / per decennium toggle
@@ -321,7 +322,7 @@ new Chart(cVrouwtijd,{type:'line',data:{labels:decLabels,datasets:[{data:S.gende
 function hbar(cv,pairs,unit,color){const L=pairs.map(p=>p[0]),D=pairs.map(p=>p[1]);
 new Chart(cv,{type:'bar',data:{labels:L,datasets:[{data:D,backgroundColor:color||ACC,borderRadius:5,borderSkipped:false,maxBarThickness:20}]},
   options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
-    tooltip:{...tip,callbacks:{label:c=>money(c.raw)+" "+unit}}},scales:{x:{...gridX,ticks:{color:MUT,callback:v=>money(v)}},y:noGrid}}});}
+    tooltip:{...tip,callbacks:{label:c=>withUnit(c.raw,unit)}}},scales:{x:{...gridX,ticks:{color:MUT,callback:v=>money(v)}},y:noGrid}}});}
 // categorie-gekleurde horizontale balk (emoji-labels), waarde in %
 function catbar(cv,pairs){
   new Chart(cv,{type:'bar',data:{labels:pairs.map(p=>CATEMO[p[0]]+" "+CATLBL[p[0]]),
@@ -356,7 +357,7 @@ new Chart(cGenderCat,{type:'bar',data:{labels:L,datasets:[
     chart=new Chart(cPlaces,{type:'bar',data:{labels:pairs.map(p=>p[0]),
       datasets:[{data:pairs.map(p=>p[1]),backgroundColor:ACC,borderRadius:5,borderSkipped:false,maxBarThickness:20}]},
       options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
-        tooltip:{...tip,callbacks:{label:c=>money(c.raw)+" "+unit}}},
+        tooltip:{...tip,callbacks:{label:c=>withUnit(c.raw,unit)}}},
         scales:{x:{...gridX,ticks:{color:MUT,callback:v=>money(v)}},y:noGrid}}});
   }
   segPlace.querySelectorAll('button').forEach(b=>b.onclick=()=>{
@@ -376,7 +377,7 @@ new Chart(cGenderCat,{type:'bar',data:{labels:L,datasets:[
     chart=new Chart(cProv,{type:'bar',data:{labels:pairs.map(p=>p[0]),
       datasets:[{data:pairs.map(p=>p[1]),backgroundColor:ACC,borderRadius:5,borderSkipped:false,maxBarThickness:20}]},
       options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
-        tooltip:{...tip,callbacks:{label:c=>money(c.raw)+" "+unit}}},
+        tooltip:{...tip,callbacks:{label:c=>withUnit(c.raw,unit)}}},
         scales:{x:{...gridX,ticks:{color:MUT,callback:v=>money(v)}},y:noGrid}}});
   }
   segProv.querySelectorAll('button').forEach(b=>b.onclick=()=>{
