@@ -69,8 +69,18 @@ HTML = r"""<!doctype html>
     padding:8px 13px;border-radius:10px;white-space:nowrap}
   .lead{color:#374151;font-size:15px;line-height:1.55;max-width:70ch;margin:14px 0 22px}
   .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:12px;margin-bottom:26px}
-  .tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px;box-shadow:var(--shadow)}
+  .tile{position:relative;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px;box-shadow:var(--shadow)}
   .tile .n{font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1}
+  .qm{position:absolute;top:9px;right:10px;width:18px;height:18px;border-radius:50%;background:#eef1f4;color:#6b7280;
+      font-size:11px;font-weight:700;display:grid;place-items:center;cursor:help;user-select:none;border:1px solid var(--line)}
+  .qm:hover,.tile:focus-within .qm{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .tt{position:absolute;top:calc(100% + 6px);left:0;z-index:40;width:340px;text-align:left;
+      background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 6px 26px #0000001f;
+      padding:13px 15px;font-size:12.5px;line-height:1.5;color:#374151;opacity:0;visibility:hidden;
+      transform:translateY(-4px);transition:opacity .14s,transform .14s}
+  .tile:hover .tt,.tile:focus-within .tt{opacity:1;visibility:visible;transform:none}
+  .tt b{color:var(--ink)} .tt ul{margin:6px 0 0;padding-left:18px} .tt li{margin:3px 0}
+  .tt .src{margin-top:9px;font-size:11.5px;color:var(--muted)}
   .tile .l{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.3}
   /* bijzondere gevallen — carrousel */
   .hlsec{margin:0 0 26px}
@@ -105,6 +115,7 @@ HTML = r"""<!doctype html>
   .note{font-size:11px;color:#9ca3af;margin-top:9px}
   footer{color:var(--muted);font-size:12px;margin-top:30px;line-height:1.6;border-top:1px solid var(--line);padding-top:16px}
   @media(max-width:720px){.grid{grid-template-columns:1fr}.cwrap{height:240px}}
+  @media(max-width:520px){.tt{width:260px;left:auto;right:0}}
 </style>
 </head>
 <body>
@@ -126,7 +137,19 @@ HTML = r"""<!doctype html>
 
   <div class="tiles" style="margin-bottom:12px">
     <div class="tile"><div class="n">__TOT__</div><div class="l">reddingsdossiers</div></div>
-    <div class="tile"><div class="n">__GEPLOT__%</div><div class="l">als punt op de kaart geplot</div></div>
+    <div class="tile" tabindex="0"><span class="qm" aria-hidden="true">?</span>
+      <div class="n">__GEPLOT__%</div><div class="l">als punt op de kaart geplot</div>
+      <div class="tt" role="tooltip">
+        Van de __TOT__ dossiers staan er <b>__GEPLOTN__</b> (__GEPLOT__%) als punt op de kaart. Waar de beschrijving een gracht, haven of straat noemt, staat de marker dáár; anders in het centrum van de plaats.
+        <div style="margin-top:7px">De overige <b>__NIETPLOT__</b> laten we bewust weg:</div>
+        <ul>
+          <li><b>Geen reddingsplaats</b> — administratieve/steundossiers.</li>
+          <li><b>Open water</b> — "voor de kust", Noordzee, IJsselmeer: geen precies punt.</li>
+          <li><b>Te onzeker</b> — een handvol plaatsnamen niet betrouwbaar thuisgebracht.</li>
+        </ul>
+        <div class="src">Meer op de <a href="../over">over-pagina</a>.</div>
+      </div>
+    </div>
     <div class="tile"><div class="n">__PLA__</div><div class="l">verschillende plaatsen</div></div>
   </div>
   <div class="tiles">
@@ -134,17 +157,6 @@ HTML = r"""<!doctype html>
     <div class="tile"><div class="n">__KIND__%</div><div class="l">van de geredden was een kind</div></div>
     <div class="tile"><div class="n">__VRPCT__%</div><div class="l">van de redders vrouw <span style="opacity:.7">(schatting)</span></div></div>
     <div class="tile"><div class="n">__MEER__%</div><div class="l">met meerdere redders</div></div>
-  </div>
-
-  <div class="card"><h2>Wat staat er op de kaart?</h2>
-    <p class="cap">Van de __TOT__ dossiers staan er <b>__GEPLOTN__</b> (__GEPLOT__%) als punt op de kaart. Waar de beschrijving een gracht, haven of straat noemt, staat de marker dáár; anders in het centrum van de genoemde plaats.</p>
-    <p class="cap">De overige <b>__NIETPLOT__</b> laten we bewust weg, om drie redenen:</p>
-    <ul class="cap" style="margin:2px 0 0;padding-left:20px">
-      <li><b>Geen reddingsplaats.</b> Administratieve dossiers en ondersteuning van nabestaanden noemen geen plek van handeling.</li>
-      <li><b>Open water.</b> Reddingen "voor de kust", op de Noordzee of het IJsselmeer hebben geen precies punt.</li>
-      <li><b>Te onzeker.</b> Een handvol plaatsnamen kregen we niet betrouwbaar thuisgebracht (bijv. <i>St. Lucia</i>, <i>Sluis-Buitenlust</i>); die plotten we liever niet dan verkeerd.</li>
-    </ul>
-    <p class="note" style="margin-top:10px">Verantwoording en methode staan op de <a href="../over">over-pagina</a>.</p>
   </div>
 
   <div class="hlsec">
