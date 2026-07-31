@@ -279,10 +279,12 @@ const noGrid = {grid:{display:false},border:{display:false},ticks:{color:MUT}};
 const tip = {backgroundColor:"#111",padding:10,cornerRadius:8,titleFont:{weight:'700'},boxPadding:4};
 
 // 1. Aard — horizontal bar (map colors; labels give secondary encoding)
-{const cats=Object.keys(S.cat).sort((a,b)=>S.cat[b]-S.cat[a]);
+{const RES={overig:1,onbekend:2};const cats=Object.keys(S.cat).sort((a,b)=>(RES[a]||0)-(RES[b]||0)||S.cat[b]-S.cat[a]);
 new Chart(cAard,{type:'bar',data:{labels:cats.map(c=>CATEMO[c]+" "+CATLBL[c]),
   datasets:[{data:cats.map(c=>S.cat[c]),backgroundColor:cats.map(c=>CATCOL[c]),borderRadius:5,borderSkipped:false,maxBarThickness:26}]},
-  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+    interaction:{mode:'index',axis:'y',intersect:false},
+    plugins:{legend:{display:false},
     tooltip:{...tip,callbacks:{label:c=>withUnit(c.raw,'reddingen')}}},
     scales:{x:{...gridX,ticks:{color:MUT,callback:v=>money(v)}},y:noGrid}}});}
 

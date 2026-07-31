@@ -390,8 +390,9 @@ const catCount={};
 for(const p of DATA){catCount[p.cat]=(catCount[p.cat]||0)+1;}
 const catBox = document.getElementById('cats');
 const catState = {};
-for(const c of Object.keys(CATS)){
-  catState[c]=true;
+Object.keys(CATS).forEach(c=>catState[c]=true);
+const RESID={overig:1,onbekend:2};   // restgroepen altijd achteraan
+for(const c of Object.keys(CATS).sort((a,b)=>(RESID[a]||0)-(RESID[b]||0)||(catCount[b]||0)-(catCount[a]||0))){
   const l=document.createElement('label');
   l.className='chip'; l.dataset.cat=c;
   l.innerHTML=`<input type="checkbox" data-cat="${c}" checked><span class="em">${EMO[c]}</span>`+
