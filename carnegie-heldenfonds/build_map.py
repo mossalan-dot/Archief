@@ -484,9 +484,9 @@ function popupHtml(p){
   if(p.afg) b+=`<span class="badge" style="background:#b91c1c">afgewezen</span>`;
   if(p.steun) b+=`<span class="badge" style="background:#78716c">🤝 ondersteuning nabestaanden</span>`;
   if(p.foto) b+=`<span class="badge" style="background:#059669">foto's</span>`;
-  if(p.openb) b+=`<span class="badge" style="background:#6b7280">niet openbaar tot ${esc(p.openb)}</span>`;
+  if(p.openb) b+=`<span class="badge" style="background:#6b7280">beperkt openbaar tot ${esc(p.openb)}</span>`;
   b+=`</div>`;
-  b+=`<div style="margin-top:8px"><a href="${url}" target="_blank" rel="noopener">Bekijk in Nationaal Archief ↗</a></div>`;
+  b+=`<div style="margin-top:8px"><a href="${url}" target="_blank" rel="noopener">Bekijk bij het Nationaal Archief ↗</a></div>`;
   const durl=delpherURL(p);
   if(durl) b+=`<div style="margin-top:4px"><a href="${durl}" target="_blank" rel="noopener">Zoek krantenberichten (Delpher) ↗</a></div>`;
   b+=`</div>`;
