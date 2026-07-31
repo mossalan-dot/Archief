@@ -325,7 +325,7 @@ TPL = r"""<!doctype html>
     <details class="acc">
       <summary>Openbaarheid <span class="qm" data-help="openbaar">?</span></summary>
       <label class="toggle"><input type="checkbox" id="opOpen" checked> 👁️ openbaar <span class="ct" id="ctOpen"></span></label>
-      <label class="toggle"><input type="checkbox" id="opRestr" checked> 🔒 niet openbaar <span class="ct" id="ctRestr"></span></label>
+      <label class="toggle"><input type="checkbox" id="opRestr" checked> 🔒 beperkt openbaar <span class="ct" id="ctRestr"></span></label>
     </details>
     <div class="foot" style="justify-content:space-between">
       <a href="./stats" style="font-weight:700">📊 Inzichten &amp; statistiek</a>
@@ -626,7 +626,7 @@ catBox.addEventListener('click',e=>{
 const HELP={
   aard:'De aard van de redding, afgeleid uit de dossierbeschrijving. <b>Klik een categorie</b> om alléén die reddingen te tonen; klik nogmaals voor alles.',
   afloop:'<b>Geslaagd</b>: de drenkeling of gewonde werd gered. <b>Poging</b>: het lukte niet, of de redder kwam zelf om. <b>Afgewezen</b>: het bestuur kende geen onderscheiding toe. <b>Ondersteuning</b>: steun aan nabestaanden, zonder eigen reddingsplaats.',
-  openbaar:'<b>Openbaar</b>: vrij in te zien. <b>Niet openbaar</b>: beperkt vanwege de <b>persoonlijke levenssfeer</b> van de betrokkenen; deze dossiers worden pas na een wettelijke termijn openbaar. Inzage vooraf kan via een verzoek bij het <a href="https://www.nationaalarchief.nl/onderzoeken/zoekhulpen/inzage-in-beperkt-openbaar-archief" target="_blank" rel="noopener">Nationaal Archief</a>.'
+  openbaar:'<b>Openbaar</b>: vrij in te zien. <b>Beperkt openbaar</b>: beperkt vanwege de <b>persoonlijke levenssfeer</b> van de betrokkenen; deze dossiers worden pas na een wettelijke termijn openbaar. Inzage vooraf kan via een verzoek bij het <a href="https://www.nationaalarchief.nl/onderzoeken/zoekhulpen/inzage-in-beperkt-openbaar-archief" target="_blank" rel="noopener">Nationaal Archief</a>.'
 };
 const mtt=document.createElement('div'); mtt.id='mtt'; document.body.appendChild(mtt);
 let mttT;
