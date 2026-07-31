@@ -144,13 +144,13 @@ HTML = r"""<!doctype html>
     <div class="tile" tabindex="0"><span class="qm" aria-hidden="true">?</span>
       <div class="n">__GEPLOT__%</div><div class="l">als punt op de kaart geplot</div>
       <div class="tt" role="tooltip">
-        Van de __TOT__ dossiers staan er <b>__GEPLOTN__</b> (__GEPLOT__%) als punt op de kaart. Waar de beschrijving een gracht, haven of straat noemt, staat de marker dáár; anders in het centrum van de plaats.
-        <div style="margin-top:7px">De overige <b>__NIETPLOT__</b> laten we bewust weg:</div>
+        Van de __TOT__ dossiers staan er <b>__GEPLOTN__</b> (__GEPLOT__%) als punt op de kaart — waar mogelijk op de gracht of straat, anders in de plaats, op het genoemde water, of hemelsbreed tussen twee plaatsen.
+        <div style="margin-top:7px">De overige <b>__NIETPLOT__</b> hebben geen plaatsbare locatie:</div>
         <ul>
-          <li><b>Geen reddingsplaats</b> — administratieve/steundossiers.</li>
-          <li><b>Open water</b> — "voor de kust", Noordzee, IJsselmeer: geen precies punt.</li>
-          <li><b>Te onzeker</b> — een handvol plaatsnamen niet betrouwbaar thuisgebracht.</li>
+          <li><b>Geen reddingsplaats</b> — administratieve en ondersteuningsdossiers.</li>
+          <li><b>Te vaag</b> — reddingen op volle zee of "voor de kust" zonder enige plaatsaanduiding.</li>
         </ul>
+        Ze blijven vindbaar via de knop <b>“Niet op de kaart”</b> op de kaart zelf.
         <div class="src">Meer op de <a href="../over">over-pagina</a>.</div>
       </div>
     </div>

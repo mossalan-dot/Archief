@@ -112,7 +112,7 @@ MANUAL = {
     3982: ("place", "Rotterdam"),
     4805: ("water", "Oude Rijn, Zuid-Holland"),
     5379: ("place", "Amsterdam"),
-    5410: ("coord", 52.40, 4.05, "water", "Noordzee"),
+    5410: ("coord", 52.30, 4.10, "water", "Noordzee (locatie niet vermeld)"),
     5657: ("detail", "Loosduinseweg", "'s-Gravenhage"),
     # buitenland
     562:  ("abroad", "St Lucia, KwaZulu-Natal, South Africa"),
@@ -120,10 +120,11 @@ MANUAL = {
     5910: ("place", "Bath, Reimerswaal"),        # Nauw van Bath = Westerschelde (NL), niet Engeland
     6973: ("abroad", "Altenhuntorf, Elsfleth, Germany"),
     # offshore / bijzonder (expliciete coord)
-    1451: ("coord", 52.30, 4.20, "water", "Noordzee"),
-    2041: ("coord", 52.35, 4.15, "water", "Noordzee"),
-    3046: ("coord", 52.25, 4.10, "water", "Noordzee"),
-    6261: ("coord", 52.05, 4.15, "water", "Noordzee (voor Scheveningen)"),
+    # generieke "op de Noordzee" zonder plek -> één gedeeld punt (clustert tot één marker, geen schijnprecisie)
+    1451: ("coord", 52.30, 4.10, "water", "Noordzee (locatie niet vermeld)"),
+    2041: ("coord", 52.30, 4.10, "water", "Noordzee (locatie niet vermeld)"),
+    3046: ("coord", 52.30, 4.10, "water", "Noordzee (locatie niet vermeld)"),
+    6261: ("coord", 52.30, 4.10, "water", "Noordzee (locatie niet vermeld)"),
     1600: ("coord", 53.45, 5.90, "water", "Waddenzee (bij Holwerd)"),
     1648: ("coord", 53.32, 5.62, "water", "Waddenzee (voor Het Bildt)"),
     7308: ("coord", 51.885, 4.64, "water", "splitsing Lek–Noord"),
