@@ -93,8 +93,8 @@ HTML = r"""<!doctype html>
   .cbtn:hover{color:var(--ink);border-color:#cbd5e1}
   .cviewport{flex:1;min-width:0;overflow:hidden;border-radius:14px}
   .ctrack{display:flex;transition:transform .35s ease}
-  .cslide{flex:0 0 100%;min-width:0;padding:0 1px;box-sizing:border-box}
-  .hlcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 24px;box-shadow:var(--shadow);display:flex;gap:16px;align-items:center;min-height:118px;box-sizing:border-box}
+  .cslide{flex:0 0 100%;min-width:0;padding:0 1px;box-sizing:border-box;display:flex}
+  .hlcard{flex:1;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 24px;box-shadow:var(--shadow);display:flex;gap:16px;align-items:center;min-height:132px;box-sizing:border-box}
   .hlcard .em{font-size:40px;line-height:1;flex:none}
   .hlcard h3{margin:0 0 4px;font-size:16px;letter-spacing:-.01em}
   .hlcard p{margin:0 0 7px;font-size:14px;color:#374151;line-height:1.5}
@@ -373,12 +373,13 @@ new Chart(cVictim,{type:'doughnut',data:{labels:vl.map(x=>x[1]),
   options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{position:'right',labels:{color:INK,usePointStyle:true,boxWidth:10}},
     tooltip:{...tip,callbacks:{label:c=>c.label+": "+money(c.raw)+" ("+Math.round(100*c.raw/tot)+"%)"}}}}});}
 
-// 6. Vrouw% over tijd — single line (same hue as 'vrouw')
-new Chart(cVrouwtijd,{type:'line',data:{labels:decLabels,datasets:[{data:S.gender_decade_vrouwpct,
+// 6. Vrouw% over tijd — single line (same hue as 'vrouw'), vanaf 1910 (eerste dossiers)
+{const vi=S.decades.findIndex(d=>d>=1910);
+new Chart(cVrouwtijd,{type:'line',data:{labels:decLabels.slice(vi),datasets:[{data:S.gender_decade_vrouwpct.slice(vi),
   borderColor:"#1baf7a",backgroundColor:"#1baf7a22",fill:true,tension:.35,borderWidth:2.5,pointRadius:3,pointHoverRadius:6}]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
     tooltip:{...tip,callbacks:{title:c=>"Jaren "+c[0].label,label:c=>c.raw+"% vrouw"}}},
-    scales:{x:noGrid,y:{...gridX,beginAtZero:true,ticks:{color:MUT,callback:v=>v+"%"}}}}});
+    scales:{x:noGrid,y:{...gridX,beginAtZero:true,ticks:{color:MUT,callback:v=>v+"%"}}}}});}
 
 // 7/8/9 horizontal single-hue bars
 function hbar(cv,pairs,unit,color){const L=pairs.map(p=>p[0]),D=pairs.map(p=>p[1]);
