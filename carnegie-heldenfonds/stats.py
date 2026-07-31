@@ -25,7 +25,8 @@ def province(place):
 def in_nl(g): return g and 50.6 <= g["lat"] <= 53.7 and 3.2 <= g["lon"] <= 7.4
 LAND = {"Ireland":"Ierland","Éire":"Ierland","United Kingdom":"Verenigd Koninkrijk","Deutschland":"Duitsland",
         "Danmark":"Denemarken","France":"Frankrijk","Indonesia":"Indonesië","España":"Spanje","Canada":"Canada",
-        "Malaysia":"Maleisië","South Africa":"Zuid-Afrika","Belgi":"België","Nederland":"Nederland (Cariben)"}
+        "Malaysia":"Maleisië","South Africa":"Zuid-Afrika","Belgi":"België","Nederland":"Nederland (Cariben)",
+        "Brasil":"Brazilië","Brazil":"Brazilië","Österreich":"Oostenrijk","Osterreich":"Oostenrijk"}
 def land(place):
     g = cache.get(place)
     if not g: return None
