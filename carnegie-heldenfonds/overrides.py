@@ -106,6 +106,14 @@ MANUAL = {
     9053: ("between", "Woerden", "Gouda"),
     9089: ("between", "Alkmaar", "Harlingen"),
     9434: ("between", "Gaast", "Makkum"),
+    # aanvulling gebruikerslijst ronde 2
+    1426: ("water", "IJsselmeer"),
+    5772: ("water", "IJsselmeer"),
+    3982: ("place", "Rotterdam"),
+    4805: ("water", "Oude Rijn, Zuid-Holland"),
+    5379: ("place", "Amsterdam"),
+    5410: ("coord", 52.40, 4.05, "water", "Noordzee"),
+    5657: ("detail", "Loosduinseweg", "'s-Gravenhage"),
     # buitenland
     562:  ("abroad", "St Lucia, KwaZulu-Natal, South Africa"),
     5508: ("abroad", "Merauke, Indonesia"),
