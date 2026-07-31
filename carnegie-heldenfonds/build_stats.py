@@ -67,7 +67,7 @@ HTML = r"""<!doctype html>
   header .sub{color:var(--muted);font-size:13px;margin:2px 0 0}
   .back{margin-left:auto;font-size:13px;font-weight:600;text-decoration:none;background:#fff;border:1px solid var(--line);
     padding:8px 13px;border-radius:10px;white-space:nowrap}
-  .lead{color:#374151;font-size:15px;line-height:1.55;max-width:70ch;margin:14px 0 22px}
+  .lead{color:#374151;font-size:15px;line-height:1.55;margin:14px 0 22px}
   .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:12px;margin-bottom:26px}
   .tile{position:relative;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px;box-shadow:var(--shadow)}
   .tile .n{font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1}
