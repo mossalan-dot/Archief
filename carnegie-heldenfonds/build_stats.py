@@ -174,7 +174,9 @@ HTML = r"""<!doctype html>
   </div>
 
   <div class="grid">
-    <div class="card"><h2>Aard van de reddingen</h2>
+    <div class="card"><div class="h2row"><h2>Aard van de reddingen</h2>
+      <span class="help" tabindex="0"><span class="qm" aria-hidden="true">?</span>
+        <div class="tt" role="tooltip">Wat zit er in <b>🆘 Overig</b> (~236)? De restgroep die buiten de vaste soorten valt: <b>gasverstikking</b> in putten, riolen en silo's (~34), mensen <b>bedolven</b> bij instortingen en bouwputten (~24), <b>oorlogstuig</b> als granaten en mijnen (~19) en <b>elektrocutie</b>/hoogspanning (~11) — plus de echte uitschieters: een ontsnapte circusleeuw, dierentuinberen, een baby weggetrokken van een vallende benzinetank. <b>❔ Onvermeld</b> = de aard staat niet in de beschrijving.</div></span></div>
       <p class="cap">Ruim driekwart is een redding <b>uit het water</b> — Nederland is een waterland.</p>
       <div class="cwrap"><canvas id="cAard"></canvas></div></div>
 
