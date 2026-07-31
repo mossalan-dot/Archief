@@ -326,7 +326,7 @@ function timeChart(canvas, seg, yData, dData, color, unit){
             footer:it=>{const t=it.reduce((s,i)=>s+i.raw,0);const r=it.find(i=>i.dataset.label==='Afgewezen');
               return t?"totaal "+money(t)+" · "+Math.round(100*(r?r.raw:0)/t)+"% afgewezen":"";}}}},
         scales:{x:{...noGrid,stacked:true,ticks:{color:MUT,autoSkip:false,maxRotation:0,
-                  callback:jaar?function(v,i){const y=labels[i];return y%5===0?y:'';}:undefined}},
+                  callback:function(v,i){const y=labels[i];return jaar?(y%5===0?y:''):y;}}},
                 y:{...gridX,stacked:true,beginAtZero:true,ticks:{color:MUT,callback:v=>money(v)}}}}});
   }
   segRed.querySelectorAll('button').forEach(b=>b.onclick=()=>{segRed.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');draw(b.dataset.g);});
