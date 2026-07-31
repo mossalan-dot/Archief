@@ -177,9 +177,9 @@ HTML = r"""<!doctype html>
       <p class="cap">Ruim driekwart is een redding <b>uit het water</b> — Nederland is een waterland.</p>
       <div class="cwrap"><canvas id="cAard"></canvas></div></div>
 
-    <div class="card"><h2>Hoe gevaarlijk was elke redding?</h2>
-      <p class="cap">Aandeel dat een <b>poging</b> bleef of de redder het leven kostte. Uit het <b>binnenwater</b> lukte het bijna altijd; <b>op hol geslagen paarden</b>, <b>auto's te water</b> en de <b>zee</b> waren veel gevaarlijker.</p>
-      <div class="cwrap"><canvas id="cDanger"></canvas></div></div>
+    <div class="card"><h2>Wie werd er gered?</h2>
+      <p class="cap">In verreweg de meeste dossiers gaat het om een <b>kind</b> — vaak te water geraakt.</p>
+      <div class="cwrap"><canvas id="cVictim"></canvas></div></div>
 
     <div class="card wide"><div class="h2row"><h2>Reddingen door de tijd</h2>
       <span class="seg" id="segRed"><button data-g="jaar" class="on">per jaar</button><button data-g="dec">per decennium</button></span></div>
@@ -201,35 +201,36 @@ HTML = r"""<!doctype html>
       <p class="cap">Het <b>aandeel</b> ijsreddingen per jaar. In <b>Elfstedentocht-jaren</b> <span style="color:#0e8ba8;font-weight:700">(blauw)</span> — graadmeter voor een strenge winter — was dat aandeel ruim <b>anderhalf keer</b> zo groot; de pieken vallen op ijswinters als <b>1929</b>, <b>1963</b> en <b>1979</b>.</p>
       <div class="cwrap"><canvas id="cIce"></canvas></div></div>
 
-    <div class="card"><h2>Wie werd er gered?</h2>
-      <p class="cap">In verreweg de meeste dossiers gaat het om een <b>kind</b> — vaak te water geraakt.</p>
-      <div class="cwrap"><canvas id="cVictim"></canvas></div></div>
+    <div class="card"><div class="h2row"><h2>Geslacht van de redder</h2>
+      <span class="help" tabindex="0"><span class="qm" aria-hidden="true">?</span>
+        <div class="tt" role="tooltip">Het geslacht is een <b>schatting</b>, afgeleid uit de voornaam en de gehuwde-vrouw-vorm (achternaam met koppelteken, bijv. “De Boer-Hoekstra”). “Onbekend” zijn vooral namen met alleen initialen — het is dus een benadering, geen registratie.</div></span></div>
+      <p class="cap">Onder de geregistreerde redders zijn mannen sterk in de meerderheid.</p>
+      <div class="cwrap"><canvas id="cGender"></canvas></div></div>
 
-    <div class="card"><h2>Geslacht van de redder</h2>
-      <p class="cap">Onder de geregistreerde redders zijn mannen sterk in de meerderheid. Het geslacht is een schatting.</p>
-      <div class="cwrap"><canvas id="cGender"></canvas></div>
-      <p class="note">Geschat op basis van voornaam en de gehuwde-vrouw-vorm (achternaam met koppelteken). “Onbekend” = vooral namen met alleen initialen.</p></div>
-
-    <div class="card wide"><h2>Aandeel vrouwelijke redders door de tijd</h2>
-      <p class="cap">Na de Tweede Wereldoorlog stijgt het geschatte aandeel vrouwelijke redders van ~4% naar ~14%.</p>
-      <div class="cwrap"><canvas id="cVrouwtijd"></canvas></div></div>
-
-    <div class="card"><h2>Man of vrouw? — geslacht per aard</h2>
-      <p class="cap">Absoluut aantal <b>mannelijke</b> en <b>vrouwelijke</b> redders per soort redding (geschat). Water levert veruit de meeste redders; het vrouwaandeel is overal een minderheid, maar relatief het grootst bij <b>water, ijs en brand</b>.</p>
-      <div class="cwrap"><canvas id="cGenderCat"></canvas></div></div>
-
-    <div class="card"><h2>Welke reddingen werden afgewezen?</h2>
+    <div class="card"><div class="h2row"><h2>Welke reddingen werden afgewezen?</h2>
+      <span class="help" tabindex="0"><span class="qm" aria-hidden="true">?</span>
+        <div class="tt" role="tooltip"><b>Afgewezen</b> = het bestuur kende geen onderscheiding of gratificatie toe. Hier uitgesplitst per <b>aard</b> van de redding; alleen categorieën met genoeg dossiers (≥40) zijn meegeteld.</div></span></div>
       <p class="cap"><b>Auto te water</b> werd het vaakst afgewezen (~37%); <b>op hol geslagen paarden</b> — de klassieke heldendaad — juist het minst (~17%).</p>
       <div class="cwrap"><canvas id="cRejectCat"></canvas></div></div>
 
+    <div class="card wide"><div class="h2row"><h2>Aandeel vrouwelijke redders door de tijd</h2>
+      <span class="help" tabindex="0"><span class="qm" aria-hidden="true">?</span>
+        <div class="tt" role="tooltip">Zelfde schatting als bij “Geslacht van de redder”, op basis van voornamen. Een losse jaarwaarde is ruw; de <b>trend over decennia</b> is betrouwbaarder.</div></span></div>
+      <p class="cap">Na de Tweede Wereldoorlog stijgt het geschatte aandeel vrouwelijke redders van ~4% naar ~14%.</p>
+      <div class="cwrap"><canvas id="cVrouwtijd"></canvas></div></div>
+
     <div class="card"><div class="h2row"><h2>Waar wordt gered? — top-plaatsen</h2>
-      <span class="seg" id="segPlace"><button data-g="abs" class="on">absoluut</button><button data-g="pc">per 100.000 inw.</button></span></div>
-      <p class="cap">Absoluut voeren de grote steden de lijst aan (<b>Amsterdam</b>, <b>Den Haag</b>). <b>Per hoofd</b> van de bevolking draaien de waterstadjes de rollen om: <b>Dordrecht</b>, <b>Leiden</b> en <b>Delft</b> bovenaan, Amsterdam en Rotterdam juist laag (indicatief, inwonertal rond 1947).</p>
+      <span class="seg" id="segPlace"><button data-g="abs" class="on">absoluut</button><button data-g="pc">per 100.000 inw.</button></span>
+      <span class="help" tabindex="0"><span class="qm" aria-hidden="true">?</span>
+        <div class="tt" role="tooltip"><b>Per 100.000 inw.</b> deelt de reddingen door het inwonertal van de stad rond <b>1947</b> (indicatief — steden groeiden sterk over de eeuw). Zo komen kleine <b>waterstadjes</b> bovendrijven die per hoofd veel reddingen kenden.</div></span></div>
+      <p class="cap">Absoluut voeren de grote steden de lijst aan (<b>Amsterdam</b>, <b>Den Haag</b>). <b>Per hoofd</b> van de bevolking draaien de waterstadjes de rollen om: <b>Dordrecht</b>, <b>Leiden</b> en <b>Delft</b> bovenaan, Amsterdam en Rotterdam juist laag.</p>
       <div class="cwrap tall"><canvas id="cPlaces"></canvas></div></div>
 
     <div class="card"><div class="h2row"><h2>Per provincie</h2>
-      <span class="seg" id="segProv"><button data-g="abs" class="on">absoluut</button><button data-g="pc">per 100.000 inw.</button></span></div>
-      <p class="cap">De waterrijke <b>Randstad</b> domineert — ook <b>per hoofd</b> van de bevolking (indicatief, t.o.v. de volkstelling 1947). Bij 'absoluut' onderaan de reddingen in het <b>buitenland</b>.</p>
+      <span class="seg" id="segProv"><button data-g="abs" class="on">absoluut</button><button data-g="pc">per 100.000 inw.</button></span>
+      <span class="help" tabindex="0"><span class="qm" aria-hidden="true">?</span>
+        <div class="tt" role="tooltip"><b>Per 100.000 inw.</b> t.o.v. de volkstelling van <b>1947</b> (indicatief). Flevoland bestond toen nog niet en ontbreekt in de relatieve weergave. Bij ‘absoluut’ staat onderaan het <b>buitenland</b>.</div></span></div>
+      <p class="cap">De waterrijke <b>Randstad</b> domineert — ook <b>per hoofd</b> van de bevolking.</p>
       <div class="cwrap tall"><canvas id="cProv"></canvas></div></div>
 
     <div class="card"><h2>In welk water?</h2>
@@ -240,7 +241,9 @@ HTML = r"""<!doctype html>
       <p class="cap">Bijna alles speelt zich in Nederland af (<b>__BINNEN__</b>), maar <b>__BUITEN__</b> reddingen gebeurden erbuiten — door Nederlanders op zee, in de koloniën of op reis.</p>
       <div class="cwrap tall"><canvas id="cLand"></canvas></div></div>
 
-    <div class="card wide"><h2>Wanneer wordt het archief openbaar?</h2>
+    <div class="card wide"><div class="h2row"><h2>Wanneer wordt het archief openbaar?</h2>
+      <span class="help" tabindex="0"><span class="qm" aria-hidden="true">?</span>
+        <div class="tt" role="tooltip">Niet-openbare dossiers zijn beperkt vanwege de <b>persoonlijke levenssfeer</b> van de betrokkenen en worden pas na een wettelijke termijn openbaar. Inzage vooraf kan via een verzoek bij het <a href="https://www.nationaalarchief.nl/onderzoeken/zoekhulpen/inzage-in-beperkt-openbaar-archief" target="_blank" rel="noopener">Nationaal Archief</a>.</div></span></div>
       <p class="cap">Nu is <b>__OPENPCT__%</b> van de dossiers openbaar; de rest opent geleidelijk (veelal ~75 jaar na de redding, om privacyredenen). Pas rond <b>2085</b> is alles openbaar.</p>
       <div class="cwrap"><canvas id="cOpenb"></canvas></div></div>
   </div>
@@ -390,21 +393,9 @@ function catbar(cv,pairs){
       tooltip:{...tip,callbacks:{label:c=>c.raw+"%"}}},
       scales:{x:{...gridX,ticks:{color:MUT,callback:v=>v+"%"}},y:noGrid}}});
 }
-catbar(cDanger,S.danger);
 catbar(cRejectCat,S.reject_cat);
 hbar(cWater,S.top_waters.slice(0,12),"reddingen","#0891b2");
 hbar(cLand,S.landen,"reddingen","#4a3aa7");
-
-// Geslacht per aard — gestapelde absolute man/vrouw-balk
-{const G=S.gender_cat_abs, L=G.map(r=>CATEMO[r[0]]+" "+CATLBL[r[0]]);
-new Chart(cGenderCat,{type:'bar',data:{labels:L,datasets:[
-  {label:'Man',data:G.map(r=>r[1]),backgroundColor:"#2a78d6",borderRadius:4,borderSkipped:false,maxBarThickness:22,stack:'g'},
-  {label:'Vrouw',data:G.map(r=>r[2]),backgroundColor:"#1baf7a",borderRadius:4,borderSkipped:false,maxBarThickness:22,stack:'g'}]},
-  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{position:'top',labels:{color:INK,usePointStyle:true,boxWidth:10}},
-      tooltip:{...tip,callbacks:{label:c=>c.dataset.label+": "+money(c.raw)+
-        " ("+Math.round(100*c.raw/(G[c.dataIndex][1]+G[c.dataIndex][2]))+"%)"}}},
-    scales:{x:{...gridX,stacked:true,ticks:{color:MUT,callback:v=>money(v)}},y:{...noGrid,stacked:true}}}});}
 
 // Top-plaatsen met toggle absoluut / per 100.000 inwoners
 (function(){
