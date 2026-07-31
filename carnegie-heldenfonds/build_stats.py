@@ -230,7 +230,7 @@ HTML = r"""<!doctype html>
     <div class="card"><div class="h2row"><h2>Per provincie</h2>
       <span class="seg" id="segProv"><button data-g="abs" class="on">absoluut</button><button data-g="pc">per 100.000 inw.</button></span>
       <span class="help" tabindex="0"><span class="qm" aria-hidden="true">?</span>
-        <div class="tt" role="tooltip"><b>Per 100.000 inw.</b> t.o.v. de volkstelling van <b>1947</b> (indicatief). Flevoland bestond toen nog niet en ontbreekt in de relatieve weergave. Bij ‘absoluut’ staat onderaan het <b>buitenland</b>.</div></span></div>
+        <div class="tt" role="tooltip"><b>Per 100.000 inw.</b> t.o.v. de volkstelling van <b>1947</b> (indicatief). Getoetst tegen andere volkstellingen (1909–1971): de <b>Randstad leidt in elk jaar</b>, de rangorde is stabiel. Flevoland bestond toen nog niet en ontbreekt in de relatieve weergave. Bij ‘absoluut’ staat onderaan het <b>buitenland</b>.</div></span></div>
       <p class="cap">De waterrijke <b>Randstad</b> domineert — ook <b>per hoofd</b> van de bevolking.</p>
       <div class="cwrap tall"><canvas id="cProv"></canvas></div></div>
 
