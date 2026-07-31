@@ -35,6 +35,7 @@ HIGHLIGHTS = [
  ("🔥","Zes kinderen uit het vuur","Anna Cornelia Dijkman zou zes kinderen uit een brandend huis hebben gered. Wat het fonds haar toekende, is in het dossier onbekend gebleven.","Amsterdam, 1922",1752),
  ("👧","Voor haar broertje en zusje","Antonia Maria Grootaert haalde haar eigen broertje en zusje uit een brandend pand.","Rijsenhout, 1966",2409),
  ("🤝","Samen uit het water","Saida Errouk en Annemarie Veldhuizen redden samen met omstanders een drenkeling — twee vrouwen aan het hoofd van de reddersploeg, en meteen een tweede zeldzaam migratie­spoor in het bestand.","Vlijmen, 1982",1945),
+ ("🥊","Al boksend tot stilstand","Peter van der Heide rende een slingerende auto op de A28 achterna, klauterde door het portier naar binnen en bracht de dronken bestuurder — al boksend — tot stilstand op de vluchtstrook.","Rijksweg A28, 1972",2789),
 ]
 def _hl(emo,title,text,place,nr):
     na = f"https://www.nationaalarchief.nl/onderzoeken/archief/2.19.364/invnr/{nr}"

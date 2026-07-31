@@ -9,6 +9,8 @@ recs = json.load(open(f"{WORK}/dossiers_raw.json", encoding="utf-8"))
 cache = json.load(open(f"{WORK}/geocache.json", encoding="utf-8"))
 dpath = f"{WORK}/geocache_detail.json"
 dcache = json.load(open(dpath, encoding="utf-8")) if os.path.exists(dpath) else {}
+mpath = f"{WORK}/manual_coords.json"
+mcoords = json.load(open(mpath, encoding="utf-8")) if os.path.exists(mpath) else {}
 
 rows = []
 for r in recs:
@@ -24,6 +26,9 @@ for r in recs:
                 if dg and dg.get("lat") is not None:
                     lat, lon, prec = dg["lat"], dg["lon"], dg.get("prec", "straat")
             break
+    if lat is None and str(r["nr"]) in mcoords:   # handmatige plaatsbepaling
+        mc = mcoords[str(r["nr"])]
+        lat, lon, prec, used_place = mc["lat"], mc["lon"], mc.get("prec", "hemelsbreed"), mc.get("place", "")
     na = f"https://www.nationaalarchief.nl/onderzoeken/archief/2.19.364/invnr/{r['nr']}"
     who = extract_person(r["desc"])
     delpher = delpher_query(who, used_place or None, r.get("detail"))

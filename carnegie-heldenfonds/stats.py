@@ -8,6 +8,9 @@ from gender import gender
 WORK = os.path.dirname(os.path.abspath(__file__))
 recs = json.load(open(f"{WORK}/dossiers_raw.json", encoding="utf-8"))
 cache = json.load(open(f"{WORK}/geocache.json", encoding="utf-8"))
+import os as _os
+_mp = f"{WORK}/manual_coords.json"
+mcoords = json.load(open(_mp, encoding="utf-8")) if _os.path.exists(_mp) else {}
 
 from cats import categorize, outcome, CAT_ORDER
 
@@ -148,7 +151,7 @@ places_pc = sorted(([p, round(n / CITYPOP1947[p] * 100, 1)] for p, n in top15 if
 
 stats = {
     "totaal": len(recs),
-    "geplot": sum(1 for x in recs if any(cache.get(p) for p in x["places"])),
+    "geplot": sum(1 for x in recs if any(cache.get(p) for p in x["places"]) or str(x["nr"]) in mcoords),
     "plaatsen": len(place_counts),
     "jaarspan": [min(x["year_from"] for x in recs if x["year_from"]),
                  max(x["year_from"] for x in recs if x["year_from"])],

@@ -11,6 +11,9 @@ cache = json.load(open(f"{WORK}/geocache.json", encoding="utf-8"))
 # optional street/waterway-level cache: key "detail||place" -> {lat,lon,...}
 dpath = f"{WORK}/geocache_detail.json"
 dcache = json.load(open(dpath, encoding="utf-8")) if os.path.exists(dpath) else {}
+# handmatige plaatsbepaling voor dossiers die het patroon miste (overrides.py -> manual_coords.json)
+mpath = f"{WORK}/manual_coords.json"
+mcoords = json.load(open(mpath, encoding="utf-8")) if os.path.exists(mpath) else {}
 
 out = sys.argv[1] if len(sys.argv) > 1 else f"{WORK}/carnegie-kaart.html"
 nr_min = int(sys.argv[2]) if len(sys.argv) > 2 else 0
@@ -75,6 +78,18 @@ for r in recs:
             "steun": steun,
             "seg": seg_hl,
         })
+    # handmatige plaatsbepaling als het reguliere patroon niets vond
+    if not placed_any and str(r["nr"]) in mcoords:
+        mc = mcoords[str(r["nr"])]
+        cat = categorize(r["desc"], det)
+        points.append({
+            "nr": r["nr"], "desc": r["desc"], "year": r["year"], "y": r["year_from"],
+            "place": mc.get("place", ""), "lat": round(mc["lat"], 5), "lon": round(mc["lon"], 5),
+            "cat": cat, "afg": r["afgewezen"], "foto": r["fotos"], "openb": r["openbaar_tot"],
+            "who": who, "det": det, "prec": mc.get("prec", "hemelsbreed"), "res": res,
+            "steun": steun, "seg": -1,
+        })
+        placed_any = True
     if placed_any:
         n_placed += 1
 
@@ -87,7 +102,7 @@ unplaced = []
 for r in recs:
     if not (nr_min <= r["nr"] <= nr_max):
         continue
-    if any(cache.get(p) for p in r["places"]):
+    if any(cache.get(p) for p in r["places"]) or str(r["nr"]) in mcoords:
         continue
     if r["places"]:
         reason = "plaats niet te lokaliseren"
@@ -460,7 +475,8 @@ function popupHtml(p){
   b+=`<div style="margin:6px 0">${descHtml(p)}</div>`;
   b+=`<div style="color:#6b7280;font-size:12px">Jaar: ${esc(p.year||'?')}`;
   if(p.det) b+=` &middot; locatie: ${esc(p.det)}`;
-  b+=` &middot; <span title="nauwkeurigheid van de marker">${p.prec==='straat'?'📍 straat/water':'🏙️ plaatsniveau'}</span></div>`;
+  const PRECLBL={straat:'📍 straat/water',water:'🌊 waterlocatie (benadering)',hemelsbreed:'🧭 hemelsbreed (benadering)'};
+  b+=` &middot; <span title="nauwkeurigheid van de marker">${PRECLBL[p.prec]||'🏙️ plaatsniveau'}</span></div>`;
   b+=`<div class="badges">`;
   b+=`<span class="badge" style="background:${COL[p.cat]}">${EMO[p.cat]} ${CATS_FULL[p.cat]}</span>`;
   b+=`<span class="badge" style="background:${p.res==='poging'?'#b45309':'#059669'}">${p.res==='poging'?'⭕ poging/omgekomen':'✅ geslaagd'}</span>`;
