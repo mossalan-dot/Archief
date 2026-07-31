@@ -222,9 +222,10 @@ HTML = r"""<!doctype html>
     <div class="card"><div class="h2row"><h2>Waar wordt gered? — top-plaatsen</h2>
       <span class="seg" id="segPlace"><button data-g="abs" class="on">absoluut</button><button data-g="pc">per 100.000 inw.</button></span>
       <span class="help" tabindex="0"><span class="qm" aria-hidden="true">?</span>
-        <div class="tt" role="tooltip"><b>Per 100.000 inw.</b> deelt de reddingen door het inwonertal van de stad rond <b>1947</b> (indicatief — steden groeiden sterk over de eeuw). Zo komen kleine <b>waterstadjes</b> bovendrijven die per hoofd veel reddingen kenden.</div></span></div>
-      <p class="cap">Absoluut voeren de grote steden de lijst aan (<b>Amsterdam</b>, <b>Den Haag</b>). <b>Per hoofd</b> van de bevolking draaien de waterstadjes de rollen om: <b>Dordrecht</b>, <b>Leiden</b> en <b>Delft</b> bovenaan, Amsterdam en Rotterdam juist laag.</p>
-      <div class="cwrap tall"><canvas id="cPlaces"></canvas></div></div>
+        <div class="tt" role="tooltip"><b>Per 100.000 inw.</b> deelt de reddingen door het inwonertal rond <b>1947</b> — één volkstellingsjaar als benadering (er waren er ook in 1909, 1920, 1930 en 1960; steden groeiden sterk over de eeuw). <b>Middelgrote watersteden</b> komen zo bovendrijven; heel kleine plaatsen laten we hier weg, want hun geringe inwonertal maakt zo'n cijfer te wankel.</div></span></div>
+      <p class="cap">Absoluut voeren de grote steden de lijst aan (<b>Amsterdam</b>, <b>Den Haag</b>). <b>Per hoofd</b> van de bevolking draaien de <b>watersteden</b> de rollen om: <b>Dordrecht</b>, <b>Leiden</b> en <b>Delft</b> bovenaan, Amsterdam en Rotterdam juist laag.</p>
+      <div class="cwrap tall"><canvas id="cPlaces"></canvas></div>
+      <p class="note" style="margin-top:10px;border-top:1px dashed var(--line);padding-top:9px">💧 <b>Opvallend:</b> ook enkele <b>kleine waterplaatsen</b> tellen veel reddingen voor hun omvang — <b>Rijnsburg</b> (45), <b>Wormerveer</b> (31), <b>Sneek</b> (30), <b>Harlingen</b> (28) en <b>Meppel</b> (27), vaak vissers- of grachtenplaatsen.</p></div>
 
     <div class="card"><div class="h2row"><h2>Per provincie</h2>
       <span class="seg" id="segProv"><button data-g="abs" class="on">absoluut</button><button data-g="pc">per 100.000 inw.</button></span>
