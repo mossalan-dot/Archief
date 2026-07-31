@@ -20,8 +20,14 @@ for r in recs:
             if p not in seen:
                 seen.add(p); places.append(p)
 
+# plaatsen die we bewust NIET plotten: NL-begrensde geocoder matcht ze fout
+# (St. Lucia = piloot boven zee, geen Brabants gehucht) -> geforceerd op None, nooit retryen
+SKIP = {"St. Lucia"}
+for p in SKIP:
+    cache[p] = None
+
 # retry entries that previously failed (cache value None) with the improved logic
-todo = [p for p in places if not cache.get(p)]
+todo = [p for p in places if not cache.get(p) and p not in SKIP]
 print(f"unieke plaatsen in bereik {nr_min}-{nr_max}: {len(places)}; te (her)geocoderen: {len(todo)}")
 
 UA = "CarnegieHeldenfondsKaart/1.0 (mossalan@gmail.com)"

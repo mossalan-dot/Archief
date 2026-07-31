@@ -170,12 +170,16 @@ FB_TERHOOGTE = re.compile(r'ter hoogte van\s+(' + _CAP + r'(?:\s+' + _CAP + r'){
 FB_GEM_PRE   = re.compile(r'\b(' + _CAP + r')\s+gemeente\s+' + _CAP)   # dorp vóór "gemeente X"
 FB_GEM       = re.compile(r'\bgemeente\s+(' + _CAP + r')')
 FB_HAVEN     = re.compile(r'haven van\s+(' + _CAP + r')')
+# "(na)bij [de/het] [haven/eilandje/brug] <Plaats>" — bv. "bij Zaltbommel", "nabij het eilandje Pampus"
+FB_BIJ       = re.compile(r'\b(?:bij|nabij)\s+(?:de\s+|het\s+|\'t\s+)?'
+                          r'(?:(?:haven|eiland(?:je)?|verkeersbrug|brug|sluis|pier|dorp)\s+)?'
+                          r'(' + _CAP + r'(?:\s+' + _CAP + r'){0,1})')
 def extract_places_fallback(desc):
-    for rx in (FB_TERHOOGTE, FB_GEM_PRE, FB_HAVEN, FB_GEM):
+    for rx in (FB_TERHOOGTE, FB_GEM_PRE, FB_HAVEN, FB_GEM, FB_BIJ):
         m = rx.search(desc)
         if m:
             p = m.group(1).strip(" .,;-")
-            if p:
+            if p and not p.isupper():   # sla afkortingen over (NZHRM, KNRM, ...)
                 return [p]
     return []
 

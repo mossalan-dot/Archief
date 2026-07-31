@@ -82,6 +82,24 @@ years = [p["y"] for p in points if p["y"]]
 ymin, ymax = (min(years), max(years)) if years else (1900, 1990)
 data_json = json.dumps(points, ensure_ascii=False, separators=(",", ":"))
 
+# dossiers die (nog) niet op de kaart staan, met reden — voor de lijst-knop rechtsonder
+unplaced = []
+for r in recs:
+    if not (nr_min <= r["nr"] <= nr_max):
+        continue
+    if any(cache.get(p) for p in r["places"]):
+        continue
+    if r["places"]:
+        reason = "plaats niet te lokaliseren"
+    elif is_steun(r["desc"]) or r["desc"].lower().startswith(("afwijzen", "ondersteun", "stukken", "correspond")):
+        reason = "administratief / ondersteuning"
+    else:
+        reason = "geen plaats vermeld (o.a. open zee)"
+    unplaced.append({"nr": r["nr"], "desc": r["desc"], "year": r["year"],
+                     "reason": reason, "who": extract_person(r["desc"]), "det": r.get("detail")})
+unplaced.sort(key=lambda u: u["nr"])
+unplaced_json = json.dumps(unplaced, ensure_ascii=False, separators=(",", ":"))
+
 TPL = r"""<!doctype html>
 <html lang="nl">
 <head>
@@ -201,6 +219,28 @@ TPL = r"""<!doctype html>
   .lrow .ltx{font-size:12px;line-height:1.25;overflow:hidden}
   .lrow .lyr{margin-left:auto;font-size:10px;color:var(--muted);flex:none;font-variant-numeric:tabular-nums}
 
+  /* ---- niet-op-de-kaart: knop rechtsonder + paneel ---- */
+  #unBtn{position:absolute;z-index:1000;right:14px;bottom:14px;display:flex;align-items:center;gap:7px;
+    background:var(--panel);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:11px;
+    padding:8px 12px;font-size:12px;font-weight:600;color:var(--ink);cursor:pointer;box-shadow:var(--shadow);font-family:inherit}
+  #unBtn:hover{border-color:#cbd5e1}
+  #unBtn .unc{font-size:11px;color:#fff;background:#64748b;border-radius:20px;padding:1px 7px;font-variant-numeric:tabular-nums}
+  #unpanel{position:absolute;z-index:1002;right:14px;bottom:14px;width:360px;max-width:calc(100vw - 28px);
+    max-height:calc(100vh - 28px);background:var(--panel);backdrop-filter:blur(10px);border-radius:16px;
+    box-shadow:var(--shadow);display:none;flex-direction:column;overflow:hidden}
+  #unpanel.open{display:flex}
+  #unNote{padding:0 14px 8px;font-size:11px;color:var(--muted);line-height:1.4}
+  #unRows{overflow:auto;padding:2px 8px 10px}
+  .urow{padding:8px 9px;border-bottom:1px solid #f1f5f9}
+  .urow .uhd{display:flex;gap:7px;align-items:center;margin-bottom:3px}
+  .urow .lnr{font-weight:700;font-size:11px;color:#fff;background:#334155;border-radius:5px;padding:1px 5px;flex:none}
+  .urow .uyr{font-size:10px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .urow .ubadge{margin-left:auto;font-size:9.5px;padding:1px 7px;border-radius:20px;background:#eef1f4;color:#475569;flex:none}
+  .urow .utx{font-size:12px;line-height:1.35;color:#374151}
+  .urow .ulinks{margin-top:5px;font-size:11px;display:flex;gap:12px}
+  .urow .ulinks a{color:var(--accent);font-weight:600;text-decoration:none}
+  .urow .ulinks a:hover{text-decoration:underline}
+
   /* ---- markers & popup ---- */
   .emoji-marker div{transition:transform .1s}
   .emoji-marker:hover div{transform:scale(1.25)}
@@ -288,6 +328,17 @@ TPL = r"""<!doctype html>
   <div id="listRows"></div>
 </div>
 
+<button id="unBtn">📋 Niet op de kaart <span class="unc" id="unCt"></span></button>
+<div id="unpanel">
+  <div class="lhead">
+    <div><div class="lt">Niet op de kaart</div><div class="lc" id="unCount"></div></div>
+    <button class="x" id="unClose" title="Sluiten">×</button>
+  </div>
+  <input id="unSearch" type="search" placeholder="Filter op naam, nr. of reden">
+  <div id="unNote">Dossiers zonder plaatsbare locatie — administratieve/ondersteuningsdossiers, reddingen op open zee, of plaatsen die we niet betrouwbaar konden thuisbrengen. Wél te openen bij het Nationaal Archief.</div>
+  <div id="unRows"></div>
+</div>
+
 <div class="credit">Kaart &copy; OpenStreetMap-bijdragers &middot; data: Nationaal Archief 2.19.364</div>
 
 <div id="welcome"><div class="box">
@@ -309,6 +360,7 @@ TPL = r"""<!doctype html>
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 <script>
 const DATA = __DATA__;
+const UNPLACED = __UNPLACED__;
 const YMIN = __YMIN__, YMAX = __YMAX__;
 const CATS = __CATS__;
 const CATS_FULL = __CATSFULL__;
@@ -475,6 +527,33 @@ function openList(items){
 document.getElementById('listClose').onclick=()=>listp.classList.remove('open');
 listSearch.addEventListener('input',renderList);
 
+// ---- niet-op-de-kaart-lijst (knop rechtsonder) ----
+const unpanel=document.getElementById('unpanel'), unRows=document.getElementById('unRows'),
+      unSearch=document.getElementById('unSearch'), unCount=document.getElementById('unCount');
+document.getElementById('unCt').textContent=UNPLACED.length.toLocaleString('nl');
+function naURL(nr){return `https://www.nationaalarchief.nl/onderzoeken/archief/2.19.364/invnr/${nr}`;}
+function renderUn(){
+  const q=unSearch.value.trim().toLowerCase();
+  const rows=UNPLACED.filter(u=>!q || (u.desc+' '+u.nr+' '+u.reason+' '+(u.who||'')).toLowerCase().includes(q));
+  unCount.textContent=`${rows.length} dossier${rows.length===1?'':'s'}`+(rows.length<UNPLACED.length?` (van ${UNPLACED.length})`:'');
+  const frag=document.createDocumentFragment();
+  for(const u of rows.slice(0,600)){
+    const el=document.createElement('div'); el.className='urow';
+    const durl=delpherURL(u);
+    el.innerHTML=`<div class="uhd"><span class="lnr">${u.nr}</span><span class="uyr">${esc(u.year||'')}</span><span class="ubadge">${esc(u.reason)}</span></div>`+
+      `<div class="utx">${esc(u.desc)}</div>`+
+      `<div class="ulinks"><a href="${naURL(u.nr)}" target="_blank" rel="noopener">Nationaal Archief ↗</a>`+
+      (durl?`<a href="${durl}" target="_blank" rel="noopener">Delpher ↗</a>`:'')+`</div>`;
+    frag.appendChild(el);
+  }
+  unRows.innerHTML=''; unRows.appendChild(frag);
+  if(rows.length>600){const m=document.createElement('div');m.style.cssText='padding:8px;color:#6b7280;font-size:11px';
+    m.textContent=`… en ${rows.length-600} meer — verfijn met het filter`;unRows.appendChild(m);}
+}
+document.getElementById('unBtn').onclick=()=>{ listp.classList.remove('open'); unSearch.value=''; renderUn(); unpanel.classList.add('open'); };
+document.getElementById('unClose').onclick=()=>unpanel.classList.remove('open');
+unSearch.addEventListener('input',renderUn);
+
 function apply(){
   syncY();
   let yf=+yfrom.value, yt=+yto.value; if(yf>yt){[yf,yt]=[yt,yf];}
@@ -588,7 +667,7 @@ welcome.addEventListener('click',e=>{ if(e.target===welcome) welcome.classList.r
 
 note_html = (f'<div class="noteband">{html.escape(note)}</div>') if note else ""
 def odict(dct): return json.dumps({c: dct[c] for c in CAT_ORDER}, ensure_ascii=False)
-h=(TPL.replace("__DATA__", data_json).replace("__YMIN__", str(ymin))
+h=(TPL.replace("__DATA__", data_json).replace("__UNPLACED__", unplaced_json).replace("__YMIN__", str(ymin))
       .replace("__YMAX__", str(ymax)).replace("__NOTE__", note_html)
       .replace("__CATS__", odict(CAT_LABEL)).replace("__CATSFULL__", odict(CAT_FULL))
       .replace("__COL__", odict(CAT_COL)).replace("__EMO__", odict(CAT_EMO)))
