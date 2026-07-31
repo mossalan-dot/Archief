@@ -176,7 +176,7 @@ HTML = r"""<!doctype html>
   <div class="grid">
     <div class="card"><div class="h2row"><h2>Aard van de reddingen</h2>
       <span class="help" tabindex="0"><span class="qm" aria-hidden="true">?</span>
-        <div class="tt" role="tooltip">Wat zit er in <b>🆘 Overig</b> (~236)? De restgroep die buiten de vaste soorten valt: <b>gasverstikking</b> in putten, riolen en silo's (~34), mensen <b>bedolven</b> bij instortingen en bouwputten (~24), <b>oorlogstuig</b> als granaten en mijnen (~19) en <b>elektrocutie</b>/hoogspanning (~11) — plus de echte uitschieters: een ontsnapte circusleeuw, dierentuinberen, een baby weggetrokken van een vallende benzinetank. <b>❔ Onvermeld</b> = de aard staat niet in de beschrijving.</div></span></div>
+        <div class="tt" role="tooltip">Twee soorten kwamen uit de restgroep tevoorschijn en kregen een <b>eigen categorie</b>: <b>💨 Gas</b> (verstikking in putten, riolen en scheepsruimen, ~20) en <b>🧱 Instorting</b> (bedolven in bouwputten, onder zand of bij mijn­instortingen, ~18). Wat in <b>🆘 Overig</b> (~200) overblijft: <b>oorlogstuig</b> als granaten en mijnen (~19), <b>elektrocutie</b>/hoogspanning (~11) en de echte uitschieters — een ontsnapte circusleeuw, dierentuinberen, een baby weggetrokken van een vallende benzinetank. <b>❔ Onvermeld</b> = de aard staat niet in de beschrijving.</div></span></div>
       <p class="cap">Ruim driekwart is een redding <b>uit het water</b> — Nederland is een waterland.</p>
       <div class="cwrap"><canvas id="cAard"></canvas></div></div>
 

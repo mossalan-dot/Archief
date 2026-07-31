@@ -5,15 +5,18 @@ import re
 
 # volgorde/labels/kleuren/emoji — één bron van waarheid (ondersteuning is GEEN aard-categorie
 # maar een aparte vlag; de daad van de overleden redder wordt zelf gecategoriseerd)
-CAT_ORDER = ["water","zee","ijs","auto","trein","vliegtuig","brand","dier","onbekend","overig"]
+CAT_ORDER = ["water","zee","ijs","auto","trein","vliegtuig","brand","dier","gas","instorting","onbekend","overig"]
 CAT_LABEL = {"water":"Water","zee":"Zee/kust","ijs":"IJs","auto":"Auto","trein":"Trein/spoor",
-             "vliegtuig":"Vliegtuig","brand":"Brand","dier":"Op hol/dier","onbekend":"Onvermeld","overig":"Overig"}
+             "vliegtuig":"Vliegtuig","brand":"Brand","dier":"Op hol/dier","gas":"Gas","instorting":"Instorting",
+             "onbekend":"Onvermeld","overig":"Overig"}
 CAT_FULL  = {"water":"Binnenwater","zee":"Zee / kust","ijs":"IJs","auto":"Auto te water","trein":"Trein / spoor",
-             "vliegtuig":"Vliegtuigongeval","brand":"Brand","dier":"Op hol / dier","onbekend":"Aard onvermeld","overig":"Overig"}
+             "vliegtuig":"Vliegtuigongeval","brand":"Brand","dier":"Op hol / dier","gas":"Gasverstikking",
+             "instorting":"Instorting / bedolven","onbekend":"Aard onvermeld","overig":"Overig"}
 CAT_COL   = {"water":"#2563eb","zee":"#0e7490","ijs":"#06b6d4","auto":"#dc2626","trein":"#a16207",
-             "vliegtuig":"#0284c7","brand":"#ea580c","dier":"#7c3aed","onbekend":"#a8a29e","overig":"#6b7280"}
+             "vliegtuig":"#0284c7","brand":"#ea580c","dier":"#7c3aed","gas":"#65a30d","instorting":"#6d4c41",
+             "onbekend":"#a8a29e","overig":"#6b7280"}
 CAT_EMO   = {"water":"🌊","zee":"🚢","ijs":"🧊","auto":"🚗","trein":"🚂","vliegtuig":"✈️","brand":"🔥","dier":"🐴",
-             "onbekend":"❔","overig":"🆘"}
+             "gas":"💨","instorting":"🧱","onbekend":"❔","overig":"🆘"}
 
 # administratieve/steun-dossiers (aan het begin herkenbaar)
 STEUN_START = re.compile(r'^\s*(ondersteun|correspondentie|stukken betreffende|'
@@ -47,6 +50,10 @@ def categorize(desc, detail=None):
     if re.search(r'op hol|hol geslagen|hollende?|dolle hond|aangevallen door (?:een )?(?:hond|stier|dier|koe)|'
                  r'\bstier\b|losgebroken', d):
         return "dier"
+    # gas/verstikking (strak: giftige gassen, put/riool-gas, bedwelming) — vóór zee/water
+    if re.search(r'gasverstikk|giftige?\s+gas|kolendamp|rioolgas|mijngas|methaan|koolmonoxide|bedwelm|'
+                 r'gierput|gierkelder|beerput|mestput|gasvergiftig|met\s+gassen?\s+gevuld|verstikkende?\s+gas', d):
+        return "gas"
     if re.search(r'noordzee|waddenzee|zuiderzee|\bzee\b|op zee|schipbreuk|schip\b|vrachtschip|binnenschip|'
                  r'zeeschip|opvarende|coaster|sleepboot|duwbak|scheepsramp|bemanning|reddingb?oot|reddingsboot|'
                  r'gezonken|\bzonk\b|stoomschip|\bs\.?s\.?\b|\bstrand|branding|\bkust|\bkotter|vissersvaartuig', d):
@@ -55,6 +62,10 @@ def categorize(desc, detail=None):
                  r'kade|wetering|tocht|boezem|drenkel|verdrink|verdronk|te water|'
                  r'\bboot|bootje|roeiboot|sloep|schuit|praam|\bkano|kajak|punter|schipper|\bjol\b', d):
         return "water"
+    # instorting / bedolven — ná water, zodat echte waterreddingen ("uit het water") winnen
+    if re.search(r'ingestort|instort|bedolven|bedol\w*|onder het zand|zandverschuiv|bouwput|ingegraven|'
+                 r'onder puin|onder het puin|onder de aarde|bezweken\s+(?:wand|talud)', d):
+        return "instorting"
     if ONBEKEND.search(d):
         return "onbekend"
     return "overig"
