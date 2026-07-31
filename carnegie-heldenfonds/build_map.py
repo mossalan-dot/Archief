@@ -150,6 +150,14 @@ TPL = r"""<!doctype html>
   .chip .ct{margin-left:auto;padding-left:4px;font-size:10px;color:var(--muted);font-variant-numeric:tabular-nums;flex:none}
   .chip.off{opacity:.42;background:#f1f5f9}
   .chip.off .em{filter:grayscale(1)}
+  .qm{display:inline-grid;place-items:center;width:15px;height:15px;border-radius:50%;background:#eef1f4;color:#6b7280;
+      font-size:10px;font-weight:700;border:1px solid var(--line);cursor:help;user-select:none;flex:none}
+  .qm:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+  #mtt{position:fixed;z-index:3000;width:270px;max-width:calc(100vw - 20px);background:#fff;border:1px solid var(--line);
+      border-radius:10px;box-shadow:var(--shadow);padding:10px 12px;font-size:12px;line-height:1.45;color:#374151;
+      opacity:0;visibility:hidden;transition:opacity .12s}
+  #mtt.on{opacity:1;visibility:visible}
+  #mtt b{color:var(--ink)} #mtt a{color:var(--accent);font-weight:600}
 
   .ybadge{font-variant-numeric:tabular-nums;font-weight:700;font-size:12px;color:var(--accent)}
   /* dual-thumb range slider */
@@ -240,7 +248,7 @@ TPL = r"""<!doctype html>
       <input id="q" type="search" placeholder="naam, plaats of inv.nr. — bijv. Amsterdam, Aa, 63">
     </div>
     <details class="acc" open>
-      <summary>Aard van de redding</summary>
+      <summary>Aard van de redding <span class="qm" data-help="aard">?</span></summary>
       <div class="cats" id="cats"></div>
     </details>
     <div class="row">
@@ -253,14 +261,14 @@ TPL = r"""<!doctype html>
       </div>
     </div>
     <details class="acc">
-      <summary>Afloop</summary>
+      <summary>Afloop <span class="qm" data-help="afloop">?</span></summary>
       <label class="toggle"><input type="checkbox" id="resOk" checked> ✅ geslaagde redding <span class="ct" id="ctOk"></span></label>
       <label class="toggle"><input type="checkbox" id="resPog" checked> ⭕ poging / omgekomen <span class="ct" id="ctPog"></span></label>
       <label class="toggle"><input type="checkbox" id="afg" checked> ⚖️ afgewezen aanvragen <span class="ct" id="ctAfg"></span></label>
       <label class="toggle"><input type="checkbox" id="steunTog" checked> 🤝 ondersteuning nabestaanden <span class="ct" id="ctSteun"></span></label>
     </details>
     <details class="acc">
-      <summary>Openbaarheid</summary>
+      <summary>Openbaarheid <span class="qm" data-help="openbaar">?</span></summary>
       <label class="toggle"><input type="checkbox" id="opOpen" checked> 👁️ openbaar <span class="ct" id="ctOpen"></span></label>
       <label class="toggle"><input type="checkbox" id="opRestr" checked> 🔒 niet openbaar <span class="ct" id="ctRestr"></span></label>
     </details>
@@ -502,11 +510,44 @@ function apply(){
   });
 }
 
-catBox.addEventListener('change',e=>{const c=e.target.dataset.cat; if(c){
-  catState[c]=e.target.checked;
-  e.target.closest('.chip').classList.toggle('off',!e.target.checked);
+// klik op een categorie = isoleer die categorie; klik nogmaals (enige actieve) = weer alles
+catBox.addEventListener('click',e=>{
+  const chip=e.target.closest('.chip'); if(!chip) return;
+  e.preventDefault();
+  const c=chip.dataset.cat, keys=Object.keys(CATS);
+  const active=keys.filter(k=>catState[k]);
+  if(active.length===1 && catState[c]) keys.forEach(k=>catState[k]=true);
+  else keys.forEach(k=>catState[k]=(k===c));
+  for(const k of keys){
+    const chp=catBox.querySelector('.chip[data-cat="'+k+'"]');
+    chp.classList.toggle('off',!catState[k]);
+    const cb=chp.querySelector('input'); if(cb) cb.checked=catState[k];
+  }
   apply();
-}});
+});
+
+// hover-help (?) — vaste popup buiten het scrollende paneel, zodat niets wordt afgekapt
+const HELP={
+  aard:'De aard van de redding, afgeleid uit de dossierbeschrijving. <b>Klik een categorie</b> om alléén die reddingen te tonen; klik nogmaals voor alles.',
+  afloop:'<b>Geslaagd</b>: de drenkeling of gewonde werd gered. <b>Poging</b>: het lukte niet, of de redder kwam zelf om. <b>Afgewezen</b>: het bestuur kende geen onderscheiding toe. <b>Ondersteuning</b>: steun aan nabestaanden, zonder eigen reddingsplaats.',
+  openbaar:'<b>Openbaar</b>: vrij in te zien. <b>Niet openbaar</b>: beperkt vanwege de <b>persoonlijke levenssfeer</b> van de betrokkenen; deze dossiers worden pas na een wettelijke termijn openbaar. Inzage vooraf kan via een verzoek bij het <a href="https://www.nationaalarchief.nl/onderzoeken/zoekhulpen/inzage-in-beperkt-openbaar-archief" target="_blank" rel="noopener">Nationaal Archief</a>.'
+};
+const mtt=document.createElement('div'); mtt.id='mtt'; document.body.appendChild(mtt);
+let mttT;
+function showTip(el){
+  clearTimeout(mttT); mtt.innerHTML=HELP[el.dataset.help]||''; mtt.classList.add('on');
+  const r=el.getBoundingClientRect(), w=mtt.offsetWidth||270, vw=window.innerWidth||9999;
+  let x=r.left; if(x+w>vw-8) x=vw-8-w;
+  mtt.style.left=Math.max(8,x)+'px'; mtt.style.top=(r.bottom+6)+'px';
+}
+function hideTip(){ mttT=setTimeout(()=>mtt.classList.remove('on'),140); }
+document.querySelectorAll('.qm[data-help]').forEach(el=>{
+  el.addEventListener('mouseenter',()=>showTip(el));
+  el.addEventListener('mouseleave',hideTip);
+  el.addEventListener('click',ev=>{ev.preventDefault();ev.stopPropagation();showTip(el);});
+});
+mtt.addEventListener('mouseenter',()=>clearTimeout(mttT));
+mtt.addEventListener('mouseleave',hideTip);
 [yfrom,yto].forEach(s=>s.addEventListener('input',apply));
 qEl.addEventListener('input',apply);
 afgEl.addEventListener('change',apply);
