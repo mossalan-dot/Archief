@@ -303,7 +303,7 @@ TPL = r"""<!doctype html>
       <input id="q" type="search" placeholder="naam, plaats of inv.nr. — bijv. Amsterdam, Aa, 63">
     </div>
     <details class="acc" open>
-      <summary>Aard van de redding <span class="qm" data-help="aard">?</span></summary>
+      <summary>Categorie redding <span class="qm" data-help="aard">?</span></summary>
       <div class="cats" id="cats"></div>
     </details>
     <div class="row">
@@ -316,7 +316,7 @@ TPL = r"""<!doctype html>
       </div>
     </div>
     <details class="acc">
-      <summary>Afloop <span class="qm" data-help="afloop">?</span></summary>
+      <summary>Extra filters <span class="qm" data-help="afloop">?</span></summary>
       <label class="toggle"><input type="checkbox" id="resOk" checked> ✅ geslaagde redding <span class="ct" id="ctOk"></span></label>
       <label class="toggle"><input type="checkbox" id="resPog" checked> ⭕ poging / omgekomen <span class="ct" id="ctPog"></span></label>
       <label class="toggle"><input type="checkbox" id="afg" checked> ⚖️ afgewezen aanvragen <span class="ct" id="ctAfg"></span></label>
@@ -624,7 +624,7 @@ catBox.addEventListener('click',e=>{
 
 // hover-help (?) — vaste popup buiten het scrollende paneel, zodat niets wordt afgekapt
 const HELP={
-  aard:'De aard van de redding, afgeleid uit de dossierbeschrijving. <b>Klik een categorie</b> om alléén die reddingen te tonen; klik nogmaals voor alles.',
+  aard:'De soort redding, afgeleid uit de beschrijving:<br>🌊 <b>Binnenwater</b>, 🚢 <b>zee/kust</b> en 🧊 <b>ijs</b> — samen ruim driekwart · 🚗 <b>auto te water</b> · 🚂 <b>trein/spoor</b> · ✈️ <b>vliegtuig</b> · 🔥 <b>brand</b> · 🐴 <b>op hol geslagen dier</b> · 💨 <b>gasverstikking</b> (put/riool) · 🧱 <b>instorting</b> (bedolven/bouwput).<br>❔ <b>Onvermeld</b> = de aard staat er niet bij; 🆘 <b>Overig</b> = alles daarbuiten (oorlogstuig, elektrocutie, uitschieters).<br><span style="color:#6b7280">Klik een categorie om alléén die te tonen; klik nogmaals voor alles.</span>',
   afloop:'<b>Geslaagd</b>: de drenkeling of gewonde werd gered. <b>Poging</b>: het lukte niet, of de redder kwam zelf om. <b>Afgewezen</b>: het bestuur kende geen onderscheiding toe. <b>Ondersteuning</b>: steun aan nabestaanden, zonder eigen reddingsplaats.',
   openbaar:'<b>Openbaar</b>: vrij in te zien. <b>Beperkt openbaar</b>: beperkt vanwege de <b>persoonlijke levenssfeer</b> van de betrokkenen; deze dossiers worden pas na een wettelijke termijn openbaar. Inzage vooraf kan via een verzoek bij het <a href="https://www.nationaalarchief.nl/onderzoeken/zoekhulpen/inzage-in-beperkt-openbaar-archief" target="_blank" rel="noopener">Nationaal Archief</a>.'
 };

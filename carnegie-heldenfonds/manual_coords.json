@@ -1,0 +1,500 @@
+{
+ "510": {
+  "lat": 52.37232,
+  "lon": 4.87631,
+  "prec": "straat",
+  "place": "Amsterdam"
+ },
+ "1246": {
+  "lat": 52.37522,
+  "lon": 4.88328,
+  "prec": "straat",
+  "place": "Amsterdam"
+ },
+ "1394": {
+  "lat": 52.37232,
+  "lon": 4.87631,
+  "prec": "straat",
+  "place": "Amsterdam"
+ },
+ "6428": {
+  "lat": 52.0733,
+  "lon": 4.29893,
+  "prec": "straat",
+  "place": "'s-Gravenhage"
+ },
+ "6518": {
+  "lat": 51.43142,
+  "lon": 5.50165,
+  "prec": "straat",
+  "place": "Eindhoven"
+ },
+ "6955": {
+  "lat": 52.36891,
+  "lon": 4.89995,
+  "prec": "straat",
+  "place": "Amsterdam"
+ },
+ "7028": {
+  "lat": 52.07998,
+  "lon": 4.31135,
+  "prec": "plaats",
+  "place": "'s-Gravenhage"
+ },
+ "7629": {
+  "lat": 52.35835,
+  "lon": 4.89114,
+  "prec": "straat",
+  "place": "Amsterdam"
+ },
+ "7665": {
+  "lat": 52.07998,
+  "lon": 4.31135,
+  "prec": "plaats",
+  "place": "'s-Gravenhage"
+ },
+ "9017": {
+  "lat": 52.37386,
+  "lon": 4.87704,
+  "prec": "straat",
+  "place": "Amsterdam"
+ },
+ "9029": {
+  "lat": 52.95534,
+  "lon": 4.74111,
+  "prec": "straat",
+  "place": "Den Helder"
+ },
+ "9160": {
+  "lat": 51.32463,
+  "lon": 3.83704,
+  "prec": "straat",
+  "place": "Terneuzen"
+ },
+ "9607": {
+  "lat": 53.16382,
+  "lon": 6.75569,
+  "prec": "plaats",
+  "place": "Hoogezand"
+ },
+ "1045": {
+  "lat": 52.07998,
+  "lon": 4.31135,
+  "prec": "plaats",
+  "place": "'s-Gravenhage"
+ },
+ "1247": {
+  "lat": 50.85124,
+  "lon": 5.69098,
+  "prec": "plaats",
+  "place": "Maastricht"
+ },
+ "1340": {
+  "lat": 51.86586,
+  "lon": 5.86509,
+  "prec": "plaats",
+  "place": "Lent"
+ },
+ "1493": {
+  "lat": 51.92444,
+  "lon": 4.47775,
+  "prec": "plaats",
+  "place": "Rotterdam"
+ },
+ "1565": {
+  "lat": 53.27112,
+  "lon": 6.73279,
+  "prec": "plaats",
+  "place": "Woltersum"
+ },
+ "2290": {
+  "lat": 52.08118,
+  "lon": 5.03636,
+  "prec": "plaats",
+  "place": "De Meern"
+ },
+ "2539": {
+  "lat": 52.07998,
+  "lon": 4.31135,
+  "prec": "plaats",
+  "place": "'s-Gravenhage"
+ },
+ "2751": {
+  "lat": 52.92287,
+  "lon": 6.92062,
+  "prec": "plaats",
+  "place": "Eerste Exloërmond"
+ },
+ "2974": {
+  "lat": 51.68894,
+  "lon": 5.30312,
+  "prec": "plaats",
+  "place": "'s-Hertogenbosch"
+ },
+ "3155": {
+  "lat": 52.37308,
+  "lon": 4.89245,
+  "prec": "plaats",
+  "place": "Amsterdam"
+ },
+ "3458": {
+  "lat": 52.07998,
+  "lon": 4.31135,
+  "prec": "plaats",
+  "place": "'s-Gravenhage"
+ },
+ "3975": {
+  "lat": 52.26949,
+  "lon": 6.23649,
+  "prec": "plaats",
+  "place": "Deventer"
+ },
+ "3981": {
+  "lat": 51.92444,
+  "lon": 4.47775,
+  "prec": "plaats",
+  "place": "Rotterdam"
+ },
+ "4430": {
+  "lat": 51.92444,
+  "lon": 4.47775,
+  "prec": "plaats",
+  "place": "Rotterdam"
+ },
+ "4835": {
+  "lat": 53.47828,
+  "lon": 6.16101,
+  "prec": "plaats",
+  "place": "Schiermonnikoog"
+ },
+ "4963": {
+  "lat": 52.67211,
+  "lon": 6.28869,
+  "prec": "plaats",
+  "place": "De Wijk, Drenthe"
+ },
+ "5498": {
+  "lat": 52.37308,
+  "lon": 4.89245,
+  "prec": "plaats",
+  "place": "Amsterdam"
+ },
+ "5513": {
+  "lat": 51.32566,
+  "lon": 3.51663,
+  "prec": "plaats",
+  "place": "Sluis, Zeeland"
+ },
+ "6157": {
+  "lat": 52.37308,
+  "lon": 4.89245,
+  "prec": "plaats",
+  "place": "Amsterdam"
+ },
+ "6628": {
+  "lat": 51.82144,
+  "lon": 4.41647,
+  "prec": "plaats",
+  "place": "Oud-Beijerland"
+ },
+ "6996": {
+  "lat": 53.203,
+  "lon": 4.99491,
+  "prec": "plaats",
+  "place": "Vlieland"
+ },
+ "7152": {
+  "lat": 53.09988,
+  "lon": 4.76265,
+  "prec": "plaats",
+  "place": "De Koog, Texel"
+ },
+ "7321": {
+  "lat": 53.33391,
+  "lon": 5.35149,
+  "prec": "plaats",
+  "place": "Terschelling"
+ },
+ "7706": {
+  "lat": 53.53597,
+  "lon": 6.58067,
+  "prec": "plaats",
+  "place": "Rottumeroog"
+ },
+ "8063": {
+  "lat": 52.49546,
+  "lon": 4.76649,
+  "prec": "plaats",
+  "place": "Krommenie"
+ },
+ "9187": {
+  "lat": 51.99144,
+  "lon": 4.47391,
+  "prec": "plaats",
+  "place": "Berkel en Rodenrijs"
+ },
+ "1137": {
+  "lat": 52.80926,
+  "lon": 5.37481,
+  "prec": "water",
+  "place": "IJsselmeer"
+ },
+ "4830": {
+  "lat": 52.80926,
+  "lon": 5.37481,
+  "prec": "water",
+  "place": "IJsselmeer"
+ },
+ "5822": {
+  "lat": 52.80926,
+  "lon": 5.37481,
+  "prec": "water",
+  "place": "IJsselmeer"
+ },
+ "7135": {
+  "lat": 52.80926,
+  "lon": 5.37481,
+  "prec": "water",
+  "place": "IJsselmeer"
+ },
+ "4420": {
+  "lat": 52.1952,
+  "lon": 4.6543,
+  "prec": "water",
+  "place": "Braassemermeer"
+ },
+ "1583": {
+  "lat": 51.73557,
+  "lon": 3.96563,
+  "prec": "water",
+  "place": "Grevelingenmeer"
+ },
+ "5917": {
+  "lat": 51.71869,
+  "lon": 4.63569,
+  "prec": "water",
+  "place": "Hollands Diep"
+ },
+ "7946": {
+  "lat": 51.56327,
+  "lon": 3.96356,
+  "prec": "water",
+  "place": "Oosterschelde"
+ },
+ "8834": {
+  "lat": 51.56327,
+  "lon": 3.96356,
+  "prec": "water",
+  "place": "Oosterschelde"
+ },
+ "8309": {
+  "lat": 52.95372,
+  "lon": 5.58545,
+  "prec": "water",
+  "place": "Heegermeer"
+ },
+ "8592": {
+  "lat": 52.20413,
+  "lon": 4.54152,
+  "prec": "water",
+  "place": "Kagerplassen"
+ },
+ "9622": {
+  "lat": 52.20413,
+  "lon": 4.54152,
+  "prec": "water",
+  "place": "Kagerplassen"
+ },
+ "7624": {
+  "lat": 52.98248,
+  "lon": 4.74491,
+  "prec": "water",
+  "place": "Marsdiep"
+ },
+ "6832": {
+  "lat": 51.90041,
+  "lon": 4.20933,
+  "prec": "water",
+  "place": "Brielse Maas"
+ },
+ "518": {
+  "lat": 52.40044,
+  "lon": 4.97996,
+  "prec": "hemelsbreed",
+  "place": "Zunderdorp–Ransdorp"
+ },
+ "572": {
+  "lat": 51.96898,
+  "lon": 4.3964,
+  "prec": "hemelsbreed",
+  "place": "Delft–Overschie"
+ },
+ "1881": {
+  "lat": 52.17167,
+  "lon": 5.66948,
+  "prec": "hemelsbreed",
+  "place": "Amersfoort–Apeldoorn"
+ },
+ "3251": {
+  "lat": 51.72348,
+  "lon": 5.0537,
+  "prec": "hemelsbreed",
+  "place": "Eethen–Drongelen"
+ },
+ "7231": {
+  "lat": 52.47258,
+  "lon": 6.16407,
+  "prec": "hemelsbreed",
+  "place": "Zwolle–Heino"
+ },
+ "7239": {
+  "lat": 51.61477,
+  "lon": 3.70952,
+  "prec": "hemelsbreed",
+  "place": "Sint Laurens–Serooskerke"
+ },
+ "9053": {
+  "lat": 52.04871,
+  "lon": 4.79695,
+  "prec": "hemelsbreed",
+  "place": "Woerden–Gouda"
+ },
+ "9089": {
+  "lat": 52.88803,
+  "lon": 5.11565,
+  "prec": "hemelsbreed",
+  "place": "Alkmaar–Harlingen"
+ },
+ "9434": {
+  "lat": 53.03662,
+  "lon": 5.40703,
+  "prec": "hemelsbreed",
+  "place": "Gaast–Makkum"
+ },
+ "1426": {
+  "lat": 52.80926,
+  "lon": 5.37481,
+  "prec": "water",
+  "place": "IJsselmeer"
+ },
+ "5772": {
+  "lat": 52.80926,
+  "lon": 5.37481,
+  "prec": "water",
+  "place": "IJsselmeer"
+ },
+ "3982": {
+  "lat": 51.92444,
+  "lon": 4.47775,
+  "prec": "plaats",
+  "place": "Rotterdam"
+ },
+ "4805": {
+  "lat": 52.11825,
+  "lon": 4.67844,
+  "prec": "water",
+  "place": "Oude Rijn, Zuid-Holland"
+ },
+ "5379": {
+  "lat": 52.37308,
+  "lon": 4.89245,
+  "prec": "plaats",
+  "place": "Amsterdam"
+ },
+ "5410": {
+  "lat": 52.3,
+  "lon": 4.1,
+  "prec": "water",
+  "place": "Noordzee (locatie niet vermeld)"
+ },
+ "5657": {
+  "lat": 52.0692,
+  "lon": 4.27807,
+  "prec": "straat",
+  "place": "'s-Gravenhage"
+ },
+ "562": {
+  "lat": -28.37694,
+  "lon": 32.41417,
+  "prec": "plaats",
+  "place": "St Lucia, KwaZulu-Natal, South Africa"
+ },
+ "5508": {
+  "lat": -7.79252,
+  "lon": 140.01833,
+  "prec": "plaats",
+  "place": "Merauke, Indonesia"
+ },
+ "5910": {
+  "lat": 51.40125,
+  "lon": 4.20901,
+  "prec": "plaats",
+  "place": "Bath, Reimerswaal"
+ },
+ "6973": {
+  "lat": 53.1957,
+  "lon": 8.3897,
+  "prec": "plaats",
+  "place": "Altenhuntorf, Elsfleth, Germany"
+ },
+ "1451": {
+  "lat": 52.3,
+  "lon": 4.1,
+  "prec": "water",
+  "place": "Noordzee (locatie niet vermeld)"
+ },
+ "2041": {
+  "lat": 52.3,
+  "lon": 4.1,
+  "prec": "water",
+  "place": "Noordzee (locatie niet vermeld)"
+ },
+ "3046": {
+  "lat": 52.3,
+  "lon": 4.1,
+  "prec": "water",
+  "place": "Noordzee (locatie niet vermeld)"
+ },
+ "6261": {
+  "lat": 52.3,
+  "lon": 4.1,
+  "prec": "water",
+  "place": "Noordzee (locatie niet vermeld)"
+ },
+ "1600": {
+  "lat": 53.45,
+  "lon": 5.9,
+  "prec": "water",
+  "place": "Waddenzee (bij Holwerd)"
+ },
+ "1648": {
+  "lat": 53.32,
+  "lon": 5.62,
+  "prec": "water",
+  "place": "Waddenzee (voor Het Bildt)"
+ },
+ "7308": {
+  "lat": 51.885,
+  "lon": 4.64,
+  "prec": "water",
+  "place": "splitsing Lek–Noord"
+ },
+ "8846": {
+  "lat": 52.62,
+  "lon": 5.72,
+  "prec": "water",
+  "place": "Ketelmeer (voorm. Ketelmond)"
+ },
+ "5915": {
+  "lat": -34.3,
+  "lon": 22.5,
+  "prec": "hemelsbreed",
+  "place": "Zuidkust Zuid-Afrika"
+ },
+ "8583": {
+  "lat": 54.0,
+  "lon": 10.8,
+  "prec": "water",
+  "place": "Lübecker Bocht (Oostzee)"
+ }
+}
