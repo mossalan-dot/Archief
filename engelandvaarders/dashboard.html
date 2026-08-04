@@ -190,7 +190,7 @@ function chartTip(cardEl, n, note){
 }
 function setSub(chartId, text, n, note){ const c=document.getElementById(chartId).closest('.card'); const s=c.querySelector('.sub'); if(s) s.textContent=text; if(n!=null) chartTip(c,n,note); }
 
-fetch('people.json?v=4').then(r=>r.json()).then(build);
+fetch('people.json?v=5').then(r=>r.json()).then(build);
 
 function build(P){
   DATA=P;

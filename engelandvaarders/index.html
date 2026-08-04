@@ -258,9 +258,9 @@ let animLayer=null, animTimer=null, heatLayer=null, HEAT_N=0, locMarker=null;
 function interact(){ state.blank=false; state.focusId=null; const s=document.getElementById('search'); if(s)s.classList.remove('glow'); }
 
 Promise.all([
-  fetch('people.json?v=4').then(r=>r.json()),
-  fetch('geocache.json?v=4').then(r=>r.json()),
-  fetch('woon_geocache.json?v=4').then(r=>r.ok?r.json():{}).catch(()=>({}))
+  fetch('people.json?v=5').then(r=>r.json()),
+  fetch('geocache.json?v=5').then(r=>r.json()),
+  fetch('woon_geocache.json?v=5').then(r=>r.ok?r.json():{}).catch(()=>({}))
 ]).then(([people,geo,woon])=>{
   PEOPLE=people; GEO=geo; WOON=woon||{};
   buildLegend(); buildLines(); buildHeatSets(); wire(); apply();
