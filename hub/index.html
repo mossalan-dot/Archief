@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Archiefkaarten — Alan Moss</title>
+<meta name="description" content="Historische bronnen uit het Nationaal Archief, interactief in kaart gebracht: Carnegie Heldenfonds, Arbeidsinzet, VOC-opvarenden en Engelandvaarders.">
+<style>
+  :root{--accent:#0e7490;--accent-dark:#155e75;--ink:#1f2937;--muted:#6b7280;--line:#e5e7eb;--card:#fff;--bg:#f6f7f5}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+  header{padding:30px 24px 6px}
+  .wrap{max-width:1080px;margin:0 auto}
+  .htop{display:flex;align-items:center;gap:14px}
+  .hicon{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+    display:flex;align-items:center;justify-content:center;font-size:28px;flex:none;box-shadow:0 2px 10px rgba(14,116,144,.28)}
+  h1{margin:0;font-size:27px;letter-spacing:-.02em}
+  .htop .sub{font-size:13.5px;color:var(--muted);margin-top:2px}
+  .htop .back{margin-left:auto;font-size:13px;color:var(--accent);text-decoration:none;white-space:nowrap;
+    border:1px solid var(--line);background:#fff;padding:8px 14px;border-radius:9px}
+  .htop .back:hover{border-color:var(--accent);background:#f0fafc}
+  .intro{max-width:1080px;margin:16px auto 0;padding:0 24px;font-size:15.5px;color:#374151;max-width:76ch}
+  main{max-width:1080px;margin:0 auto;padding:24px 24px 60px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
+  .mapcard{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:14px;
+    overflow:hidden;text-decoration:none;color:inherit;transition:transform .15s ease,box-shadow .15s ease}
+  .mapcard:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.12);border-color:#d5dbe0}
+  .thumb{height:190px;background-size:cover;background-position:top center;border-bottom:1px solid var(--line);position:relative}
+  .thumb .count{position:absolute;left:12px;bottom:12px;background:rgba(31,41,55,.86);color:#fff;font-size:12px;font-weight:600;
+    padding:4px 10px;border-radius:20px;font-variant-numeric:tabular-nums;backdrop-filter:blur(2px)}
+  .cbody{padding:16px 18px 18px;display:flex;flex-direction:column;flex:1}
+  .ceyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);font-weight:700}
+  .mapcard h2{margin:5px 0 6px;font-size:19px;letter-spacing:-.01em}
+  .mapcard p{margin:0 0 14px;font-size:14px;color:#4b5563}
+  .cfoot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .src{font-size:12px;color:var(--muted)}
+  .cta{font-size:13.5px;font-weight:600;color:var(--accent);white-space:nowrap}
+  footer{max-width:1080px;margin:0 auto;padding:8px 24px 50px;font-size:12.5px;color:var(--muted)}
+  footer a{color:var(--accent)}
+  @media(max-width:560px){.htop .sub{display:none}h1{font-size:23px}}
+</style>
+</head>
+<body>
+<header><div class="wrap htop">
+  <div class="hicon">🗺️</div>
+  <div><h1>Archiefkaarten</h1><div class="sub">Historische bronnen uit het Nationaal Archief, interactief in kaart</div></div>
+  <a class="back" href="https://alanmoss.nl/">alanmoss.nl →</a>
+</div></header>
+<p class="intro">Vier grote archiefcollecties, geografisch ontsloten: van reddingsdaden en dwangarbeid tot de opvarenden van de VOC en de Engelandvaarders van de Tweede Wereldoorlog. Klik een onderwerp om de kaart te openen.</p>
+<main>
+  <div class="grid">
+
+    <a class="mapcard" href="https://engelandvaarders.alanmoss.nl/">
+      <div class="thumb" style="background-image:url(engelandvaarders.jpg)"><span class="count">2.101 reizigers</span></div>
+      <div class="cbody">
+        <div class="ceyebrow">Verzet · 1940–1945</div>
+        <h2>Engelandvaarders</h2>
+        <p>De reizen van ruim tweeduizend verzetsdeelnemers die tijdens de bezetting Engeland wisten te bereiken — met routes, herkomst, bestemmingen en reisanimatie.</p>
+        <div class="cfoot"><span class="src">index Engelandvaarders (NA)</span><span class="cta">Open de kaart →</span></div>
+      </div>
+    </a>
+
+    <a class="mapcard" href="https://carnegie.alanmoss.nl/">
+      <div class="thumb" style="background-image:url(carnegie.jpg)"><span class="count">± 9.600 dossiers</span></div>
+      <div class="cbody">
+        <div class="ceyebrow">Reddingsdaden · 1903–1987</div>
+        <h2>Carnegie Heldenfonds</h2>
+        <p>Bijna 9.600 beloonde reddingen uit het archief van het Carnegie Heldenfonds, per plaats in kaart gebracht en volledig doorzoekbaar.</p>
+        <div class="cfoot"><span class="src">Nationaal Archief 2.19.364</span><span class="cta">Open de kaart →</span></div>
+      </div>
+    </a>
+
+    <a class="mapcard" href="https://opvarenden.alanmoss.nl/">
+      <div class="thumb" style="background-image:url(opvarenden.jpg)"><span class="count">± 774.000 opvarenden</span></div>
+      <div class="cbody">
+        <div class="ceyebrow">VOC · 1633–1795</div>
+        <h2>VOC-opvarenden</h2>
+        <p>De herkomst van honderdduizenden bemanningsleden en soldaten in dienst van de VOC, met afloop van de reis en rang.</p>
+        <div class="cfoot"><span class="src">Nationaal Archief</span><span class="cta">Open de kaart →</span></div>
+      </div>
+    </a>
+
+    <a class="mapcard" href="https://arbeidsinzet.alanmoss.nl/">
+      <div class="thumb" style="background-image:url(arbeidsinzet.jpg)"><span class="count">± 850.000 records</span></div>
+      <div class="cbody">
+        <div class="ceyebrow">Dwangarbeid · 1940–1945</div>
+        <h2>Arbeidsinzet</h2>
+        <p>Nederlanders die tijdens de bezetting in Duitsland tewerk werden gesteld — van herkomstplaats naar de Kreis waar zij belandden.</p>
+        <div class="cfoot"><span class="src">Nationaal Archief 2.19.323</span><span class="cta">Open de kaart →</span></div>
+      </div>
+    </a>
+
+  </div>
+</main>
+<footer><div class="wrap">Kaarten en visualisaties: Alan Moss. Bronnen: Nationaal Archief. Onderdeel van <a href="https://alanmoss.nl/">alanmoss.nl</a>.</div></footer>
+</body>
+</html>
