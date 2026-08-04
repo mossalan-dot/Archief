@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Engelandvaarders in cijfers 1940–1945</title>
+<style>
+  :root{
+    --noord:#2f6fb0; --zuid:#d67a2e; --zwits:#8156b8; --zee:#1f9e8f;
+    --oost:#4f9d4f; --overig:#6b7280; --onbekend:#334155;
+    --accent:#0e7490; --accent-dark:#155e75; --joods:#a07d2c;
+    --gold:#9a7420; --cream:#faf7ee; --cream-line:#ece2c9;
+    --ink:#1f2937; --muted:#6b7280; --line:#e5e7eb; --card:#fff; --bg:#f6f7f5;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.4}
+  header{background:transparent;color:var(--ink);padding:22px 24px 4px}
+  header .wrap{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:14px}
+  .hicon{width:54px;height:54px;border-radius:13px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+    display:flex;align-items:center;justify-content:center;font-size:27px;flex:none;box-shadow:0 2px 8px rgba(14,116,144,.25)}
+  header h1{margin:0;font-size:23px;letter-spacing:-.01em}
+  header .subtitle{font-size:13px;color:var(--muted);margin-top:2px}
+  header .hnav{margin-left:auto;display:flex;gap:8px}
+  header .hnav a{display:inline-block;padding:8px 14px;border:1px solid var(--line);border-radius:9px;background:#fff;
+    color:var(--accent);text-decoration:none;font-size:13px;font-weight:500;white-space:nowrap}
+  header .hnav a:hover{border-color:var(--accent);background:#f0fafc}
+  main{max-width:1180px;margin:0 auto;padding:16px 24px 60px}
+  .intro{font-size:15.5px;color:#374151;margin:0 0 22px}
+  .intro b{color:var(--ink)}
+  /* KPI */
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:26px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .kpi .v{font-size:30px;font-weight:650;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .kpi .l{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .kpi .s{font-size:12px;color:var(--muted);margin-top:6px}
+  /* grid van kaarten */
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px 18px;overflow:hidden}
+  .card.w12{grid-column:span 12}.card.w8{grid-column:span 8}.card.w6{grid-column:span 6}.card.w4{grid-column:span 4}
+  .card h2{margin:0;font-size:15px}
+  .card .sub{font-size:12px;color:var(--muted);margin:2px 0 14px}
+  /* horizontale balken */
+  .bars{display:flex;flex-direction:column;gap:7px}
+  .bar{display:grid;grid-template-columns:165px 1fr 50px;align-items:center;gap:10px;font-size:13px}
+  .bar .lab{color:var(--ink);white-space:normal;line-height:1.25;word-break:break-word}
+  .bar .track{background:#eef1f4;border-radius:5px;height:16px;position:relative;overflow:hidden}
+  .bar .track{display:block}
+  .bar .fill{display:block;height:100%;border-radius:5px;background:var(--accent);min-width:3px}
+  .bar .val{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums;font-size:12px}
+  /* gestapelde jaar-kolommen */
+  .yearchart{display:flex;align-items:flex-end;gap:14px;height:260px;padding-top:8px}
+  .ycol{flex:1;display:flex;flex-direction:column;align-items:center;height:100%;justify-content:flex-end}
+  .ystack{width:100%;max-width:70px;display:flex;flex-direction:column-reverse;border-radius:5px 5px 0 0;overflow:hidden}
+  .yseg{width:100%}
+  .ycap{font-size:12px;color:var(--muted);margin-top:7px;font-variant-numeric:tabular-nums;text-align:center}
+  .ycap b{display:block;color:var(--ink);font-size:13px}
+  .yearchart.months{gap:2px;overflow-x:auto;padding-left:18px;padding-right:8px}
+  .yearchart.months .ystack{max-width:none;border-radius:2px 2px 0 0}
+  .yearchart.months .ycol{min-width:9px}
+  .ycap.mth{font-size:10px;min-height:15px}
+  .legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;font-size:12.5px}
+  .legend span{display:inline-flex;align-items:center;gap:6px;color:var(--muted)}
+  .legend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+  .note{font-size:12px;color:var(--muted);margin-top:14px}
+  .vnote{font-size:12.5px;color:#4b5563;line-height:1.55;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+  .vnote b{color:var(--ink)}
+  /* kaartkop met toggle */
+  .cardhead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}
+  .cardhead h2{margin:0}.cardhead .sub{margin:2px 0 0}
+  .toggle{display:inline-flex;gap:2px;background:#eef1f4;border-radius:8px;padding:2px;flex:none}
+  .toggle button{border:none;background:none;font-size:12px;padding:4px 10px;border-radius:6px;cursor:pointer;color:var(--muted);white-space:nowrap}
+  .toggle button.on{background:#fff;color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.12)}
+  /* verticale staafgrafiek (leeftijd / per maand) */
+  .vchart{display:flex;align-items:flex-end;gap:3px;height:210px;overflow-x:auto;padding:6px 2px 0}
+  .vbar{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+  .vbar .vfill{width:100%;background:var(--accent);border-radius:3px 3px 0 0;min-height:1px}
+  .vbar .vlab{font-size:9.5px;color:var(--muted);margin-top:5px;white-space:nowrap;overflow:visible}
+  .vbar .vlab.blank{visibility:hidden}
+  /* klikbare legenda */
+  .legend span{cursor:pointer;user-select:none}
+  .legend span.off{opacity:.34}
+  /* KPI help */
+  .kpi{position:relative}
+  .kpi .q{position:absolute;top:12px;right:14px;width:16px;height:16px;border-radius:50%;background:#eef1f4;
+    color:var(--muted);font-size:11px;text-align:center;line-height:16px;cursor:default;font-weight:600}
+  .qmark{display:inline-block;width:16px;height:16px;border-radius:50%;background:#eef1f4;color:var(--muted);
+    font-size:11px;text-align:center;line-height:16px;cursor:default;font-weight:600;vertical-align:middle}
+  /* downloads */
+  .downloads{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+  .downloads a{font-size:13px;text-decoration:none;padding:9px 15px;border:1px solid var(--line);border-radius:9px;
+    color:var(--accent);background:#fff;font-weight:500}
+  .downloads a:hover{border-color:var(--accent);background:#f0fafc}
+  /* hover-tooltip op grafieksegmenten */
+  #viztip{position:fixed;z-index:9999;background:#1f2937;color:#fff;padding:7px 10px;border-radius:8px;
+    font-size:12.5px;line-height:1.45;box-shadow:0 4px 14px rgba(0,0,0,.28);pointer-events:none;opacity:0;
+    transition:opacity .12s;max-width:260px}
+  #viztip.on{opacity:1}
+  .bar,.yseg{cursor:default}
+  .bar:hover .fill,.yseg:hover{filter:brightness(1.08)}
+  /* carrousel — Carnegie-stijl */
+  .finds{position:relative;background:var(--cream);border:1px solid var(--cream-line);border-radius:14px;
+    padding:16px 62px 16px;margin-bottom:26px}
+  .finds .flabel{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);font-weight:700;margin-bottom:11px}
+  .finds .navb button{position:absolute;top:calc(50% + 6px);transform:translateY(-50%);width:40px;height:66px;border-radius:10px;
+    border:1px solid var(--line);background:#fff;cursor:pointer;font-size:20px;color:var(--ink);line-height:1;
+    box-shadow:0 1px 3px rgba(0,0,0,.06),0 8px 24px rgba(0,0,0,.06);z-index:2}
+  .finds #fprev{left:12px}.finds #fnext{right:12px}
+  .finds .navb button:hover{border-color:var(--accent);color:var(--accent)}
+  .track2{display:flex;gap:16px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .track2::-webkit-scrollbar{display:none}
+  .find{flex:0 0 100%;background:#fff;border:1px solid var(--line);border-radius:12px;
+    padding:20px 24px;display:flex;gap:18px;align-items:flex-start}
+  .find .femoji{font-size:38px;line-height:1;flex:none;margin-top:2px}
+  .find .fcontent{flex:1;min-width:0}
+  .find .tag{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);font-weight:600}
+  .find h3{margin:4px 0 8px;font-size:18px;line-height:1.25}
+  .find p{margin:0 0 12px;font-size:14px;color:#374151;line-height:1.55}
+  .find .meta{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;margin-bottom:12px}
+  .find .flinks{display:flex;flex-wrap:wrap;gap:7px}
+  .find .flinks a{font-size:12px;text-decoration:none;padding:5px 11px;border-radius:20px;
+    background:#e8f4f7;color:var(--accent);white-space:nowrap;font-weight:500}
+  .find .flinks a.ext{background:#f2f2f3;color:var(--muted);font-weight:400}
+  .find .flinks a:hover{filter:brightness(.96)}
+  .fdots{display:flex;justify-content:center;flex-wrap:wrap;gap:7px;margin-top:14px}
+  .fdots i{width:7px;height:7px;border-radius:50%;background:#d6cdb5;cursor:pointer;transition:width .2s}
+  .fdots i.on{background:var(--gold);width:18px;border-radius:4px}
+  @media(max-width:860px){.finds{padding:16px 14px}.finds .navb button{display:none}.find{padding:16px 16px;gap:12px}.find .femoji{font-size:30px}}
+  @media(max-width:860px){.card.w8,.card.w6,.card.w4{grid-column:span 12}.bar{grid-template-columns:120px 1fr 46px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="hicon">⛵</div>
+  <div class="htext">
+    <h1>Engelandvaarders in cijfers</h1>
+    <div class="subtitle">Analyse van 2.101 dossiers · index Engelandvaarders · Nationaal Archief · 1940–1945</div>
+  </div>
+  <div class="hnav"><a href="over.html">ⓘ Over</a><a href="index.html">← naar de kaart</a></div>
+</div></header>
+<main>
+  <p class="intro">Wie waren de ruim tweeduizend Nederlandse verzetsdeelnemers die tussen 1940 en 1945 Engeland wisten te bereiken? Uit de index Engelandvaarders van het Nationaal Archief is per persoon de <b>route</b>, <b>herkomst</b>, <b>leeftijd</b>, <b>beroep</b> en <b>godsdienst</b> af te leiden — bijna vijf jaar oorlogsgeschiedenis in cijfers.</p>
+  <div class="kpis" id="kpis"></div>
+  <section class="finds">
+    <div class="flabel">Bijzondere vondsten</div>
+    <div class="track2" id="finds"></div>
+    <div class="navb"><button id="fprev" aria-label="vorige">‹</button><button id="fnext" aria-label="volgende">›</button></div>
+    <div class="fdots" id="fdots"></div>
+  </section>
+  <div class="grid">
+    <div class="card w8">
+      <div class="cardhead"><div><h2>Vertrek in de tijd <span class="qmark" data-tip="De grootste golf valt in het voorjaar en de zomer van 1943: na de Duitse maatregelen van april 1943 — de loyaliteitsverklaring voor studenten, het opnieuw in krijgsgevangenschap voeren van oud-militairen en de uitbreiding van de arbeidsinzet — sloegen veel jonge mannen op de vlucht. Een eerdere, kleinere piek is mei 1940, direct na de Duitse inval. In de wintermaanden lag het aantal vertrekken telkens lager.">?</span></h2><div class="sub">aantal vertrekken, gestapeld naar hoofdroute — klik de legenda om routes te tonen/verbergen</div></div>
+        <div class="toggle" id="vtoggle"><button data-m="jaar" class="on">Per jaar</button><button data-m="maand">Per maand</button></div></div>
+      <div class="yearchart" id="yearchart"></div><div class="legend" id="ylegend"></div></div>
+    <div class="card w4"><h2>Hoofdroute</h2><div class="sub">welke weg naar Engeland</div><div class="bars" id="routechart"></div></div>
+    <div class="card w6"><h2>Land van vertrek <span class="qmark" data-tip="Verreweg de meeste Engelandvaarders vertrokken vanuit Nederland (1.993). Om de overige landen zichtbaar te maken is Nederland hier weggelaten.">?</span></h2><div class="sub">overige landen van vertrek — Nederland (1.993) weggelaten</div><div class="bars" id="landchart"></div></div>
+    <div class="card w6">
+      <div class="cardhead"><div><h2 id="herktitel">Herkomst — steden</h2><div class="sub" id="herksub">top 15 · woonplaats bij vertrek</div></div>
+        <div class="toggle" id="htoggle"><button data-m="stad" class="on">Stad</button><button data-m="prov">Provincie</button></div></div>
+      <div class="bars" id="herkchart"></div></div>
+    <div class="card w6"><h2>Leeftijd bij vertrek</h2><div class="sub">per leeftijdsjaar, berekend uit geboorte- en vertrekjaar</div><div class="vchart" id="leeftijdchart"></div></div>
+    <div class="card w6"><h2>Meest genoemde beroepen <span class="qmark" data-tip="Militaire rangen (luitenant, sergeant, marinier, adelborst, cadet, …) zijn samengevoegd tot ‘militair’; koopvaardij en visserij blijven apart. Sommigen gaven meerdere beroepen op (in de bron gescheiden door een puntkomma); elk beroep telt apart mee.">?</span></h2><div class="sub">top 15 · beroep bij vertrek</div><div class="bars" id="beroepchart"></div></div>
+    <div class="card w6"><h2>Godsdienst</h2><div class="sub">opgegeven geloof, samengevoegd</div><div class="bars" id="godschart"></div></div>
+    <div class="card w6"><h2>Reisduur</h2><div class="sub">tijd tussen vertrek en aankomst in Engeland</div><div class="bars" id="duurchart"></div></div>
+    <div class="card w6">
+      <div class="cardhead"><div><h2><span id="plaatstitel">Meest aangedane plaatsen</span> <span class="qmark" data-tip="Gebaseerd op de reizen met een gedetailleerde route in het archief (ca. 1.158). Reizen die alleen als herkomstlijn bekend zijn, tellen hier niet mee.">?</span></h2><div class="sub" id="plaatssub">top 20 · uit de gedetailleerde routes</div></div>
+        <div class="toggle" id="ptoggle"><button data-m="plaats" class="on">Plaatsen</button><button data-m="land">Landen</button></div></div>
+      <div class="bars" id="plaatschart"></div></div>
+  </div>
+  <p class="note">Bron: Nationaal Archief, index Engelandvaarders 1940–1945. Percentages afgerond; niet elk veld is bij ieder dossier ingevuld. Gegevens downloaden en broncode: zie <a href="over.html" style="color:var(--accent)">Over</a>.</p>
+</main>
+<div id="viztip"></div>
+
+<script>
+const RC={"Noordelijke route":"var(--noord)","Zuidelijke route":"var(--zuid)",
+ "Zuidelijke route, via Zwitserland":"var(--zwits)","Noordzee":"var(--zee)",
+ "Oostelijke route":"var(--oost)","overig":"var(--overig)","onbekend":"var(--onbekend)"};
+const ROUTE_ORDER=Object.keys(RC);
+const PALETTE=['#0e7490','#2f6fb0','#8156b8','#1f9e8f','#d67a2e','#4f9d4f','#be123c','#0891b2','#7c3aed','#b45309','#0d9488','#6366f1'];
+const cap=s=>s?s.charAt(0).toUpperCase()+s.slice(1):s;
+const esc=s=>(s||"").replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const med=arr=>{ if(!arr.length)return 0; const s=[...arr].sort((a,b)=>a-b),m=s.length>>1; return s.length%2?s[m]:Math.round((s[m-1]+s[m])/2); };
+function chartTip(cardEl, n, note){
+  const h=cardEl.querySelector('h2'); if(!h) return;
+  let q=h.querySelector('.qmark');
+  if(!q){ q=document.createElement('span'); q.className='qmark'; q.textContent='?'; h.appendChild(document.createTextNode(' ')); h.appendChild(q); }
+  if(q.dataset.basetip==null) q.dataset.basetip = note || q.getAttribute('data-tip') || '';
+  const base=q.dataset.basetip;
+  q.setAttribute('data-tip', (base?base+' — ':'')+`n = ${(+n).toLocaleString('nl')} ingevulde records`);
+}
+function setSub(chartId, text, n, note){ const c=document.getElementById(chartId).closest('.card'); const s=c.querySelector('.sub'); if(s) s.textContent=text; if(n!=null) chartTip(c,n,note); }
+
+fetch('people.json?v=4').then(r=>r.json()).then(build);
+
+function build(P){
+  DATA=P;
+  const N=P.length;
+  const vrouw=P.filter(p=>p.geslacht==='vrouw').length;
+  const metroute=P.filter(p=>p.heeft_route).length;
+  const MND=['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'];
+  const mcnt={}; P.forEach(p=>{const m=(p.datumvertr||'').slice(0,7); if(/^\d{4}-\d{2}$/.test(m)) mcnt[m]=(mcnt[m]||0)+1;});
+  const piekM=Object.entries(mcnt).sort((a,b)=>b[1]-a[1])[0];
+  const piekLabel=piekM?`${MND[+piekM[0].slice(5)-1]} ${piekM[0].slice(0,4)}`:'–';
+  const agesAll=[]; P.forEach(p=>{const gy=+p.geboortejaar, vy=+(p.datumvertr||'').slice(0,4);
+    if(gy>1850&&vy>1939){const a=vy-gy; if(a>=10&&a<=80) agesAll.push(a);}});
+  const gemL=agesAll.length?Math.round(agesAll.reduce((a,b)=>a+b,0)/agesAll.length):'–';
+
+  kpi([
+    [N.toLocaleString('nl'),"Engelandvaarders","in de index"],
+    [pct(metroute,N),"met gedetailleerde reisroute",`${metroute.toLocaleString('nl')} van ${N.toLocaleString('nl')}`,
+      "Bij deze personen legt de index de volledige reeks tussenstops vast. Bij de overige is alleen begin- en eindpunt bekend."],
+    [piekLabel,"drukste vertrekmaand",piekM?`${piekM[1]} vertrokken`:''],
+    [gemL+" jr","gemiddelde leeftijd","bij vertrek"],
+    [vrouw,"vrouwen",`${pct(vrouw,N)} van het totaal`],
+  ]);
+  renderFinds(P);
+  setupVertrek(P);
+  setSub('yearchart', `gestapeld naar hoofdroute · klik de legenda om te filteren`, Object.values(mcnt).reduce((a,b)=>a+b,0));
+
+  // Hoofdroute
+  const rc={}; P.forEach(p=>{const r=p.hoofdroute||'onbekend'; rc[r]=(rc[r]||0)+1;});
+  bars('routechart', ROUTE_ORDER.filter(r=>rc[r]).map(r=>[r,rc[r],RC[r]]), N);
+  setSub('routechart', `welke weg naar Engeland`, N);
+
+  // Land van vertrek — Nederland weggelaten (dwarsboomt de rest)
+  const lc={}; P.forEach(p=>{const l=p.land_vertrek||'onbekend'; if(l==='Nederland')return; lc[l]=(lc[l]||0)+1;});
+  bars('landchart', topN(lc,8), N);
+  setSub('landchart', `overige landen — Nederland (1.993) weggelaten`, N);
+
+  // Leeftijd bij vertrek — per leeftijdsjaar (verticaal)
+  const ageCount={}; agesAll.forEach(a=>ageCount[a]=(ageCount[a]||0)+1);
+  const amin=Math.min(...agesAll), amax=Math.max(...agesAll), ageRows=[];
+  for(let a=amin;a<=amax;a++) ageRows.push([a, ageCount[a]||0, (a%5===0?String(a):''), `<b>${a} jaar</b><br>${ageCount[a]||0} personen`]);
+  vbars('leeftijdchart', ageRows);
+  setSub('leeftijdchart', `per leeftijdsjaar · mediaan ${med(agesAll)}, gemiddeld ${gemL} jaar`, agesAll.length);
+
+  // Beroepen — militaire rangen samengevoegd tot 'militair'
+  const bc={}; P.forEach(p=>{ (p.beroep||'').split(';').forEach(t=>{let k=t.trim().toLowerCase();
+    if(!k)return; if(isMilitair(k)) k='militair'; bc[k]=(bc[k]||0)+1;});});
+  bars('beroepchart', topN(bc,15).map(([l,n])=>[cap(l),n]), N);
+  setSub('beroepchart', `top 15 · beroep bij vertrek`, P.filter(p=>p.beroep&&p.beroep.trim()).length, 'Militaire rangen (luitenant, sergeant, marinier, adelborst, cadet, …) samengevoegd tot ‘militair’; koopvaardij en visserij apart.');
+
+  // Godsdienst — 'geen'→onbekend (onderaan), Israëliet-spelling + toelichting
+  const gc={}; P.forEach(p=>{let g=(p.godsdienst||'').trim(); if(!g)return;
+    if(g.toLowerCase()==='geen') g='onbekend';
+    g=g.replace(/Israeliet/gi,'Israëliet').replace(/\(Joods\)/gi,'(joods)').replace(/Joodse afkomst/g,'joodse afkomst');
+    const k=g.toLowerCase(); gc[k]=gc[k]||{n:0,label:cap(g)}; gc[k].n++;});
+  let gE=Object.entries(gc).sort((a,b)=>b[1].n-a[1].n);
+  const onb=gE.filter(([k])=>k==='onbekend'); gE=gE.filter(([k])=>k!=='onbekend');
+  const gtop=gE.slice(0,9).concat(onb).map(([k,v])=>{
+    const col=k==='onbekend'?'var(--muted)':undefined;
+    const note=/isra/.test(k)?"Israëliet — de destijds gangbare aanduiding voor het joodse geloof.":null;
+    return [v.label, v.n, col, note];});
+  const nGods=P.filter(p=>p.godsdienst&&p.godsdienst.trim()).length;
+  bars('godschart', gtop, nGods);
+  setSub('godschart', `opgegeven geloof, samengevoegd`, nGods);
+
+  // Reisduur
+  const durs=[]; P.forEach(p=>{const d1=pd(p.datumvertr), d2=pd(p.datumaank);
+    if(d1&&d2){const days=(d2-d1)/864e5; if(days>=0&&days<2000) durs.push(days);}});
+  const dbins=[["< 1 maand",0,30],["1–3 mnd",30,91],["3–6 mnd",91,182],["6–12 mnd",182,365],["1–2 jaar",365,730],["> 2 jaar",730,1e9]];
+  bars('duurchart', dbins.map(([lab,lo,hi])=>[lab, durs.filter(x=>x>=lo&&x<hi).length, 'var(--accent)']), durs.length, true);
+  const meanDur=durs.length?Math.round(durs.reduce((a,b)=>a+b,0)/durs.length):0;
+  setSub('duurchart', `vertrek→aankomst · mediaan ${med(durs)}, gemiddeld ${meanDur} dagen`, durs.length);
+
+  setupPlaats(P, metroute);
+  setupHerkomst(P);
+  bindTips();
+}
+const PROV={
+ amsterdam:'Noord-Holland',haarlem:'Noord-Holland',heemstede:'Noord-Holland',bussum:'Noord-Holland',naarden:'Noord-Holland',hilversum:'Noord-Holland',ijmuiden:'Noord-Holland',velsen:'Noord-Holland',beverwijk:'Noord-Holland',santpoort:'Noord-Holland',zaandam:'Noord-Holland',alkmaar:'Noord-Holland',hoorn:'Noord-Holland',bloemendaal:'Noord-Holland',laren:'Noord-Holland',huizen:'Noord-Holland',weesp:'Noord-Holland',zandvoort:'Noord-Holland','den helder':'Noord-Holland',
+ 'den haag':'Zuid-Holland',"'s-gravenhage":'Zuid-Holland',scheveningen:'Zuid-Holland',rotterdam:'Zuid-Holland',delft:'Zuid-Holland',leiden:'Zuid-Holland',dordrecht:'Zuid-Holland',vlaardingen:'Zuid-Holland',schiedam:'Zuid-Holland',wassenaar:'Zuid-Holland',voorburg:'Zuid-Holland',rijswijk:'Zuid-Holland',katwijk:'Zuid-Holland','katwijk aan zee':'Zuid-Holland',oegstgeest:'Zuid-Holland',gouda:'Zuid-Holland',gorinchem:'Zuid-Holland',voorschoten:'Zuid-Holland',maassluis:'Zuid-Holland',noordwijk:'Zuid-Holland',hillegom:'Zuid-Holland',
+ utrecht:'Utrecht',amersfoort:'Utrecht',zeist:'Utrecht',baarn:'Utrecht',bilthoven:'Utrecht',soest:'Utrecht',driebergen:'Utrecht',doorn:'Utrecht',veenendaal:'Utrecht',
+ groningen:'Groningen',delfzijl:'Groningen',winschoten:'Groningen',appingedam:'Groningen',
+ arnhem:'Gelderland',nijmegen:'Gelderland',apeldoorn:'Gelderland',ede:'Gelderland',wageningen:'Gelderland',zutphen:'Gelderland',harderwijk:'Gelderland',doetinchem:'Gelderland',
+ enschede:'Overijssel',hengelo:'Overijssel',deventer:'Overijssel',zwolle:'Overijssel',almelo:'Overijssel',kampen:'Overijssel',
+ breda:'Noord-Brabant',eindhoven:'Noord-Brabant',tilburg:'Noord-Brabant',"'s-hertogenbosch":'Noord-Brabant','den bosch':'Noord-Brabant',helmond:'Noord-Brabant','bergen op zoom':'Noord-Brabant',roosendaal:'Noord-Brabant',
+ maastricht:'Limburg',heerlen:'Limburg',venlo:'Limburg',roermond:'Limburg',sittard:'Limburg',
+ vlissingen:'Zeeland',middelburg:'Zeeland',goes:'Zeeland',terneuzen:'Zeeland',
+ leeuwarden:'Friesland',sneek:'Friesland',harlingen:'Friesland',drachten:'Friesland',
+ assen:'Drenthe',emmen:'Drenthe',meppel:'Drenthe',hoogeveen:'Drenthe'
+};
+function provinceOf(wp){
+  if(!wp) return '';
+  if(/\(([^)]+)\)/.test(wp)) return 'buitenland';   // "Antwerpen (België)", "Parijs (Frankrijk)" enz.
+  return PROV[wp.toLowerCase().trim()]||'overig / onbekend';
+}
+let hMode='stad';
+function setupHerkomst(P){
+  document.querySelectorAll('#htoggle button').forEach(b=>b.onclick=()=>{ hMode=b.dataset.m;
+    document.querySelectorAll('#htoggle button').forEach(x=>x.classList.toggle('on',x===b)); drawHerkomst(P); });
+  drawHerkomst(P);
+}
+function drawHerkomst(P){
+  const denom=P.filter(p=>p.woonplaats && p.woonplaats.trim()).length;
+  document.getElementById('herktitel').textContent = hMode==='stad'?'Herkomst — steden':'Herkomst — provincies';
+  document.getElementById('herksub').textContent = (hMode==='stad'?'top 15 · woonplaats bij vertrek':'woonplaats naar provincie');
+  chartTip(document.getElementById('herkchart').closest('.card'), denom);
+  if(hMode==='stad'){
+    const c={}; P.forEach(p=>{ const w=(p.woonplaats||'').trim(); if(w)c[w]=(c[w]||0)+1; });
+    bars('herkchart', topN(c,15), denom);
+  } else {
+    const c={}; P.forEach(p=>{ const pr=provinceOf(p.woonplaats); if(pr)c[pr]=(c[pr]||0)+1; });
+    let e=Object.entries(c).sort((a,b)=>b[1]-a[1]);
+    const tail=e.filter(([k])=>k==='overig / onbekend'||k==='buitenland');
+    e=e.filter(([k])=>k!=='overig / onbekend'&&k!=='buitenland');
+    bars('herkchart', e.concat(tail), denom);
+  }
+}
+let DATA=[];
+function isMilitair(t){
+  if(/binnenvaart|kustvaart|grote vaart|koopvaardij|sleepboot|matroos|bootsman|stoker|schipper/.test(t)) return false;
+  return /luitenant|sergeant|korporaal|marinier|adelborst|vaandrig|cadet|officier|majoor|kolonel|generaal|wachtmeester|ritmeester|kornet|huzaar|grenadier|fuselier|dragonder|kanonnier|milicien|beroepsmilitair|k\.?n\.?i\.?l|k\.?n\.?l|kma|ter zee|dienstplichtig|soldaat|militair|kapitein der/.test(t);
+}
+function vbars(id, rows){
+  const max=Math.max(1,...rows.map(r=>r[1]));
+  document.getElementById(id).innerHTML=rows.map(([lab,n,xl,tip])=>{
+    const tt=(tip||`<b>${esc(String(lab))}</b><br>${n}`).replace(/"/g,'&quot;');
+    return `<div class="vbar" data-tip="${tt}"><div class="vfill" style="height:${n/max*100}%;${n?'':'min-height:0'}"></div>
+      <div class="vlab${xl?'':' blank'}">${esc(xl||'.')}</div></div>`;}).join('');
+}
+// Vertrek in de tijd (jaar/maand + route-toggle)
+let vMode='jaar'; const vOff=new Set();
+const MN=['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+function setupVertrek(P){
+  document.querySelectorAll('#vtoggle button').forEach(b=>b.onclick=()=>{
+    vMode=b.dataset.m; document.querySelectorAll('#vtoggle button').forEach(x=>x.classList.toggle('on',x===b)); drawVertrek(P);});
+  const leg=document.getElementById('ylegend');
+  leg.innerHTML=ROUTE_ORDER.map(r=>`<span data-r="${esc(r)}"><i style="background:${RC[r]}"></i>${esc(r)}</span>`).join('');
+  leg.querySelectorAll('span').forEach(s=>s.onclick=()=>{const r=s.dataset.r;
+    if(vOff.has(r)){vOff.delete(r);s.classList.remove('off');}else{vOff.add(r);s.classList.add('off');} drawVertrek(P);});
+  drawVertrek(P);
+}
+function drawVertrek(P){
+  const active=ROUTE_ORDER.filter(r=>!vOff.has(r));
+  let buckets;
+  if(vMode==='jaar') buckets=["1940","1941","1942","1943","1944","1945"];
+  else { const set=new Set(); P.forEach(p=>{const m=(p.datumvertr||'').slice(0,7); if(/^\d{4}-\d{2}$/.test(m))set.add(m);}); buckets=[...set].sort(); }
+  const stack={}; buckets.forEach(b=>stack[b]={});
+  P.forEach(p=>{const key=vMode==='jaar'?(p.datumvertr||'').slice(0,4):(p.datumvertr||'').slice(0,7);
+    if(!(key in stack))return; const r=p.hoofdroute||'onbekend'; if(vOff.has(r))return; stack[key][r]=(stack[key][r]||0)+1;});
+  const totals=buckets.map(b=>active.reduce((s,r)=>s+(stack[b][r]||0),0));
+  const maxY=Math.max(1,...totals);
+  const el=document.getElementById('yearchart'); el.classList.toggle('months',vMode==='maand');
+  el.innerHTML=buckets.map((b,idx)=>{
+    const tot=totals[idx];
+    const segs=active.filter(r=>stack[b][r]).map(r=>{
+      const lab=vMode==='jaar'?b:`${MN[+b.slice(5)-1]} ${b.slice(0,4)}`;
+      return `<div class="yseg" data-tip="<b>${lab} · ${esc(r)}</b><br>${stack[b][r]} personen" style="height:${stack[b][r]/maxY*100}%;background:${RC[r]}"></div>`;}).join('');
+    let cap;
+    if(vMode==='jaar') cap=`<div class="ycap"><b>${tot}</b>${b}</div>`;
+    else { const yy=b.slice(0,4),mm=b.slice(5); cap=`<div class="ycap mth">${(mm==='01'||idx===0)?`<b>${yy}</b>`:'&nbsp;'}</div>`; }
+    return `<div class="ycol"><div class="ystack" style="height:${tot/maxY*100}%">${segs}</div>${cap}</div>`;
+  }).join('');
+  bindTips();
+}
+// Plaatsen / Landen onderweg
+let pMode='plaats';
+function setupPlaats(P, metroute){
+  document.querySelectorAll('#ptoggle button').forEach(b=>b.onclick=()=>{
+    pMode=b.dataset.m; document.querySelectorAll('#ptoggle button').forEach(x=>x.classList.toggle('on',x===b)); drawPlaats(P,metroute);});
+  drawPlaats(P,metroute);
+}
+function drawPlaats(P, metroute){
+  document.getElementById('plaatstitel').textContent=pMode==='plaats'?'Meest aangedane plaatsen':'Meest aangedane landen';
+  document.getElementById('plaatssub').textContent=(pMode==='plaats'?'top 20 · uit de gedetailleerde routes':'aantal reizen dat door elk land liep');
+  chartTip(document.getElementById('plaatschart').closest('.card'), metroute);
+  if(pMode==='plaats'){
+    const abbr=c=>c==='Verenigd Koninkrijk'?'VK':(c==='Verenigde Staten'?'VS':c);
+    const pc={}; P.forEach(p=>{ if(!p.heeft_route)return; p.route.forEach(s=>{ if(s.place){const d=s.country?`${s.place} (${abbr(s.country)})`:s.place; pc[d]=(pc[d]||0)+1;}});});
+    bars('plaatschart', topN(pc,20).map(([l,n])=>[l,n]), metroute);
+  } else {
+    const cc={}; P.forEach(p=>{ if(!p.heeft_route)return; const set=new Set(); p.route.forEach(s=>{ const c=normCountry(s.country); if(c)set.add(c);}); set.forEach(c=>cc[c]=(cc[c]||0)+1);});
+    bars('plaatschart', topN(cc,20), metroute);
+  }
+}
+const CFIX={'verenigd koninkrijk':'Verenigd Koninkrijk','belgïe':'België','belgie':'België','frankrij':'Frankrijk',
+  'new york':'Verenigde Staten','casablanca':'Marokko','noord-afrika':'','tschjechoslowakije':'Tsjechoslowakije',
+  'tegenwoordig: most in tsjechië':'Tsjechoslowakije','zweden -verenigd koninkrijk':'Zweden'};
+function normCountry(c){ if(!c)return''; c=c.trim(); if(c.includes(','))c=c.split(',').pop().trim();
+  const f=CFIX[c.toLowerCase()]; return f!==undefined?f:c; }
+function bindTips(){
+  const tip=document.getElementById('viztip');
+  document.querySelectorAll('[data-tip]').forEach(el=>{
+    if(el._tb)return; el._tb=1;
+    el.addEventListener('mouseenter',()=>{tip.innerHTML=el.dataset.tip;tip.classList.add('on');});
+    el.addEventListener('mousemove',e=>{let x=e.clientX+14,y=e.clientY+14;
+      if(x+tip.offsetWidth>innerWidth-8)x=e.clientX-tip.offsetWidth-14;
+      if(y+tip.offsetHeight>innerHeight-8)y=e.clientY-tip.offsetHeight-14;
+      tip.style.left=x+'px';tip.style.top=y+'px';});
+    el.addEventListener('mouseleave',()=>tip.classList.remove('on'));
+  });
+}
+
+const FINDS=[
+ {emoji:"🎖️", tag:"Soldaat van Oranje", title:"Twee die samen overstaken", ids:[748,1838], labels:["Hazelhoff Roelfzema","Tazelaar"],
+  body:"Erik Hazelhoff Roelfzema en Peter Tazelaar — later wereldberoemd door boek en film — reisden op precies dezelfde dagen via Duitsland, Noorwegen en de Faeröer-eilanden naar Engeland.",
+  meta:"Route ‘overig’ · 1–19 juli 1941"},
+ {emoji:"🧭", tag:"Grootste omweg", title:"De halve wereld rond via Moskou", ids:[1324], labels:["Niermeyer"],
+  body:"Handelsreiziger Willem Niermeyer passeerde veertien landen: van Finland via de Sovjet-Unie, Turkije, Syrië, Perzië en Brits-Indië naar Zuid-Afrika, Trinidad en Canada — en dan pas Engeland.",
+  meta:"Oostelijke route · 18 stops · 14 landen"},
+ {emoji:"🚂", tag:"Naar het oosten", title:"Via Siberië en Japan", ids:[2116], labels:["Woudhuysen"],
+  body:"Houthandelaar Andries Woudhuysen vluchtte júist oostwaarts: door de Sovjet-Unie naar Japan, en over de Grote Oceaan naar de Verenigde Staten. Een reis van tweeënhalf jaar.",
+  meta:"Oostelijke route · sep 1940 – mrt 1943"},
+ {emoji:"⏳", tag:"Langste reis", title:"Bijna vijf jaar onderweg", ids:[382], labels:["Cohn"],
+  body:"Uitgever Eduard Cohn vertrok op 12 mei 1940 — twee dagen na de Duitse inval — en kwam pas op 18 april 1945 in Engeland aan, via Spanje, Palestina en Egypte. 1.802 dagen.",
+  meta:"Zuidelijke route · mei 1940 – apr 1945"},
+ {emoji:"🌊", tag:"Kortste reis", title:"In één nacht de Noordzee over", ids:[18], labels:["Alblas"],
+  body:"Tegenover de jarenlange omwegen staat de directe oversteek: stuurman Aart Alblas voer in de nacht van 18 op 19 maart 1941 rechtstreeks van de Nederlandse kust naar Engeland.",
+  meta:"Noordzee-route · 1 etmaal"},
+ {emoji:"💎", tag:"Beroepsgroep", title:"De diamantbewerkers van Antwerpen",
+  body:"Onder de vluchtelingen vallen 44 diamantbewerkers op — 43 van hen van joodse afkomst, 26 uit Antwerpen. Toen de Duitsers oprukten, ontvluchtte een groot deel van de Antwerpse diamantnijverheid tegelijk de stad.",
+  meta:"44 personen · 98% van joodse afkomst"},
+ {emoji:"👥", tag:"Uitersten", title:"Van veertien tot vijfenzestig", ids:[1122,1102], labels:["Laufer","van Laer"],
+  body:"De jongste Engelandvaarders waren pas veertien, zoals scholier Manfred Laufer (1926). De oudste was rechter Jan van Laer (1878), die op zijn vijfenzestigste nog via Zweden ontkwam.",
+  meta:"Jongste 14 jaar · oudste 65 jaar"},
+ {emoji:"📜", tag:"Opmerkelijk", title:"De opperrabbijn via Argentinië", ids:[1541], labels:["Rodrigues Pereira"],
+  body:"Salomon Rodrigues Pereira, opperrabbijn en leraar Oude Talen uit Hilversum, ontsnapte op zijn vijfenvijftigste langs een ongebruikelijke weg: via Spanje naar Argentinië, de Verenigde Staten en ten slotte Engeland.",
+  meta:"Zuidelijke route · 1942–1943"},
+ {emoji:"🏘️", tag:"Uit alle uithoeken", title:"Niet alleen uit de grote stad", ids:[210,1123,1605], labels:["Boersma","Laureyssen","Rutten"],
+  body:"Engelandvaarders kwamen uit tientallen kleine dorpen — van bakker Sietse Boersma uit het Groningse Grootegast en priester Laureyssen uit het Limburgse Helden-Panningen tot kok Leonardus Rutten uit Venray, die maar liefst 31 tussenstops maakte.",
+  meta:"144 dorpen met precies één Engelandvaarder"},
+];
+function renderFinds(P){
+  const byId={}; P.forEach(p=>byId[p.id]=p);
+  const first=n=>(n||'').split(' ')[0];
+  const tr=document.getElementById('finds');
+  tr.innerHTML=FINDS.map(f=>{
+    let links='';
+    (f.ids||[]).forEach((id,i)=>{const p=byId[id]; if(!p)return;
+      const nm=((f.labels&&f.labels[i])||p.roepnaam||first(p.naam)||'kaart');
+      links+=`<a href="index.html?id=${id}">${esc(nm)} op de kaart →</a>`;
+    });
+    return `<article class="find"><div class="femoji">${f.emoji||''}</div><div class="fcontent">
+      <span class="tag">${esc(f.tag)}</span><h3>${esc(f.title)}</h3><p>${esc(f.body)}</p>
+      <div class="meta">${esc(f.meta)}</div><div class="flinks">${links}</div></div></article>`;
+  }).join('');
+  // stippen
+  const dots=document.getElementById('fdots');
+  dots.innerHTML=FINDS.map((_,i)=>`<i data-i="${i}"></i>`).join('');
+  const dotEls=[...dots.children];
+  const step=()=>tr.clientWidth+16; // kaartbreedte (100%) + gap
+  let cur=0;
+  const setActive=i=>dotEls.forEach((d,j)=>d.classList.toggle('on',j===i));
+  setActive(0);
+  const go=i=>{cur=((i%FINDS.length)+FINDS.length)%FINDS.length; tr.scrollLeft=cur*step(); setActive(cur);};
+  let timer;
+  const auto=()=>{clearInterval(timer); timer=setInterval(()=>go(cur+1),6000);};
+  const nav=i=>{go(i); auto();};   // handmatige actie reset de timer
+  dotEls.forEach(d=>d.onclick=()=>nav(+d.dataset.i));
+  document.getElementById('fnext').onclick=()=>nav(cur+1);
+  document.getElementById('fprev').onclick=()=>nav(cur-1);
+  const finds=document.querySelector('.finds');
+  finds.addEventListener('mouseenter',()=>clearInterval(timer));
+  finds.addEventListener('mouseleave',auto);
+  // handmatig scrollen (swipe) → index + stip bijwerken
+  let t; tr.addEventListener('scroll',()=>{clearTimeout(t);t=setTimeout(()=>{cur=Math.round(tr.scrollLeft/step());setActive(cur);},90);});
+  auto();
+}
+function pd(s){ if(!/^\d{4}-\d{2}-\d{2}$/.test(s||''))return null; const d=new Date(s); return isNaN(d)?null:d; }
+function pct(a,b){ return b?Math.round(a/b*100)+'%':'–'; }
+function topN(obj,n){ return Object.entries(obj).sort((a,b)=>b[1]-a[1]).slice(0,n); }
+function kpi(items){ document.getElementById('kpis').innerHTML=items.map(([v,l,s,tip])=>
+  `<div class="kpi">${tip?`<span class="q" data-tip="${esc(tip).replace(/"/g,'&quot;')}">?</span>`:''}<div class="v">${v}</div><div class="l">${l}</div>${s?`<div class="s">${s}</div>`:''}</div>`).join(''); }
+function bars(id, rows, denom, showPct){
+  const max=Math.max(1,...rows.map(r=>r[1]));
+  document.getElementById(id).innerHTML=rows.map((r,i)=>{
+    const [lab,n,col,note]=r; const w=n/max*100;
+    const val=showPct?`${pct(n,denom)}`:n.toLocaleString('nl');
+    let tip=`<b>${esc(lab)}</b><br>${n.toLocaleString('nl')} · ${pct(n,denom)}`;
+    if(note) tip+=`<br><span style="opacity:.85">${esc(note)}</span>`;
+    return `<div class="bar" data-tip="${tip.replace(/"/g,'&quot;')}"><span class="lab">${esc(lab)}</span>
+      <span class="track"><span class="fill" style="width:${w}%;background:${col||PALETTE[i%PALETTE.length]}"></span></span>
+      <span class="val">${val}</span></div>`;
+  }).join('');
+}
+</script>
+</body>
+</html>

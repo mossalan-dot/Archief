@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Over — Reizen van de Engelandvaarders</title>
+<style>
+  :root{--accent:#0e7490;--accent-dark:#155e75;--ink:#1f2937;--muted:#6b7280;--line:#e5e7eb;--card:#fff;--bg:#f6f7f5}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+  header{padding:22px 24px 4px}
+  header .wrap{max-width:820px;margin:0 auto;display:flex;align-items:center;gap:14px}
+  .hicon{width:54px;height:54px;border-radius:13px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+    display:flex;align-items:center;justify-content:center;font-size:27px;flex:none;box-shadow:0 2px 8px rgba(14,116,144,.25)}
+  header h1{margin:0;font-size:23px;letter-spacing:-.01em}
+  header .subtitle{font-size:13px;color:var(--muted);margin-top:2px}
+  header .hnav{margin-left:auto;display:flex;gap:8px}
+  header .hnav a{display:inline-block;padding:8px 14px;border:1px solid var(--line);border-radius:9px;background:#fff;
+    color:var(--accent);text-decoration:none;font-size:13px;font-weight:500;white-space:nowrap}
+  header .hnav a:hover{border-color:var(--accent);background:#f0fafc}
+  main{max-width:820px;margin:0 auto;padding:18px 24px 70px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 24px;margin-bottom:16px}
+  h2{font-size:17px;margin:0 0 10px}
+  p{margin:0 0 12px;font-size:15px;color:#374151}
+  p:last-child{margin-bottom:0}
+  a{color:var(--accent)}
+  ul{margin:0 0 12px;padding-left:20px;font-size:15px;color:#374151}
+  li{margin-bottom:5px}
+  b{color:var(--ink)}
+  .lead{font-size:16px}
+  .foot{font-size:12.5px;color:var(--muted);margin-top:6px}
+  .downloads{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .downloads a{font-size:14px;text-decoration:none;padding:9px 15px;border:1px solid var(--line);border-radius:9px;color:var(--accent);background:#fff;font-weight:500}
+  .downloads a:hover{border-color:var(--accent);background:#f0fafc}
+  @media(max-width:560px){header .subtitle{display:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="hicon">⛵</div>
+  <div><h1>Over deze kaart</h1><div class="subtitle">Reizen van de Engelandvaarders 1940–1945</div></div>
+  <div class="hnav"><a href="dashboard.html">Cijfers</a><a href="index.html">← naar de kaart</a></div>
+</div></header>
+<main>
+  <div class="card">
+    <p class="lead">Tijdens de Duitse bezetting wisten ruim tweeduizend Nederlanders bezet gebied te verlaten om zich vanuit Engeland bij de geallieerden en de Nederlandse regering in ballingschap te voegen. Zij werden <b>Engelandvaarders</b> genoemd. Deze kaart brengt hun reizen in beeld: elke lijn is de weg die één persoon aflegde.</p>
+  </div>
+
+  <div class="card">
+    <h2>De bron</h2>
+    <p>De gegevens komen uit de index <a href="https://www.nationaalarchief.nl/onderzoeken/zoekhulpen/engelandvaarders-1940-1945" target="_blank" rel="noopener">Engelandvaarders 1940–1945</a> van het Nationaal Archief. Die index ontsluit 2.101 persoonsdossiers, met per persoon onder meer geboortegegevens, beroep, godsdienst, de gevolgde hoofdroute, de landen onderweg en — bij ruim de helft — een gedetailleerde reeks plaatsen die iemand aandeed.</p>
+    <p>Vanuit het detailvenster op de kaart is elk record met één klik te openen op de <b>recordpagina</b> in het Nationaal Archief, met daar ook de gedigitaliseerde verhoordossiers.</p>
+  </div>
+
+  <div class="card">
+    <h2>Hoe de kaart werkt</h2>
+    <ul>
+      <li>Elke lijn is de reis van één Engelandvaarder, <b>gekleurd naar hoofdroute</b> (noordelijk via Scandinavië, zuidelijk via Frankrijk en Spanje, via Zwitserland, over de Noordzee, oostelijk via de Sovjet-Unie, of overig).</li>
+      <li>Voor de ruim duizend records met een gedetailleerde route is de <b>volledige weg</b> getekend, stap voor stap.</li>
+      <li>Voor records zonder gedetailleerde route toont de kaart een <b>herkomstlijn</b> (stippellijn) van het land van vertrek naar het Verenigd Koninkrijk. Die zijn apart in of uit te schakelen.</li>
+      <li>In het detailvenster zien <b>kamp- en opvanglocaties</b> onderweg er anders uit dan gewone plaatsen.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Databewerking</h2>
+    <p>De reeks plaatsen per persoon (bijvoorbeeld “Rotterdam – Berlijn – Hamburg – Oslo – Stockholm – Londen”) is automatisch uit de index geparsed en per plaats voorzien van coördinaten via <a href="https://nominatim.openstreetmap.org/" target="_blank" rel="noopener">Nominatim / OpenStreetMap</a>. In totaal gaat het om ongeveer 1.250 verschillende plaatsen. Waar de bron een plaatsnaam verkeerd spelde, is die waar mogelijk hersteld.</p>
+  </div>
+
+  <div class="card">
+    <h2>Kanttekeningen</h2>
+    <ul>
+      <li>Niet elk veld is bij ieder dossier ingevuld; getoonde aantallen en percentages betreffen alleen de ingevulde records.</li>
+      <li>Voor ongeveer 940 personen bevat de index geen gedetailleerde route. Hun reis is niet te reconstrueren en wordt als herkomstlijn getoond.</li>
+      <li>Landsgrenzen en -namen worden weergegeven naar de situatie van nu; onderweg passeerden reizigers landen die inmiddels anders heten (zoals de Sovjet-Unie of Brits-Indië).</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Gegevens &amp; broncode</h2>
+    <p>De bewerkte dataset (2.101 records) en de volledige broncode van kaart en pijplijn zijn vrij te gebruiken.</p>
+    <div class="downloads">
+      <a href="engelandvaarders.csv" download>⬇️ Data (CSV)</a>
+      <a href="people.json" download="engelandvaarders.json">⬇️ Data (JSON)</a>
+      <a href="https://github.com/mossalan-dot/engelandvaarders" target="_blank" rel="noopener">💻 Broncode (GitHub)</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Colofon</h2>
+    <p>Kaart en visualisatie: Alan Moss. Kaartmateriaal © OpenStreetMap-bijdragers en CARTO. Gegevens: Nationaal Archief, index Engelandvaarders 1940–1945.</p>
+    <p class="foot">Onderdeel van een reeks archiefkaarten op alanmoss.nl.</p>
+  </div>
+</main>
+</body>
+</html>
