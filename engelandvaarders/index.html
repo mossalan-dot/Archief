@@ -576,7 +576,7 @@ function showDetail(p){
     kv("Aankomst", nlDate(p.datumaank))+ kv("Reisduur", reisDagen(p.datumvertr,p.datumaank))+
     `<h3>Route</h3>`+ landenKv + (landenKv&&p.heeft_route?`<div class="rsep"></div>`:"") + stops+
     `<h3>Bron</h3>`+
-    (p.record_link?`<div><a href="${esc(p.record_link)}" target="_blank" rel="noopener">Bekijk het record in het Nationaal Archief →</a></div>`:"")+
+    (p.record_link?`<div><a href="${esc(p.record_link)}" target="_blank" rel="noopener">Bekijk het record bij het Nationaal Archief →</a></div>`:"")+
     (p.na_link?`<div style="margin-top:6px"><a href="${esc(p.na_link)}" target="_blank" rel="noopener" style="font-size:12px;color:var(--muted)">Scan van het dossier${archiefNr(p.na_link)?` (${archiefNr(p.na_link)})`:''} →</a></div>`:"")+
     (p.link?`<div style="margin-top:6px"><a href="${esc(p.link)}" target="_blank" rel="noopener" style="font-size:12px;color:var(--muted)">Meer op Oorlogsbronnen.nl →</a></div>`:"");
   document.getElementById('detail').style.display='block'; document.body.classList.add('detail-open');
