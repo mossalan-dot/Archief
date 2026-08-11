@@ -1,0 +1,4 @@
+# backups en tussenbestanden
+*.bak-*
+*_new.json
+*_todo.json
