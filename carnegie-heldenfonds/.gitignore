@@ -1,0 +1,16 @@
+# Python-artefacten
+__pycache__/
+*.pyc
+
+# Gegenereerde, self-contained build-uitvoer (worden opgebouwd door de scripts
+# en naar de live site geüpload; niet in de repo bewaard):
+kaart.html
+stats.html
+dossier.html
+
+# Afgeleide data (gegenereerd door de pijplijn)
+dossiers_raw.json
+dossiers.json
+dossiers.csv
+stats.json
+geocache*.json
