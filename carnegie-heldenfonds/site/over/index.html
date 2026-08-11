@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carnegie Heldenfonds — over deze kaart</title>
+<style>
+  :root{--bg:#f6f7f5;--card:#fff;--ink:#171717;--muted:#6b7280;--line:#e7e7e4;--accent:#0e7490;
+    --shadow:0 1px 3px #0000000f,0 8px 24px #00000010}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6}
+  a{color:var(--accent)}
+  .wrap{max-width:820px;margin:0 auto;padding:22px 20px 70px}
+  header{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+  .logo{width:44px;height:44px;border-radius:11px;display:grid;place-items:center;font-size:24px;flex:none;
+    background:linear-gradient(135deg,#0e7490,#0891b2);box-shadow:0 2px 8px #0e749055}
+  h1{font-size:23px;margin:0;letter-spacing:-.02em}
+  header .sub{color:var(--muted);font-size:13px;margin:2px 0 0}
+  .back{margin-left:auto;font-size:13px;font-weight:600;text-decoration:none;background:#fff;border:1px solid var(--line);padding:8px 13px;border-radius:10px;white-space:nowrap}
+  .nav{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 26px}
+  .nav a{background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 14px;font-size:13px;font-weight:600;text-decoration:none;box-shadow:var(--shadow)}
+  .nav a:hover{border-color:#cbd5e1}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 24px;box-shadow:var(--shadow);margin-bottom:16px}
+  h2{font-size:17px;margin:0 0 10px;letter-spacing:-.01em}
+  p{margin:0 0 12px}
+  .lead{font-size:16px;color:#374151}
+  ul{margin:0 0 12px;padding-left:20px}
+  li{margin:5px 0}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin:6px 0 4px}
+  th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+  code{background:#eef2f4;padding:1px 5px;border-radius:5px;font-size:12.5px}
+  .note{font-size:12.5px;color:var(--muted)}
+  .tag{display:inline-block;background:#fef3c7;color:#92400e;font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;margin-bottom:10px}
+  footer{color:var(--muted);font-size:12.5px;margin-top:24px;border-top:1px solid var(--line);padding-top:16px}
+</style>
+<script>window.goatcounter={path:function(p){return location.host+p}}</script>
+<script data-goatcounter="https://stats.alanmoss.nl/count" async src="https://stats.alanmoss.nl/count.js"></script>
+<style>
+.ptabs{display:flex;gap:5px;background:rgba(255,255,255,.94);padding:5px;border-radius:12px;box-shadow:0 2px 14px rgba(0,0,0,.16);border:1px solid #e5e7eb;width:max-content;max-width:calc(100vw - 20px);overflow-x:auto;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.ptabs::-webkit-scrollbar{display:none}
+.ptabs a{padding:7px 13px;border-radius:8px;text-decoration:none;color:#5a6b74;font-size:13px;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
+.ptabs a.on{background:#0e7490;color:#fff}
+.ptabs a:not(.on):hover{background:#eef6f8;color:#0e7490}
+.ptabs a.ext{color:#0e7490}
+.ptabs-float{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:2000;backdrop-filter:blur(8px)}
+.ptabs-top{margin:14px auto 4px}
+@media(max-width:640px){.ptabs a{padding:6px 10px;font-size:12px}.ptabs-float{top:8px}}
+.fbk{position:fixed;bottom:14px;left:14px;z-index:2000;font-size:12px;color:#0e7490;text-decoration:none;background:rgba(255,255,255,.94);border:1px solid rgba(0,0,0,.12);padding:6px 12px;border-radius:20px;box-shadow:0 1px 5px rgba(0,0,0,.14);white-space:nowrap}
+.fbk:hover{background:#fff;border-color:#0e7490}
+@media(max-width:640px){.fbk{bottom:8px;left:8px;font-size:11px;padding:5px 10px}}
+</style>
+</head>
+<body>
+<nav class="ptabs ptabs-top"><a href="../">🗺️ Kaart</a><a href="../stats/">📊 Inzichten</a><a href="../dossier/">📄 Voorbeeld</a><a href="../over/" class="on">ℹ️ Over</a><a href="https://archief.alanmoss.nl/" class="ext">← Archiefprojecten</a></nav>
+<a class="fbk" href="mailto:mossalan@gmail.com?subject=Carnegie%20Heldenfonds%3A%20feedback%20of%20bugmelding" title="Feedback of een fout melden">✉︎ Feedback</a>
+<div class="wrap">
+  <header>
+    <div class="logo">🛟</div>
+    <div><h1>Over deze kaart</h1><p class="sub">Colofon &amp; verantwoording · Carnegie Heldenfonds</p></div>
+  </header>
+
+  <div class="nav">
+    <a href="../dossiers.csv" download>⬇️ Data (CSV)</a>
+    <a href="../dossiers.json" download>⬇️ Data (JSON)</a>
+    <a href="https://github.com/mossalan-dot/Archief/tree/main/carnegie-heldenfonds" target="_blank" rel="noopener">💻 Broncode (GitHub)</a>
+  </div>
+
+  <div class="card">
+    <p class="lead">Deze kaart ontsluit alle <b>9.628 persoonsdossiers</b> van het Nederlandse Carnegie Heldenfonds
+    (Nationaal Archief, toegang <a href="https://www.nationaalarchief.nl/onderzoeken/archief/2.19.364" target="_blank" rel="noopener">2.19.364</a>, 1903–1987).
+    Het fonds beloonde sinds 1911 mensen die met gevaar voor eigen leven anderen redden. Elke redding is met behulp van
+    AI uit de dossierbeschrijvingen gestructureerd tot doorzoekbare, geografische data — ruim <b>98%</b> staat als punt op de kaart,
+    de rest is vindbaar via de lijst <b>"Niet op de kaart"</b>.</p>
+  </div>
+
+  <div class="card">
+    <h2>Van dossierbeschrijving naar dataset</h2>
+    <p>De inventaris beschrijft elke redding volgens een vast stramien —
+    <i>"[naam], redde in [jaar] te [plaats] een kind uit het water van de [gracht]…"</i>. Die regelmaat maakt het
+    mogelijk alle beschrijvingen in één keer te lezen. De pijplijn bestaat uit losse, reproduceerbare scripts:</p>
+    <table>
+      <tr><th>Stap</th><th>Wat het doet</th></tr>
+      <tr><td><code>parse.py</code></td><td>Inventaris-tekst → gestructureerde dossiers (nr, namen, jaar, plaats, aard, openbaarheid).</td></tr>
+      <tr><td><code>geocode.py</code></td><td>Plaatsnamen → coördinaten via OpenStreetMap/Nominatim, met NL-begrenzing en afstandsvalidatie.</td></tr>
+      <tr><td><code>geocode_detail.py</code></td><td>Verfijning naar de genoemde gracht/haven/straat (±3.600 dossiers).</td></tr>
+      <tr><td><code>overrides.py</code></td><td>Handmatige plaatsbepaling voor dossiers buiten het vaste patroon: plaats/gracht toewijzen, water centreren, midden tussen twee plaatsen, offshore- en buitenland-punten.</td></tr>
+      <tr><td><code>cats.py</code></td><td>Categorisering (aard), afloop, ondersteuning-vlag, redder-naam, Delpher-zoekopdracht.</td></tr>
+      <tr><td><code>gender.py</code></td><td>Schatting van het geslacht van de redder.</td></tr>
+      <tr><td><code>build_map.py</code> / <code>build_stats.py</code></td><td>Genereren de kaart (Leaflet) en het dashboard (Chart.js).</td></tr>
+    </table>
+    <p class="note">De volledige code staat op <a href="https://github.com/mossalan-dot/Archief/tree/main/carnegie-heldenfonds" target="_blank" rel="noopener">GitHub</a>.</p>
+  </div>
+
+  <div class="card">
+    <h2>Designkeuzes</h2>
+    <ul>
+      <li><b>Leaflet + OpenStreetMap</b>, geen Mapbox: gratis, tokenloos en privacyvriendelijk, en 9.600 geclusterde punten draaien er prima op.</li>
+      <li><b>Grote steden</b> (Amsterdam ~1.400 dossiers op één punt) zouden een onbruikbare wolk geven; een klik op een dichte cluster opent daarom een <b>doorzoekbare dossierlijst</b>.</li>
+      <li><b>Marker-precisie in vier niveaus.</b> Waar de beschrijving een gracht, haven of straat noemt, staat de marker dáár (📍 straat); anders in het centrum van de plaats (🏙️ plaats). Voor reddingen op open water centreren we op het genoemde meer of de rivier (🌊 water), en waar alleen "tussen X en Y" staat, zetten we het punt <b>hemelsbreed in het midden</b> (🧭 benadering). De popup vermeldt het niveau.</li>
+      <li><b>Zoveel mogelijk op de kaart — de rest vindbaar.</b> Ruim <b>98%</b> van de dossiers staat als punt op de kaart. De inventaris vergeet soms het woordje "te", schrijft "onder&nbsp;[plaats]" of noemt alleen een water; extra herkenningsregels en een <a href="https://github.com/mossalan-dot/Archief/tree/main/carnegie-heldenfonds" target="_blank" rel="noopener">handmatige plaatsbepaling</a> vangen die alsnog. Wat écht geen plek heeft — administratieve dossiers, reddingen op volle zee — blijft toegankelijk via de knop <b>"Niet op de kaart"</b> rechtsonder, met links naar het Nationaal Archief en Delpher.</li>
+      <li><b>Categorieën</b> zijn de <i>aard van de redding</i>. "Ondersteuning nabestaanden" is géén aard maar een filtervlag; de daad van de overleden redder wordt zelf gecategoriseerd.</li>
+      <li><b>Eén aard per redding.</b> Sommige beschrijvingen raken meerdere categorieën — een <i>brandende auto te water</i>, een <i>kind door het ijs in de gracht</i>. Ongeveer <b>8%</b> van de dossiers doet dat. We kennen dan tóch één categorie toe, via een vaste prioriteit (ijs → auto → trein → vliegtuig → brand → dier → gas → zee → water → instorting), zodat de <i>primaire dreiging</i> wint. Dat houdt de totalen zuiver (elk dossier telt één keer) en elke kaartmarker één symbool. "Auto te water" ís bovendien al de auto-categorie.</li>
+      <li><b>Meerdere reddingen in één dossier.</b> Een dossier beschrijft soms verschillende reddingen — andere jaren, andere plaatsen — gescheiden door <b>puntkomma's</b>. We splitsen op de puntkomma en behandelen elke daad apart: een dossier met meerdere plaatsen krijgt een marker per plaats, elk met de eigen aard en afloop. In de popup tonen we de <b>volledige</b> beschrijving, maar met de daad die bij díé marker hoort <b>gemarkeerd</b>, zodat je ziet welk deel erbij hoort.</li>
+      <li><b>Delpher-zoeklink</b>: <code>"eerste voornaam + achternaam" + plaats + water-detail</code> — volledige doopnamen geven nul krantentreffers; deze formule vindt het reddingsbericht zelf.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <span class="tag">Belangrijk</span>
+    <h2>Kanttekeningen</h2>
+    <ul>
+      <li><b>Bij benadering</b>: aard, afloop, wie gered werd en geslacht zijn <i>afgeleid</i> uit vrije tekst en dus schattingen.</li>
+      <li><b>Sommige locaties zijn benaderd.</b> Bij "onder&nbsp;[plaats]", "tussen X en Y" of een genoemd water plaatsen we de marker zo goed mogelijk — in de gemeente, hemelsbreed in het midden, of op het water. Reddingen zonder enige plaatsaanduiding (open zee) staan als één punt bij benadering, of in de lijst "Niet op de kaart". Liever een gemarkeerde onzekerheid dan onzichtbaar. Het niveau staat in de popup.</li>
+      <li><b>Momentopname tot ~1987</b>: de stichting bestaat nog en kent nog steeds onderscheidingen toe. Een dalende curve richting het einde is een archief-artefact, geen echte afname.</li>
+      <li><b>De Watersnoodramp van 1953 ontbreekt</b> vrijwel: veel van die erkenningen kwamen pas decennia later, buiten dit dossierblok. Een gat in de data duid je pas met de klassieke context (inleiding, bestuursarchief 2.19.352, en C.P. Mulder &amp; M. Spaans, <i>Honderd jaar helden</i>, 2011).</li>
+      <li><b>De arbeidsmigratie is (nog) niet zichtbaar.</b> Vanaf de jaren '60 kwamen gastarbeiders uit vooral Turkije en Marokko naar Nederland. In de reddersnamen is daar nauwelijks een spoor van terug te vinden: bij strenge selectie blijft er slechts een handvol namen over (zoals Mehmet Cakici in Hengelo, 1984, en Saida Errouk in Vlijmen, 1982). Deels omdat naam→herkomst een onbetrouwbare, gevoelige maatstaf is — en op een handjevol gevallen statistisch niets zegt — en deels omdat het dossierblok vooral de vroege eeuwhelft dekt en na de jaren '60 uitdunt. Een eventueel signaal zou eerder in de latere, nog niet openbare dossiers zitten. We hebben hier daarom géén grafiek van gemaakt.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Bronnen &amp; hergebruik</h2>
+    <p>Bron: Nationaal Archief, <b>Stichting Carnegie Heldenfonds Nederland — Persoonsdossiers, 1903-1987</b> (2.19.364).
+    De inventarisbeschrijvingen zijn openbaar; de fysieke dossiers zijn deels beperkt openbaar. Kaartachtergrond:
+    © OpenStreetMap-bijdragers. De <a href="../dossiers.csv" download>afgeleide dataset</a> mag vrij worden hergebruikt met bronvermelding.</p>
+  </div>
+
+  <footer>
+    Gebouwd met AI-ondersteuning als experiment in het op schaal ontsluiten van archiefbeschrijvingen.
+    Broncode: <a href="https://github.com/mossalan-dot/Archief/tree/main/carnegie-heldenfonds" target="_blank" rel="noopener">github.com/mossalan-dot/Archief</a>.
+  </footer>
+</div>
+</body>
+</html>

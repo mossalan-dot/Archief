@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carnegie Heldenfonds — een dossier van dichtbij</title>
+<style>
+  :root{--bg:#f6f7f5;--card:#fff;--ink:#171717;--muted:#6b7280;--line:#e7e7e4;--accent:#0e7490;
+    --shadow:0 1px 3px #0000000f,0 8px 24px #00000010}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6}
+  a{color:var(--accent)}
+  .wrap{max-width:820px;margin:0 auto;padding:22px 20px 70px}
+  header{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+  .logo{width:44px;height:44px;border-radius:11px;display:grid;place-items:center;font-size:24px;flex:none;
+    background:linear-gradient(135deg,#0e7490,#0891b2);box-shadow:0 2px 8px #0e749055}
+  h1{font-size:23px;margin:0;letter-spacing:-.02em}
+  header .sub{color:var(--muted);font-size:13px;margin:2px 0 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 24px;box-shadow:var(--shadow);margin-bottom:16px}
+  h2{font-size:17px;margin:0 0 10px;letter-spacing:-.01em}
+  p{margin:0 0 12px}
+  .lead{font-size:16px;color:#374151}
+  .eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);font-weight:700;margin-bottom:6px}
+  .note{font-size:12.5px;color:var(--muted)}
+  .tl{list-style:none;margin:6px 0 0;padding:0}
+  .tl li{position:relative;padding:0 0 14px 26px;border-left:2px solid var(--line);margin-left:6px}
+  .tl li:last-child{border-left-color:transparent;padding-bottom:0}
+  .tl li::before{content:"";position:absolute;left:-7px;top:3px;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px #fff}
+  .tl .d{font-size:12px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
+  .tl .t{font-size:14px}
+  .doc{display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start;padding:20px 0;border-top:1px solid var(--line)}
+  .doc:first-of-type{border-top:1px solid var(--line);margin-top:12px}
+  .doc .dt{font-weight:700;font-size:15px;margin:0 0 2px}
+  .doc .dd{color:var(--muted);font-size:12px;margin:0 0 8px}
+  .doc p{font-size:14px;margin:0 0 8px}
+  .doc figure{margin:0}
+  .dscan{cursor:zoom-in;position:relative;padding:0;border:1px solid var(--line);border-radius:9px;overflow:hidden;box-shadow:var(--shadow);background:#fff;display:block;width:100%}
+  .dscan:hover{border-color:#cbd5e1}
+  .dscan img{width:100%;display:block}
+  .pgbadge{position:absolute;right:6px;bottom:6px;background:rgba(31,41,55,.85);color:#fff;font-size:11px;font-weight:600;padding:2px 8px;border-radius:12px;pointer-events:none}
+  .doc figcaption{font-size:11px;color:var(--muted);margin-top:5px;text-align:center}
+  blockquote{margin:8px 0;padding:8px 14px;border-left:3px solid var(--accent);background:#f0fafc;border-radius:0 8px 8px 0;font-size:14px;color:#334155}
+  @media(max-width:640px){.doc{grid-template-columns:1fr}}
+  footer{color:var(--muted);font-size:12.5px;margin-top:24px;border-top:1px solid var(--line);padding-top:16px}
+  /* lightbox */
+  .lb{position:fixed;inset:0;z-index:9999;background:rgba(17,24,39,.9);display:none;align-items:center;justify-content:center;padding:30px}
+  .lb.on{display:flex}
+  .lb img{max-width:min(900px,94vw);max-height:88vh;border-radius:6px;box-shadow:0 10px 40px rgba(0,0,0,.55);background:#fff}
+  .lb button{position:absolute;border:none;background:rgba(255,255,255,.16);color:#fff;cursor:pointer;line-height:1;border-radius:50%}
+  .lb button:hover{background:rgba(255,255,255,.32)}
+  .lb-close{top:16px;right:20px;width:42px;height:42px;font-size:24px}
+  .lb-prev,.lb-next{top:50%;transform:translateY(-50%);width:50px;height:50px;font-size:30px}
+  .lb-prev{left:14px}.lb-next{right:14px}
+  .lb-cap{position:absolute;bottom:16px;left:0;right:0;text-align:center;color:#e5e7eb;font-size:13px;background:none}
+</style>
+<script>window.goatcounter={path:function(p){return location.host+p}}</script>
+<script data-goatcounter="https://stats.alanmoss.nl/count" async src="https://stats.alanmoss.nl/count.js"></script>
+<style>
+.ptabs{display:flex;gap:5px;background:rgba(255,255,255,.94);padding:5px;border-radius:12px;box-shadow:0 2px 14px rgba(0,0,0,.16);border:1px solid #e5e7eb;width:max-content;max-width:calc(100vw - 20px);overflow-x:auto;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.ptabs::-webkit-scrollbar{display:none}
+.ptabs a{padding:7px 12px;border-radius:8px;text-decoration:none;color:#5a6b74;font-size:13px;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
+.ptabs a.on{background:#0e7490;color:#fff}
+.ptabs a:not(.on):hover{background:#eef6f8;color:#0e7490}
+.ptabs a.ext{color:#0e7490}
+.ptabs-top{margin:14px auto 4px}
+@media(max-width:640px){.ptabs a{padding:6px 9px;font-size:12px}}
+.fbk{position:fixed;bottom:14px;left:14px;z-index:2000;font-size:12px;color:#0e7490;text-decoration:none;background:rgba(255,255,255,.94);border:1px solid rgba(0,0,0,.12);padding:6px 12px;border-radius:20px;box-shadow:0 1px 5px rgba(0,0,0,.14);white-space:nowrap}
+.fbk:hover{background:#fff;border-color:#0e7490}
+@media(max-width:640px){.fbk{bottom:8px;left:8px;font-size:11px;padding:5px 10px}}
+</style>
+</head>
+<body>
+<nav class="ptabs ptabs-top"><a href="../">🗺️ Kaart</a><a href="../stats/">📊 Inzichten</a><a href="../dossier/" class="on">📄 Voorbeeld</a><a href="../over/">ℹ️ Over</a><a href="https://archief.alanmoss.nl/" class="ext">← Archiefprojecten</a></nav>
+<a class="fbk" href="mailto:mossalan@gmail.com?subject=Carnegie%20Heldenfonds%3A%20feedback%20of%20bugmelding" title="Feedback of een fout melden">✉︎ Feedback</a>
+<div class="wrap">
+  <header>
+    <div class="logo">📄</div>
+    <div><h1>Een dossier van dichtbij</h1><p class="sub">Voorbeelddossier nr. 3622 · Carnegie Heldenfonds</p></div>
+  </header>
+
+  <div class="card">
+    <div class="eyebrow">De redding</div>
+    <p class="lead">Op zaterdag <b>28 januari 1933</b> schaatsen twee jonge vrouwen, Wilhelmina van Gelder (25) en Mientje Stevens (20), hand in hand over de <b>Oude Waal</b> bij Ubbergen, vlak bij Nijmegen. Ze zakken door een wak. <b>Johannes B.J. Jooren</b>, ziekenverpleger en sinds een jaar werkloos, staat op zo'n twaalf meter afstand toe te kijken. Hij gooit zijn overjas uit en springt het ijskoude water in. Hij haalt beide vrouwen naar de rand, waar schilder J.A. Ham plat op het ijs een stok toereikt en helpt hen op het droge te trekken.</p>
+    <p>Zo'n reddingsdaad staat op deze kaart als één puntje. In het archief is het een dossier van tientallen pagina's, waarin je het hele verloop kunt volgen: van het politieonderzoek tot het uiteindelijke besluit van het fonds. Dit is dossier <b>3622</b>, van dichtbij.</p>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Het verloop</div>
+    <ul class="tl">
+      <li><span class="d">28 januari 1933</span><div class="t">De redding op de Oude Waal.</div></li>
+      <li><span class="d">2 februari 1933</span><div class="t">Jooren schrijft het Heldenfonds aan en vraagt om een tegemoetkoming.</div></li>
+      <li><span class="d">februari 1933</span><div class="t">De politie hoort de redder, de geredden en een getuige onder ede.</div></li>
+      <li><span class="d">9 maart 1933</span><div class="t">De burgemeester van Nijmegen stuurt het rapport door en adviseert positief.</div></li>
+      <li><span class="d">13 mei 1933</span><div class="t">Het fonds kent Jooren f 50,- toe als beloning en schadevergoeding.</div></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">De documenten</div>
+    <h2>Hoe zo'n dossier is opgebouwd</h2>
+    <p class="note" style="margin-bottom:6px">Vier stukken uit het dossier, elk met een eigen rol. Klik een scan om hem groter te bekijken en door de pagina's te bladeren.</p>
+
+    <div class="doc">
+      <div>
+        <div class="dt">1 · Politierapport met verklaringen</div>
+        <div class="dd">Inspecteur van Politie · Nijmegen, februari 1933</div>
+        <p>In opdracht van het fonds onderzoekt inspecteur Johannes Meijberg de redding en hoort alle betrokkenen onder ede: de redder Jooren, de twee geredde vrouwen en getuige-helper Ham. Het rapport is de feitelijke basis waarop het fonds later beslist.</p>
+        <p class="note">Opvallend: de geredde Wilhelmina Stevens kan zelf niet zwemmen en herinnert zich vooral "in groot levensgevaar" te hebben verkeerd.</p>
+      </div>
+      <figure><button type="button" class="dscan" data-cap="Politierapport" data-imgs="carn-rapport-1.jpg,carn-rapport-2.jpg,carn-rapport-3.jpg,carn-rapport-4.jpg"><img src="carn-rapport-1.jpg" alt="Politierapport" loading="lazy"><span class="pgbadge">4 pagina's</span></button><figcaption>Rapport, klik om te bladeren</figcaption></figure>
+    </div>
+
+    <div class="doc">
+      <div>
+        <div class="dt">2 · Handgeschreven verzoekbrief van de redder</div>
+        <div class="dd">J.B. Jooren · Nijmegen, 2 februari 1933</div>
+        <p>Jooren schrijft het fonds zelf aan. Hij beschrijft de redding en vraagt om een tegemoetkoming: zijn beste kostuum scheurde en hij is al bijna een jaar zonder werk.</p>
+        <blockquote>"Ik zelf ben sinds Maart 1932 zonder werk en zoodoende niet bij machte mij weer een ander costuum aan te schaffen."</blockquote>
+        <p class="note">In het politierapport laat hij weten liever een gift in geld dan een medaille te ontvangen.</p>
+      </div>
+      <figure><button type="button" class="dscan" data-cap="Brief van Jooren aan het fonds" data-imgs="carn-jooren-1.jpg,carn-jooren-2.jpg"><img src="carn-jooren-1.jpg" alt="Handgeschreven brief van Jooren" loading="lazy"><span class="pgbadge">2 pagina's</span></button><figcaption>Brief van Jooren, klik om te bladeren</figcaption></figure>
+    </div>
+
+    <div class="doc">
+      <div>
+        <div class="dt">3 · Brief van het gemeentebestuur</div>
+        <div class="dd">Burgemeester van Nijmegen · 9 maart 1933</div>
+        <p>De burgemeester stuurt het politierapport door naar het Heldenfonds en adviseert positief: er bestaat "aanleiding … eene belooning of eene vergoeding voor geleden schade toe te kennen". De gemeente is de schakel tussen redder en fonds.</p>
+      </div>
+      <figure><button type="button" class="dscan" data-cap="Gemeentebestuur van Nijmegen" data-imgs="carn-burgemeester.jpg"><img src="carn-burgemeester.jpg" alt="Brief van de burgemeester" loading="lazy"></button><figcaption>Gemeentebestuur van Nijmegen</figcaption></figure>
+    </div>
+
+    <div class="doc">
+      <div>
+        <div class="dt">4 · Het toekenningsbesluit</div>
+        <div class="dd">Carnegie Heldenfonds · 's-Gravenhage, 13 mei 1933</div>
+        <p>Ruim drie maanden na de redding besluit het bestuur Jooren <b>f 50,-</b> toe te kennen "als belooning en schadevergoeding", uit te betalen via de burgemeester met een bijgevoegde postcheque. Daarmee is het dossier rond.</p>
+      </div>
+      <figure><button type="button" class="dscan" data-cap="Besluit van het fonds" data-imgs="carn-besluit.jpg"><img src="carn-besluit.jpg" alt="Toekenningsbesluit van het fonds" loading="lazy"></button><figcaption>Besluit van het fonds</figcaption></figure>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Zelf een dossier inzien</h2>
+    <p>Deze scans komen uit het originele dossier bij het Nationaal Archief. De inventarisbeschrijvingen zijn openbaar; het volledige dossier is in te zien via
+    <a href="https://www.nationaalarchief.nl/onderzoeken/archief/2.19.364/invnr/3622" target="_blank" rel="noopener">toegang 2.19.364, inventarisnummer 3622</a>.
+    Elk puntje op de <a href="../">kaart</a> heeft zo'n dossier achter zich.</p>
+  </div>
+
+  <footer>
+    Voorbeelddossier uit het archief van het Carnegie Heldenfonds (Nationaal Archief, 2.19.364).
+    Onderdeel van een reeks archiefkaarten op <a href="https://alanmoss.nl/">alanmoss.nl</a>.
+  </footer>
+</div>
+
+<div class="lb" id="lb" aria-hidden="true">
+  <button class="lb-close" title="Sluiten (Esc)">×</button>
+  <button class="lb-prev" title="Vorige">‹</button>
+  <img id="lb-img" alt="">
+  <button class="lb-next" title="Volgende">›</button>
+  <div class="lb-cap"></div>
+</div>
+<script>
+(function(){
+  var lb=document.getElementById('lb'), img=document.getElementById('lb-img'), cap=lb.querySelector('.lb-cap');
+  var imgs=[], i=0, capText='';
+  function show(){ img.src=imgs[i]; cap.textContent=(imgs.length>1?('Pagina '+(i+1)+' van '+imgs.length+' · '):'')+capText;
+    var multi=imgs.length>1; lb.querySelector('.lb-prev').style.display=multi?'':'none'; lb.querySelector('.lb-next').style.display=multi?'':'none'; }
+  function open(el){ imgs=(el.getAttribute('data-imgs')||'').split(',').filter(Boolean); if(!imgs.length)return;
+    i=0; capText=el.getAttribute('data-cap')||''; show(); lb.classList.add('on'); document.body.style.overflow='hidden'; }
+  function close(){ lb.classList.remove('on'); document.body.style.overflow=''; img.src=''; }
+  document.querySelectorAll('.dscan').forEach(function(el){ el.addEventListener('click',function(){open(el);}); });
+  lb.querySelector('.lb-close').onclick=close;
+  lb.querySelector('.lb-prev').onclick=function(){ i=(i-1+imgs.length)%imgs.length; show(); };
+  lb.querySelector('.lb-next').onclick=function(){ i=(i+1)%imgs.length; show(); };
+  lb.addEventListener('click',function(e){ if(e.target===lb) close(); });
+  document.addEventListener('keydown',function(e){ if(!lb.classList.contains('on'))return;
+    if(e.key==='Escape')close(); else if(e.key==='ArrowLeft')lb.querySelector('.lb-prev').click(); else if(e.key==='ArrowRight')lb.querySelector('.lb-next').click(); });
+})();
+</script>
+</body>
+</html>
