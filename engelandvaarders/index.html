@@ -17,7 +17,7 @@
   #map{position:absolute;inset:0;background:#eef1f4}
   .leaflet-container{background:#dfe6ec}
   /* zwevend zijpaneel — Carnegie-stijl */
-  #side{position:absolute;top:14px;left:14px;bottom:14px;width:334px;background:rgba(255,255,255,.96);
+  #side{position:absolute;top:60px;left:14px;bottom:14px;width:334px;background:rgba(255,255,255,.96);
     border:1px solid var(--line);border-radius:14px;box-shadow:0 6px 24px rgba(0,0,0,.12);
     z-index:1000;display:flex;flex-direction:column;overflow:hidden}
   .shead{display:flex;align-items:center;gap:11px;padding:14px 16px 10px}
@@ -47,6 +47,47 @@
   .ck{display:flex;align-items:center;gap:8px;font-size:13px;padding:5px 0;cursor:pointer}
   .ck input{accent-color:var(--accent);width:15px;height:15px}
   .ck .n{margin-left:auto;font-variant-numeric:tabular-nums;color:var(--muted);font-size:12px}
+  .hint{position:relative;cursor:help;font-size:11px;font-weight:400;color:#9aa2ac}
+  .ck .hint{color:var(--muted)}
+  .grpdesc{font-size:11px;color:var(--muted);margin:0 0 8px;line-height:1.45}
+  .rdet{border-top:1px solid var(--line);margin:15px 0 0;padding-top:12px}
+  .rdet.sub{border-top:none;margin-top:6px;padding-top:0}
+  .rdet>summary{cursor:pointer;list-style:none;user-select:none;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700}
+  .rdet>summary::-webkit-details-marker{display:none}
+  .rdet.sub>summary{font-size:12.5px;text-transform:none;letter-spacing:normal;color:var(--accent);font-weight:600}
+  .rdet>summary::after{content:" ▸";color:#9aa2ac;font-weight:400}
+  .rdet[open]>summary::after{content:" ▾"}
+  .rdet[open]>summary{margin-bottom:7px}
+  .grpdesc{font-size:11px;color:var(--muted);line-height:1.45;margin:0 0 8px}
+  .hint:hover::after{content:attr(data-tip);position:absolute;left:0;top:150%;z-index:30;
+    width:220px;background:#1f2937;color:#fff;font-size:11px;font-weight:400;line-height:1.45;
+    padding:8px 10px;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,.3);
+    white-space:normal;text-transform:none;letter-spacing:normal}
+  .stop .sdate{color:var(--accent);font-variant-numeric:tabular-nums;font-size:11px;margin-left:5px}
+  .rgens{display:flex;flex-wrap:wrap;gap:5px;margin-top:2px}
+  .rgen{font-size:12px;background:#eef6f8;color:var(--accent);border:1px solid #d5e9ee;border-radius:20px;
+    padding:2px 10px;cursor:pointer;white-space:nowrap}
+  .rgen:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .rgmore{font-size:11.5px;color:var(--muted);align-self:center;padding:2px 4px}
+  .hlpmark{background:none;border:none}
+  .hlpdot{width:22px;height:22px;display:flex;align-items:center;justify-content:center;
+    background:var(--accent);color:#fff;border:2px solid #fff;border-radius:50%;
+    font-size:11px;font-weight:700;font-variant-numeric:tabular-nums;box-shadow:0 1px 5px rgba(0,0,0,.35)}
+  .hpop{font-size:13px;line-height:1.4;max-height:280px;overflow:auto}
+  .hph{font-weight:700;margin-bottom:4px}
+  .hph .hpc{color:var(--muted);font-weight:400;font-size:12px}
+  .hpr{padding:6px 0;border-top:1px solid var(--line)}
+  .hpr:first-of-type{border-top:none}
+  .hprol{margin-left:6px;font-size:11px;background:#eef6f8;color:var(--accent);border-radius:20px;padding:1px 8px;white-space:nowrap}
+  .hpm{font-size:11.5px;color:var(--muted);margin-top:2px}
+  .hpo{font-size:11.5px;color:#4b5563;margin-top:3px}
+  .hph2{font-weight:600;font-size:11.5px;color:var(--ink);margin-top:7px;margin-bottom:3px}
+  .sdays{color:var(--muted);font-size:10.5px;margin-left:6px;font-variant-numeric:tabular-nums}
+  .rgloc{color:var(--muted);font-weight:400;font-size:10.5px}
+  .rgen.hlp{background:#fff7ed;color:#b45309;border-color:#fcd9a8}
+  .rgen.hlp:hover{background:#d97706;color:#fff;border-color:#d97706}
+  .rgen:hover .rgloc{color:inherit;opacity:.85}
+  #modes button{font-size:12px;padding:7px 5px}
   .fld{font-size:13px;margin:6px 0}
   .fld label{display:block;color:var(--muted);font-size:11px;margin-bottom:3px}
   select{width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:8px;font-size:13px;background:#fff;color:var(--ink)}
@@ -133,6 +174,7 @@
   .animbtn:hover{background:var(--accent-dark)}
   .leaflet-tooltip.animlabel{background:#1f2937;color:#fff;border:none;border-radius:6px;font-size:11px;font-weight:600;padding:3px 8px;box-shadow:0 2px 8px rgba(0,0,0,.35)}
   .leaflet-tooltip.animlabel.leaflet-tooltip-top:before{border-top-color:#1f2937}
+  .leaflet-tooltip.animlabel .animdate{display:block;color:#7dd3e0;font-weight:600;font-size:10px;margin-top:1px}
   /* kamp-tooltip */
   .leaflet-tooltip.evtip{background:#1f2937;color:#fff;border:none;border-radius:8px;padding:7px 10px;
     font-size:12px;line-height:1.45;box-shadow:0 4px 14px rgba(0,0,0,.3)}
@@ -152,7 +194,7 @@
   #welcome .wf button{background:var(--accent);color:#fff;border:none;border-radius:9px;padding:10px 18px;font-size:14px;font-weight:600;cursor:pointer}
   #welcome .wf button:hover{background:var(--accent-dark)}
   @media(max-width:640px){
-    #side{left:8px;right:8px;top:8px;width:auto;bottom:auto;max-height:48%}
+    #side{left:8px;right:8px;top:52px;width:auto;bottom:auto;max-height:48%}
     body.detail-open #side{max-height:120px;overflow:hidden}
     #detail{width:auto;left:8px;right:8px;top:auto;bottom:8px;max-height:62%;border-radius:14px}
     #detail .db{max-height:none}
@@ -160,9 +202,23 @@
     body.playing #detail .db{display:none}
     body.playing #side{display:none}
   }
+  .ptabs{display:flex;gap:5px;background:rgba(255,255,255,.94);padding:5px;border-radius:12px;box-shadow:0 2px 14px rgba(0,0,0,.16);border:1px solid #e5e7eb;width:max-content;max-width:calc(100vw - 20px);overflow-x:auto;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  .ptabs::-webkit-scrollbar{display:none}
+  .ptabs a{padding:6px 8px;border-radius:7px;text-decoration:none;color:#5a6b74;font-size:12px;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:3px}
+  .ptabs a.on{background:#0e7490;color:#fff}
+  .ptabs a:not(.on):hover{background:#eef6f8;color:#0e7490}
+  .ptabs a.ext{color:#0e7490}
+  .ptabs-float{position:fixed;top:14px;left:14px;z-index:2000;backdrop-filter:blur(8px);width:334px;max-width:calc(100vw - 28px);justify-content:space-between;overflow:visible;padding:4px 6px}
+  .ptabs-top{margin:14px auto 4px}
+  @media(max-width:640px){.ptabs a{padding:6px 10px;font-size:12px}.ptabs-float{top:8px}}
+  .fbk{position:fixed;bottom:24px;right:14px;z-index:2000;font-size:12px;color:#0e7490;text-decoration:none;background:rgba(255,255,255,.94);border:1px solid rgba(0,0,0,.12);padding:6px 12px;border-radius:20px;box-shadow:0 1px 5px rgba(0,0,0,.14);backdrop-filter:blur(6px);white-space:nowrap}
+  .fbk:hover{background:#fff;border-color:#0e7490}
+  @media(max-width:640px){.fbk{bottom:18px;right:8px;font-size:11px;padding:5px 10px}}
 </style>
 </head>
 <body>
+<nav class="ptabs ptabs-float"><a href="index.html" class="on">🗺️ Kaart</a><a href="dashboard.html">📊 Inzichten</a><a href="over.html">ℹ️ Over</a><a href="https://archief.alanmoss.nl/" class="ext" title="Alle archiefprojecten">← Archief</a></nav>
+<a class="fbk" href="mailto:mossalan@gmail.com?subject=Engelandvaarders%3A%20feedback%20of%20bugmelding" title="Feedback of een fout melden">✉︎ Feedback</a>
 <div id="map"></div>
 <div id="blankscrim"><div class="bh">Begin met verkennen<span>zoek een persoon, of toon alle reizen — links in het paneel</span></div></div>
 <aside id="side">
@@ -172,13 +228,13 @@
       <div class="sub">1940–1945 · verzetsdeelnemers op weg naar Engeland</div></div>
   </div>
   <div id="count"></div>
-  <div class="modes" id="modes"><button data-mode="herkomst">Herkomst</button><button data-mode="routes" class="on">Routes</button><button data-mode="bestemming">Bestemmingen</button></div>
+  <div class="modes" id="modes"><button data-mode="herkomst">Herkomst</button><button data-mode="routes" class="on">Routes</button><button data-mode="bestemming">Bestemmingen</button><button data-mode="helpers">Helpers</button></div>
   <div id="searchwrap">
     <input id="search" type="text" placeholder="Zoek een persoon op naam…" autocomplete="off">
     <div id="results"></div>
   </div>
   <div class="scroll">
-    <div class="starthint" id="starthint"><button class="showallbtn" id="showall">Toon alle 2.101 reizen</button></div>
+    <div class="starthint" id="starthint"><button class="showallbtn" id="showall">Toon alle reizen</button></div>
     <div class="grp collapsed">
       <h2 class="ch">Hoofdroute<span class="chev">▾</span></h2>
       <div class="gbody" id="legend"></div>
@@ -194,16 +250,24 @@
         <div class="yearrow"><span id="yearval">1940 – 1945</span><span>vertrek</span></div>
       </div>
     </div>
-    <div class="grp">
+    <div class="grp collapsed">
+      <h2 class="ch">Categorieën<span class="chev">▾</span></h2>
+      <div class="gbody">
+        <p class="grpdesc">Naast de eigenlijke Engelandvaarders ook verwante groepen: afgevallen (wél vertrokken, niet in het VK aangekomen), twijfelgevallen en Indiëvaarders, als gestippelde lijnen.</p>
+        <label class="ck"><input type="checkbox" id="ckKern" checked> Engelandvaarders <span class="n" id="nKern"></span></label>
+        <label class="ck"><input type="checkbox" id="ckAfg" checked> Afgevallen <span class="n" id="nAfg"></span></label>
+        <label class="ck"><input type="checkbox" id="ckTwijfel" checked> Twijfelgevallen <span class="n" id="nTwijfel"></span></label>
+        <label class="ck"><input type="checkbox" id="ckIndie" checked> Indiëvaarders <span class="n" id="nIndie"></span></label>
+      </div>
+    </div>
+    <div class="grp collapsed">
       <h2 class="ch">Weergave<span class="chev">▾</span></h2>
       <div class="gbody">
         <label class="ck"><input type="checkbox" id="ckDetail" checked> Gedetailleerde routes <span class="n" id="nDetail"></span></label>
         <label class="ck"><input type="checkbox" id="ckDashed" checked> Herkomstlijnen (zonder detail) <span class="n" id="nDashed"></span></label>
       </div>
     </div>
-  </div>
-  <div class="sfoot"><a href="dashboard.html">Inzichten</a><a href="over.html">Over</a><a class="back" href="https://archief.alanmoss.nl/">Archiefkaarten ↩</a></div>
-</aside>
+  </div></aside>
 <div id="detail"><span class="close" onclick="hideDetail()">×</span><div class="dh"></div><div class="db"></div></div>
 <div id="welcome"><div class="box">
   <div class="wicon">⛵</div>
@@ -262,67 +326,105 @@ const labelsLayer=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labe
   subdomains:'abcd',maxZoom:12,pane:'labels'});
 
 const renderer = L.canvas({padding:.5, tolerance:8});  // ruimere klik-tolerantie voor dunne lijnen
-let PEOPLE=[], GEO={}, LINES=[];
-const state={solo:null,yearMin:1940,yearMax:1945,showDetail:true,showDashed:true,q:"",blank:true,focusId:null,mode:'routes'};
-let animLayer=null, animTimer=null, heatLayer=null, HEAT_N=0, locMarker=null;
+let PEOPLE=[], GEO={}, LINES=[], HELPERS=[], HELP_LAYER=null;
+const state={solo:null,yearMin:1940,yearMax:1945,showDetail:true,showDashed:true,showKern:true,showAfg:true,showTwijfel:true,showIndie:true,q:"",blank:true,focusId:null,mode:'routes'};
+function catOf(p){ const st=p.status||''; if(!st||st==='Engelandvaarder') return 'kern';
+  if(st==='twijfelgeval') return 'twijfel'; if(st==='Indiëvaarder') return 'indie'; return 'afg'; }
+function isRand(p){ return catOf(p)!=='kern'; }
+let animLayer=null, animTimer=null, heatLayer=null, HEAT_N=0, locMarker=null, lineClickAt=0;
+map.on('click',()=>{ if(Date.now()-lineClickAt<80) return;   // niet meteen sluiten na een lijn-klik
+  if(document.getElementById('detail').style.display==='block') hideDetail(); });
 function interact(){ state.blank=false; state.focusId=null; const s=document.getElementById('search'); if(s)s.classList.remove('glow'); }
 
 Promise.all([
-  fetch('people.json?v=5').then(r=>r.json()),
-  fetch('geocache.json?v=5').then(r=>r.json()),
-  fetch('woon_geocache.json?v=5').then(r=>r.ok?r.json():{}).catch(()=>({}))
-]).then(([people,geo,woon])=>{
-  PEOPLE=people; GEO=geo; WOON=woon||{};
+  fetch('people.json?v=14').then(r=>r.json()),
+  fetch('geocache.json?v=14').then(r=>r.json()),
+  fetch('woon_geocache.json?v=14').then(r=>r.ok?r.json():{}).catch(()=>({})),
+  fetch('helpers.json?v=14').then(r=>r.ok?r.json():[]).catch(()=>[])
+]).then(([people,geo,woon,helpers])=>{
+  PEOPLE=people; GEO=geo; WOON=woon||{}; HELPERS=helpers||[];
   buildLegend(); buildLines(); buildHeatSets(); wire(); apply();
-  let nd=0,nh=0; LINES.forEach(l=>l._dashed?nh++:nd++);
+  let nd=0,nh=0,cc={afg:0,twijfel:0,indie:0}; LINES.forEach(l=>{ if(l._cat!=='kern') cc[l._cat]++; else if(l._dashed) nh++; else nd++; });
+  document.getElementById('showall').textContent='Toon alle '+PEOPLE.length.toLocaleString('nl')+' reizen';
+  document.getElementById('nKern').textContent=nd+nh;
   document.getElementById('nDetail').textContent=nd;
   document.getElementById('nDashed').textContent=nh;
+  document.getElementById('nAfg').textContent=cc.afg;
+  document.getElementById('nTwijfel').textContent=cc.twijfel;
+  document.getElementById('nIndie').textContent=cc.indie;
   document.getElementById('search').classList.add('glow');   // nodig het zoeken uit
   const qp=new URLSearchParams(location.search);
-  if(qp.get('id')) setTimeout(()=>gotoPerson(qp.get('id')),200);
+  if(qp.get('id')){ const w=document.getElementById('welcome'); if(w) w.style.display='none';
+    setTimeout(()=>gotoPerson(qp.get('id')),200); }
+  if(qp.get('helpers')){ const w=document.getElementById('welcome'); if(w) w.style.display='none';
+    interact(); const hb=document.querySelector('#modes button[data-mode="helpers"]'); if(hb) hb.click(); }
+  { const md=qp.get('mode'); if(['herkomst','bestemming','helpers'].includes(md)){ const w=document.getElementById('welcome'); if(w) w.style.display='none';
+    interact(); const mb=document.querySelector('#modes button[data-mode="'+md+'"]'); if(mb) mb.click(); } }
+  if(qp.get('all')){ const w=document.getElementById('welcome'); if(w) w.style.display='none';
+    interact(); const sa=document.getElementById('showall'); if(sa) sa.click(); apply(); }
 });
 
 function coordOf(key){ const g=key&&GEO[key]; return g?[g.lat,g.lon]:null; }
+// schuif opeenvolgende lengtegraden naar de kortste weg, zodat een sprong over de Stille Oceaan
+// (bv. Japan → Hawaï) oostwaarts wordt getekend i.p.v. als rechte lijn rond de halve wereld
+function unwrapLng(cs){ if(!cs||cs.length<2) return cs;
+  const out=[[cs[0][0],cs[0][1]]];
+  for(let i=1;i<cs.length;i++){ let lng=cs[i][1]; const prev=out[i-1][1];
+    while(lng-prev>180) lng-=360; while(lng-prev<-180) lng+=360;
+    out.push([cs[i][0],lng]); }
+  return out; }
 function latlngsOf(p){ const out=[]; if(p.heeft_route){ for(const s of p.route){ const c=coordOf(s.key);
-  if(c) out.push({c,place:s.place,country:s.country,camp:s.camp}); } } return out; }
+  if(c) out.push({c,place:s.place,country:s.country,camp:s.camp,date:s.date}); } }
+  const uc=unwrapLng(out.map(o=>o.c)); out.forEach((o,i)=>o.c=uc[i]); return out; }
 function clearAnim(){ if(animTimer){clearInterval(animTimer);animTimer=null;}
   document.body.classList.remove('playing');
   if(animLayer){ map.removeLayer(animLayer); animLayer=null; apply(); } }  // apply() zet de andere reizen terug
 function animateRoute(id){
   const p=PEOPLE.find(x=>x.id===id); if(!p) return;
   const pts=latlngsOf(p); if(pts.length<2) return;
+  const lngs=pts.map(x=>x.c[1]); const spanLng=Math.max(...lngs)-Math.min(...lngs);
+  const follow=spanLng>170;   // reis omspant bijna de halve wereld (bv. Pacific): meelopen i.p.v. alles tegelijk tonen
   clearAnim();
   document.body.classList.add('playing');   // mobiel: detail inklappen tot kop, kaart vrij
   LINES.forEach(l=>{ if(map.hasLayer(l)) map.removeLayer(l); });   // verberg alle andere reizen
   animLayer=L.layerGroup().addTo(map);
   const col=ROUTE_COLORS[p.hoofdroute]||"#6b7280";
   const pad=window.innerWidth<=640?{paddingTopLeft:[20,20],paddingBottomRight:[20,90]}:{paddingTopLeft:[360,30],paddingBottomRight:[330,30]};
-  try{ map.fitBounds(L.latLngBounds(pts.map(x=>x.c)),pad); }catch(e){}
+  if(follow){ try{ map.setView(pts[0].c,4,{animate:false}); }catch(e){} }
+  else { try{ map.fitBounds(L.latLngBounds(pts.map(x=>x.c)),pad); }catch(e){} }
   const line=L.polyline([pts[0].c],{renderer,color:'#0e7490',weight:3,opacity:.95,interactive:false}).addTo(animLayer);
   const fixed=[pts[0].c]; let prevDot=null;
   const dropDot=pt=>{
     if(prevDot){ prevDot.setStyle({radius:4,fillColor:col,fillOpacity:.8,weight:1}); prevDot.closeTooltip(); }
     const d=L.circleMarker(pt.c,{renderer,radius:7,color:'#fff',weight:2,fillColor:'#0e7490',fillOpacity:1,interactive:false}).addTo(animLayer);
-    d.bindTooltip(`${esc(pt.place)}${pt.camp?' · '+esc(pt.camp):''}`,{permanent:true,direction:'top',className:'animlabel'}).openTooltip();
+    d.bindTooltip(`${esc(pt.place)}${pt.camp?' · '+esc(pt.camp):''}${pt.date?'<span class="animdate">'+nlDate(pt.date)+'</span>':''}`,{permanent:true,direction:'top',className:'animlabel'}).openTooltip();
     prevDot=d;
   };
   dropDot(pts[0]);
-  const segDur=Math.max(300,Math.min(900,9000/(pts.length-1)));
+  // segmentduur evenredig aan het aantal dagen tussen twee gedateerde stops
+  const dayGap=(a,b)=>{ if(!/^\d{4}-\d{2}-\d{2}$/.test(a||'')||!/^\d{4}-\d{2}-\d{2}$/.test(b||'')) return null;
+    const d=Math.round((new Date(b)-new Date(a))/864e5); return (d>=0&&d<=3000)?d:null; };
+  const durs=[]; for(let i=0;i<pts.length-1;i++){ const g=dayGap(pts[i].date,pts[i+1].date);
+    durs.push(360 + (g==null?220:Math.min(1700, g*4))); }   // langere verblijven = langer in beeld
+  const ends=[]; let acc=0; for(const d of durs){ acc+=d; ends.push(acc); } const total=acc||1;
   const start=Date.now(); let lastDot=0;
   animTimer=setInterval(()=>{
-    const prog=(Date.now()-start)/segDur;          // voortgang in segmenten (tijd-gebaseerd)
-    let seg=Math.floor(prog);
-    if(seg>=pts.length-1){                          // klaar
+    const el=Date.now()-start;
+    if(el>=total){                                  // klaar
       line.setLatLngs(pts.map(x=>x.c));
+      if(follow){ try{ map.panTo(pts[pts.length-1].c,{animate:false}); }catch(e){} }
       while(lastDot<pts.length-1){ lastDot++; dropDot(pts[lastDot]); }
       clearInterval(animTimer); animTimer=null;
       if(prevDot) prevDot.setStyle({radius:5,fillColor:col,fillOpacity:1,weight:1.5});
       line.setStyle({color:col,opacity:.85}); document.body.classList.remove('playing'); return;
     }
-    const t=prog-seg, A=pts[seg].c, B=pts[seg+1].c;
+    let seg=0; while(seg<ends.length && el>=ends[seg]) seg++;
+    const segStart=seg?ends[seg-1]:0, t=Math.min(1,(el-segStart)/durs[seg]);
+    const A=pts[seg].c, B=pts[seg+1].c;
     const path=pts.slice(0,seg+1).map(x=>x.c);
     path.push([A[0]+(B[0]-A[0])*t, A[1]+(B[1]-A[1])*t]);   // vloeiend groeiende rand
     line.setLatLngs(path);
+    if(follow){ map.panTo(path[path.length-1],{animate:false}); }   // kaart loopt mee met de kop
     while(lastDot<seg){ lastDot++; dropDot(pts[lastDot]); }
   },30);
 }
@@ -332,19 +434,22 @@ function buildLines(){
     let latlngs=[], dashed=false;
     if(p.heeft_route){
       for(const s of p.route){ const c=coordOf(s.key); if(c) latlngs.push(c); }
+      latlngs=unwrapLng(latlngs);
     }
     if(latlngs.length<2){
       // val terug op herkomst → VK stippellijn
       const o=coordOf(p.vertrek_key)||coordOf(p.geboorte_key);
       if(o){ latlngs=[o,UK_END]; dashed=true; } else { continue; }
     }
-    const col=ROUTE_COLORS[p.hoofdroute]||"#8a8f98";
-    const line=L.polyline(latlngs,{renderer, color:col, weight:dashed?1.4:2,
-      opacity:dashed?.5:.75, dashArray:dashed?"3 5":null});
-    const yr=(p.datumvertr||"").slice(0,4); line._p=p; line._dashed=dashed; line._year=/^\d{4}$/.test(yr)?+yr:0;
-    line.on('click',()=>showDetail(p));
+    const cat=catOf(p), rand=cat!=='kern';
+    const col=ROUTE_COLORS[p.hoofdroute]||"#8a8f98";   // altijd naar hoofdroute (ook randgevallen zichtbaar)
+    const baseW=rand?1.4:(dashed?1.4:2), baseO=rand?.5:(dashed?.5:.75);
+    const dash=rand?"5 5":(dashed?"3 5":null);         // randgevallen gestippeld ter onderscheiding
+    const line=L.polyline(latlngs,{renderer, color:col, weight:baseW, opacity:baseO, dashArray:dash});
+    const yr=(p.datumvertr||"").slice(0,4); line._p=p; line._dashed=dashed; line._cat=cat; line._year=/^\d{4}$/.test(yr)?+yr:0;
+    line.on('click',()=>{ lineClickAt=Date.now(); showDetail(p); });
     line.on('mouseover',()=>line.setStyle({weight:dashed?3:4,opacity:1}));
-    line.on('mouseout',()=>line.setStyle({weight:dashed?1.4:2,opacity:dashed?.5:.75}));
+    line.on('mouseout',()=>line.setStyle({weight:baseW,opacity:baseO}));
     LINES.push(line);
   }
 }
@@ -353,13 +458,13 @@ let WOON={}, HEAT_PLACES=[], HERK_PLACES=[], BEST_PLACES=[];
 function buildHeatSets(){
   // Herkomst — woonplaats
   const h={};
-  PEOPLE.forEach(p=>{ const w=(p.woonplaats||'').trim(); if(!w) return; const g=WOON[w]; if(!g) return;
+  PEOPLE.forEach(p=>{ if(isRand(p)) return; const w=(p.woonplaats||'').trim(); if(!w) return; const g=WOON[w]; if(!g) return;
     if(!h[w]) h[w]={c:[g.lat,g.lon],n:0,place:w.split(';')[0].replace(/\s*\(.*/,'').trim(),country:'',ids:[],_s:{}};
     h[w].n++; if(!h[w]._s[p.id]){h[w]._s[p.id]=1; h[w].ids.push(p.id);} });
   HERK_PLACES=Object.values(h).sort((a,b)=>b.n-a.n);
   // Bestemming — laatste gegeocodeerde stop van de reis
   const b={};
-  PEOPLE.forEach(p=>{ if(!p.heeft_route) return; let last=null;
+  PEOPLE.forEach(p=>{ if(isRand(p)||!p.heeft_route) return; let last=null;
     for(const s of p.route){ const c=coordOf(s.key); if(c) last={c,key:s.key,place:s.place,country:s.country}; }
     if(!last) return; const k=last.key;
     if(!b[k]) b[k]={c:last.c,n:0,place:last.place,country:last.country,ids:[],_s:{}};
@@ -367,12 +472,62 @@ function buildHeatSets(){
   BEST_PLACES=Object.values(b).sort((a,b2)=>b2.n-a.n);
 }
 function heatFor(mode){ return mode==='herkomst'?HERK_PLACES:BEST_PLACES; }
-function buildHeatLayer(places){
-  if(typeof L.heatLayer!=='function' || !places.length) return null;
+// ---- helpers-laag (passeurs, onderduikgevers, ontsnappingslijnen) ----
+function helperPopup(g){
+  let b=`<div class="hpop"><div class="hph">Helpers in ${esc(g.plaats)} <span class="hpc">(${esc(g.land)})</span></div>`;
+  for(const h of g.list){
+    b+=`<div class="hpr"><b>${esc(h.naam)}</b>`+
+       (h.rol?`<span class="hprol">${esc(h.rol)}</span>`:'')+
+       (h.beroep&&h.beroep!==h.rol?`<div class="hpm">${esc(h.beroep)}</div>`:'')+
+       (h.opmerkingen?`<div class="hpo">${esc(h.opmerkingen)}</div>`:'');
+    if(h.helped&&h.helped.length){ const show=h.helped.slice(0,8);
+      b+=`<div class="hph2">Hielp ${h.helped.length} Engelandvaarder${h.helped.length>1?'s':''}:</div><div class="rgens">`+
+         show.map(x=>`<span class="rgen" onclick="gotoPerson('${x.id}')">${esc(x.naam)}</span>`).join('')+
+         (h.helped.length>show.length?`<span class="rgmore">+${h.helped.length-show.length} meer</span>`:'')+`</div>`;
+    }
+    b+=`</div>`;
+  }
+  return b+`</div>`;
+}
+function gotoHelper(id){
+  const h=HELPERS.find(x=>x.id===id); if(!h) return;
+  const hb=document.querySelector('#modes button[data-mode="helpers"]');
+  if(hb && state.mode!=='helpers') hb.click();
+  const c=coordOf(h.key); if(!c) return;
+  map.setView(c, Math.max(map.getZoom(),7), {animate:false});
+  if(HELP_LAYER) HELP_LAYER.eachLayer(m=>{ const ll=m.getLatLng();
+    if(Math.abs(ll.lat-c[0])<1e-6 && Math.abs(ll.lng-c[1])<1e-6) m.openPopup(); });
+}
+function buildHelpers(){
+  const byKey={};
+  for(const h of HELPERS){ const c=coordOf(h.key); if(!c) continue;
+    (byKey[h.key]=byKey[h.key]||{c,plaats:h.plaats,land:h.land,list:[]}).list.push(h); }
+  HELP_LAYER=L.layerGroup();
+  for(const k in byKey){ const g=byKey[k], n=g.list.length;
+    const icon=L.divIcon({className:'hlpmark',iconSize:[24,24],iconAnchor:[12,12],popupAnchor:[0,-11],
+      html:`<div class="hlpdot">${n>1?n:''}</div>`});
+    L.marker(g.c,{icon}).bindPopup(()=>helperPopup(g),{maxWidth:280}).addTo(HELP_LAYER);
+  }
+}
+function toggleHelpers(on){
+  if(on){ if(!HELP_LAYER) buildHelpers(); HELP_LAYER.addTo(map); }
+  else if(HELP_LAYER) map.removeLayer(HELP_LAYER);
+}
+function buildHeatLayer(places){   // klikbare stippen i.p.v. hittekaart
+  if(!places.length) return null;
   const max=Math.max(1,...places.map(a=>a.n));
-  const data=places.map(a=>[a.c[0],a.c[1], 0.25+0.75*(a.n/max)]);
-  return L.heatLayer(data,{radius:20,blur:16,maxZoom:8,minOpacity:.3,
-    gradient:{0.2:'#2f6fb0',0.45:'#1f9e8f',0.65:'#eab308',0.82:'#d67a2e',1:'#b91c1c'}});
+  const col=state.mode==='herkomst'?'#2f6fb0':'#1f9e8f';
+  const g=L.layerGroup();
+  places.forEach(a=>{
+    const r=4+Math.sqrt(a.n/max)*13;
+    const m=L.circleMarker(a.c,{renderer,radius:r,color:'#fff',weight:1.5,fillColor:col,fillOpacity:.72});
+    m.bindTooltip(`<b>${esc(a.place)}</b><br>${a.n}×`,{className:'evtip',direction:'top'});
+    m.on('mouseover',()=>m.setStyle({fillOpacity:.95,weight:2}));
+    m.on('mouseout',()=>m.setStyle({fillOpacity:.72,weight:1.5}));
+    m.on('click',()=>{ lineClickAt=Date.now(); interact(); gotoPlace(a); });
+    g.addLayer(m);
+  });
+  return g;
 }
 function buildLegend(){
   const el=document.getElementById('legend');
@@ -410,23 +565,34 @@ function wire(){
   lo.oninput=function(e){years.call(lo,e);}; hi.oninput=function(e){years.call(hi,e);}; years();
   document.getElementById('ckDetail').onchange=e=>{interact();state.showDetail=e.target.checked;apply();};
   document.getElementById('ckDashed').onchange=e=>{interact();state.showDashed=e.target.checked;apply();};
+  document.getElementById('ckKern').onchange=e=>{interact();state.showKern=e.target.checked;apply();};
+  document.getElementById('ckAfg').onchange=e=>{interact();state.showAfg=e.target.checked;apply();};
+  document.getElementById('ckTwijfel').onchange=e=>{interact();state.showTwijfel=e.target.checked;apply();};
+  document.getElementById('ckIndie').onchange=e=>{interact();state.showIndie=e.target.checked;apply();};
   // modus-schakelaar Routes / Warmtekaart
   document.querySelectorAll('#modes button').forEach(b=>b.onclick=()=>{
     state.mode=b.dataset.mode; document.querySelectorAll('#modes button').forEach(x=>x.classList.toggle('on',x===b));
-    const heat=state.mode!=='routes';
-    document.querySelector('.scroll').style.display = heat?'none':'';
+    const isRoutes=state.mode==='routes', isHelpers=state.mode==='helpers', heat=!isRoutes&&!isHelpers;
+    document.querySelector('.scroll').style.display = isRoutes?'':'none';   // filters alleen in Routes
     const sb=document.getElementById('search');
     sb.value=''; state.q=''; document.getElementById('results').style.display='none';
-    sb.placeholder = heat ? 'Zoek een plaats op de kaart…' : 'Zoek een persoon op naam…';
+    sb.placeholder = isRoutes?'Zoek een persoon op naam…':(isHelpers?'Klik een helper voor details':'Zoek een plaats op de kaart…');
     if(locMarker){ map.removeLayer(locMarker); locMarker=null; }
     if(heatLayer){ map.removeLayer(heatLayer); heatLayer=null; }
+    toggleHelpers(isHelpers);
     if(heat){
       HEAT_PLACES=heatFor(state.mode); HEAT_N=HEAT_PLACES.length;
       if(state.mode==='herkomst') map.fitBounds([[50.7,3.2],[53.6,7.3]],{padding:[20,20],maxZoom:8,animate:false});
       else map.fitBounds([[49.5,-9],[60,4]],{padding:[20,20],maxZoom:6,animate:false});
       heatLayer=buildHeatLayer(HEAT_PLACES); if(heatLayer) heatLayer.addTo(map);
       labelsLayer.addTo(map);
+    } else if(isHelpers){
+      if(HELP_LAYER){ try{ const bb=[]; HELP_LAYER.eachLayer(m=>bb.push(m.getLatLng()));
+        if(bb.length) map.fitBounds(L.latLngBounds(bb).pad(0.1),{animate:false}); }catch(e){} }
+      labelsLayer.addTo(map);
     } else { map.removeLayer(labelsLayer); }
+    state.focusId=null; state.solo=null; syncLegend();
+    clearAnim();
     document.getElementById('detail').style.display='none'; document.body.classList.remove('detail-open');
     apply();
   });
@@ -500,6 +666,7 @@ function gotoPerson(id){
   map.removeLayer(labelsLayer);
   if(heatLayer){ map.removeLayer(heatLayer); heatLayer=null; }
   if(locMarker){ map.removeLayer(locMarker); locMarker=null; }
+  toggleHelpers(false);
   apply();
   if(line){ try{map.fitBounds(line.getBounds().pad(0.25));}catch(e){} }
   if(p) showDetail(p);
@@ -517,7 +684,11 @@ function apply(){
     else if(state.blank) ok=false;
     else {
       ok=true;
-      if(state.solo && p.hoofdroute!==state.solo) ok=false;
+      if(line._cat==='kern'&&!state.showKern) ok=false;
+      else if(line._cat==='afg'&&!state.showAfg) ok=false;
+      else if(line._cat==='twijfel'&&!state.showTwijfel) ok=false;
+      else if(line._cat==='indie'&&!state.showIndie) ok=false;
+      if(ok && state.solo && p.hoofdroute!==state.solo) ok=false;
       if(ok && line._year && (line._year<state.yearMin||line._year>state.yearMax)) ok=false;
       if(ok && state.q && !p.naam.toLowerCase().includes(state.q)) ok=false;
       if(ok && line._dashed && !state.showDashed) ok=false;
@@ -527,15 +698,19 @@ function apply(){
     else if(map.hasLayer(line)) map.removeLayer(line);
   }
   const c=document.getElementById('count');
-  if(heat){ const lbl=state.mode==='herkomst'?'woonplaatsen (herkomst)':'bestemmingen onderweg';
+  if(state.mode==='helpers'){ const n=HELPERS.filter(h=>coordOf(h.key)).length;
+    c.innerHTML=`<b>${n.toLocaleString('nl')}</b><span>helpers · passeurs & onderduik</span>`; }
+  else if(heat){ const lbl=state.mode==='herkomst'?'woonplaatsen (herkomst)':'bestemmingen onderweg';
     c.innerHTML=`<b>${HEAT_N.toLocaleString('nl')}</b><span>${lbl}</span>`; }
-  else if(state.blank && !state.focusId) c.innerHTML=`<b>${PEOPLE.length.toLocaleString('nl')}</b><span>reizen — kies wat je toont</span>`;
+  else if(state.blank && !state.focusId) c.innerHTML=`<b>${PEOPLE.length.toLocaleString('nl')}</b><span>reizen</span>`;
   else c.innerHTML=`<b>${shown.toLocaleString('nl')}</b><span>van ${PEOPLE.length.toLocaleString('nl')} reizen zichtbaar</span>`;
 }
-function esc(s){return (s||"").replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+function esc(s){return (s==null?"":""+s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
 function nlDate(s){ const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s||""); return m?`${+m[3]}-${+m[2]}-${m[1]}`:(s||""); }
 function godsLabel(g){ if(!g) return g; if(g.toLowerCase().trim()==='geen') return 'onbekend';
   return g.replace(/Israeliet/g,'Israëliet').replace(/\(Joods\)/g,'(joods)'); }
+function polLabel(p){ if(!p) return ''; const t=(''+p).trim();
+  if(!t||/^(geen|onbekend|—|-)$/i.test(t)) return ''; return t.replace(/;/g,', '); }
 function archiefNr(url){ const m=/\/archief\/([\d.]+)\//.exec(url||""); return m?m[1]:""; }
 function reisDagen(a,b){ if(!/^\d{4}-\d{2}-\d{2}$/.test(a||'')||!/^\d{4}-\d{2}-\d{2}$/.test(b||'')) return '';
   const d=Math.round((new Date(b)-new Date(a))/864e5); if(d<0||d>3000) return '';
@@ -553,7 +728,9 @@ function showDetail(p){
   if(p.heeft_route){
     stops="<ol>"+p.route.map(s=>{
       const fl=flag(s.country);
-      const loc=`${esc(s.place)}${fl?" "+fl:""}${s.country?` <span class="cn">(${esc(s.country)})</span>`:""}`;
+      const dt=s.date?`<span class="sdate">${nlDate(s.date)}</span>`:"";
+      const dur=(s.days!=null&&s.days>=1)?`<span class="sdays">${s.days===1?'1 dag':s.days+' dagen'}</span>`:"";
+      const loc=`${esc(s.place)}${fl?" "+fl:""}${s.country?` <span class="cn">(${esc(s.country)})</span>`:""}${dt}${dur}`;
       if(s.camp) return `<li><span class="stop kamp">${loc}<span class="ktag">${esc(s.camp)}</span></span></li>`;
       return `<li><span class="stop">${loc}</span></li>`;
     }).join("")+"</ol>";
@@ -570,11 +747,21 @@ function showDetail(p){
     playBtn+
     `<h3>Personalia</h3>`+
     kv("Geboortejaar", p.geboortejaar)+ kv("Geboorteplaats", p.geboorteplaats)+
+    kv("Overleden", nlDate(p.overlijdensdatum))+
     kv("Woonplaats", p.woonplaats)+ kv("Beroep", p.beroep)+ kv("Godsdienst", godsLabel(p.godsdienst))+
+    kv("Politiek", polLabel(p.politiek))+
     `<h3>Reis</h3>`+
     kv("Vertrek", [(p.land_vertrek&&p.land_vertrek!=='Nederland')?p.land_vertrek:null, nlDate(p.datumvertr)].filter(Boolean).join(", "))+
     kv("Aankomst", nlDate(p.datumaank))+ kv("Reisduur", reisDagen(p.datumvertr,p.datumaank))+
-    `<h3>Route</h3>`+ landenKv + (landenKv&&p.heeft_route?`<div class="rsep"></div>`:"") + stops+
+    `<h3>Route</h3>`+ landenKv +
+    (p.heeft_route
+      ? `<details class="rdet sub"><summary>Reisverloop, ${p.route.length} stops</summary>${stops}</details>`
+      : ((landenKv?`<div class="rsep"></div>`:"")+stops))+
+    ((p.reisgenoten&&p.reisgenoten.length)?`<details class="rdet"><summary>Reisgenoten (${p.reisgenoten.length})</summary><div class="rgens">`+
+      p.reisgenoten.slice(0,12).map(r=>`<span class="rgen" onclick="gotoPerson('${r.id}')">${esc(r.naam)}</span>`).join('')+
+      (p.reisgenoten.length>12?`<span class="rgmore">+${p.reisgenoten.length-12} meer</span>`:"")+`</div></details>`:"")+
+    ((p.geholpen_door&&p.geholpen_door.length)?`<details class="rdet"><summary>Geholpen door (${p.geholpen_door.length})</summary><div class="rgens">`+
+      p.geholpen_door.map(h=>`<span class="rgen hlp" onclick="gotoHelper('${h.id}')">${esc(h.naam)}${h.plaats?` <span class="rgloc">${esc(h.plaats)}</span>`:''}</span>`).join('')+`</div></details>`:"")+
     `<h3>Bron</h3>`+
     (p.record_link?`<div><a href="${esc(p.record_link)}" target="_blank" rel="noopener">Bekijk het record bij het Nationaal Archief →</a></div>`:"")+
     (p.na_link?`<div style="margin-top:6px"><a href="${esc(p.na_link)}" target="_blank" rel="noopener" style="font-size:12px;color:var(--muted)">Scan van het dossier${archiefNr(p.na_link)?` (${archiefNr(p.na_link)})`:''} →</a></div>`:"")+

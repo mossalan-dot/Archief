@@ -33,13 +33,23 @@
   .downloads a{font-size:14px;text-decoration:none;padding:9px 15px;border:1px solid var(--line);border-radius:9px;color:var(--accent);background:#fff;font-weight:500}
   .downloads a:hover{border-color:var(--accent);background:#f0fafc}
   @media(max-width:560px){header .subtitle{display:none}}
+  .ptabs{display:flex;gap:5px;background:rgba(255,255,255,.94);padding:5px;border-radius:12px;box-shadow:0 2px 14px rgba(0,0,0,.16);border:1px solid #e5e7eb;width:max-content;max-width:calc(100vw - 20px);overflow-x:auto;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  .ptabs::-webkit-scrollbar{display:none}
+  .ptabs a{padding:6px 8px;border-radius:7px;text-decoration:none;color:#5a6b74;font-size:12px;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:3px}
+  .ptabs a.on{background:#0e7490;color:#fff}
+  .ptabs a:not(.on):hover{background:#eef6f8;color:#0e7490}
+  .ptabs a.ext{color:#0e7490}
+  .ptabs-top{margin:14px auto 4px}
+  @media(max-width:640px){.ptabs a{padding:6px 10px;font-size:12px}}
 </style>
 </head>
 <body>
+<style>.fbk{position:fixed;bottom:14px;right:14px;z-index:2000;font-size:12px;color:#0e7490;text-decoration:none;background:rgba(255,255,255,.94);border:1px solid rgba(0,0,0,.12);padding:6px 12px;border-radius:20px;box-shadow:0 1px 5px rgba(0,0,0,.14);white-space:nowrap}.fbk:hover{background:#fff;border-color:#0e7490}@media(max-width:640px){.fbk{bottom:8px;right:8px;font-size:11px;padding:5px 10px}}</style>
+<nav class="ptabs ptabs-top"><a href="index.html">🗺️ Kaart</a><a href="dashboard.html">📊 Inzichten</a><a href="over.html" class="on">ℹ️ Over</a><a href="https://archief.alanmoss.nl/" class="ext">← Archiefprojecten</a></nav>
+<a class="fbk" href="mailto:mossalan@gmail.com?subject=Engelandvaarders%3A%20feedback%20of%20bugmelding" title="Feedback of een fout melden">✉︎ Feedback</a>
 <header><div class="wrap">
   <div class="hicon">⛵</div>
   <div><h1>Over deze kaart</h1><div class="subtitle">Reizen van de Engelandvaarders 1940–1945</div></div>
-  <div class="hnav"><a href="dashboard.html">Cijfers</a><a href="index.html">← naar de kaart</a></div>
 </div></header>
 <main>
   <div class="card">
@@ -48,41 +58,47 @@
 
   <div class="card">
     <h2>De bron</h2>
-    <p>De gegevens komen uit de index <a href="https://www.nationaalarchief.nl/onderzoeken/zoekhulpen/engelandvaarders-1940-1945" target="_blank" rel="noopener">Engelandvaarders 1940–1945</a> van het Nationaal Archief. Die index ontsluit 2.101 persoonsdossiers, met per persoon onder meer geboortegegevens, beroep, godsdienst, de gevolgde hoofdroute, de landen onderweg en — bij ruim de helft — een gedetailleerde reeks plaatsen die iemand aandeed.</p>
-    <p>Vanuit het detailvenster op de kaart is elk record met één klik te openen op de <b>recordpagina</b> in het Nationaal Archief, met daar ook de gedigitaliseerde verhoordossiers.</p>
+    <p>De basis is de index <a href="https://www.nationaalarchief.nl/onderzoeken/zoekhulpen/engelandvaarders-1940-1945" target="_blank" rel="noopener">Engelandvaarders 1940–1945</a> van het Nationaal Archief (2.101 persoonsdossiers). Die is voor deze kaart aangevuld met een <b>gecureerd totaaloverzicht</b> (WO2Net, 2026) dat per persoon veel meer vastlegt: de reis <b>per etappe met datums</b>, overlijdensdata, politieke richting, mede-reizigers en de <b>helpers</b> onderweg. In totaal worden nu <b>2.690 personen</b> getoond.</p>
+    <p>Vanuit het detailvenster is elk record met één klik te openen op de <b>recordpagina</b> of het gedigitaliseerde dossier bij het Nationaal Archief.</p>
   </div>
 
   <div class="card">
     <h2>Hoe de kaart werkt</h2>
     <ul>
-      <li>Elke lijn is de reis van één Engelandvaarder, <b>gekleurd naar hoofdroute</b> (noordelijk via Scandinavië, zuidelijk via Frankrijk en Spanje, via Zwitserland, over de Noordzee, oostelijk via de Sovjet-Unie, of overig).</li>
-      <li>Voor de ruim duizend records met een gedetailleerde route is de <b>volledige weg</b> getekend, stap voor stap.</li>
-      <li>Voor records zonder gedetailleerde route toont de kaart een <b>herkomstlijn</b> (stippellijn) van het land van vertrek naar het Verenigd Koninkrijk. Die zijn apart in of uit te schakelen.</li>
-      <li>In het detailvenster zien <b>kamp- en opvanglocaties</b> onderweg er anders uit dan gewone plaatsen; je kunt een reis ook <b>afspelen</b> als animatie.</li>
-      <li>Naast de routes zijn er <b>warmtekaarten</b> voor <b>herkomst</b> (woonplaats) en <b>bestemming</b> (aankomstplekken), met per plaats een doorklikbare lijst van personen.</li>
+      <li>Elke lijn is de reis van één persoon, <b>gekleurd naar hoofdroute</b> (noordelijk via Scandinavië, zuidelijk via Frankrijk en Spanje, via Zwitserland, over de Noordzee, oostelijk via de Sovjet-Unie, of overig).</li>
+      <li>Onder <b>Categorieën</b> staan naast de eigenlijke Engelandvaarders ook verwante groepen — <b>afgevallen</b> (wél vertrokken, maar niet in het VK aangekomen), <b>twijfelgevallen</b> en <b>Indiëvaarders</b> — als gestippelde lijnen, apart aan of uit te zetten.</li>
+      <li>Waar de bron etappes met datums geeft, toont het reisoverzicht per stop de <b>datum en de verblijfsduur</b>; zo worden lange wachttijden in interneringskampen zichtbaar. Een reis is ook als <b>animatie af te spelen</b>, op de echte tijdlijn.</li>
+      <li>Records zonder gedetailleerde route krijgen een <b>herkomstlijn</b> (stippellijn) van het land van vertrek naar het Verenigd Koninkrijk.</li>
+      <li>Naast <b>Routes</b> zijn er warmtekaarten voor <b>Herkomst</b> en <b>Bestemmingen</b>, en een aparte modus <b>Helpers</b>: passeurs, onderduikgevers en koeriers van ontsnappingslijnen. In het detailvenster staat per persoon <b>wie hem hielp</b>; bij een helper staat andersom <b>wie zij hielpen</b> — beide klikbaar.</li>
     </ul>
   </div>
 
   <div class="card">
     <h2>Databewerking</h2>
-    <p>De reeks plaatsen per persoon (bijvoorbeeld “Rotterdam – Berlijn – Hamburg – Oslo – Stockholm – Londen”) is automatisch uit de index geparsed en per plaats voorzien van coördinaten via <a href="https://nominatim.openstreetmap.org/" target="_blank" rel="noopener">Nominatim / OpenStreetMap</a>. In totaal gaat het om ongeveer 1.250 verschillende plaatsen. Waar de bron een plaatsnaam verkeerd spelde, is die waar mogelijk hersteld.</p>
+    <p>De reeks plaatsen per persoon (bijvoorbeeld “Rotterdam – Berlijn – Hamburg – Oslo – Stockholm – Londen”) is uit de bron geparsed en per plaats voorzien van coördinaten via <a href="https://nominatim.openstreetmap.org/" target="_blank" rel="noopener">Nominatim / OpenStreetMap</a> — ruim 1.400 verschillende plaatsen, waarvan circa 98% gelokaliseerd. Verkeerd gespelde of verouderde namen (zoals Nederlands-Indische plaatsen) zijn waar mogelijk hersteld. De koppeling tussen het aanvullende overzicht en de open index verloopt via het inventarisnummer en een genormaliseerde naam.</p>
+  </div>
+
+  <div class="card">
+    <h2>Selectie en privacy</h2>
+    <p>Wie al in de openbare index van het Nationaal Archief staat, blijft opgenomen. <b>Nieuwe</b> namen uit het aanvullende overzicht tonen we alleen wanneer er een overlijdensdatum bekend is óf de persoon vóór augustus 1916 (ruim honderd jaar geleden) is geboren — om mogelijk nog levende personen niet in beeld te brengen. Twee groepen laten we principieel weg: personen die als “politiek onbetrouwbaar” te boek stonden en NSB-leden. Helpers tonen we op hun publieke rol en operatielocatie, zonder privégegevens.</p>
   </div>
 
   <div class="card">
     <h2>Kanttekeningen</h2>
     <ul>
-      <li>Niet elk veld is bij ieder dossier ingevuld; getoonde aantallen en percentages betreffen alleen de ingevulde records.</li>
-      <li>Voor ongeveer 940 personen bevat de index geen gedetailleerde route. Hun reis is niet te reconstrueren en wordt als herkomstlijn getoond.</li>
+      <li>Niet elk veld is bij ieder dossier ingevuld; getoonde aantallen en percentages betreffen alleen de ingevulde records. Het cijferoverzicht (Inzichten) gaat over de eigenlijke Engelandvaarders.</li>
+      <li>Voor een deel van de personen bevat de bron geen gedetailleerde route; hun reis wordt als herkomstlijn getoond.</li>
+      <li>Namen van helpers en mede-reizigers komen deels uit lopende tekst en zijn zo goed mogelijk samengevoegd; een enkele naamvariant kan dubbel voorkomen.</li>
       <li>Landsgrenzen en -namen worden weergegeven naar de situatie van nu; onderweg passeerden reizigers landen die inmiddels anders heten (zoals de Sovjet-Unie of Brits-Indië).</li>
+      <li>De lijnen verbinden de plaatsen in de volgorde van de reis, maar de exact gevaren of gevlogen weg ertussen is niet bekend. Bij de lange oostelijke routes (via de Sovjet-Unie en Japan naar Amerika) wordt de oversteek van de Grote Oceaan <b>oostwaarts</b> getekend, als kortste voortgang rond de wereld; dat is een logische aanname, geen vastgelegde koers.</li>
     </ul>
   </div>
 
   <div class="card">
     <h2>Gegevens &amp; broncode</h2>
-    <p>De bewerkte dataset (2.101 records) en de volledige broncode van kaart en pijplijn zijn vrij te gebruiken.</p>
+    <p>De databestanden en de volledige broncode van kaart en pijplijn zijn vrij te gebruiken. De CSV bevat vooralsnog de openbare index <b>Engelandvaarders 1940–1945</b> (2.101 records).</p>
     <div class="downloads">
       <a href="engelandvaarders.csv" download>⬇️ Data (CSV)</a>
-      <a href="people.json" download="engelandvaarders.json">⬇️ Data (JSON)</a>
       <a href="https://github.com/mossalan-dot/Archief/tree/main/engelandvaarders" target="_blank" rel="noopener">💻 Broncode (GitHub)</a>
     </div>
   </div>

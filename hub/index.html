@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Archiefkaarten — Alan Moss</title>
-<meta name="description" content="Historische bronnen uit het Nationaal Archief, interactief in kaart gebracht: Carnegie Heldenfonds, Arbeidsinzet, VOC-opvarenden en Engelandvaarders.">
+<title>Archiefprojecten — Alan Moss</title>
+<meta name="description" content="Historische bronnen uit het Nationaal Archief, interactief ontsloten: de Filmkeuring 1928–1960, het Carnegie Heldenfonds en de Engelandvaarders.">
 <style>
   :root{--accent:#0e7490;--accent-dark:#155e75;--ink:#1f2937;--muted:#6b7280;--line:#e5e7eb;--card:#fff;--bg:#f6f7f5}
   *{box-sizing:border-box}
@@ -19,6 +19,9 @@
   .htop .back{margin-left:auto;font-size:13px;color:var(--accent);text-decoration:none;white-space:nowrap;
     border:1px solid var(--line);background:#fff;padding:8px 14px;border-radius:9px}
   .htop .back:hover{border-color:var(--accent);background:#f0fafc}
+  .hactions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+  .hbtn{font-size:13px;color:var(--accent);text-decoration:none;white-space:nowrap;border:1px solid var(--line);background:#fff;padding:8px 14px;border-radius:9px}
+  .hbtn:hover{border-color:var(--accent);background:#f0fafc}
   .intro{max-width:1080px;margin:16px auto 0;padding:0 24px;font-size:15.5px;color:#374151}
   .intro p{margin:0;max-width:76ch}
   main{max-width:1080px;margin:0 auto;padding:24px 24px 60px}
@@ -51,19 +54,32 @@
 <body>
 <header><div class="wrap htop">
   <div class="hicon">🗺️</div>
-  <div><h1>Archiefkaarten</h1><div class="sub">Historische bronnen uit het Nationaal Archief, interactief in kaart</div></div>
-  <a class="back" href="https://alanmoss.nl/">alanmoss.nl →</a>
+  <div><h1>Archiefprojecten</h1><div class="sub">Historische bronnen uit het Nationaal Archief, interactief ontsloten</div></div>
+  <div class="hactions">
+    <a class="hbtn" href="mailto:mossalan@gmail.com?subject=Archiefprojecten%3A%20feedback%20of%20bugmelding">✉️ Feedback</a>
+    <a class="hbtn" href="https://alanmoss.nl/">alanmoss.nl →</a>
+  </div>
 </div></header>
-<p class="intro">Vier grote archiefcollecties, geografisch ontsloten: van reddingsdaden en dwangarbeid tot de opvarenden van de VOC en de Engelandvaarders van de Tweede Wereldoorlog. Klik een onderwerp om de kaart te openen.</p>
+<p class="intro">Drie archiefcollecties, interactief ontsloten: van reddingsdaden tot de Engelandvaarders en de filmkeuring van 1928–1960. Klik een onderwerp om te openen.</p>
 <main>
   <div class="grid">
+
+    <a class="mapcard" href="https://filmkeuring.alanmoss.nl/">
+      <div class="thumb" style="background-image:url(filmkeuring.jpg)"><span class="count">± 48.500 records</span></div>
+      <div class="cbody">
+        <div class="ctop"><span class="ceyebrow">Filmkeuring · 1928–1960</span><span class="status done">Voltooid</span></div>
+        <h2>Filmkeuring</h2>
+        <p>Alle 48.499 keuringsrapporten van de Centrale Commissie voor de Filmkeuring: verboden films, coupures en leeftijdsoordelen, verrijkt met IMDb-scores, posters en Wikidata.</p>
+        <div class="cfoot"><span class="src">Nationaal Archief · NT00402</span><span class="cta">Bekijk →</span></div>
+      </div>
+    </a>
 
     <a class="mapcard" href="https://engelandvaarders.alanmoss.nl/">
       <div class="thumb" style="background-image:url(engelandvaarders.jpg)"><span class="count">± 2.100 records</span></div>
       <div class="cbody">
         <div class="ctop"><span class="ceyebrow">Verzet · 1940–1945</span><span class="status done">Voltooid</span></div>
         <h2>Engelandvaarders</h2>
-        <p>De reizen van ruim tweeduizend verzetsdeelnemers die tijdens de bezetting Engeland wisten te bereiken — met routes, herkomst, bestemmingen en reisanimatie.</p>
+        <p>De reizen van ruim tweeduizend verzetsdeelnemers die tijdens de bezetting Engeland wisten te bereiken, met routes, herkomst, bestemmingen en reisanimatie.</p>
         <div class="cfoot"><span class="src">Nationaal Archief · NT00464</span><span class="cta">Open de kaart →</span></div>
       </div>
     </a>
@@ -78,25 +94,7 @@
       </div>
     </a>
 
-    <a class="mapcard wip" href="https://opvarenden.alanmoss.nl/">
-      <div class="thumb" style="background-image:url(opvarenden.jpg)"><span class="count">± 774.000 records</span></div>
-      <div class="cbody">
-        <div class="ctop"><span class="ceyebrow">VOC · 1633–1795</span><span class="status wip">In bewerking</span></div>
-        <h2>VOC-opvarenden</h2>
-        <p>De herkomst van honderdduizenden bemanningsleden en soldaten in dienst van de VOC, met afloop van de reis en rang.</p>
-        <div class="cfoot"><span class="src">Nationaal Archief · NT00444</span><span class="cta">Open de kaart →</span></div>
-      </div>
-    </a>
 
-    <a class="mapcard wip" href="https://arbeidsinzet.alanmoss.nl/">
-      <div class="thumb" style="background-image:url(arbeidsinzet.jpg)"><span class="count">± 850.000 records</span></div>
-      <div class="cbody">
-        <div class="ctop"><span class="ceyebrow">Dwangarbeid · 1940–1945</span><span class="status wip">In bewerking</span></div>
-        <h2>Arbeidsinzet</h2>
-        <p>Nederlanders die tijdens de bezetting in Duitsland tewerk werden gesteld — van herkomstplaats naar de Kreis waar zij belandden.</p>
-        <div class="cfoot"><span class="src">Nationaal Archief · 2.19.323</span><span class="cta">Open de kaart →</span></div>
-      </div>
-    </a>
 
   </div>
 </main>

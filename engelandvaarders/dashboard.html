@@ -127,16 +127,26 @@
   .fdots i.on{background:var(--gold);width:18px;border-radius:4px}
   @media(max-width:860px){.finds{padding:16px 14px}.finds .navb button{display:none}.find{padding:16px 16px;gap:12px}.find .femoji{font-size:30px}}
   @media(max-width:860px){.card.w8,.card.w6,.card.w4{grid-column:span 12}.bar{grid-template-columns:120px 1fr 46px}}
+  .ptabs{display:flex;gap:5px;background:rgba(255,255,255,.94);padding:5px;border-radius:12px;box-shadow:0 2px 14px rgba(0,0,0,.16);border:1px solid #e5e7eb;width:max-content;max-width:calc(100vw - 20px);overflow-x:auto;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  .ptabs::-webkit-scrollbar{display:none}
+  .ptabs a{padding:6px 8px;border-radius:7px;text-decoration:none;color:#5a6b74;font-size:12px;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:3px}
+  .ptabs a.on{background:#0e7490;color:#fff}
+  .ptabs a:not(.on):hover{background:#eef6f8;color:#0e7490}
+  .ptabs a.ext{color:#0e7490}
+  .ptabs-top{margin:14px auto 4px}
+  @media(max-width:640px){.ptabs a{padding:6px 10px;font-size:12px}}
 </style>
 </head>
 <body>
+<style>.fbk{position:fixed;bottom:14px;right:14px;z-index:2000;font-size:12px;color:#0e7490;text-decoration:none;background:rgba(255,255,255,.94);border:1px solid rgba(0,0,0,.12);padding:6px 12px;border-radius:20px;box-shadow:0 1px 5px rgba(0,0,0,.14);white-space:nowrap}.fbk:hover{background:#fff;border-color:#0e7490}@media(max-width:640px){.fbk{bottom:8px;right:8px;font-size:11px;padding:5px 10px}}</style>
+<nav class="ptabs ptabs-top"><a href="index.html">🗺️ Kaart</a><a href="dashboard.html" class="on">📊 Inzichten</a><a href="over.html">ℹ️ Over</a><a href="https://archief.alanmoss.nl/" class="ext">← Archiefprojecten</a></nav>
+<a class="fbk" href="mailto:mossalan@gmail.com?subject=Engelandvaarders%3A%20feedback%20of%20bugmelding" title="Feedback of een fout melden">✉︎ Feedback</a>
 <header><div class="wrap">
   <div class="hicon">⛵</div>
   <div class="htext">
     <h1>Engelandvaarders in cijfers</h1>
     <div class="subtitle">Analyse van 2.101 dossiers · index Engelandvaarders · Nationaal Archief · 1940–1945</div>
   </div>
-  <div class="hnav"><a href="over.html">ⓘ Over</a><a href="index.html">← naar de kaart</a></div>
 </div></header>
 <main>
   <p class="intro">Wie waren de ruim tweeduizend Nederlandse verzetsdeelnemers die tussen 1940 en 1945 Engeland wisten te bereiken? Uit de index Engelandvaarders van het Nationaal Archief is per persoon de <b>route</b>, <b>herkomst</b>, <b>leeftijd</b>, <b>beroep</b> en <b>godsdienst</b> af te leiden — bijna vijf jaar oorlogsgeschiedenis in cijfers.</p>
@@ -153,7 +163,10 @@
         <div class="toggle" id="vtoggle"><button data-m="jaar" class="on">Per jaar</button><button data-m="maand">Per maand</button></div></div>
       <div class="yearchart" id="yearchart"></div><div class="legend" id="ylegend"></div></div>
     <div class="card w4"><h2>Hoofdroute</h2><div class="sub">welke weg naar Engeland</div><div class="bars" id="routechart"></div></div>
-    <div class="card w6"><h2>Land van vertrek <span class="qmark" data-tip="Verreweg de meeste Engelandvaarders vertrokken vanuit Nederland (1.993). Om de overige landen zichtbaar te maken is Nederland hier weggelaten.">?</span></h2><div class="sub">overige landen van vertrek — Nederland (1.993) weggelaten</div><div class="bars" id="landchart"></div></div>
+    <div class="card w6">
+      <div class="cardhead"><div><h2>Land van vertrek <span class="qmark" data-tip="Verreweg de meeste Engelandvaarders vertrokken vanuit Nederland; standaard is Nederland weggelaten om de overige landen zichtbaar te maken. Wissel met de knop rechts.">?</span></h2><div class="sub">landen van vertrek</div></div>
+        <div class="toggle" id="ltoggle"><button data-m="zonder" class="on">Zonder NL</button><button data-m="met">Met NL</button></div></div>
+      <div class="bars" id="landchart"></div></div>
     <div class="card w6">
       <div class="cardhead"><div><h2 id="herktitel">Herkomst — steden</h2><div class="sub" id="herksub">top 15 · woonplaats bij vertrek</div></div>
         <div class="toggle" id="htoggle"><button data-m="stad" class="on">Stad</button><button data-m="prov">Provincie</button></div></div>
@@ -161,6 +174,8 @@
     <div class="card w6"><h2>Leeftijd bij vertrek</h2><div class="sub">per leeftijdsjaar, berekend uit geboorte- en vertrekjaar</div><div class="vchart" id="leeftijdchart"></div></div>
     <div class="card w6"><h2>Meest genoemde beroepen <span class="qmark" data-tip="Militaire rangen (luitenant, sergeant, marinier, adelborst, cadet, …) zijn samengevoegd tot ‘militair’; koopvaardij en visserij blijven apart. Sommigen gaven meerdere beroepen op (in de bron gescheiden door een puntkomma); elk beroep telt apart mee.">?</span></h2><div class="sub">top 15 · beroep bij vertrek</div><div class="bars" id="beroepchart"></div></div>
     <div class="card w6"><h2>Godsdienst</h2><div class="sub">opgegeven geloof, samengevoegd</div><div class="bars" id="godschart"></div></div>
+    <div class="card w6"><h2>Politieke richting <span class="qmark" data-tip="Slechts een minderheid gaf een politieke voorkeur op. Wie meerdere richtingen noemde, telt bij elke mee. Percentages zijn ten opzichte van wie een richting opgaf.">?</span></h2><div class="sub">opgegeven voorkeur — alleen wie er een noemde</div><div class="bars" id="polchart"></div></div>
+    <div class="card w6"><h2>Meest genoemde helpers <span class="qmark" data-tip="Passeurs, onderduikgevers en koeriers van ontsnappingslijnen, geordend naar het aantal Engelandvaarders dat volgens de bron door hen werd geholpen. Percentages zijn ten opzichte van alle Engelandvaarders bij wie een helper is genoteerd.">?</span></h2><div class="sub">aantal geholpen Engelandvaarders</div><div class="bars" id="helperchart"></div></div>
     <div class="card w6"><h2>Reisduur</h2><div class="sub">tijd tussen vertrek en aankomst in Engeland</div><div class="bars" id="duurchart"></div></div>
     <div class="card w6">
       <div class="cardhead"><div><h2><span id="plaatstitel">Meest aangedane plaatsen</span> <span class="qmark" data-tip="Gebaseerd op de reizen met een gedetailleerde route in het archief (ca. 1.158). Reizen die alleen als herkomstlijn bekend zijn, tellen hier niet mee.">?</span></h2><div class="sub" id="plaatssub">top 20 · uit de gedetailleerde routes</div></div>
@@ -190,11 +205,18 @@ function chartTip(cardEl, n, note){
 }
 function setSub(chartId, text, n, note){ const c=document.getElementById(chartId).closest('.card'); const s=c.querySelector('.sub'); if(s) s.textContent=text; if(n!=null) chartTip(c,n,note); }
 
-fetch('people.json?v=5').then(r=>r.json()).then(build);
+let HELPERS=[];
+Promise.all([
+  fetch('people.json?v=14').then(r=>r.json()),
+  fetch('helpers.json?v=14').then(r=>r.ok?r.json():[]).catch(()=>[])
+]).then(([P,H])=>{ HELPERS=H||[]; build(P); });
 
 function build(P){
+  P=P.filter(p=>!p.status || p.status==='Engelandvaarder');   // kern-Engelandvaarders (randgevallen buiten de cijfers)
   DATA=P;
   const N=P.length;
+  const stEl=document.querySelector('.subtitle');
+  if(stEl) stEl.textContent=`Analyse van ${N.toLocaleString('nl')} Engelandvaarders · index Engelandvaarders · Nationaal Archief · 1940–1945`;
   const vrouw=P.filter(p=>p.geslacht==='vrouw').length;
   const metroute=P.filter(p=>p.heeft_route).length;
   const MND=['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'];
@@ -222,10 +244,8 @@ function build(P){
   bars('routechart', ROUTE_ORDER.filter(r=>rc[r]).map(r=>[r,rc[r],RC[r]]), N);
   setSub('routechart', `welke weg naar Engeland`, N);
 
-  // Land van vertrek — Nederland weggelaten (dwarsboomt de rest)
-  const lc={}; P.forEach(p=>{const l=p.land_vertrek||'onbekend'; if(l==='Nederland')return; lc[l]=(lc[l]||0)+1;});
-  bars('landchart', topN(lc,8), N);
-  setSub('landchart', `overige landen — Nederland (1.993) weggelaten`, N);
+  // Land van vertrek — toggle met/zonder Nederland; 'onbekend' altijd onderaan
+  drawLand(P);
 
   // Leeftijd bij vertrek — per leeftijdsjaar (verticaal)
   const ageCount={}; agesAll.forEach(a=>ageCount[a]=(ageCount[a]||0)+1);
@@ -254,6 +274,20 @@ function build(P){
   const nGods=P.filter(p=>p.godsdienst&&p.godsdienst.trim()).length;
   bars('godschart', gtop, nGods);
   setSub('godschart', `opgegeven geloof, samengevoegd`, nGods);
+
+  // Politieke richting — alleen wie een voorkeur opgaf (kan meerdere zijn, ';'-gescheiden)
+  const poc={}; P.forEach(p=>{const t=(p.politiek||'').trim(); if(!t||/^(geen|onbekend|—|-)$/i.test(t))return;
+    t.split(';').forEach(x=>{x=x.trim(); if(x) poc[x]=(poc[x]||0)+1;});});
+  const nPol=P.filter(p=>{const t=(p.politiek||'').trim(); return t&&!/^(geen|onbekend|—|-)$/i.test(t);}).length;
+  bars('polchart', topN(poc,10), nPol);
+  setSub('polchart', `opgegeven voorkeur — alleen wie er een noemde`, nPol);
+
+  // Meest genoemde helpers (passeurs, onderduikgevers, ontsnappingslijnen)
+  const nGeh=P.filter(p=>p.geholpen_door&&p.geholpen_door.length).length;
+  const hrows=(HELPERS||[]).filter(h=>h.n>0).sort((a,b)=>b.n-a.n).slice(0,12)
+    .map(h=>[h.naam+(h.plaats?` · ${h.plaats}`:''), h.n]);
+  bars('helperchart', hrows, nGeh);
+  setSub('helperchart', `aantal Engelandvaarders dat zij hielpen`, nGeh);
 
   // Reisduur
   const durs=[]; P.forEach(p=>{const d1=pd(p.datumvertr), d2=pd(p.datumaank);
@@ -289,7 +323,18 @@ let hMode='stad';
 function setupHerkomst(P){
   document.querySelectorAll('#htoggle button').forEach(b=>b.onclick=()=>{ hMode=b.dataset.m;
     document.querySelectorAll('#htoggle button').forEach(x=>x.classList.toggle('on',x===b)); drawHerkomst(P); });
+  document.querySelectorAll('#ltoggle button').forEach(b=>b.onclick=()=>{ lMode=b.dataset.m;
+    document.querySelectorAll('#ltoggle button').forEach(x=>x.classList.toggle('on',x===b)); drawLand(P); });
   drawHerkomst(P);
+}
+let lMode='zonder';
+function drawLand(P){
+  const lc={}; P.forEach(p=>{ const l=p.land_vertrek||'onbekend'; if(lMode==='zonder'&&l==='Nederland')return; lc[l]=(lc[l]||0)+1; });
+  let ent=Object.entries(lc); const onb=ent.filter(([k])=>k==='onbekend');
+  ent=ent.filter(([k])=>k!=='onbekend').sort((a,b)=>b[1]-a[1]).slice(0,8).concat(onb);
+  bars('landchart', ent, P.length);
+  const nl=P.filter(p=>(p.land_vertrek||'')==='Nederland').length;
+  setSub('landchart', lMode==='zonder'?`overige landen — Nederland (${nl.toLocaleString('nl')}) weggelaten`:`alle landen van vertrek`, P.length);
 }
 function drawHerkomst(P){
   const denom=P.filter(p=>p.woonplaats && p.woonplaats.trim()).length;
