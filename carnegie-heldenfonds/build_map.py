@@ -329,6 +329,7 @@ TPL = r"""<!doctype html>
     </details>
     <div class="foot" style="justify-content:space-between">
       <a href="./stats" style="font-weight:700">📊 Inzichten &amp; statistiek</a>
+      <a href="./dossier" style="color:#6b7280">📄 Voorbeelddossier</a>
       <a href="./over" style="color:#6b7280">ℹ️ Over</a>
     </div>
   </div>

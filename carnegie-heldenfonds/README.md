@@ -6,6 +6,7 @@ Elke beloonde redding is met behulp van AI uit de dossierbeschrijvingen gestruct
 
 - 🗺️ **Kaart:** <https://grisburgh.nl/carnegie>
 - 📊 **Inzichten & statistiek:** <https://grisburgh.nl/carnegie/stats>
+- 📄 **Voorbeelddossier (een dossier van dichtbij):** <https://grisburgh.nl/carnegie/dossier>
 - ℹ️ **Over / verantwoording:** <https://grisburgh.nl/carnegie/over>
 - 📄 **Data (download):** <https://grisburgh.nl/carnegie/dossiers.csv> · <https://grisburgh.nl/carnegie/dossiers.json>
 
@@ -34,6 +35,7 @@ Elke stap is een los, reproduceerbaar script (`pijplijn/`):
 | `export.py` | `dossiers.csv` + `dossiers.json` (incl. categorie, afloop, geslacht, coördinaten, NA- en Delpher-URL). |
 | `build_map.py` | Genereert de self-contained kaart-HTML (Leaflet + markercluster). |
 | `build_stats.py` | Genereert het dashboard-HTML (Chart.js). |
+| `build_dossier.py` | Genereert de self-contained **voorbeelddossier**-pagina (`dossier.html`): één compleet dossier (inv.nr. 3622) van dichtbij, met de scans in `dossier/` als data-URI ingesloten en per documentsoort een duiding + transcriptie. |
 
 Reproduceren: `python3 parse.py && python3 geocode.py && python3 geocode_detail.py && python3 stats.py && python3 export.py && python3 build_map.py kaart.html && python3 build_stats.py`.
 

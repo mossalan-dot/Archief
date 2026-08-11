@@ -130,7 +130,8 @@ HTML = r"""<!doctype html>
       <h1>Carnegie Heldenfonds — inzichten</h1>
       <p class="sub">Analyse van __TOT__ dossiers · inventaris 2.19.364 · __Y0__–__Y1__</p>
     </div>
-    <a class="back" href="../over" style="margin-left:auto">ℹ️ Over</a>
+    <a class="back" href="../dossier" style="margin-left:auto">📄 Voorbeelddossier</a>
+    <a class="back" href="../over">ℹ️ Over</a>
     <a class="back" href="../">← naar de kaart</a>
   </header>
 
@@ -162,6 +163,17 @@ HTML = r"""<!doctype html>
     <div class="tile"><div class="n">__VRPCT__%</div><div class="l">van de redders vrouw <span style="opacity:.7">(schatting)</span></div></div>
     <div class="tile"><div class="n">__MEER__%</div><div class="l">met meerdere redders</div></div>
   </div>
+
+  <a href="../dossier" style="display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit;
+    background:linear-gradient(135deg,#faf6ea,#f6efe0);border:1px solid #ece0c8;border-radius:16px;
+    padding:14px 18px;margin:0 0 8px;box-shadow:var(--shadow)">
+    <span style="font-size:30px;line-height:1;flex:none">📄</span>
+    <span style="flex:1;min-width:0">
+      <span style="display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#a07d3c">Een dossier van dichtbij</span>
+      <span style="display:block;font-size:14.5px;color:#3a3320;line-height:1.45;margin-top:2px">Wat zit er achter één regel? Bekijk een <b>compleet voorbeelddossier</b> — de ijsredding op de Oude Waal (1933) — met de verschillende soorten documenten toegelicht.</span>
+    </span>
+    <span style="flex:none;font-weight:600;color:var(--accent);font-size:13.5px;white-space:nowrap">Bekijk →</span>
+  </a>
 
   <div class="hlsec">
     <div class="lbl2">Bijzondere gevallen</div>
