@@ -39,6 +39,7 @@ ALIAS = {
     "Wychen": "Wijchen",                 # -> Gelderland (was Polen)
     "Camp": "Bergen, Noord-Holland",     # "Camp (Bergen)" Noordzee (was Texas)
     "Snek": "Sneek",                     # bron-typfout
+    "Monnikendam": "Monnikendam, Noord-Holland",  # stad in Waterland (was: city_gate 'Monnikendam' te Amersfoort)
     # bron-/OCR-typefouten -> juiste spelling
     "'s-Gravenhagen": "'s-Gravenhage", "'s-Gravenhag": "'s-Gravenhage",
     "Herenveen": "Heerenveen", "Veendendaal": "Veenendaal", "Eindhoen": "Eindhoven",
