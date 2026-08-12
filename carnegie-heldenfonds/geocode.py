@@ -60,12 +60,23 @@ ALIAS = {
     "Dantumadeel": "Damwoude", "Datumadeel": "Damwoude", "Hennaarderadeel": "Wommels",
     "Achtkaspelen": "Buitenpost", "Franekeradeel": "Franeker", "Zwollerkerspel": "Zwolle",
     "Bellingwedde": "Wedde",
+    # plaatsnaam matchte op gelijknamige straat/zaak in verkeerde gemeente -> juiste plaats/hoofdplaats
+    "Groenloo": "Groenlo", "Lemsterland": "Lemmer", "Wieringermeer": "Wieringerwerf",
+    "Wijde Wormer": "Wijdewormer", "Gaasterland": "Balk, Friesland", "Kollumerland": "Kollum",
+    "Haskerland": "Joure", "Alkemade": "Roelofarendsveen",
+    "Hardinxveld": "Hardinxveld-Giessendam", "Driebergen": "Driebergen-Rijsenburg",
 }
 # buitenland-aliassen: gecodeerd met abroad=True (niet NL-begrensd)
 ALIAS_ABROAD = {
     "Norresunby": "Nørresundby, Danmark", "Tandjong Priok": "Tanjung Priok, Jakarta",
     "Tjipatoedjah": "Cipatujah, Indonesia", "Campos de Jordao in Brazilië": "Campos do Jordão, Brazil",
     "Flambourough Head": "Flamborough Head, England", "Haiming Titol": "Haiming, Tirol",
+    # buitenlandse reddingsplaatsen die als gelijknamige NL-straat/zaak werden gematcht
+    "Bandoeng": "Bandung, Indonesia", "Soerabaja": "Surabaya, Indonesia",
+    "Sabang": "Sabang, Aceh, Indonesia", "Cebu": "Cebu City, Philippines",
+    "Cairo": "Cairo, Egypt", "Malaga": "Malaga, Spain",
+    "Las Palmas": "Las Palmas de Gran Canaria, Spain", "Newcastle": "Newcastle upon Tyne, United Kingdom",
+    "Düren": "Düren, Germany", "Brünen": "Brünen, Hamminkeln, Germany", "Keeken": "Keeken, Kleve, Germany",
 }
 # European-NL bounding box so nl-queries never return Caribbean "Nederland" (Curaçao etc.)
 NL_VIEWBOX = "3.2,53.7,7.4,50.6"
