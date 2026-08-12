@@ -22,7 +22,7 @@ for r in recs:
 
 # plaatsen die we bewust NIET plotten: NL-begrensde geocoder matcht ze fout
 # (St. Lucia = piloot boven zee, geen Brabants gehucht) -> geforceerd op None, nooit retryen
-SKIP = {"St. Lucia"}
+SKIP = {"St. Lucia", "Griekenland", "Gironde", "Seven Stones"}  # heel land / gebied / rif: niet plotbaar
 for p in SKIP:
     cache[p] = None
 
@@ -65,6 +65,14 @@ ALIAS = {
     "Wijde Wormer": "Wijdewormer", "Gaasterland": "Balk, Friesland", "Kollumerland": "Kollum",
     "Haskerland": "Joure", "Alkemade": "Roelofarendsveen",
     "Hardinxveld": "Hardinxveld-Giessendam", "Driebergen": "Driebergen-Rijsenburg",
+    "Rapenveld": "Wapenveld", "Molenheide": "Molenschot", "Stobbegat": "Vegelinsoord",
+    "Buck": "Warmenhuizen",
+    # parse-artefacten: naam/zinsdeel in het plaatsveld -> juiste plaats (beter t.z.t. in parse.py oplossen)
+    "Pas Johanna Marie Elisabeth Vink en Marinus Hendrik Paulus de Regt": "Amsterdam",
+    "Kloeze en Dirk Willem Wensink": "Terborg",
+    "'s-Gravenhage Nicolaas van der Pol": "'s-Gravenhage",
+    "Utrecht Cornelis van Straalen": "Utrecht",
+    "Kerkwijk op de Rijksweg A2": "Kerkwijk, Zaltbommel",
 }
 # buitenland-aliassen: gecodeerd met abroad=True (niet NL-begrensd)
 ALIAS_ABROAD = {
@@ -77,6 +85,7 @@ ALIAS_ABROAD = {
     "Cairo": "Cairo, Egypt", "Malaga": "Malaga, Spain",
     "Las Palmas": "Las Palmas de Gran Canaria, Spain", "Newcastle": "Newcastle upon Tyne, United Kingdom",
     "Düren": "Düren, Germany", "Brünen": "Brünen, Hamminkeln, Germany", "Keeken": "Keeken, Kleve, Germany",
+    "Bazel": "Basel, Switzerland",
 }
 # European-NL bounding box so nl-queries never return Caribbean "Nederland" (Curaçao etc.)
 NL_VIEWBOX = "3.2,53.7,7.4,50.6"
