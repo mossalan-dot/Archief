@@ -74,8 +74,9 @@ html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Ro
 <div id="map"></div>
 <div id="side">
   <div class="phead"><div class="plogo">📐</div><div><h1>Tekeningenarchief RGD</h1><div class="sub">Nederland · hele objectenarchief</div></div></div>
-  <div class="pcount"><b id="cnt">…</b> bouwprojecten <span style="color:var(--muted)">· 22.362 bladen (Nationaal Archief 4.RGD)</span></div>
+  <div class="pcount"><b id="cnt">…</b> bouwprojecten <span style="color:var(--muted)">· 30.698 bladen (Nationaal Archief 4.RGD)</span></div>
   <div class="psearch"><input id="q" type="search" placeholder="Zoek op plaats, gebouw of straat…" autocomplete="off"></div>
+  <div class="sec"><h2>Materiaal</h2><div class="chips" id="matchips"></div></div>
   <div class="sec"><h2>Functie</h2><div class="chips" id="catchips"></div></div>
   <div class="sec"><h2>Soort tekening</h2><div class="chips" id="soortchips"></div></div>
   <div class="sec"><h2>Periode <span id="yrlab" style="color:var(--muted)"></span></h2>
@@ -90,25 +91,28 @@ html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Ro
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 <script>
 const EM = {"overig": "📐", "bestuur & financiën": "🏢", "post & telegraaf": "✉️", "politie": "👮", "kerk & religie": "⛪", "gevangeniswezen": "🔒", "zorg": "🏥", "rechtspraak": "⚖️", "douane & opslag": "📦", "museum & paleis": "🏛️", "onderwijs & wetenschap": "🎓", "militair": "🎖️"};
+const MAT_EM={tekening:'📐',foto:'📷',bestek:'📄',overig:'📎'};
 const esc=s=>(s==null?'':''+s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const map=L.map('map',{preferCanvas:false,zoomControl:false}).setView([52.15,5.4],7);
 L.control.zoom({position:'bottomright'}).addTo(map);
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{subdomains:'abcd',maxZoom:19,attribution:''}).addTo(map);
 const cluster=L.markerClusterGroup({maxClusterRadius:44,spiderfyOnMaxZoom:true,chunkedLoading:true}).addTo(map);
-let DATA=[], YMIN=0, YMAX=0, cats=[], soorten=[], st={cat:new Set(),soort:new Set(),y0:0,y1:0,q:''};
+let DATA=[], YMIN=0, YMAX=0, cats=[], soorten=[], mats=[], st={mat:new Set(),cat:new Set(),soort:new Set(),y0:0,y1:0,q:''};
 let CUR=null, CSC=[], CIX=0;
 
 function chip(label,em,n,on){return `<span class="chip ${on?'on':'off'}">${em?em+' ':''}${esc(label)} <span class="n">${n}</span></span>`;}
 function drawChips(){
-  const cc={},sc={}; DATA.forEach(p=>{cc[p.cat]=(cc[p.cat]||0)+1;sc[p.soort]=(sc[p.soort]||0)+1;});
+  const mm={},cc={},sc={}; DATA.forEach(p=>{mm[p.mat]=(mm[p.mat]||0)+1;cc[p.cat]=(cc[p.cat]||0)+1;sc[p.soort]=(sc[p.soort]||0)+1;});
+  document.getElementById('matchips').innerHTML=mats.map(m=>chip(m,MAT_EM[m]||'',mm[m],st.mat.has(m))).join('');
   document.getElementById('catchips').innerHTML=cats.map(c=>chip(c,EM[c],cc[c],st.cat.has(c))).join('');
   document.getElementById('soortchips').innerHTML=soorten.map(s=>chip(s,'',sc[s],st.soort.has(s))).join('');
+  document.querySelectorAll('#matchips .chip').forEach((el,i)=>el.onclick=()=>toggle(st.mat,mats[i]));
   document.querySelectorAll('#catchips .chip').forEach((el,i)=>el.onclick=()=>toggle(st.cat,cats[i]));
   document.querySelectorAll('#soortchips .chip').forEach((el,i)=>el.onclick=()=>toggle(st.soort,soorten[i]));
 }
 function toggle(set,v){ set.has(v)?set.delete(v):set.add(v); if(set.size===0)set.add(v); drawChips(); render(); }
 function match(p){
-  if(!st.cat.has(p.cat)||!st.soort.has(p.soort)) return false;
+  if(!st.mat.has(p.mat)||!st.cat.has(p.cat)||!st.soort.has(p.soort)) return false;
   if(!(p.jaar_max==null||p.jaar_max>=st.y0)||!(p.jaar_min==null||p.jaar_min<=st.y1)) return false;
   if(st.q){ const h=((p.stad||'')+' '+(p.gebouw||'')+' '+(p.locatie||'')+' '+(p.titel||'')).toLowerCase(); if(h.indexOf(st.q)<0) return false; }
   return true;
@@ -157,9 +161,10 @@ fetch('./data.json').then(r=>r.json()).then(d=>{
   DATA=d;
   const yrs=DATA.flatMap(p=>[p.jaar_min,p.jaar_max]).filter(Boolean);
   YMIN=Math.min(...yrs); YMAX=Math.max(...yrs);
+  mats=[...new Set(DATA.map(p=>p.mat))];
   cats=[...new Set(DATA.map(p=>p.cat))];
   soorten=[...new Set(DATA.map(p=>p.soort))];
-  st.cat=new Set(cats); st.soort=new Set(soorten); st.y0=YMIN; st.y1=YMAX;
+  st.mat=new Set(mats); st.cat=new Set(cats); st.soort=new Set(soorten); st.y0=YMIN; st.y1=YMAX;
   [rmin,rmax].forEach(r=>{r.min=YMIN;r.max=YMAX;r.step=1;}); rmin.value=YMIN; rmax.value=YMAX;
   document.getElementById('y0').textContent=YMIN; document.getElementById('y1').textContent=YMAX;
   rmin.oninput=onYear; rmax.oninput=onYear; rfl();
