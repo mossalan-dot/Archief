@@ -7,7 +7,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 WORK = os.path.dirname(os.path.abspath(__file__))
 PLACE = sys.argv[1] if len(sys.argv) > 1 else "Amsterdam"
-FN = f"{WORK}/rgd_{PLACE.lower().replace(' ','_')}.json"
+FN = f"{WORK}/rgd_{'all' if PLACE.lower()=='all' else PLACE.lower().replace(' ','_')}.json"
 P = json.load(open(FN, encoding="utf-8"))
 CACHE = f"{WORK}/mets_cache.json"
 cache = json.load(open(CACHE, encoding="utf-8")) if os.path.exists(CACHE) else {}

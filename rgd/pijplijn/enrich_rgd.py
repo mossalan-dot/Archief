@@ -6,7 +6,8 @@ import json, os, sys, time, re, urllib.parse, urllib.request
 
 WORK = os.path.dirname(os.path.abspath(__file__))
 PLACE = sys.argv[1] if len(sys.argv) > 1 else "Amsterdam"
-FN = f"{WORK}/rgd_{PLACE.lower().replace(' ','_')}.json"
+ALL = PLACE.lower() == "all"
+FN = f"{WORK}/rgd_{'all' if ALL else PLACE.lower().replace(' ','_')}.json"
 P = json.load(open(FN, encoding="utf-8"))
 UA = "RGDtekeningenkaart/1.0 (mossalan@gmail.com)"
 
@@ -45,11 +46,14 @@ def scan_urls(mets_uuid):
 
 npd = nsc = 0
 for p in P:
+    stad = p.get("stad", PLACE)
     loc = (p.get("locatie") or "").split("/")[0].split(",")[0].strip()
-    q = f"{loc}, {PLACE}" if loc else PLACE
-    hit = pdok(q); time.sleep(0.25)
+    hit = pdok(f"{loc}, {stad}") if loc else None
+    if loc: time.sleep(0.2)
     if not hit and loc:
-        hit = pdok(f"{loc} {PLACE}"); time.sleep(0.25)
+        hit = pdok(f"{loc} {stad}"); time.sleep(0.2)
+    if not hit:
+        hit = pdok(stad); time.sleep(0.2)            # stad-terugval
     if hit:
         p["lat"] = round(hit["lat"], 6); p["lon"] = round(hit["lon"], 6)
         p["prec"] = PREC.get(hit["type"], hit["type"]); p["bron_geo"] = "pdok"; p["geo_naam"] = hit["naam"]

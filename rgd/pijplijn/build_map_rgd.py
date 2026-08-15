@@ -1,26 +1,30 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Bouw de self-contained RGD-kaart (Leaflet + markercluster) uit rgd_<stad>.json."""
+"""Bouw de RGD-kaart (Leaflet + markercluster). Data wordt EXTERN geladen (data.json).
+Argument = 'all' (hele objectenarchief) of één stad."""
 import json, os, sys
 from collections import Counter
 
 WORK = os.path.dirname(os.path.abspath(__file__))
-PLACE = sys.argv[1] if len(sys.argv) > 1 else "Amsterdam"
-OUT = sys.argv[2] if len(sys.argv) > 2 else f"{WORK}/../site/index.html"
-P = json.load(open(f"{WORK}/rgd_{PLACE.lower().replace(' ','_')}.json", encoding="utf-8"))
+PLACE = sys.argv[1] if len(sys.argv) > 1 else "all"
+ALL = PLACE.lower() == "all"
+SITE = f"{WORK}/../site"
+P = json.load(open(f"{WORK}/rgd_{'all' if ALL else PLACE.lower().replace(' ','_')}.json", encoding="utf-8"))
+P = [p for p in P if p.get("lat") is not None]
 
 nbl = sum(x["n_bladen"] for x in P)
-cats = [c for c, _ in Counter(x["cat"] for x in P).most_common()]
 EM = {x["cat"]: x["emoji"] for x in P}
-DATA = json.dumps(P, ensure_ascii=False, separators=(",", ":"))
+SUB = "Nederland · hele objectenarchief" if ALL else f"proef: {PLACE}"
+VIEW = "[52.15,5.4],7" if ALL else "[52.37,4.9],13"
+json.dump(P, open(f"{SITE}/data.json", "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 
 HTML = r"""<!DOCTYPE html>
 <html lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tekeningenarchief Rijksgebouwendienst — __PLACE__</title>
-<meta name="description" content="Bouwtekeningen van de Rijksgebouwendienst (Nationaal Archief 4.RGD) op de kaart — proef: __PLACE__.">
+<title>Tekeningenarchief Rijksgebouwendienst</title>
+<meta name="description" content="Bouwtekeningen van de Rijksgebouwendienst (Nationaal Archief 4.RGD, CC0) op de kaart — __SUB__.">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
@@ -41,6 +45,8 @@ html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Ro
 .plogo{width:44px;height:44px;border-radius:12px;flex:none;display:grid;place-items:center;font-size:22px;background:linear-gradient(135deg,var(--accent),#0891b2);box-shadow:0 2px 8px #0e749055}
 .phead h1{margin:0;font-size:17px;letter-spacing:-.01em}.phead .sub{font-size:12px;color:var(--muted);margin-top:1px}
 .pcount{padding:0 16px 8px;font-size:13px}.pcount b{font-size:22px;color:var(--accent)}
+.psearch{padding:0 16px 10px}
+.psearch input{width:100%;font:inherit;font-size:13px;padding:7px 10px;border:1px solid var(--line);border-radius:9px;background:#fff}
 .sec{padding:10px 16px;border-top:1px solid var(--line)}
 .sec h2{margin:0 0 8px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
@@ -74,12 +80,6 @@ html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Ro
 .dmeta{font-size:12.5px;color:#374151;line-height:1.6}
 .dmeta b{color:var(--ink)}
 .badge{display:inline-block;font-size:10.5px;font-weight:600;padding:1px 7px;border-radius:20px;background:#eef2f4;color:#374151;margin-left:4px}
-.badge.mf{background:#fef3c7;color:#92400e}
-.dsheets{margin:10px 0 0;border-top:1px solid var(--line)}
-.sh{display:flex;gap:8px;align-items:baseline;padding:6px 0;border-bottom:1px solid #f1f5f9;font-size:12.5px}
-.sh a{color:var(--accent);text-decoration:none;font-weight:600;white-space:nowrap}
-.sh a:hover{text-decoration:underline}
-.sh .sc{color:var(--muted);font-size:11px}
 .nalink{display:inline-block;margin-top:8px;font-size:12.5px;color:var(--accent);text-decoration:none}
 .emoji-marker div{font-size:20px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4));text-align:center;line-height:1}
 .credit{position:fixed;left:14px;bottom:8px;z-index:1000;font-size:10px;color:#374151;background:#ffffffcc;padding:2px 7px;border-radius:6px}
@@ -93,8 +93,9 @@ html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Ro
 <nav class="ptabs"><a href="./" class="on">🗺️ Kaart</a><a href="https://archief.alanmoss.nl/" class="ext">← Archiefprojecten</a></nav>
 <div id="map"></div>
 <div id="side">
-  <div class="phead"><div class="plogo">📐</div><div><h1>Tekeningenarchief RGD</h1><div class="sub">Rijksgebouwendienst · Nationaal Archief 4.RGD</div></div></div>
-  <div class="pcount"><b id="cnt">__NP__</b> bouwprojecten <span style="color:var(--muted)">· __NBL__ bladen · proef: __PLACE__</span></div>
+  <div class="phead"><div class="plogo">📐</div><div><h1>Tekeningenarchief RGD</h1><div class="sub">__SUB__</div></div></div>
+  <div class="pcount"><b id="cnt">…</b> bouwprojecten <span style="color:var(--muted)">· __NBL__ bladen (Nationaal Archief 4.RGD)</span></div>
+  <div class="psearch"><input id="q" type="search" placeholder="Zoek op plaats, gebouw of straat…" autocomplete="off"></div>
   <div class="sec"><h2>Functie</h2><div class="chips" id="catchips"></div></div>
   <div class="sec"><h2>Soort tekening</h2><div class="chips" id="soortchips"></div></div>
   <div class="sec"><h2>Periode <span id="yrlab" style="color:var(--muted)"></span></h2>
@@ -108,18 +109,14 @@ html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Ro
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 <script>
-const DATA = __DATA__;
 const EM = __EM__;
 const esc=s=>(s==null?'':''+s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const map=L.map('map',{preferCanvas:false,zoomControl:false}).setView([52.37,4.9],13);
+const map=L.map('map',{preferCanvas:false,zoomControl:false}).setView(__VIEW__);
 L.control.zoom({position:'bottomright'}).addTo(map);
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{subdomains:'abcd',maxZoom:19,attribution:''}).addTo(map);
-const cluster=L.markerClusterGroup({maxClusterRadius:38,spiderfyOnMaxZoom:true}).addTo(map);
-const yrs=DATA.flatMap(p=>[p.jaar_min,p.jaar_max]).filter(Boolean);
-const YMIN=Math.min(...yrs), YMAX=Math.max(...yrs);
-const cats=[...new Set(DATA.map(p=>p.cat))];
-const soorten=[...new Set(DATA.map(p=>p.soort))];
-const st={cat:new Set(cats),soort:new Set(soorten),y0:YMIN,y1:YMAX};
+const cluster=L.markerClusterGroup({maxClusterRadius:44,spiderfyOnMaxZoom:true,chunkedLoading:true}).addTo(map);
+let DATA=[], YMIN=0, YMAX=0, cats=[], soorten=[], st={cat:new Set(),soort:new Set(),y0:0,y1:0,q:''};
+let CUR=null, CSC=[], CIX=0;
 
 function chip(label,em,n,on){return `<span class="chip ${on?'on':'off'}">${em?em+' ':''}${esc(label)} <span class="n">${n}</span></span>`;}
 function drawChips(){
@@ -129,19 +126,25 @@ function drawChips(){
   document.querySelectorAll('#catchips .chip').forEach((el,i)=>el.onclick=()=>toggle(st.cat,cats[i]));
   document.querySelectorAll('#soortchips .chip').forEach((el,i)=>el.onclick=()=>toggle(st.soort,soorten[i]));
 }
-function toggle(set,v){ set.has(v)?set.delete(v):set.add(v); if(set.size===0)DATA.forEach(()=>{}),set.add(v); drawChips(); render(); }
-function match(p){ return st.cat.has(p.cat)&&st.soort.has(p.soort)&&(p.jaar_max==null||p.jaar_max>=st.y0)&&(p.jaar_min==null||p.jaar_min<=st.y1); }
-
+function toggle(set,v){ set.has(v)?set.delete(v):set.add(v); if(set.size===0)set.add(v); drawChips(); render(); }
+function match(p){
+  if(!st.cat.has(p.cat)||!st.soort.has(p.soort)) return false;
+  if(!(p.jaar_max==null||p.jaar_max>=st.y0)||!(p.jaar_min==null||p.jaar_min<=st.y1)) return false;
+  if(st.q){ const h=((p.stad||'')+' '+(p.gebouw||'')+' '+(p.locatie||'')+' '+(p.titel||'')).toLowerCase(); if(h.indexOf(st.q)<0) return false; }
+  return true;
+}
 function render(){
-  cluster.clearLayers(); let n=0;
+  cluster.clearLayers(); let n=0; const ms=[];
   DATA.forEach(p=>{ if(!match(p))return; n++;
     const m=L.marker([p.lat,p.lon],{icon:L.divIcon({className:'emoji-marker',html:`<div>${p.emoji}</div>`,iconSize:[24,24],iconAnchor:[12,12]})});
-    m.on('click',()=>showDetail(p)); cluster.addLayer(m);
+    m.on('click',()=>showDetail(p)); ms.push(m);
   });
+  cluster.addLayers(ms);
   document.getElementById('cnt').textContent=n;
 }
-let CUR=null,CSC=[],CIX=0;
-function showDetail(p){ CUR=p; CSC=p.sheets.filter(s=>s.thumb); CIX=0; renderDetail();
+function showDetail(p){ CUR=p; CSC=p.sheets.filter(s=>s.thumb);
+  if(!CSC.length&&p.thumb) CSC=[{thumb:p.thumb,full:p.scan_full,id:p.uid.split('-')[0],title:'voorbeeldscan',micro:false}];
+  CIX=0; renderDetail();
   map.setView([p.lat,p.lon],Math.max(map.getZoom(),15),{animate:true}); }
 function carouNav(dr){ if(CSC.length){ CIX=(CIX+dr+CSC.length)%CSC.length; renderDetail(); } }
 function renderDetail(){
@@ -151,12 +154,12 @@ function renderDetail(){
   let carou;
   if(CSC.length){ const s=CSC[CIX];
     const ph="data:image/svg+xml,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180"><rect width="100%" height="100%" fill="#eef2f4"/><text x="160" y="116" font-size="64" text-anchor="middle">'+p.emoji+'</text></svg>');
-    carou=`<div class="carou"><a href="${esc(s.handle||s.full)}" target="_blank" rel="noopener" title="Open deze scan bij het Nationaal Archief"><img class="dscan" src="${esc(s.thumb)}" loading="lazy" alt="scan ${esc(s.id)}" onerror="this.onerror=null;this.src='${ph}'"></a>`
+    carou=`<div class="carou"><a href="${esc(s.full||s.handle)}" target="_blank" rel="noopener" title="Open de scan op volledige grootte"><img class="dscan" src="${esc(s.thumb)}" loading="lazy" alt="scan ${esc(s.id)}" onerror="this.onerror=null;this.src='${ph}'"></a>`
       +(CSC.length>1?`<button class="cnav prev" onclick="carouNav(-1)">‹</button><button class="cnav next" onclick="carouNav(1)">›</button>`:'')
       +`<div class="cbar"><span class="cpill">${esc(s.id)}: ${esc(s.title||'Tekening')}${s.micro?' <span class="mf">· microfilm</span>':''}</span><span class="ccount">${CIX+1} / ${CSC.length} gescand</span></div></div>`;
   } else { carou=`<div class="dmeta" style="color:var(--muted);margin:2px 0 8px">Geen scan online (alleen microfilm/analoog bewaard).</div>`; }
   d.innerHTML=`<div class="dwrap"><button class="dclose" onclick="document.getElementById('detail').className=''">×</button>
-    <div class="dcat">${p.emoji} ${esc(p.cat)}</div><div class="dtitle">${esc(p.gebouw||p.titel)}</div>
+    <div class="dcat">${p.emoji} ${esc(p.cat)} · ${esc(p.stad)}</div><div class="dtitle">${esc(p.gebouw||p.titel)}</div>
     ${carou}
     <div class="dmeta">${p.locatie?'<b>'+esc(p.locatie)+'</b>, ':''}${esc(p.stad)} <span class="badge">${esc(p.prec)}</span><br>
       <b>Periode:</b> ${per} &nbsp; <b>Soort:</b> ${esc(p.soort)}<br>
@@ -164,19 +167,28 @@ function renderDetail(){
     ${p.wd?`<a class="nalink" href="${esc(p.wd.url)}" target="_blank" rel="noopener">🔗 Wikidata: ${esc(p.wd.label)} →</a><br>`:''}
     <a class="nalink" href="${na}" target="_blank" rel="noopener">Open het bouwproject bij het Nationaal Archief →</a></div>`;
 }
-// year sliders
 const rmin=document.getElementById('rmin'),rmax=document.getElementById('rmax'),rfill=document.getElementById('rfill');
-[rmin,rmax].forEach(r=>{r.min=YMIN;r.max=YMAX;r.step=1;});rmin.value=YMIN;rmax.value=YMAX;
-document.getElementById('y0').textContent=YMIN;document.getElementById('y1').textContent=YMAX;
 function ylab(){document.getElementById('yrlab').textContent=(st.y0===YMIN&&st.y1===YMAX)?'':`(${st.y0}–${st.y1})`;}
 function rfl(){const sp=(YMAX-YMIN)||1,a=(st.y0-YMIN)/sp*100,b=(st.y1-YMIN)/sp*100;rfill.style.left=a+'%';rfill.style.width=(b-a)+'%';}
 function onYear(){st.y0=Math.min(+rmin.value,+rmax.value);st.y1=Math.max(+rmin.value,+rmax.value);ylab();rfl();render();}
-rmin.oninput=onYear;rmax.oninput=onYear;rfl();
-drawChips();render();
+document.getElementById('q').oninput=e=>{st.q=e.target.value.trim().toLowerCase();render();};
+
+fetch('./data.json').then(r=>r.json()).then(d=>{
+  DATA=d;
+  const yrs=DATA.flatMap(p=>[p.jaar_min,p.jaar_max]).filter(Boolean);
+  YMIN=Math.min(...yrs); YMAX=Math.max(...yrs);
+  cats=[...new Set(DATA.map(p=>p.cat))];
+  soorten=[...new Set(DATA.map(p=>p.soort))];
+  st.cat=new Set(cats); st.soort=new Set(soorten); st.y0=YMIN; st.y1=YMAX;
+  [rmin,rmax].forEach(r=>{r.min=YMIN;r.max=YMAX;r.step=1;}); rmin.value=YMIN; rmax.value=YMAX;
+  document.getElementById('y0').textContent=YMIN; document.getElementById('y1').textContent=YMAX;
+  rmin.oninput=onYear; rmax.oninput=onYear; rfl();
+  drawChips(); render();
+});
 </script>
 </body>
 </html>"""
-HTML = (HTML.replace("__DATA__", DATA).replace("__EM__", json.dumps(EM, ensure_ascii=False))
-            .replace("__PLACE__", PLACE).replace("__NP__", str(len(P))).replace("__NBL__", f"{nbl:,}".replace(",", ".")))
-open(OUT, "w", encoding="utf-8").write(HTML)
-print(f"geschreven: {OUT}  ({len(P)} projecten, {nbl} bladen)")
+HTML = (HTML.replace("__EM__", json.dumps(EM, ensure_ascii=False)).replace("__VIEW__", VIEW)
+            .replace("__SUB__", SUB).replace("__NBL__", f"{nbl:,}".replace(",", ".")))
+open(f"{SITE}/index.html", "w", encoding="utf-8").write(HTML)
+print(f"geschreven: {SITE}/index.html + data.json  ({len(P)} projecten met coord, {nbl} bladen)")
