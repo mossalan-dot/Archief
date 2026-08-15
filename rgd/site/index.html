@@ -27,8 +27,14 @@ html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Ro
 .pcount{padding:0 16px 8px;font-size:13px}.pcount b{font-size:22px;color:var(--accent)}
 .psearch{padding:0 16px 10px}
 .psearch input{width:100%;font:inherit;font-size:13px;padding:7px 10px;border:1px solid var(--line);border-radius:9px;background:#fff}
-.sec{padding:10px 16px;border-top:1px solid var(--line)}
-.sec h2{margin:0 0 8px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.sec{border-top:1px solid var(--line)}
+.sec>summary{list-style:none;cursor:pointer;padding:10px 16px;display:flex;align-items:center}
+.sec>summary::-webkit-details-marker{display:none}
+.sec>summary::after{content:"+";margin-left:auto;color:var(--muted);font-size:16px;line-height:1}
+.sec[open]>summary::after{content:"–"}
+.sec>summary:hover h2{color:var(--accent)}
+.sec h2{margin:0;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.secbody{padding:0 16px 12px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{font-size:12px;border:1px solid var(--line);background:#fff;border-radius:20px;padding:4px 10px;cursor:pointer;user-select:none;display:inline-flex;gap:5px;align-items:center}
 .chip .n{color:var(--muted);font-variant-numeric:tabular-nums}
@@ -76,13 +82,13 @@ html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Ro
   <div class="phead"><div class="plogo">📐</div><div><h1>Tekeningenarchief RGD</h1><div class="sub">Nederland · hele objectenarchief</div></div></div>
   <div class="pcount"><b id="cnt">…</b> bouwprojecten <span style="color:var(--muted)">· 30.698 bladen (Nationaal Archief 4.RGD)</span></div>
   <div class="psearch"><input id="q" type="search" placeholder="Zoek op plaats, gebouw of straat…" autocomplete="off"></div>
-  <div class="sec"><h2>Materiaal</h2><div class="chips" id="matchips"></div></div>
-  <div class="sec"><h2>Functie</h2><div class="chips" id="catchips"></div></div>
-  <div class="sec"><h2>Soort tekening</h2><div class="chips" id="soortchips"></div></div>
-  <div class="sec"><h2>Periode <span id="yrlab" style="color:var(--muted)"></span></h2>
-    <div class="rangewrap"><div class="rtrack"></div><div class="rfill" id="rfill"></div>
+  <details class="sec"><summary><h2>Materiaal</h2></summary><div class="secbody"><div class="chips" id="matchips"></div></div></details>
+  <details class="sec"><summary><h2>Functie</h2></summary><div class="secbody"><div class="chips" id="catchips"></div></div></details>
+  <details class="sec"><summary><h2>Soort tekening</h2></summary><div class="secbody"><div class="chips" id="soortchips"></div></div></details>
+  <details class="sec"><summary><h2>Periode <span id="yrlab" style="color:var(--muted);text-transform:none;letter-spacing:0"></span></h2></summary>
+    <div class="secbody"><div class="rangewrap"><div class="rtrack"></div><div class="rfill" id="rfill"></div>
       <input type="range" id="rmin" class="rr"><input type="range" id="rmax" class="rr"></div>
-    <div class="yr"><span id="y0"></span><span id="y1"></span></div></div>
+    <div class="yr"><span id="y0"></span><span id="y1"></span></div></div></details>
 </div>
 <div id="detail"></div>
 <a class="fbk" href="mailto:mossalan@gmail.com?subject=RGD-tekeningenkaart%3A%20feedback%20of%20bugmelding" title="Feedback of een fout melden">✉︎ Feedback</a>
@@ -106,11 +112,15 @@ function drawChips(){
   document.getElementById('matchips').innerHTML=mats.map(m=>chip(m,MAT_EM[m]||'',mm[m],st.mat.has(m))).join('');
   document.getElementById('catchips').innerHTML=cats.map(c=>chip(c,EM[c],cc[c],st.cat.has(c))).join('');
   document.getElementById('soortchips').innerHTML=soorten.map(s=>chip(s,'',sc[s],st.soort.has(s))).join('');
-  document.querySelectorAll('#matchips .chip').forEach((el,i)=>el.onclick=()=>toggle(st.mat,mats[i]));
-  document.querySelectorAll('#catchips .chip').forEach((el,i)=>el.onclick=()=>toggle(st.cat,cats[i]));
-  document.querySelectorAll('#soortchips .chip').forEach((el,i)=>el.onclick=()=>toggle(st.soort,soorten[i]));
+  document.querySelectorAll('#matchips .chip').forEach((el,i)=>el.onclick=()=>toggle(st.mat,mats,mats[i]));
+  document.querySelectorAll('#catchips .chip').forEach((el,i)=>el.onclick=()=>toggle(st.cat,cats,cats[i]));
+  document.querySelectorAll('#soortchips .chip').forEach((el,i)=>el.onclick=()=>toggle(st.soort,soorten,soorten[i]));
 }
-function toggle(set,v){ set.has(v)?set.delete(v):set.add(v); if(set.size===0)set.add(v); drawChips(); render(); }
+function toggle(set,all,v){
+  if(set.size===1&&set.has(v)) all.forEach(x=>set.add(x));   // stond op solo -> toon weer alles
+  else { set.clear(); set.add(v); }                          // toon alleen deze
+  drawChips(); render();
+}
 function match(p){
   if(!st.mat.has(p.mat)||!st.cat.has(p.cat)||!st.soort.has(p.soort)) return false;
   if(!(p.jaar_max==null||p.jaar_max>=st.y0)||!(p.jaar_min==null||p.jaar_min<=st.y1)) return false;

@@ -10,7 +10,7 @@ SRC = "/Users/alan/Downloads/4.RGD.xml"
 PLACE = sys.argv[1] if len(sys.argv) > 1 else "Amsterdam"
 ALL = PLACE.upper() == "ALL"
 # (series_code, materiaaltype) van de plaats-georganiseerde secties
-SECTIONS = [("IB", "tekening"), ("IIB", "tekening"), ("IC", "foto"), ("ID", "bestek"), ("III", "overig")]
+SECTIONS = [("IB", "tekening"), ("IIB", "tekening"), ("IC", "foto"), ("ID", "bestek"), ("III", "tekening")]
 
 raw = open(SRC, encoding="utf-8").read()
 body = raw[raw.find("<dsc"):]
