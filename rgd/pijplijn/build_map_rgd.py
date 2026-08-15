@@ -15,6 +15,9 @@ P = [p for p in P if p.get("lat") is not None]
 for p in P:
     if p.get("mat") == "overig": p["mat"] = "tekening"   # 'overig' materiaal onder tekening
     p["cat"], p["emoji"] = categorie(p.get("titel", ""))  # hercategoriseren met verbeterde trefwoorden
+    for k in ("locatie", "gebouw"):                       # vierkante haken (editoriale toevoeging) strippen
+        if p.get(k): p[k] = p[k].replace("[", "").replace("]", "").strip()
+    p["invnr"] = p["uid"].split("-")[0].split(".")[0]     # afgekort inventarisnummer (1.1-1.48 -> 1)
 
 nbl = sum(x["n_bladen"] for x in P)
 EM = {x["cat"]: x["emoji"] for x in P}
@@ -57,6 +60,7 @@ html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Ro
 .sec>summary::-webkit-details-marker{display:none}
 .sec>summary::after{content:"+";margin-left:auto;color:var(--muted);font-size:16px;line-height:1}
 .sec[open]>summary::after{content:"–"}
+.sec.noco>summary{pointer-events:none}.sec.noco>summary::after{content:""}
 .sec>summary:hover h2{color:var(--accent)}
 .sec h2{margin:0;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .secbody{padding:0 16px 12px}
@@ -86,12 +90,15 @@ html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Ro
 .dscan{display:block;width:100%;height:180px;object-fit:cover;background:#eef2f4;border:1px solid var(--line);border-radius:10px;cursor:zoom-in;margin:2px 0 10px}
 .dwrap{padding:12px 16px 16px}
 .dclose{float:right;border:none;background:none;font-size:20px;color:var(--muted);cursor:pointer;line-height:1}
-.dcat{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em}
-.dtitle{font-size:16px;font-weight:700;margin:2px 0 6px;line-height:1.25}
-.dmeta{font-size:12.5px;color:#374151;line-height:1.6}
-.dmeta b{color:var(--ink)}
-.badge{display:inline-block;font-size:10.5px;font-weight:600;padding:1px 7px;border-radius:20px;background:#eef2f4;color:#374151;margin-left:4px}
-.nalink{display:inline-block;margin-top:8px;font-size:12.5px;color:var(--accent);text-decoration:none}
+.dcat{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;display:flex;align-items:center;gap:8px}
+.dcat .invnr{margin-left:auto;font-weight:600;color:var(--muted);background:#eef2f4;border-radius:20px;padding:1px 9px;letter-spacing:0;text-transform:none}
+.dtitle{font-size:16px;font-weight:700;margin:3px 0 1px;line-height:1.25}
+.dloc{font-size:12.5px;color:var(--muted);margin:0 0 9px}
+.dtags{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 10px}
+.dtags span{font-size:11.5px;background:#eef2f4;color:#374151;border-radius:20px;padding:2px 9px}
+.dlinks{display:flex;flex-direction:column;gap:3px}
+.dlinks a{font-size:12.5px;color:var(--accent);text-decoration:none}
+.dlinks a:hover{text-decoration:underline}
 .emoji-marker div{font-size:20px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4));text-align:center;line-height:1}
 .credit{position:fixed;left:14px;bottom:8px;z-index:1000;font-size:10px;color:#374151;background:#ffffffcc;padding:2px 7px;border-radius:6px}
 .fbk{position:fixed;bottom:12px;right:12px;z-index:1200;font-size:12px;color:var(--accent);text-decoration:none;background:var(--panel);
@@ -110,7 +117,7 @@ html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Ro
   <details class="sec"><summary><h2>Materiaal</h2></summary><div class="secbody"><div class="chips" id="matchips"></div></div></details>
   <details class="sec"><summary><h2>Functie</h2></summary><div class="secbody"><div class="chips" id="catchips"></div></div></details>
   <details class="sec"><summary><h2>Soort tekening</h2></summary><div class="secbody"><div class="chips" id="soortchips"></div></div></details>
-  <details class="sec"><summary><h2>Periode <span id="yrlab" style="color:var(--muted);text-transform:none;letter-spacing:0"></span></h2></summary>
+  <details class="sec noco" open><summary><h2>Periode <span id="yrlab" style="color:var(--muted);text-transform:none;letter-spacing:0"></span></h2></summary>
     <div class="secbody"><div class="rangewrap"><div class="rtrack"></div><div class="rfill" id="rfill"></div>
       <input type="range" id="rmin" class="rr"><input type="range" id="rmax" class="rr"></div>
     <div class="yr"><span id="y0"></span><span id="y1"></span></div></div></details>
@@ -161,30 +168,30 @@ function render(){
   cluster.addLayers(ms);
   document.getElementById('cnt').textContent=n;
 }
-function showDetail(p){ CUR=p; CSC=p.sheets.filter(s=>s.thumb);
-  if(!CSC.length&&p.thumb) CSC=[{thumb:p.thumb,full:p.scan_full,id:p.uid.split('-')[0],title:'voorbeeldscan',micro:false}];
-  CIX=0; renderDetail();
-  map.setView([p.lat,p.lon],Math.max(map.getZoom(),15),{animate:true}); }
+function showDetail(p){ CUR=p; CSC=p.sheets||[];
+  CIX=CSC.findIndex(s=>s.thumb); if(CIX<0)CIX=0;
+  renderDetail(); map.setView([p.lat,p.lon],Math.max(map.getZoom(),15),{animate:true}); }
 function carouNav(dr){ if(CSC.length){ CIX=(CIX+dr+CSC.length)%CSC.length; renderDetail(); } }
 function renderDetail(){
   const p=CUR, d=document.getElementById('detail'); d.className='show';
   const per=(p.jaar_min?(p.jaar_min===p.jaar_max?p.jaar_min:p.jaar_min+'–'+p.jaar_max):'onbekend');
   const na='https://www.nationaalarchief.nl/onderzoeken/archief/4.RGD/invnr/'+encodeURIComponent(p.uid.split('-')[0]);
-  let carou;
-  if(CSC.length){ const s=CSC[CIX];
-    const ph="data:image/svg+xml,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180"><rect width="100%" height="100%" fill="#eef2f4"/><text x="160" y="116" font-size="64" text-anchor="middle">'+p.emoji+'</text></svg>');
-    carou=`<div class="carou"><a href="${esc(s.full||s.handle)}" target="_blank" rel="noopener" title="Open de scan op volledige grootte"><img class="dscan" src="${esc(s.thumb)}" loading="lazy" alt="scan ${esc(s.id)}" onerror="this.onerror=null;this.src='${ph}'"></a>`
+  const ph="data:image/svg+xml,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180"><rect width="100%" height="100%" fill="#eef2f4"/><text x="160" y="116" font-size="64" text-anchor="middle">'+p.emoji+'</text></svg>');
+  let carou='';
+  if(CSC.length){ const s=CSC[CIX]; const href=s.full||s.handle||na;
+    carou=`<div class="carou"><a href="${esc(href)}" target="_blank" rel="noopener" title="Open de scan bij het Nationaal Archief"><img class="dscan" src="${esc(s.thumb||ph)}" loading="lazy" alt="scan ${esc(s.id)}" onerror="this.onerror=null;this.src='${ph}'"></a>`
       +(CSC.length>1?`<button class="cnav prev" onclick="carouNav(-1)">‹</button><button class="cnav next" onclick="carouNav(1)">›</button>`:'')
-      +`<div class="cbar"><span class="cpill">${esc(s.id)}: ${esc(s.title||'Tekening')}${s.micro?' <span class="mf">· microfilm</span>':''}</span><span class="ccount">${CIX+1} / ${CSC.length} gescand</span></div></div>`;
-  } else { carou=`<div class="dmeta" style="color:var(--muted);margin:2px 0 8px">Geen scan online (alleen microfilm/analoog bewaard).</div>`; }
+      +`<div class="cbar"><span class="cpill">blad ${esc(s.id)}${s.micro?' <span class="mf">· microfilm</span>':''}</span><span class="ccount">${CIX+1} / ${CSC.length}</span></div></div>`;
+  }
+  const n=p.n_bladen, bl=n+' blad'+(n===1?'':'en');
   d.innerHTML=`<div class="dwrap"><button class="dclose" onclick="document.getElementById('detail').className=''">×</button>
-    <div class="dcat">${p.emoji} ${esc(p.cat)} · ${esc(p.stad)}</div><div class="dtitle">${esc(p.gebouw||p.titel)}</div>
+    <div class="dcat"><span>${p.emoji} ${esc(p.cat)}</span><span class="invnr">inv.nr ${esc(p.invnr)}</span></div>
+    <div class="dtitle">${esc(p.gebouw||p.titel)}</div>
+    <div class="dloc">${p.locatie?esc(p.locatie)+', ':''}${esc(p.stad)}</div>
     ${carou}
-    <div class="dmeta">${p.locatie?'<b>'+esc(p.locatie)+'</b>, ':''}${esc(p.stad)} <span class="badge">${esc(p.prec)}</span><br>
-      <b>Periode:</b> ${per} &nbsp; <b>Soort:</b> ${esc(p.soort)}<br>
-      <b>${p.n_bladen}</b> bladen${p.n_micro?` · ${p.n_micro} microfilm`:''}${p.schalen&&p.schalen.length?`<br><b>Schaal:</b> ${esc(p.schalen.join(', '))}`:''}</div>
-    ${p.wd?`<a class="nalink" href="${esc(p.wd.url)}" target="_blank" rel="noopener">🔗 Wikidata: ${esc(p.wd.label)} →</a><br>`:''}
-    <a class="nalink" href="${na}" target="_blank" rel="noopener">Open het bouwproject bij het Nationaal Archief →</a></div>`;
+    <div class="dtags"><span>${esc(per)}</span><span>${esc(p.soort)}</span><span>${bl}${p.n_micro?' · '+p.n_micro+' microfilm':''}</span>${p.schalen&&p.schalen.length?`<span>schaal ${esc(p.schalen.join(', '))}</span>`:''}</div>
+    <div class="dlinks">${p.wd?`<a href="${esc(p.wd.url)}" target="_blank" rel="noopener">Wikidata: ${esc(p.wd.label)} ↗</a>`:''}<a href="${na}" target="_blank" rel="noopener">Bij het Nationaal Archief ↗</a></div>
+  </div>`;
 }
 const rmin=document.getElementById('rmin'),rmax=document.getElementById('rmax'),rfill=document.getElementById('rfill');
 function ylab(){document.getElementById('yrlab').textContent=(st.y0===YMIN&&st.y1===YMAX)?'':`(${st.y0}–${st.y1})`;}
@@ -196,9 +203,8 @@ fetch('./data.json').then(r=>r.json()).then(d=>{
   DATA=d;
   const yrs=DATA.flatMap(p=>[p.jaar_min,p.jaar_max]).filter(Boolean);
   YMIN=Math.min(...yrs); YMAX=Math.max(...yrs);
-  mats=[...new Set(DATA.map(p=>p.mat))];
-  cats=[...new Set(DATA.map(p=>p.cat))];
-  soorten=[...new Set(DATA.map(p=>p.soort))];
+  const byCnt=k=>{const m={};DATA.forEach(p=>m[p[k]]=(m[p[k]]||0)+1);return Object.keys(m).sort((a,b)=>m[b]-m[a]);};
+  mats=byCnt('mat'); cats=byCnt('cat'); soorten=byCnt('soort');
   st.mat=new Set(mats); st.cat=new Set(cats); st.soort=new Set(soorten); st.y0=YMIN; st.y1=YMAX;
   [rmin,rmax].forEach(r=>{r.min=YMIN;r.max=YMAX;r.step=1;}); rmin.value=YMIN; rmax.value=YMAX;
   document.getElementById('y0').textContent=YMIN; document.getElementById('y1').textContent=YMAX;

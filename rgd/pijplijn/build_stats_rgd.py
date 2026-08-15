@@ -93,13 +93,10 @@ h1{{font-size:25px;margin:0;letter-spacing:-.02em}}.sub{{color:var(--muted);font
     <div class="kpi"><b>{nl(nproj)}</b><span>bouwprojecten op de kaart</span></div>
     <div class="kpi"><b>{nl(nbl)}</b><span>tekeningen, foto's &amp; bestekken</span></div>
     <div class="kpi"><b>{nl(nplaats)}</b><span>plaatsen in Nederland</span></div>
-    <div class="kpi"><b>{round(100*op_adres/nproj)}%</b><span>op straat- of adresniveau</span></div>
+    <div class="kpi" style="cursor:help" title="Adres: {nl(nprec.get('adres',0))} · Straat: {nl(nprec.get('straat',0))} · Alleen plaats (terugval): {nl(nprec.get('plaats',0))}"><b>{round(100*op_adres/nproj)}%</b><span>op straat- of adresniveau&nbsp; <span style="color:#94a3b8">&#9432;</span></span></div>
   </div>
   <div class="panel"><h2>Bouwprojecten per functie</h2>{bars(cat, emoji=EMC, fmt=nl)}</div>
-  <div class="two">
-    <div class="panel"><h2>Materiaal</h2>{bars(mat, emoji=EMO, fmt=nl)}</div>
-    <div class="panel"><h2>Locatieprecisie</h2>{bars(prec, order=['adres','straat','plaats (terugval)'], fmt=nl)}</div>
-  </div>
+  <div class="panel"><h2>Materiaal</h2>{bars(mat, emoji=EMO, fmt=nl)}</div>
   <div class="panel"><h2>Per decennium (bouw- of tekeningjaar)</h2>{linechart(dec_order, dec)}</div>
   <div class="panel"><h2>Meeste bouwprojecten per plaats (top 15)</h2>{bars(steden, maxbars=15, fmt=nl)}</div>
   <div class="foot">Cijfers over de plaats-georganiseerde secties (IB/IIB tekeningen, IC foto's, ID bestekken). Bron: Nationaal Archief 4.RGD (CC0). Onderdeel van de <a href="https://archief.alanmoss.nl/">archiefprojecten</a>.</div>
