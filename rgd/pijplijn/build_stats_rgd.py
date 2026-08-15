@@ -13,6 +13,9 @@ nbl = sum(p["n_bladen"] for p in P)
 nplaats = len({p["stad"] for p in P})
 nprec = Counter(p.get("prec") for p in P)
 op_adres = nprec.get("adres", 0) + nprec.get("straat", 0)
+n_micro = sum(p.get("n_micro", 0) for p in P)
+pct_orig = round(100 * (nbl - n_micro) / nbl) if nbl else 0
+prov = Counter(p.get("provincie") for p in P if p.get("provincie"))
 EMO = {"tekening": "📐", "foto": "📷", "bestek": "📄"}
 EMC = {p["cat"]: p["emoji"] for p in P}
 
@@ -72,7 +75,7 @@ main{{max-width:900px;margin:0 auto;padding:24px 22px 70px}}
 .head{{display:flex;align-items:center;gap:14px;margin:4px 0 18px}}
 .logo{{width:52px;height:52px;border-radius:14px;flex:none;display:grid;place-items:center;font-size:26px;background:linear-gradient(135deg,var(--accent),#0891b2);box-shadow:0 2px 10px #0e749033}}
 h1{{font-size:25px;margin:0;letter-spacing:-.02em}}.sub{{color:var(--muted);font-size:14px;margin-top:2px}}
-.kpis{{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 8px}}
+.kpis{{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:12px;margin:0 0 8px}}
 .kpi{{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}}
 .kpi b{{display:block;font-size:26px;color:var(--accent);letter-spacing:-.02em}}.kpi span{{font-size:12.5px;color:var(--muted)}}
 .panel{{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:16px 0}}
@@ -94,11 +97,12 @@ h1{{font-size:25px;margin:0;letter-spacing:-.02em}}.sub{{color:var(--muted);font
     <div class="kpi"><b>{nl(nbl)}</b><span>tekeningen, foto's &amp; bestekken</span></div>
     <div class="kpi"><b>{nl(nplaats)}</b><span>plaatsen in Nederland</span></div>
     <div class="kpi" style="cursor:help" title="Adres: {nl(nprec.get('adres',0))} · Straat: {nl(nprec.get('straat',0))} · Alleen plaats (terugval): {nl(nprec.get('plaats',0))}"><b>{round(100*op_adres/nproj)}%</b><span>op straat- of adresniveau&nbsp; <span style="color:#94a3b8">&#9432;</span></span></div>
+    <div class="kpi" style="cursor:help" title="{pct_orig}% origineel gedigitaliseerd · {100-pct_orig}% alleen op microfilm bewaard"><b>{pct_orig}%</b><span>origineel gedigitaliseerd&nbsp; <span style="color:#94a3b8">&#9432;</span></span></div>
   </div>
   <div class="panel"><h2>Bouwprojecten per functie</h2>{bars(cat, emoji=EMC, fmt=nl)}</div>
   <div class="panel"><h2>Materiaal</h2>{bars(mat, emoji=EMO, fmt=nl)}</div>
+  {'<div class="panel"><h2>Bouwprojecten per provincie</h2>' + bars(prov, fmt=nl) + '</div>' if prov else ''}
   <div class="panel"><h2>Per decennium (bouw- of tekeningjaar)</h2>{linechart(dec_order, dec)}</div>
-  <div class="panel"><h2>Meeste bouwprojecten per plaats (top 15)</h2>{bars(steden, maxbars=15, fmt=nl)}</div>
   <div class="foot">Cijfers over de plaats-georganiseerde secties (IB/IIB tekeningen, IC foto's, ID bestekken). Bron: Nationaal Archief 4.RGD (CC0). Onderdeel van de <a href="https://archief.alanmoss.nl/">archiefprojecten</a>.</div>
 </main></body></html>"""
 os.makedirs(f"{SITE}/inzichten", exist_ok=True)

@@ -52,9 +52,8 @@ html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Ro
 .carou{position:relative;margin:2px 0 4px}
 .cnav{position:absolute;top:82px;border:none;background:rgba(255,255,255,.9);border-radius:50%;width:30px;height:30px;font-size:19px;line-height:1;color:var(--ink);cursor:pointer;box-shadow:0 1px 5px rgba(0,0,0,.25)}
 .cnav:hover{background:#fff;color:var(--accent)}.cnav.prev{left:6px}.cnav.next{right:6px}
-.cbar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:6px}
-.cpill{font-size:11.5px;background:#eef2f4;border-radius:20px;padding:2px 9px;color:#374151}
-.cpill .mf{color:#92400e}
+.cbar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:7px;font-size:11.5px;color:var(--muted)}
+.cpill .mf{color:#b45309;font-weight:600}
 .ccount{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
 #detail{position:fixed;top:14px;right:14px;z-index:1150;width:346px;max-width:calc(100vw - 28px);max-height:calc(100vh - 28px);
   overflow:auto;background:var(--panel);backdrop-filter:blur(10px);border:1px solid var(--line);border-top:3px solid var(--accent);
@@ -63,15 +62,15 @@ html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Ro
 .dscan{display:block;width:100%;height:180px;object-fit:cover;background:#eef2f4;border:1px solid var(--line);border-radius:10px;cursor:zoom-in;margin:2px 0 10px}
 .dwrap{padding:12px 16px 16px}
 .dclose{float:right;border:none;background:none;font-size:20px;color:var(--muted);cursor:pointer;line-height:1}
-.dcat{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;display:flex;align-items:center;gap:8px}
-.dcat .invnr{margin-left:auto;font-weight:600;color:var(--muted);background:#eef2f4;border-radius:20px;padding:1px 9px;letter-spacing:0;text-transform:none}
-.dtitle{font-size:16px;font-weight:700;margin:3px 0 1px;line-height:1.25}
-.dloc{font-size:12.5px;color:var(--muted);margin:0 0 9px}
-.dtags{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 10px}
-.dtags span{font-size:11.5px;background:#eef2f4;color:#374151;border-radius:20px;padding:2px 9px}
-.dlinks{display:flex;flex-direction:column;gap:3px}
-.dlinks a{font-size:12.5px;color:var(--accent);text-decoration:none}
-.dlinks a:hover{text-decoration:underline}
+.dtitle{font-size:16.5px;font-weight:700;margin:0 0 2px;line-height:1.25;color:var(--ink)}
+.dloc{font-size:13px;color:var(--muted);margin:0}
+.catbadge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--accent-dark);background:#e6f3f6;border-radius:20px;padding:3px 11px;margin:9px 0 2px}
+.dmeta{font-size:12.5px;color:var(--muted);line-height:1.55;margin:9px 0 0}
+.dmeta b{color:var(--ink);font-weight:600}
+.wdlink{display:inline-block;margin:9px 0 0;font-size:12.5px;color:var(--accent);text-decoration:none}
+.wdlink:hover{text-decoration:underline}
+.dossbar{display:block;margin-top:10px;background:var(--accent);color:#fff;text-align:center;padding:9px 10px;border-radius:9px;font-weight:700;font-size:12.5px;text-decoration:none}
+.dossbar:hover{background:var(--accent-dark)}
 .emoji-marker div{font-size:20px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4));text-align:center;line-height:1}
 .credit{position:fixed;left:14px;bottom:8px;z-index:1000;font-size:10px;color:#374151;background:#ffffffcc;padding:2px 7px;border-radius:6px}
 .fbk{position:fixed;bottom:12px;right:12px;z-index:1200;font-size:12px;color:var(--accent);text-decoration:none;background:var(--panel);
@@ -158,12 +157,13 @@ function renderDetail(){
   }
   const n=p.n_bladen, bl=n+' blad'+(n===1?'':'en');
   d.innerHTML=`<div class="dwrap"><button class="dclose" onclick="document.getElementById('detail').className=''">×</button>
-    <div class="dcat"><span>${p.emoji} ${esc(p.cat)}</span><span class="invnr">inv.nr ${esc(p.invnr)}</span></div>
     <div class="dtitle">${esc(p.gebouw||p.titel)}</div>
     <div class="dloc">${p.locatie?esc(p.locatie)+', ':''}${esc(p.stad)}</div>
+    <div class="catbadge">${p.emoji} ${esc(p.cat)}</div>
     ${carou}
-    <div class="dtags"><span>${esc(per)}</span><span>${esc(p.soort)}</span><span>${bl}${p.n_micro?' · '+p.n_micro+' microfilm':''}</span>${p.schalen&&p.schalen.length?`<span>schaal ${esc(p.schalen.join(', '))}</span>`:''}</div>
-    <div class="dlinks">${p.wd?`<a href="${esc(p.wd.url)}" target="_blank" rel="noopener">Wikidata: ${esc(p.wd.label)} ↗</a>`:''}<a href="${na}" target="_blank" rel="noopener">Bij het Nationaal Archief ↗</a></div>
+    <div class="dmeta"><b>${esc(per)}</b> · ${esc(p.soort)} · ${bl}${p.n_micro?` · ${p.n_micro} microfilm`:''}${p.schalen&&p.schalen.length?` · schaal ${esc(p.schalen.join(', '))}`:''}</div>
+    ${p.wd?`<a class="wdlink" href="${esc(p.wd.url)}" target="_blank" rel="noopener">🔗 Wikidata: ${esc(p.wd.label)} ↗</a>`:''}
+    <a class="dossbar" href="${na}" target="_blank" rel="noopener">📄 Inventaris ${esc(p.invnr)} bij het Nationaal Archief</a>
   </div>`;
 }
 const rmin=document.getElementById('rmin'),rmax=document.getElementById('rmax'),rfill=document.getElementById('rfill');

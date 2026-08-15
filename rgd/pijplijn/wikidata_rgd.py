@@ -6,7 +6,7 @@ import json, os, sys, time, re, urllib.parse, urllib.request
 
 WORK = os.path.dirname(os.path.abspath(__file__))
 PLACE = sys.argv[1] if len(sys.argv) > 1 else "Amsterdam"
-FN = f"{WORK}/rgd_{PLACE.lower().replace(' ','_')}.json"
+FN = f"{WORK}/rgd_{'all' if PLACE.lower()=='all' else PLACE.lower().replace(' ','_')}.json"
 P = json.load(open(FN, encoding="utf-8"))
 UA = "RGDtekeningenkaart/1.0 (mossalan@gmail.com)"
 API = "https://www.wikidata.org/w/api.php?"
@@ -14,8 +14,13 @@ STOP = set("de het een en van der den ten te op aan voor gebouw tekeningen teken
            "voormalig voormalige oud oude nieuw nieuwe c.a bureau kantoor huis".split())
 
 def jget(params):
-    req = urllib.request.Request(API + urllib.parse.urlencode(params), headers={"User-Agent": UA})
-    with urllib.request.urlopen(req, timeout=30) as r: return json.load(r)
+    for _ in range(3):                       # retry tegen throttling (429/timeouts)
+        try:
+            req = urllib.request.Request(API + urllib.parse.urlencode(params), headers={"User-Agent": UA})
+            with urllib.request.urlopen(req, timeout=30) as r: return json.load(r)
+        except Exception:
+            time.sleep(1.2)
+    return {}
 
 def toks(s):
     return {w for w in re.findall(r"[a-zàâäéèêëïîôöùûüç]+", (s or "").lower()) if w not in STOP and len(w) > 2}
@@ -47,36 +52,33 @@ def coord_of(qid):
     except Exception:
         return None
 
-matched = []
+matched = []; done = 0
 for p in P:
+    done += 1
+    if p.get("prec") not in ("adres", "straat", "buurt"): continue    # alleen geo-verifieerbaar (precies geplot)
     geb = p.get("gebouw", "")
-    if not geb or toks(geb) <= {"politiebureau", "politie"}: continue  # te generiek
-    try:
-        d = jget({"action": "query", "list": "search", "srsearch": f"{geb} {PLACE}",
-                  "srnamespace": "0", "srlimit": 6, "format": "json"})
-        time.sleep(0.12)
-        res = [s["title"] for s in d.get("query", {}).get("search", [])]
-    except Exception as e:
-        print("  ! zoek", geb, e); res = []
-    precise = p.get("prec") in ("adres", "straat", "buurt")
+    if not geb or toks(geb) <= {"politiebureau", "politie", "villa", "toren", "woonhuis"}: continue  # te generiek
+    stad = p.get("stad", "")                                          # zoek op gebouw + de éígen stad
+    d = jget({"action": "query", "list": "search", "srsearch": f"{geb} {stad}",
+              "srnamespace": "0", "srlimit": 6, "format": "json"})
+    time.sleep(0.15)
+    res = [s["title"] for s in d.get("query", {}).get("search", [])]
     pick = None
     for qid in res[:5]:
         cc = coord_of(qid)
         if not cc: continue
         clat, clon, label = cc
-        if precise and hav((p["lat"], p["lon"]), (clat, clon)) <= 1.5:   # zelfde plek als PDOK
-            pick = (qid, label, clat, clon); break
-        if not precise and (strong(geb, label) or strong(p["titel"], label)):
-            pick = (qid, label, clat, clon); break
-    if not pick: continue
-    qid, label, clat, clon = pick
-    wd = {"id": qid, "label": label, "url": "https://www.wikidata.org/wiki/" + qid, "lat": clat, "lon": clon}
-    p["wd"] = wd
-    if not precise:                                              # scherper dan stad-terugval
-        p["lat"], p["lon"], p["prec"], p["bron_geo"] = clat, clon, "wikidata", "wikidata"
-    matched.append((p["uid"], geb, label, qid, round(hav((p["lat"], p["lon"]), (clat, clon)), 2) if precise else 0))
+        if hav((p["lat"], p["lon"]), (clat, clon)) <= 1.2:           # Wikidata-gebouw bij het PDOK-punt
+            pick = (qid, label, round(hav((p["lat"], p["lon"]), (clat, clon)), 2)); break
+    if pick:
+        qid, label, dist = pick
+        p["wd"] = {"id": qid, "label": label, "url": "https://www.wikidata.org/wiki/" + qid}  # alleen link, geen coord
+        matched.append((p["uid"], geb, label, qid, dist))
+    if done % 200 == 0:
+        json.dump(P, open(FN, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+        print(f"  .. {done}/{len(P)} ({len(matched)} matches)", flush=True)
 
 json.dump(P, open(FN, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-print(f"{PLACE}: {len(matched)} Wikidata-matches")
-for u, g, l, q, dist in matched:
-    print(f"  {u:10s} {g[:30]:30s} -> {l} ({q}){' '+str(dist)+'km' if dist else ' [naam-match]'}")
+print(f"{PLACE}: {len(matched)} Wikidata-matches (geo-geverifieerd)")
+for u, g, l, q, dist in matched[:40]:
+    print(f"  {u:12s} {g[:30]:30s} -> {l} ({q}) {dist}km")
