@@ -142,6 +142,7 @@ function showDetail(p){
       <b>Periode:</b> ${per} &nbsp; <b>Soort:</b> ${esc(p.soort)}<br>
       <b>${p.n_bladen}</b> bladen${p.n_micro?` · ${p.n_micro} alleen microfilm`:''}${p.schalen&&p.schalen.length?`<br><b>Schaal:</b> ${esc(p.schalen.join(', '))}`:''}</div>
     <div class="dsheets">${sheets}</div>
+    ${p.wd?`<a class="nalink" href="${esc(p.wd.url)}" target="_blank" rel="noopener">🔗 Wikidata: ${esc(p.wd.label)} →</a><br>`:''}
     <a class="nalink" href="${na}" target="_blank" rel="noopener">Open het bouwproject bij het Nationaal Archief →</a></div>`;
   map.setView([p.lat,p.lon],Math.max(map.getZoom(),15),{animate:true});
 }

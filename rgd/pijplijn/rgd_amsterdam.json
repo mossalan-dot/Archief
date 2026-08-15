@@ -306,7 +306,14 @@
   "bron_geo": "pdok",
   "geo_naam": "Brouwersgracht 276, 1013HG Amsterdam",
   "thumb": "https://service.archief.nl/api/file/v1/thumb/95d5da25-8198-438b-99a4-95a92c33a7eb",
-  "scan_full": "https://service.archief.nl/api/file/v1/default/95d5da25-8198-438b-99a4-95a92c33a7eb"
+  "scan_full": "https://service.archief.nl/api/file/v1/default/95d5da25-8198-438b-99a4-95a92c33a7eb",
+  "wd": {
+   "id": "Q17309179",
+   "label": "IJkkantoor",
+   "url": "https://www.wikidata.org/wiki/Q17309179",
+   "lat": 52.38297,
+   "lon": 4.8846
+  }
  },
  {
   "uid": "45.1-45.13",
@@ -639,7 +646,14 @@
   "bron_geo": "pdok",
   "geo_naam": "Dam, Amsterdam",
   "thumb": "https://service.archief.nl/api/file/v1/thumb/34e18a24-4457-4215-a820-4c39597ecced",
-  "scan_full": "https://service.archief.nl/api/file/v1/default/34e18a24-4457-4215-a820-4c39597ecced"
+  "scan_full": "https://service.archief.nl/api/file/v1/default/34e18a24-4457-4215-a820-4c39597ecced",
+  "wd": {
+   "id": "Q1056152",
+   "label": "Paleis op de Dam",
+   "url": "https://www.wikidata.org/wiki/Q1056152",
+   "lat": 52.373167,
+   "lon": 4.891361
+  }
  },
  {
   "uid": "48.1-48.55",
@@ -1158,7 +1172,14 @@
   "bron_geo": "pdok",
   "geo_naam": "Dam, Amsterdam",
   "thumb": "https://service.archief.nl/api/file/v1/thumb/c728e2bb-f74d-473e-8230-823e84321158",
-  "scan_full": "https://service.archief.nl/api/file/v1/default/c728e2bb-f74d-473e-8230-823e84321158"
+  "scan_full": "https://service.archief.nl/api/file/v1/default/c728e2bb-f74d-473e-8230-823e84321158",
+  "wd": {
+   "id": "Q1419675",
+   "label": "Nieuwe Kerk",
+   "url": "https://www.wikidata.org/wiki/Q1419675",
+   "lat": 52.373889,
+   "lon": 4.891944
+  }
  },
  {
   "uid": "49.1-49.33",
@@ -6639,7 +6660,14 @@
   "bron_geo": "pdok",
   "geo_naam": "Paulus Potterstraat 34, 1071DB Amsterdam",
   "thumb": "https://service.archief.nl/api/file/v1/thumb/b32e9224-c0de-4058-badc-1227c9f712a8",
-  "scan_full": "https://service.archief.nl/api/file/v1/default/b32e9224-c0de-4058-badc-1227c9f712a8"
+  "scan_full": "https://service.archief.nl/api/file/v1/default/b32e9224-c0de-4058-badc-1227c9f712a8",
+  "wd": {
+   "id": "Q17302204",
+   "label": "Vossiusstraat 2-15, Amsterdam",
+   "url": "https://www.wikidata.org/wiki/Q17302204",
+   "lat": 52.361111,
+   "lon": 4.881667
+  }
  },
  {
   "uid": "88.1-88.85",
@@ -7428,7 +7456,14 @@
   "bron_geo": "pdok",
   "geo_naam": "Prinsengracht, Amsterdam",
   "thumb": "https://service.archief.nl/api/file/v1/thumb/637f5993-0866-49b8-912a-804e190cd130",
-  "scan_full": "https://service.archief.nl/api/file/v1/default/637f5993-0866-49b8-912a-804e190cd130"
+  "scan_full": "https://service.archief.nl/api/file/v1/default/637f5993-0866-49b8-912a-804e190cd130",
+  "wd": {
+   "id": "Q17299335",
+   "label": "voormalig Paleis van Justitie",
+   "url": "https://www.wikidata.org/wiki/Q17299335",
+   "lat": 52.36537,
+   "lon": 4.88274
+  }
  },
  {
   "uid": "89.1-89.2",
@@ -8415,7 +8450,14 @@
   "bron_geo": "pdok",
   "geo_naam": "Spuistraat, Amsterdam",
   "thumb": "https://service.archief.nl/api/file/v1/thumb/9a820403-c479-476b-98ce-967f8cff4bb8",
-  "scan_full": "https://service.archief.nl/api/file/v1/default/9a820403-c479-476b-98ce-967f8cff4bb8"
+  "scan_full": "https://service.archief.nl/api/file/v1/default/9a820403-c479-476b-98ce-967f8cff4bb8",
+  "wd": {
+   "id": "Q17291593",
+   "label": "Bungehuis",
+   "url": "https://www.wikidata.org/wiki/Q17291593",
+   "lat": 52.37196,
+   "lon": 4.88904
+  }
  },
  {
   "uid": "93.1-93.411",
@@ -12138,7 +12180,14 @@
   "bron_geo": "pdok",
   "geo_naam": "Stadhouderskade 42, 1071ZD Amsterdam",
   "thumb": "https://service.archief.nl/api/file/v1/thumb/d23a570f-7a24-4adc-bfca-079bfed9c441",
-  "scan_full": "https://service.archief.nl/api/file/v1/default/d23a570f-7a24-4adc-bfca-079bfed9c441"
+  "scan_full": "https://service.archief.nl/api/file/v1/default/d23a570f-7a24-4adc-bfca-079bfed9c441",
+  "wd": {
+   "id": "Q190804",
+   "label": "Rijksmuseum Amsterdam",
+   "url": "https://www.wikidata.org/wiki/Q190804",
+   "lat": 52.36,
+   "lon": 4.885278
+  }
  },
  {
   "uid": "94.1-94.6",
@@ -12447,7 +12496,14 @@
   "bron_geo": "pdok",
   "geo_naam": "Stadhouderskade 86, 1073AT Amsterdam",
   "thumb": "https://service.archief.nl/api/file/v1/thumb/673758f4-8540-4597-adec-4e69f02df45d",
-  "scan_full": "https://service.archief.nl/api/file/v1/default/673758f4-8540-4597-adec-4e69f02df45d"
+  "scan_full": "https://service.archief.nl/api/file/v1/default/673758f4-8540-4597-adec-4e69f02df45d",
+  "wd": {
+   "id": "Q17292451",
+   "label": "Gebouw van de Rijksacademie voor Beeldende Kunsten",
+   "url": "https://www.wikidata.org/wiki/Q17292451",
+   "lat": 52.357684,
+   "lon": 4.894683
+  }
  },
  {
   "uid": "96.1-96.2",
@@ -13905,6 +13961,13 @@
   "bron_geo": "pdok",
   "geo_naam": "Oude Haagseweg 50, 1066BW Amsterdam",
   "thumb": "https://service.archief.nl/api/file/v1/thumb/8fb1758f-e238-49f4-93a9-42d17e7861eb",
-  "scan_full": "https://service.archief.nl/api/file/v1/default/8fb1758f-e238-49f4-93a9-42d17e7861eb"
+  "scan_full": "https://service.archief.nl/api/file/v1/default/8fb1758f-e238-49f4-93a9-42d17e7861eb",
+  "wd": {
+   "id": "Q20871153",
+   "label": "Militaire Drinkwatervoorziening",
+   "url": "https://www.wikidata.org/wiki/Q20871153",
+   "lat": 52.334242,
+   "lon": 4.806678
+  }
  }
 ]
