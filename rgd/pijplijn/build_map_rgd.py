@@ -98,7 +98,7 @@ html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Ro
 </style>
 </head>
 <body>
-<nav class="ptabs"><a href="./" class="on">🗺️ Kaart</a><a href="https://archief.alanmoss.nl/" class="ext">← Archiefprojecten</a></nav>
+<nav class="ptabs"><a href="./" class="on">🗺️ Kaart</a><a href="./inzichten/">📊 Inzichten</a><a href="./over/">ℹ️ Over</a><a href="https://archief.alanmoss.nl/" class="ext">← Archiefprojecten</a></nav>
 <div id="map"></div>
 <div id="side">
   <div class="phead"><div class="plogo">📐</div><div><h1>Tekeningenarchief RGD</h1><div class="sub">__SUB__</div></div></div>
