@@ -50,8 +50,11 @@ html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Ro
 .chip.on{border-color:var(--accent);background:#f0fafc}
 .yr{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
 input[type=range]{flex:1;accent-color:var(--accent)}
-#detail{border-top:2px solid var(--accent);display:none}
+#detail{position:fixed;top:14px;right:14px;z-index:1150;width:346px;max-width:calc(100vw - 28px);max-height:calc(100vh - 28px);
+  overflow:auto;background:var(--panel);backdrop-filter:blur(10px);border:1px solid var(--line);border-top:3px solid var(--accent);
+  border-radius:16px;box-shadow:0 6px 28px rgba(0,0,0,.18);display:none}
 #detail.show{display:block}
+.dscan{display:block;width:100%;height:180px;object-fit:cover;background:#eef2f4;border:1px solid var(--line);border-radius:10px;cursor:zoom-in;margin:2px 0 10px}
 .dwrap{padding:12px 16px 16px}
 .dclose{float:right;border:none;background:none;font-size:20px;color:var(--muted);cursor:pointer;line-height:1}
 .dcat{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em}
@@ -84,8 +87,8 @@ input[type=range]{flex:1;accent-color:var(--accent)}
   <div class="sec"><h2>Soort tekening</h2><div class="chips" id="soortchips"></div></div>
   <div class="sec"><h2>Periode <span id="yrlab" style="color:var(--muted)"></span></h2>
     <div class="yr"><span id="y0"></span><input type="range" id="rmin"><input type="range" id="rmax"><span id="y1"></span></div></div>
-  <div id="detail"></div>
 </div>
+<div id="detail"></div>
 <a class="fbk" href="mailto:mossalan@gmail.com?subject=RGD-tekeningenkaart%3A%20feedback%20of%20bugmelding" title="Feedback of een fout melden">✉︎ Feedback</a>
 <div class="credit">Kaart © OpenStreetMap-bijdragers · data: Nationaal Archief 4.RGD (CC0)</div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -127,11 +130,13 @@ function showDetail(p){
   const d=document.getElementById('detail'); d.className='show';
   const per=(p.jaar_min?(p.jaar_min===p.jaar_max?p.jaar_min:p.jaar_min+'–'+p.jaar_max):'onbekend');
   const na='https://www.nationaalarchief.nl/onderzoeken/archief/4.RGD/invnr/'+encodeURIComponent(p.uid.split('-')[0]);
+  const scan=p.thumb?`<a href="${p.scan_full||p.thumb}" target="_blank" rel="noopener" title="Open de scan bij het Nationaal Archief"><img class="dscan" src="${esc(p.thumb)}" loading="lazy" alt="voorbeeldscan"></a>`:'';
   const sheets=p.sheets.map(s=>`<div class="sh"><a href="${s.handle||na}" target="_blank" rel="noopener">${esc(s.id)} ↗</a>`
     +`<span>${esc(s.title||'Tekening')}${s.year?' · '+s.year:''}</span>`
     +`<span class="sc">${s.scale?esc(s.scale):''}${s.micro?' <span class="badge mf">microfilm</span>':''}</span></div>`).join('');
   d.innerHTML=`<div class="dwrap"><button class="dclose" onclick="document.getElementById('detail').className=''">×</button>
     <div class="dcat">${p.emoji} ${esc(p.cat)}</div><div class="dtitle">${esc(p.gebouw||p.titel)}</div>
+    ${scan}
     <div class="dmeta">${p.locatie?'<b>'+esc(p.locatie)+'</b>, ':''}${esc(p.stad)}
       <span class="badge">${esc(p.prec)}</span><br>
       <b>Periode:</b> ${per} &nbsp; <b>Soort:</b> ${esc(p.soort)}<br>
@@ -139,7 +144,6 @@ function showDetail(p){
     <div class="dsheets">${sheets}</div>
     <a class="nalink" href="${na}" target="_blank" rel="noopener">Open het bouwproject bij het Nationaal Archief →</a></div>`;
   map.setView([p.lat,p.lon],Math.max(map.getZoom(),15),{animate:true});
-  document.getElementById('side').scrollTop=1e5;
 }
 // year sliders
 const rmin=document.getElementById('rmin'),rmax=document.getElementById('rmax');

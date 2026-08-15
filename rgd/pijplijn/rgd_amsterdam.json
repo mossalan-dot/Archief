@@ -33,9 +33,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-20b0-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.37308,
-  "lon": 4.892453,
-  "prec": "plaats"
+  "lat": 52.366487,
+  "lon": 4.919787,
+  "prec": "plaats",
+  "bron_geo": "pdok",
+  "geo_naam": "Gemeente Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/c8c7bb0a-290e-4d6c-98d0-68b88651cacb",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/c8c7bb0a-290e-4d6c-98d0-68b88651cacb"
  },
  {
   "uid": "41.1-41.7",
@@ -116,9 +120,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-20b8-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.38861,
-  "lon": 4.91978,
-  "prec": "straat"
+  "lat": 52.387997,
+  "lon": 4.91846,
+  "prec": "straat",
+  "bron_geo": "pdok",
+  "geo_naam": "Adelaarsweg, Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/758a2fc9-72c8-4ed6-8f73-101ddb1081a3",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/758a2fc9-72c8-4ed6-8f73-101ddb1081a3"
  },
  {
   "uid": "42.1-42.2",
@@ -154,9 +162,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-20bb-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.371642,
-  "lon": 4.859284,
-  "prec": "straat"
+  "lat": 52.378675,
+  "lon": 4.857009,
+  "prec": "straat",
+  "bron_geo": "pdok",
+  "geo_naam": "Admiraal De Ruijterweg, Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/7d28a3d5-f4c7-4aa2-81b9-b3ca370e354e",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/7d28a3d5-f4c7-4aa2-81b9-b3ca370e354e"
  },
  {
   "uid": "43.1-43.7",
@@ -237,9 +249,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-20c3-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.37308,
-  "lon": 4.892453,
-  "prec": "plaats"
+  "lat": 52.366487,
+  "lon": 4.919787,
+  "prec": "plaats",
+  "bron_geo": "pdok",
+  "geo_naam": "Gemeente Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/ac0cf653-1af0-4800-b3d8-577d9c80495c",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/ac0cf653-1af0-4800-b3d8-577d9c80495c"
  },
  {
   "uid": "44.1-44.3",
@@ -286,7 +302,11 @@
   ],
   "lat": 52.382988,
   "lon": 4.884562,
-  "prec": "adres"
+  "prec": "adres",
+  "bron_geo": "pdok",
+  "geo_naam": "Brouwersgracht 276, 1013HG Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/95d5da25-8198-438b-99a4-95a92c33a7eb",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/95d5da25-8198-438b-99a4-95a92c33a7eb"
  },
  {
   "uid": "45.1-45.13",
@@ -421,9 +441,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-20d5-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.357731,
-  "lon": 4.913632,
-  "prec": "adres"
+  "lat": 52.358232,
+  "lon": 4.913316,
+  "prec": "straat",
+  "bron_geo": "pdok",
+  "geo_naam": "Camperstraat, Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/bf3c32c2-5e6b-4ea5-bc46-907b10121d4b",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/bf3c32c2-5e6b-4ea5-bc46-907b10121d4b"
  },
  {
   "uid": "46.1-46.4",
@@ -479,7 +503,11 @@
   ],
   "lat": 52.369074,
   "lon": 4.926273,
-  "prec": "adres"
+  "prec": "adres",
+  "bron_geo": "pdok",
+  "geo_naam": "Conradstraat 23, 1018NE Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/86bc5e0d-f11f-4477-be01-7f18acc791d3",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/86bc5e0d-f11f-4477-be01-7f18acc791d3"
  },
  {
   "uid": "47.1-47.12",
@@ -605,9 +633,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-20e3-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.373116,
-  "lon": 4.892351,
-  "prec": "straat"
+  "lat": 52.372971,
+  "lon": 4.893044,
+  "prec": "straat",
+  "bron_geo": "pdok",
+  "geo_naam": "Dam, Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/34e18a24-4457-4215-a820-4c39597ecced",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/34e18a24-4457-4215-a820-4c39597ecced"
  },
  {
   "uid": "48.1-48.55",
@@ -1120,9 +1152,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-211b-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.373116,
-  "lon": 4.892351,
-  "prec": "straat"
+  "lat": 52.372971,
+  "lon": 4.893044,
+  "prec": "straat",
+  "bron_geo": "pdok",
+  "geo_naam": "Dam, Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/c728e2bb-f74d-473e-8230-823e84321158",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/c728e2bb-f74d-473e-8230-823e84321158"
  },
  {
   "uid": "49.1-49.33",
@@ -1437,9 +1473,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-213d-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.380237,
-  "lon": 4.893419,
-  "prec": "straat"
+  "lat": 52.380171,
+  "lon": 4.895263,
+  "prec": "straat",
+  "bron_geo": "pdok",
+  "geo_naam": "Droogbak, Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/63fc2c08-abdf-4fc5-b1ba-cd2d4b4333af",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/63fc2c08-abdf-4fc5-b1ba-cd2d4b4333af"
  },
  {
   "uid": "50.1-50.19",
@@ -1628,9 +1668,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-2151-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.372268,
-  "lon": 4.90762,
-  "prec": "straat"
+  "lat": 52.372248,
+  "lon": 4.907593,
+  "prec": "straat",
+  "bron_geo": "pdok",
+  "geo_naam": "'s-Gravenhekje, Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/1e081ad9-6461-4f86-8196-18499d466fe5",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/1e081ad9-6461-4f86-8196-18499d466fe5"
  },
  {
   "uid": "51.1-51.4",
@@ -1684,9 +1728,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-2156-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.37308,
-  "lon": 4.892453,
-  "prec": "plaats"
+  "lat": 52.072073,
+  "lon": 4.293001,
+  "prec": "plaats",
+  "bron_geo": "pdok",
+  "geo_naam": "Gemeente 's-Gravenhage",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/e2c0d4e8-ef1d-4c62-9d65-07613f4fe2ae",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/e2c0d4e8-ef1d-4c62-9d65-07613f4fe2ae"
  },
  {
   "uid": "52.1-52.52",
@@ -2109,9 +2157,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-2184-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.349988,
-  "lon": 4.856021,
-  "prec": "adres"
+  "lat": 52.348562,
+  "lon": 4.854972,
+  "prec": "straat",
+  "bron_geo": "pdok",
+  "geo_naam": "Havenstraat, Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/4c550489-7269-4951-bfd8-54be3d7313dc",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/4c550489-7269-4951-bfd8-54be3d7313dc"
  },
  {
   "uid": "53.1-53.17",
@@ -2282,9 +2334,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-2196-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.365549,
-  "lon": 4.899101,
-  "prec": "adres"
+  "lat": 52.369082,
+  "lon": 4.886379,
+  "prec": "adres",
+  "bron_geo": "pdok",
+  "geo_naam": "Herengracht 346A, 1016CG Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/a6c6c72b-d538-478e-b0ef-97ea10eda673",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/a6c6c72b-d538-478e-b0ef-97ea10eda673"
  },
  {
   "uid": "54.1-54.2",
@@ -2322,7 +2378,11 @@
   ],
   "lat": 52.368094,
   "lon": 4.886316,
-  "prec": "adres"
+  "prec": "adres",
+  "bron_geo": "pdok",
+  "geo_naam": "Herengracht 380, 1016CJ Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/8ac43947-639a-4ee1-9b00-e9ee106390d9",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/8ac43947-639a-4ee1-9b00-e9ee106390d9"
  },
  {
   "uid": "55.1-55.2",
@@ -2358,9 +2418,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-219c-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.365549,
-  "lon": 4.899101,
-  "prec": "adres"
+  "lat": 52.370191,
+  "lon": 4.887126,
+  "prec": "straat",
+  "bron_geo": "pdok",
+  "geo_naam": "Herengracht, Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/8ce7b0f2-d96d-472a-9fd2-c6064dee4ca9",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/8ce7b0f2-d96d-472a-9fd2-c6064dee4ca9"
  },
  {
   "uid": "56.1-56.5",
@@ -2423,9 +2487,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-21a2-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.35884,
-  "lon": 4.885618,
-  "prec": "straat"
+  "lat": 52.360138,
+  "lon": 4.883405,
+  "prec": "straat",
+  "bron_geo": "pdok",
+  "geo_naam": "Hobbemastraat, Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/1469a892-52c0-4036-a196-55549e01ec06",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/1469a892-52c0-4036-a196-55549e01ec06"
  },
  {
   "uid": "57.1",
@@ -2454,9 +2522,13 @@
     "handle": "http://hdl.handle.net/10648/d2944109-7f19-9283-e053-6df0900aec3e"
    }
   ],
-  "lat": 52.37308,
-  "lon": 4.892453,
-  "prec": "plaats"
+  "lat": 52.360138,
+  "lon": 4.883405,
+  "prec": "straat",
+  "bron_geo": "pdok",
+  "geo_naam": "Hobbemastraat, Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/90440c4f-1679-4381-8fbf-450d3026f0fa",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/90440c4f-1679-4381-8fbf-450d3026f0fa"
  },
  {
   "uid": "58.1-58.3",
@@ -2501,9 +2573,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-21a8-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.362193,
-  "lon": 4.944804,
-  "prec": "adres"
+  "lat": 52.362053,
+  "lon": 4.941446,
+  "prec": "straat",
+  "bron_geo": "pdok",
+  "geo_naam": "Insulindeweg, Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/2a6bb501-a6b2-4a60-a6b2-06e915e18111",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/2a6bb501-a6b2-4a60-a6b2-06e915e18111"
  },
  {
   "uid": "59.1-73.4",
@@ -4684,9 +4760,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-22a7-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.37104,
-  "lon": 4.915882,
-  "prec": "straat"
+  "lat": 52.371223,
+  "lon": 4.915991,
+  "prec": "straat",
+  "bron_geo": "pdok",
+  "geo_naam": "Kattenburgerplein, Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/11f88c51-c0a8-4807-8661-a4e24275cb7b",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/11f88c51-c0a8-4807-8661-a4e24275cb7b"
  },
  {
   "uid": "74.1-80.2",
@@ -5175,9 +5255,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-22e2-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.363287,
-  "lon": 4.883454,
-  "prec": "straat"
+  "lat": 52.363316,
+  "lon": 4.883214,
+  "prec": "straat",
+  "bron_geo": "pdok",
+  "geo_naam": "Kleine-Gartmanplantsoen, Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/e1636163-10d0-4281-a53b-581854a6eb8e",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/e1636163-10d0-4281-a53b-581854a6eb8e"
  },
  {
   "uid": "81.1-81.68",
@@ -5809,9 +5893,13 @@
     "handle": "http://hdl.handle.net/10648/73ed24c4-39bc-2933-e053-09f0900a16a2"
    }
   ],
-  "lat": 52.371596,
-  "lon": 4.899016,
-  "prec": "adres"
+  "lat": 52.370007,
+  "lon": 4.898105,
+  "prec": "straat",
+  "bron_geo": "pdok",
+  "geo_naam": "Kloveniersburgwal, Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/db08e390-9979-4bc9-af2b-db65f6647573",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/db08e390-9979-4bc9-af2b-db65f6647573"
  },
  {
   "uid": "82.1-82.3",
@@ -5856,9 +5944,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-232a-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.354959,
-  "lon": 4.861247,
-  "prec": "adres"
+  "lat": 52.355122,
+  "lon": 4.864238,
+  "prec": "straat",
+  "bron_geo": "pdok",
+  "geo_naam": "Koningslaan, Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/64fd91aa-ccb9-45dc-b9f2-eb485bf807cc",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/64fd91aa-ccb9-45dc-b9f2-eb485bf807cc"
  },
  {
   "uid": "83",
@@ -5887,9 +5979,13 @@
     "handle": "http://hdl.handle.net/10648/3ea73a06-6d17-42d2-a901-77117671b432"
    }
   ],
-  "lat": 52.37308,
-  "lon": 4.892453,
-  "prec": "plaats"
+  "lat": 52.359844,
+  "lon": 4.881573,
+  "prec": "straat",
+  "bron_geo": "pdok",
+  "geo_naam": "Jan Luijkenstraat, Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/19570444-ce11-47d5-ab8c-c2d80cba9e01",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/19570444-ce11-47d5-ab8c-c2d80cba9e01"
  },
  {
   "uid": "84.1-84.11",
@@ -6006,9 +6102,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-2337-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.37308,
-  "lon": 4.892453,
-  "prec": "plaats"
+  "lat": 52.355871,
+  "lon": 4.882114,
+  "prec": "straat",
+  "bron_geo": "pdok",
+  "geo_naam": "Gabriël Metsustraat, Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/ef07e665-cc1b-4238-b66b-27c44113c9cc",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/ef07e665-cc1b-4238-b66b-27c44113c9cc"
  },
  {
   "uid": "85.1-85.18",
@@ -6188,9 +6288,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-234a-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.37308,
-  "lon": 4.892453,
-  "prec": "plaats"
+  "lat": 52.366487,
+  "lon": 4.919787,
+  "prec": "plaats",
+  "bron_geo": "pdok",
+  "geo_naam": "Gemeente Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/d0232345-da6e-42a3-bb92-df36c56a2e3b",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/d0232345-da6e-42a3-bb92-df36c56a2e3b"
  },
  {
   "uid": "86.1-86.29",
@@ -6469,9 +6573,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-2368-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.370797,
-  "lon": 4.898113,
-  "prec": "adres"
+  "lat": 52.371257,
+  "lon": 4.897749,
+  "prec": "straat",
+  "bron_geo": "pdok",
+  "geo_naam": "Oude Hoogstraat, Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/130f37b6-ff1c-450f-9ec6-ad5010856ff4",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/130f37b6-ff1c-450f-9ec6-ad5010856ff4"
  },
  {
   "uid": "87.1-87.4",
@@ -6527,7 +6635,11 @@
   ],
   "lat": 52.35871,
   "lon": 4.879993,
-  "prec": "adres"
+  "prec": "adres",
+  "bron_geo": "pdok",
+  "geo_naam": "Paulus Potterstraat 34, 1071DB Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/b32e9224-c0de-4058-badc-1227c9f712a8",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/b32e9224-c0de-4058-badc-1227c9f712a8"
  },
  {
   "uid": "88.1-88.85",
@@ -7310,9 +7422,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-23c3-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.365751,
-  "lon": 4.882848,
-  "prec": "adres"
+  "lat": 52.368774,
+  "lon": 4.882864,
+  "prec": "straat",
+  "bron_geo": "pdok",
+  "geo_naam": "Prinsengracht, Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/637f5993-0866-49b8-912a-804e190cd130",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/637f5993-0866-49b8-912a-804e190cd130"
  },
  {
   "uid": "89.1-89.2",
@@ -7348,9 +7464,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-23c6-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.405592,
-  "lon": 4.784053,
-  "prec": "straat"
+  "lat": 52.475123,
+  "lon": 4.658345,
+  "prec": "straat",
+  "bron_geo": "pdok",
+  "geo_naam": "Rietlanden, Beverwijk",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/2ac5e08d-a7fb-4328-b776-87eed1b3e283",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/2ac5e08d-a7fb-4328-b776-87eed1b3e283"
  },
  {
   "uid": "90.1-90.4",
@@ -7404,9 +7524,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-23cb-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.340945,
-  "lon": 4.907269,
-  "prec": "adres"
+  "lat": 52.344718,
+  "lon": 4.906098,
+  "prec": "adres",
+  "bron_geo": "pdok",
+  "geo_naam": "Rijnstraat 95, 1079HA Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/e6edb611-2c07-4a88-9faa-82dd570ff1e3",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/e6edb611-2c07-4a88-9faa-82dd570ff1e3"
  },
  {
   "uid": "91.1-91.60",
@@ -7964,9 +8088,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-2408-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.37643,
-  "lon": 4.891068,
-  "prec": "adres"
+  "lat": 52.374088,
+  "lon": 4.888407,
+  "prec": "adres",
+  "bron_geo": "pdok",
+  "geo_naam": "Singel 208A, 1016AA Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/1baa3df0-10fd-423e-8e3d-8cc723d821a3",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/1baa3df0-10fd-423e-8e3d-8cc723d821a3"
  },
  {
   "uid": "92.1-92.33",
@@ -8281,9 +8409,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-242a-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.376001,
-  "lon": 4.892285,
-  "prec": "straat"
+  "lat": 52.373616,
+  "lon": 4.889882,
+  "prec": "straat",
+  "bron_geo": "pdok",
+  "geo_naam": "Spuistraat, Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/9a820403-c479-476b-98ce-967f8cff4bb8",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/9a820403-c479-476b-98ce-967f8cff4bb8"
  },
  {
   "uid": "93.1-93.411",
@@ -12002,7 +12134,11 @@
   ],
   "lat": 52.360827,
   "lon": 4.884463,
-  "prec": "adres"
+  "prec": "adres",
+  "bron_geo": "pdok",
+  "geo_naam": "Stadhouderskade 42, 1071ZD Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/d23a570f-7a24-4adc-bfca-079bfed9c441",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/d23a570f-7a24-4adc-bfca-079bfed9c441"
  },
  {
   "uid": "94.1-94.6",
@@ -12074,9 +12210,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-25cd-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.37308,
-  "lon": 4.892453,
-  "prec": "plaats"
+  "lat": 52.366487,
+  "lon": 4.919787,
+  "prec": "plaats",
+  "bron_geo": "pdok",
+  "geo_naam": "Gemeente Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/b7737ccd-7c1f-4461-b95b-921e1fdeb58d",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/b7737ccd-7c1f-4461-b95b-921e1fdeb58d"
  },
  {
   "uid": "95.1-95.23",
@@ -12303,7 +12443,11 @@
   ],
   "lat": 52.357685,
   "lon": 4.894654,
-  "prec": "adres"
+  "prec": "adres",
+  "bron_geo": "pdok",
+  "geo_naam": "Stadhouderskade 86, 1073AT Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/673758f4-8540-4597-adec-4e69f02df45d",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/673758f4-8540-4597-adec-4e69f02df45d"
  },
  {
   "uid": "96.1-96.2",
@@ -12339,9 +12483,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-25e8-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.349825,
-  "lon": 4.885434,
-  "prec": "adres"
+  "lat": 52.346439,
+  "lon": 4.86895,
+  "prec": "adres",
+  "bron_geo": "pdok",
+  "geo_naam": "Stadionweg 137, 1077SL Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/be09f5f6-614f-4f3c-bb3a-47c46c7d4966",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/be09f5f6-614f-4f3c-bb3a-47c46c7d4966"
  },
  {
   "uid": "97.1",
@@ -12370,9 +12518,13 @@
     "handle": "http://hdl.handle.net/10648/d2944105-a944-9283-e053-6df0900aec3e"
    }
   ],
-  "lat": 52.385681,
-  "lon": 4.89088,
-  "prec": "straat"
+  "lat": 52.385596,
+  "lon": 4.891637,
+  "prec": "straat",
+  "bron_geo": "pdok",
+  "geo_naam": "Westerdok, Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/9ecd8877-9977-4436-908f-5a347323b794",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/9ecd8877-9977-4436-908f-5a347323b794"
  },
  {
   "uid": "98.1-98.24",
@@ -12606,9 +12758,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-2603-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.383343,
-  "lon": 4.89333,
-  "prec": "adres"
+  "lat": 52.386446,
+  "lon": 4.892736,
+  "prec": "straat",
+  "bron_geo": "pdok",
+  "geo_naam": "Westerdoksdijk, Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/8d866920-75a9-4f7e-be96-50fb7366f29d",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/8d866920-75a9-4f7e-be96-50fb7366f29d"
  },
  {
   "uid": "99.1",
@@ -12637,9 +12793,13 @@
     "handle": "http://hdl.handle.net/10648/d2944105-b371-9283-e053-6df0900aec3e"
    }
   ],
-  "lat": 52.329178,
-  "lon": 4.785466,
-  "prec": "adres"
+  "lat": 52.170431,
+  "lon": 4.488264,
+  "prec": "adres",
+  "bron_geo": "pdok",
+  "geo_naam": "Schipholweg 270, 2316XD Leiden",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/4a69fd13-074d-47dc-812c-ff9fcaf3459b",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/4a69fd13-074d-47dc-812c-ff9fcaf3459b"
  },
  {
   "uid": "100.1-100.4",
@@ -12693,9 +12853,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-260a-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.37308,
-  "lon": 4.892453,
-  "prec": "plaats"
+  "lat": 52.366487,
+  "lon": 4.919787,
+  "prec": "plaats",
+  "bron_geo": "pdok",
+  "geo_naam": "Gemeente Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/cadbb31b-9522-4452-a560-db8873dce4cf",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/cadbb31b-9522-4452-a560-db8873dce4cf"
  },
  {
   "uid": "101.1-101.91",
@@ -13532,9 +13696,13 @@
     "handle": "http://hdl.handle.net/10648/a9631438-2666-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.383745,
-  "lon": 4.964322,
-  "prec": "straat"
+  "lat": 52.390388,
+  "lon": 4.967751,
+  "prec": "straat",
+  "bron_geo": "pdok",
+  "geo_naam": "Schellingwoude 15, Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/994eee6a-3ad9-49b2-bae3-c3860c4ae0ae",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/994eee6a-3ad9-49b2-bae3-c3860c4ae0ae"
  },
  {
   "uid": "102.1",
@@ -13563,9 +13731,13 @@
     "handle": "http://hdl.handle.net/10648/d2944109-1d16-9283-e053-6df0900aec3e"
    }
   ],
-  "lat": 52.37308,
-  "lon": 4.892453,
-  "prec": "plaats"
+  "lat": 52.366487,
+  "lon": 4.919787,
+  "prec": "plaats",
+  "bron_geo": "pdok",
+  "geo_naam": "Gemeente Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/733cd5ff-c29c-43b3-9066-a54fbffbf639",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/733cd5ff-c29c-43b3-9066-a54fbffbf639"
  },
  {
   "uid": "103.1-103.31",
@@ -13727,8 +13899,12 @@
     "handle": "http://hdl.handle.net/10648/a9631438-2679-0e36-e053-09f0900a7b9e"
    }
   ],
-  "lat": 52.333892,
-  "lon": 4.808141,
-  "prec": "adres"
+  "lat": 52.333398,
+  "lon": 4.808359,
+  "prec": "adres",
+  "bron_geo": "pdok",
+  "geo_naam": "Oude Haagseweg 50, 1066BW Amsterdam",
+  "thumb": "https://service.archief.nl/api/file/v1/thumb/8fb1758f-e238-49f4-93a9-42d17e7861eb",
+  "scan_full": "https://service.archief.nl/api/file/v1/default/8fb1758f-e238-49f4-93a9-42d17e7861eb"
  }
 ]
