@@ -4,6 +4,7 @@
 Argument = 'all' (hele objectenarchief) of één stad."""
 import json, os, sys
 from collections import Counter
+from rgd_categories import categorie
 
 WORK = os.path.dirname(os.path.abspath(__file__))
 PLACE = sys.argv[1] if len(sys.argv) > 1 else "all"
@@ -11,8 +12,9 @@ ALL = PLACE.lower() == "all"
 SITE = f"{WORK}/../site"
 P = json.load(open(f"{WORK}/rgd_{'all' if ALL else PLACE.lower().replace(' ','_')}.json", encoding="utf-8"))
 P = [p for p in P if p.get("lat") is not None]
-for p in P:                                    # 'overig' onder tekening scharen
-    if p.get("mat") == "overig": p["mat"] = "tekening"
+for p in P:
+    if p.get("mat") == "overig": p["mat"] = "tekening"   # 'overig' materiaal onder tekening
+    p["cat"], p["emoji"] = categorie(p.get("titel", ""))  # hercategoriseren met verbeterde trefwoorden
 
 nbl = sum(x["n_bladen"] for x in P)
 EM = {x["cat"]: x["emoji"] for x in P}
@@ -35,9 +37,10 @@ HTML = r"""<!DOCTYPE html>
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink)}
 #map{position:absolute;inset:0;background:#e8eef0}
-.ptabs{position:fixed;top:14px;left:14px;z-index:1200;display:flex;gap:2px;background:var(--panel);backdrop-filter:blur(8px);
-  border:1px solid var(--line);border-radius:12px;padding:4px 6px;box-shadow:0 2px 12px rgba(0,0,0,.1);max-width:calc(100vw - 28px)}
-.ptabs a{font-size:13px;color:var(--ink);text-decoration:none;padding:6px 11px;border-radius:8px;white-space:nowrap}
+.ptabs{position:fixed;top:14px;left:14px;z-index:1200;display:flex;gap:2px;width:330px;max-width:calc(100vw - 28px);
+  justify-content:space-between;background:var(--panel);backdrop-filter:blur(8px);
+  border:1px solid var(--line);border-radius:12px;padding:4px 6px;box-shadow:0 2px 12px rgba(0,0,0,.1)}
+.ptabs a{font-size:12.5px;color:var(--ink);text-decoration:none;padding:6px 9px;border-radius:8px;white-space:nowrap}
 .ptabs a.on{background:var(--accent);color:#fff}
 .ptabs a:not(.on):hover{background:#eef6f8;color:var(--accent)}
 .ptabs a.ext{color:var(--accent)}
@@ -98,7 +101,7 @@ html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Ro
 </style>
 </head>
 <body>
-<nav class="ptabs"><a href="./" class="on">🗺️ Kaart</a><a href="./inzichten/">📊 Inzichten</a><a href="./over/">ℹ️ Over</a><a href="https://archief.alanmoss.nl/" class="ext">← Archiefprojecten</a></nav>
+<nav class="ptabs"><a href="./" class="on">🗺️ Kaart</a><a href="./inzichten/">📊 Inzichten</a><a href="./over/">ℹ️ Over</a><a href="https://archief.alanmoss.nl/" class="ext" title="Alle archiefprojecten">←</a></nav>
 <div id="map"></div>
 <div id="side">
   <div class="phead"><div class="plogo">📐</div><div><h1>Tekeningenarchief RGD</h1><div class="sub">__SUB__</div></div></div>

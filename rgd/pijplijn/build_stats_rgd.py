@@ -30,6 +30,24 @@ def bars(counter, order=None, emoji=None, maxbars=99, fmt=str):
                  f'<div class="val">{fmt(v)}</div></div>')
     return rows
 
+def linechart(order, counter):
+    W, H, pl, pr, pt, pb = 840, 180, 40, 14, 16, 28
+    iw, ih = W - pl - pr, H - pt - pb
+    mx = max([counter[d] for d in order] + [1]); n = len(order)
+    X = lambda i: pl + (iw * (i / (n - 1) if n > 1 else 0))
+    Y = lambda v: pt + ih - (ih * v / mx)
+    pts = [(X(i), Y(counter[d])) for i, d in enumerate(order)]
+    poly = " ".join(f"{x:.1f},{y:.1f}" for x, y in pts)
+    area = f"{X(0):.1f},{pt+ih:.1f} " + poly + f" {X(n-1):.1f},{pt+ih:.1f}"
+    dots = "".join(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="3" fill="#0e7490"><title>{order[i]}: {counter[order[i]]}</title></circle>' for i, (x, y) in enumerate(pts))
+    xl = "".join(f'<text x="{X(i):.1f}" y="{H-8}" font-size="10" fill="#6b7280" text-anchor="middle">{order[i]}</text>' for i in range(0, n, 2))
+    grid = (f'<line x1="{pl}" y1="{pt}" x2="{W-pr}" y2="{pt}" stroke="#eef2f4"/>'
+            f'<text x="{pl-6}" y="{pt+4}" font-size="10" fill="#94a3b8" text-anchor="end">{mx}</text>'
+            f'<line x1="{pl}" y1="{pt+ih}" x2="{W-pr}" y2="{pt+ih}" stroke="#e5e7eb"/>')
+    return (f'<svg viewBox="0 0 {W} {H}" width="100%" style="height:auto;display:block">'
+            f'{grid}<polygon points="{area}" fill="#0e749020"/>'
+            f'<polyline points="{poly}" fill="none" stroke="#0e7490" stroke-width="2.5" stroke-linejoin="round"/>{dots}{xl}</svg>')
+
 cat = Counter(p["cat"] for p in P)
 mat = Counter(p["mat"] for p in P)
 steden = Counter(p["stad"] for p in P)
@@ -82,7 +100,7 @@ h1{{font-size:25px;margin:0;letter-spacing:-.02em}}.sub{{color:var(--muted);font
     <div class="panel"><h2>Materiaal</h2>{bars(mat, emoji=EMO, fmt=nl)}</div>
     <div class="panel"><h2>Locatieprecisie</h2>{bars(prec, order=['adres','straat','plaats (terugval)'], fmt=nl)}</div>
   </div>
-  <div class="panel"><h2>Per decennium (bouw- of tekeningjaar)</h2>{bars(dec, order=dec_order, fmt=nl)}</div>
+  <div class="panel"><h2>Per decennium (bouw- of tekeningjaar)</h2>{linechart(dec_order, dec)}</div>
   <div class="panel"><h2>Meeste bouwprojecten per plaats (top 15)</h2>{bars(steden, maxbars=15, fmt=nl)}</div>
   <div class="foot">Cijfers over de plaats-georganiseerde secties (IB/IIB tekeningen, IC foto's, ID bestekken). Bron: Nationaal Archief 4.RGD (CC0). Onderdeel van de <a href="https://archief.alanmoss.nl/">archiefprojecten</a>.</div>
 </main></body></html>"""

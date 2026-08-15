@@ -29,33 +29,7 @@ def balanced(startpat):
 def txt(el):
     return re.sub(r"\s+", " ", "".join(el.itertext())).strip() if el is not None else ""
 
-FUNC = [
-    ("politie", "👮", ["politiebureau", "politiepost", "marechaussee", "politie"]),
-    ("gevangeniswezen", "🔒", ["huis van bewaring", "gevangenis", "cellenbarak", "strafgevangenis", "rijkswerkinrichting", "tuchthuis"]),
-    ("rechtspraak", "⚖️", ["rechtbank", "gerechtsgebouw", "paleis van justitie", "kantongerecht", "gerechtshof"]),
-    ("post & telegraaf", "✉️", ["post", "telegraaf", "telefoon"]),
-    ("militair", "🎖️", ["kazerne", "militair", "marine", "fort", "genie", "arsenaal", "magazijn van oorlog", "wachtgebouw"]),
-    ("museum & paleis", "🏛️", ["museum", "paleis", "koninklijk"]),
-    ("kerk & religie", "⛪", ["kerk", "kapel", "klooster", "synagoge", "pastorie"]),
-    ("onderwijs & wetenschap", "🎓", ["school", "universiteit", "laboratorium", "proefstation", "sterrenwacht", "hogeschool", "gymnasium", "academie"]),
-    ("douane & opslag", "📦", ["entrepot", "pakhuis", "douane", "loods", "magazijn", "kantoor der invoerrechten"]),
-    ("zorg", "🏥", ["ziekenhuis", "gasthuis", "sanatorium", "krankzinnig", "gesticht"]),
-    ("bestuur & financiën", "🏢", ["kantoor", "agentschap", "administratie", "belasting", "financiën", "ministerie", "rijksgebouw", "gouvernement", "provinciehuis", "provinciaal", "raadhuis", "stadhuis", "secretarie", "ijkkantoor", "munt"]),
-]
-def categorie(s):
-    low = s.lower()
-    for name, em, kws in FUNC:
-        if any(k in low for k in kws): return name, em
-    return "overig", "📐"
-
-def soort_tekening(s):
-    low = s.lower()
-    if "opmeting" in low: return "opmeting"
-    if "bestek" in low or "werktekening" in low: return "bestek & werk"
-    if "ontwerp" in low: return "ontwerp"
-    if "verbouw" in low or "uitbreiding" in low or "aanbouw" in low: return "verbouw"
-    if "situatie" in low or "kadast" in low: return "situatie"
-    return "overig"
+from rgd_categories import categorie, soort_tekening
 
 def split_title(t):
     loc, rest = None, t
