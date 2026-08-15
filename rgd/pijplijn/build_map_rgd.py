@@ -36,7 +36,7 @@ html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Ro
 .ptabs a:not(.on):hover{background:#eef6f8;color:var(--accent)}
 .ptabs a.ext{color:var(--accent)}
 #side{position:fixed;top:60px;left:14px;z-index:1100;width:330px;max-width:calc(100vw - 28px);max-height:calc(100vh - 74px);
-  overflow:auto;background:var(--panel);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,.12)}
+  overflow-y:auto;overflow-x:hidden;background:var(--panel);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,.12)}
 .phead{display:flex;align-items:center;gap:10px;padding:14px 16px 10px}
 .plogo{width:44px;height:44px;border-radius:12px;flex:none;display:grid;place-items:center;font-size:22px;background:linear-gradient(135deg,var(--accent),#0891b2);box-shadow:0 2px 8px #0e749055}
 .phead h1{margin:0;font-size:17px;letter-spacing:-.01em}.phead .sub{font-size:12px;color:var(--muted);margin-top:1px}
@@ -48,8 +48,20 @@ html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Ro
 .chip .n{color:var(--muted);font-variant-numeric:tabular-nums}
 .chip.off{opacity:.4}
 .chip.on{border-color:var(--accent);background:#f0fafc}
-.yr{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
-input[type=range]{flex:1;accent-color:var(--accent)}
+.yr{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:4px}
+.rangewrap{position:relative;height:24px}
+.rtrack{position:absolute;top:10px;left:2px;right:2px;height:4px;background:var(--line);border-radius:3px}
+.rfill{position:absolute;top:10px;height:4px;background:var(--accent);border-radius:3px}
+.rr{position:absolute;top:0;left:0;width:100%;height:24px;margin:0;background:none;-webkit-appearance:none;appearance:none;pointer-events:none}
+.rr::-webkit-slider-thumb{-webkit-appearance:none;pointer-events:auto;width:16px;height:16px;border-radius:50%;background:#fff;border:2px solid var(--accent);cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.rr::-moz-range-thumb{pointer-events:auto;width:15px;height:15px;border-radius:50%;background:#fff;border:2px solid var(--accent);cursor:pointer}
+.carou{position:relative;margin:2px 0 4px}
+.cnav{position:absolute;top:82px;border:none;background:rgba(255,255,255,.9);border-radius:50%;width:30px;height:30px;font-size:19px;line-height:1;color:var(--ink);cursor:pointer;box-shadow:0 1px 5px rgba(0,0,0,.25)}
+.cnav:hover{background:#fff;color:var(--accent)}.cnav.prev{left:6px}.cnav.next{right:6px}
+.cbar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:6px}
+.cpill{font-size:11.5px;background:#eef2f4;border-radius:20px;padding:2px 9px;color:#374151}
+.cpill .mf{color:#92400e}
+.ccount{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
 #detail{position:fixed;top:14px;right:14px;z-index:1150;width:346px;max-width:calc(100vw - 28px);max-height:calc(100vh - 28px);
   overflow:auto;background:var(--panel);backdrop-filter:blur(10px);border:1px solid var(--line);border-top:3px solid var(--accent);
   border-radius:16px;box-shadow:0 6px 28px rgba(0,0,0,.18);display:none}
@@ -86,7 +98,9 @@ input[type=range]{flex:1;accent-color:var(--accent)}
   <div class="sec"><h2>Functie</h2><div class="chips" id="catchips"></div></div>
   <div class="sec"><h2>Soort tekening</h2><div class="chips" id="soortchips"></div></div>
   <div class="sec"><h2>Periode <span id="yrlab" style="color:var(--muted)"></span></h2>
-    <div class="yr"><span id="y0"></span><input type="range" id="rmin"><input type="range" id="rmax"><span id="y1"></span></div></div>
+    <div class="rangewrap"><div class="rtrack"></div><div class="rfill" id="rfill"></div>
+      <input type="range" id="rmin" class="rr"><input type="range" id="rmax" class="rr"></div>
+    <div class="yr"><span id="y0"></span><span id="y1"></span></div></div>
 </div>
 <div id="detail"></div>
 <a class="fbk" href="mailto:mossalan@gmail.com?subject=RGD-tekeningenkaart%3A%20feedback%20of%20bugmelding" title="Feedback of een fout melden">✉︎ Feedback</a>
@@ -126,33 +140,38 @@ function render(){
   });
   document.getElementById('cnt').textContent=n;
 }
-function showDetail(p){
-  const d=document.getElementById('detail'); d.className='show';
+let CUR=null,CSC=[],CIX=0;
+function showDetail(p){ CUR=p; CSC=p.sheets.filter(s=>s.thumb); CIX=0; renderDetail();
+  map.setView([p.lat,p.lon],Math.max(map.getZoom(),15),{animate:true}); }
+function carouNav(dr){ if(CSC.length){ CIX=(CIX+dr+CSC.length)%CSC.length; renderDetail(); } }
+function renderDetail(){
+  const p=CUR, d=document.getElementById('detail'); d.className='show';
   const per=(p.jaar_min?(p.jaar_min===p.jaar_max?p.jaar_min:p.jaar_min+'–'+p.jaar_max):'onbekend');
   const na='https://www.nationaalarchief.nl/onderzoeken/archief/4.RGD/invnr/'+encodeURIComponent(p.uid.split('-')[0]);
-  const scan=p.thumb?`<a href="${p.scan_full||p.thumb}" target="_blank" rel="noopener" title="Open de scan bij het Nationaal Archief"><img class="dscan" src="${esc(p.thumb)}" loading="lazy" alt="voorbeeldscan"></a>`:'';
-  const sheets=p.sheets.map(s=>`<div class="sh"><a href="${s.handle||na}" target="_blank" rel="noopener">${esc(s.id)} ↗</a>`
-    +`<span>${esc(s.title||'Tekening')}${s.year?' · '+s.year:''}</span>`
-    +`<span class="sc">${s.scale?esc(s.scale):''}${s.micro?' <span class="badge mf">microfilm</span>':''}</span></div>`).join('');
+  let carou;
+  if(CSC.length){ const s=CSC[CIX];
+    const ph="data:image/svg+xml,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180"><rect width="100%" height="100%" fill="#eef2f4"/><text x="160" y="116" font-size="64" text-anchor="middle">'+p.emoji+'</text></svg>');
+    carou=`<div class="carou"><a href="${esc(s.handle||s.full)}" target="_blank" rel="noopener" title="Open deze scan bij het Nationaal Archief"><img class="dscan" src="${esc(s.thumb)}" loading="lazy" alt="scan ${esc(s.id)}" onerror="this.onerror=null;this.src='${ph}'"></a>`
+      +(CSC.length>1?`<button class="cnav prev" onclick="carouNav(-1)">‹</button><button class="cnav next" onclick="carouNav(1)">›</button>`:'')
+      +`<div class="cbar"><span class="cpill">${esc(s.id)}: ${esc(s.title||'Tekening')}${s.micro?' <span class="mf">· microfilm</span>':''}</span><span class="ccount">${CIX+1} / ${CSC.length} gescand</span></div></div>`;
+  } else { carou=`<div class="dmeta" style="color:var(--muted);margin:2px 0 8px">Geen scan online (alleen microfilm/analoog bewaard).</div>`; }
   d.innerHTML=`<div class="dwrap"><button class="dclose" onclick="document.getElementById('detail').className=''">×</button>
     <div class="dcat">${p.emoji} ${esc(p.cat)}</div><div class="dtitle">${esc(p.gebouw||p.titel)}</div>
-    ${scan}
-    <div class="dmeta">${p.locatie?'<b>'+esc(p.locatie)+'</b>, ':''}${esc(p.stad)}
-      <span class="badge">${esc(p.prec)}</span><br>
+    ${carou}
+    <div class="dmeta">${p.locatie?'<b>'+esc(p.locatie)+'</b>, ':''}${esc(p.stad)} <span class="badge">${esc(p.prec)}</span><br>
       <b>Periode:</b> ${per} &nbsp; <b>Soort:</b> ${esc(p.soort)}<br>
-      <b>${p.n_bladen}</b> bladen${p.n_micro?` · ${p.n_micro} alleen microfilm`:''}${p.schalen&&p.schalen.length?`<br><b>Schaal:</b> ${esc(p.schalen.join(', '))}`:''}</div>
-    <div class="dsheets">${sheets}</div>
+      <b>${p.n_bladen}</b> bladen${p.n_micro?` · ${p.n_micro} microfilm`:''}${p.schalen&&p.schalen.length?`<br><b>Schaal:</b> ${esc(p.schalen.join(', '))}`:''}</div>
     ${p.wd?`<a class="nalink" href="${esc(p.wd.url)}" target="_blank" rel="noopener">🔗 Wikidata: ${esc(p.wd.label)} →</a><br>`:''}
     <a class="nalink" href="${na}" target="_blank" rel="noopener">Open het bouwproject bij het Nationaal Archief →</a></div>`;
-  map.setView([p.lat,p.lon],Math.max(map.getZoom(),15),{animate:true});
 }
 // year sliders
-const rmin=document.getElementById('rmin'),rmax=document.getElementById('rmax');
-[rmin,rmax].forEach(r=>{r.min=YMIN;r.max=YMAX;});rmin.value=YMIN;rmax.value=YMAX;
+const rmin=document.getElementById('rmin'),rmax=document.getElementById('rmax'),rfill=document.getElementById('rfill');
+[rmin,rmax].forEach(r=>{r.min=YMIN;r.max=YMAX;r.step=1;});rmin.value=YMIN;rmax.value=YMAX;
 document.getElementById('y0').textContent=YMIN;document.getElementById('y1').textContent=YMAX;
 function ylab(){document.getElementById('yrlab').textContent=(st.y0===YMIN&&st.y1===YMAX)?'':`(${st.y0}–${st.y1})`;}
-function onYear(){st.y0=Math.min(+rmin.value,+rmax.value);st.y1=Math.max(+rmin.value,+rmax.value);ylab();render();}
-rmin.oninput=onYear;rmax.oninput=onYear;
+function rfl(){const sp=(YMAX-YMIN)||1,a=(st.y0-YMIN)/sp*100,b=(st.y1-YMIN)/sp*100;rfill.style.left=a+'%';rfill.style.width=(b-a)+'%';}
+function onYear(){st.y0=Math.min(+rmin.value,+rmax.value);st.y1=Math.max(+rmin.value,+rmax.value);ylab();rfl();render();}
+rmin.oninput=onYear;rmax.oninput=onYear;rfl();
 drawChips();render();
 </script>
 </body>
