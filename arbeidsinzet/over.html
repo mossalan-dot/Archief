@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arbeidsinzet 1940–1945 — over deze kaart</title>
+<style>
+  :root{--bg:#f7f5f0;--card:#fff;--ink:#20242b;--muted:#6b7280;--line:#e4e0d6;--accent:#8a5a2b;
+        --shadow:0 1px 3px #0000000f,0 8px 24px #0000000d}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.65}
+  a{color:var(--accent)}
+  .wrap{max-width:760px;margin:0 auto;padding:22px 20px 70px}
+  header{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+  .logo{width:44px;height:44px;border-radius:11px;display:grid;place-items:center;font-size:19px;font-weight:700;flex:none;background:#e7dcc9;color:#6b4a22}
+  h1{font-size:22px;margin:0;letter-spacing:-.02em}
+  header .sub{color:var(--muted);font-size:13px;margin:2px 0 0}
+  .back{margin-left:auto;font-size:13px;font-weight:600;text-decoration:none;background:#fff;border:1px solid var(--line);padding:8px 13px;border-radius:10px;white-space:nowrap}
+  h2{font-size:16px;margin:26px 0 6px;letter-spacing:-.01em}
+  p{font-size:15px;color:#33373e;margin:8px 0}
+  ul{font-size:15px;color:#33373e;padding-left:20px} li{margin:5px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;box-shadow:var(--shadow);margin:14px 0}
+  .warn{background:#fbf1d9;border-color:#efe0b8}
+  code{background:#efece4;border-radius:5px;padding:1px 5px;font-size:13px}
+  .steps{counter-reset:s;list-style:none;padding-left:0}
+  .steps li{counter-increment:s;position:relative;padding-left:34px;margin:10px 0}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:0;width:23px;height:23px;border-radius:50%;
+    background:#e7dcc9;color:#6b4a22;font-size:12px;font-weight:700;display:grid;place-items:center}
+  footer{color:var(--muted);font-size:12.5px;margin-top:34px;border-top:1px solid var(--line);padding-top:16px;line-height:1.7}
+</style>
+<script>window.goatcounter={path:function(p){return location.host+p}}</script>
+<script data-goatcounter="https://stats.alanmoss.nl/count" async src="https://stats.alanmoss.nl/count.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">AI</div>
+    <div><h1>Over deze kaart</h1><p class="sub">Arbeidsinzet 1940–1945 · herkomst en bestemming</p></div>
+    <a class="back" href="./">← naar de kaart</a>
+  </header>
+
+  <p>Deze kaart brengt in beeld waar Nederlanders vandaan kwamen die tijdens de bezetting in Duitsland
+  werkten of terechtkwamen, en in welke Duitse <i>Kreise</i> (districten) zij belandden. De gegevens
+  komen uit de geïndexeerde <b>collectie Arbeidsinzet</b> van het Nederlandse Rode Kruis, beheerd door
+  het Nationaal Archief.</p>
+
+  <div class="card warn">
+    <b>Een gevoelig en onvolledig bestand.</b>
+    <p style="margin:6px 0 0">Van het oorspronkelijke Rode Kruis-archief ging veel verloren. De kaart toont
+    dus <b>overgeleverde records, geen volledige aantallen</b> tewerkgestelden. Vrijwillige en gedwongen
+    tewerkstelling zijn in de bron niet altijd te scheiden. Gepubliceerde indexrecords betreffen aantoonbaar
+    overleden personen; medische gegevens tonen we uitsluitend op plaatsniveau (nooit de kliniek), en
+    overlijdensgegevens worden ingetogen behandeld.</p>
+  </div>
+
+  <h2>Personen op de kaart</h2>
+  <p>Je kunt in de zoekbalk een <b>persoon</b> opzoeken. Eén persoon komt vaak in meerdere administraties —
+  en dus meerdere Kreise — voor; die <b>lichten dan samen op</b> de kaart op, met een recordkaartje dat naar
+  de bijbehorende pagina's bij het Nationaal Archief linkt. Zo is de kaart vooral een <b>ingang tot mensen</b>,
+  niet alleen tot cijfers.</p>
+
+  <h2>De twee weergaven</h2>
+  <ul>
+    <li><b>Bestemmingen (Duitsland)</b> — per Duitse <i>Kreis</i> één bolletje op de hoofdplaats, gekleurd naar
+    het aantal personen. Klik erop voor de belangrijkste Nederlandse herkomstplaatsen.</li>
+    <li><b>Herkomst (Nederland)</b> — per Nederlandse geboorteplaats één bolletje, gekleurd naar aantal personen.
+    Klik erop voor de belangrijkste Duitse bestemmingen.</li>
+  </ul>
+
+  <h2>Hoe de kaart is gemaakt</h2>
+  <ol class="steps">
+    <li>De <b>index</b> (± 850.000 records, CC-0) is als CSV gedownload bij het Nationaal Archief. Elk record heeft een naam, geboortedatum en een genormaliseerde moderne <b>geboorteplaats met coördinaten</b>.</li>
+    <li>De bronverwijzing bevat een <b>inventarisnummer</b>. Via de archiefinventaris (EAD) leidt dat nummer naar een specifieke <b>Kreis</b> en soms een categorie (bv. overlijden of ziekenhuis).</li>
+    <li>De ± 600 Duitse Kreise/steden zijn <b>gegeocodeerd</b> (OpenStreetMap/Nominatim), met handmatige correcties voor historische en verkeerd getranscribeerde namen.</li>
+    <li>Records van dezelfde persoon zijn via de <b>reconstructie-id</b> uit de index samengebracht, zodat één
+    persoon over meerdere Kreise te volgen is. Nederlandse geboorteplaatsen zijn onderscheiden van buitenlandse
+    via de <code>gemeentegeschiedenis.nl</code>-verwijzing in de bron.</li>
+  </ol>
+  <p>Zo staan er <b>535 Kreise</b> en ruim <b>1.000 Nederlandse herkomstplaatsen</b> op de kaart, met bijna
+  <b>300.000 doorzoekbare personen</b> erachter.</p>
+
+  <h2>Wat opvalt</h2>
+  <ul>
+    <li>De herkomst concentreert zich sterk in de <b>Randstad</b> (Rotterdam, Amsterdam, Den Haag), maar het hele land is vertegenwoordigd.</li>
+    <li>Aan Duitse zijde springen industriële en stedelijke centra eruit: <b>Kassel, Berlijn, München, Hamburg, het Ruhrgebied</b> en Zuid-Duitse Kreise waarvan het materiaal beter bewaard bleef.</li>
+    <li>De tewerkgestelden waren overwegend <b>jonge mannen, geboren rond 1910–1925</b>.</li>
+  </ul>
+
+  <h2>Beperkingen</h2>
+  <ul>
+    <li>Elk bolletje staat op de <b>hoofdplaats van de Kreis</b>, niet op het exacte adres — de bron kent de
+    tewerkstelling meestal alleen op Kreis-niveau.</li>
+    <li>Een klein deel van de Kreise (oude, samengevoegde districten) is nog niet te plotten.</li>
+    <li>De kaart is een <b>ingang tot de bron</b>, geen vervanging: elk record verwijst door naar de officiële recordpagina bij het Nationaal Archief.</li>
+  </ul>
+
+  <footer>
+    Bron: Nationaal Archief, <a href="https://www.nationaalarchief.nl/onderzoeken/archief/2.19.323" target="_blank" rel="noopener">collectie Arbeidsinzet (2.19.323)</a>, index onder CC-0 ·
+    <a href="https://www.nationaalarchief.nl/onderzoeken/zoekhulpen/arbeidsinzet-1940-1945" target="_blank" rel="noopener">zoekhulp</a> ·
+    code &amp; verwerking: <a href="https://github.com/mossalan-dot/Archief" target="_blank" rel="noopener">github.com/mossalan-dot/Archief</a>.
+  </footer>
+</div>
+</body>
+</html>
