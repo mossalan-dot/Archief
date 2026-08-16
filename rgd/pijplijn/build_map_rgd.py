@@ -28,6 +28,19 @@ SUB = "Nederland · hele objectenarchief" if ALL else f"proef: {PLACE}"
 VIEW = "[52.15,5.4],7" if ALL else "[52.37,4.9],13"
 json.dump(P, open(f"{SITE}/data.json", "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 
+import csv                                                # platte CSV-export voor hergebruik
+NA = "https://www.nationaalarchief.nl/onderzoeken/archief/4.RGD/invnr/{}/file/"
+with open(f"{SITE}/rgd.csv", "w", encoding="utf-8", newline="") as f:
+    w = csv.writer(f)
+    w.writerow(["inv_nr", "gebouw", "adres", "plaats", "provincie", "functie", "materiaal",
+                "sectie", "jaar_van", "jaar_tot", "aantal_bladen", "lat", "lon", "precisie", "na_link"])
+    for p in P:
+        inv = p["uid"].split("-")[0]
+        w.writerow([inv, p.get("gebouw", ""), p.get("locatie") or "", p.get("stad", ""),
+                    p.get("provincie") or "", p.get("cat", ""), p.get("mat", ""), p.get("sectie", ""),
+                    p.get("jaar_min") or "", p.get("jaar_max") or "", p.get("n_bladen", 0),
+                    p.get("lat"), p.get("lon"), p.get("prec", ""), NA.format(inv)])
+
 HTML = r"""<!DOCTYPE html>
 <html lang="nl">
 <head>

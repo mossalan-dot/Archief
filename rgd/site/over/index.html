@@ -24,6 +24,9 @@ p{margin:0 0 14px}
 a.link{color:var(--accent);text-decoration:none;border-bottom:1px solid #bfe0e8}
 a.link:hover{border-color:var(--accent)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:2px 20px;margin:16px 0}
+.downloads{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 4px}
+.downloads a{font-size:14px;text-decoration:none;padding:9px 15px;border:1px solid var(--line);border-radius:9px;color:var(--accent);background:#fff;font-weight:500}
+.downloads a:hover{border-color:var(--accent);background:#f0fafc}
 ul{margin:0 0 14px;padding-left:20px}li{margin:4px 0}
 .foot{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
 .foot a{color:var(--accent)}
@@ -67,6 +70,14 @@ ul{margin:0 0 14px;padding-left:20px}li{margin:4px 0}
 
   <h2>Bron &amp; hergebruik</h2>
   <p>Nationaal Archief, toegang <b>4.RGD</b> — “Inventaris van het tekeningenarchief van de Rijksgebouwendienst (RGD) en rechtsvoorgangers”. De archiefstukken zijn <b>volledig openbaar</b> en als <a class="link" href="https://creativecommons.org/publicdomain/zero/1.0/deed.nl" target="_blank" rel="noopener">CC0 (publiek domein)</a> beschikbaar.</p>
+
+  <h2>Gegevens &amp; broncode</h2>
+  <p>De verwerkte data (alle bouwprojecten met plaats, functie, datering, scans en coördinaten) en de volledige broncode van kaart en pijplijn zijn vrij te gebruiken.</p>
+  <div class="downloads">
+    <a href="../rgd.csv" download>⬇️ Data (CSV)</a>
+    <a href="../data.json" download>⬇️ Data (JSON)</a>
+    <a href="https://github.com/mossalan-dot/Archief/tree/main/rgd" target="_blank" rel="noopener">💻 Broncode (GitHub)</a>
+  </div>
 
   <div class="foot">Kaart en visualisatie: Alan Moss. Kaartmateriaal © OpenStreetMap-bijdragers &amp; CARTO. Onderdeel van de <a href="https://archief.alanmoss.nl/">archiefprojecten</a> op alanmoss.nl.</div>
 </main>
