@@ -20,7 +20,7 @@
   .logo{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:20px;font-weight:700;flex:none;background:#e7dcc9;color:#6b4a22}
   h1{font-size:23px;margin:0;letter-spacing:-.02em}
   header .sub{color:var(--muted);font-size:13px;margin:2px 0 0}
-  .lead{color:#4b5563;font-size:14.5px;line-height:1.6;max-width:74ch;margin:14px 0 22px}
+  .lead{color:#4b5563;font-size:14.5px;line-height:1.6;margin:14px 0 22px}
   .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:22px}
   .tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow)}
   .tile .n{font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1;color:var(--accent)}
@@ -82,11 +82,6 @@
   vrijwillige en gedwongen tewerkstelling zijn niet altijd te scheiden. De cijfers tellen overgeleverde records.</p>
 
   <div class="tiles" id="tiles"></div>
-
-  <div class="finds" id="finds" style="display:none">
-    <div class="fh"><b>🔎 Bijzondere vondsten</b><div class="fnav"><span class="fbtn" id="fprev">‹</span><span class="fbtn" id="fnext">›</span></div></div>
-    <div id="findbox"></div>
-  </div>
 
   <div class="grid">
     <div class="card wide">
@@ -167,18 +162,6 @@ function yearChart(el,gy){
     `<polygon points="${area}" fill="#8a5a2b18"/><polyline points="${poly}" fill="none" stroke="#8a5a2b" stroke-width="2.4" stroke-linejoin="round"/>${dots}${xl}</svg>`;
 }
 
-// carrousel
-let FINDS=[],fi=0;
-function showFind(){ if(!FINDS.length)return; const v=FINDS[((fi%FINDS.length)+FINDS.length)%FINDS.length];
-  const kr=(v.kreisen||[]).map(k=>`<span>${esc(k)}</span>`).join('');
-  document.getElementById('findbox').innerHTML=`<div class="find"><div class="kop">${esc(v.kop)}</div>`+
-    `<h4>${esc(v.naam)}</h4><div class="meta">${v.jaar?'geboren '+esc(v.jaar):''}${v.plaats?' · '+esc(v.plaats):''}</div>`+
-    `<p>${esc(v.tekst)}.</p>${kr?`<div class="kr">${kr}</div>`:''}`+
-    (v.record?`<a class="rec" href="${NA_REC}${encodeURIComponent(v.record)}" target="_blank" rel="noopener">Naar de scan bij het NA →</a>`:'')+`</div>`;
-}
-document.getElementById('fprev').onclick=()=>{fi--;showFind();};
-document.getElementById('fnext').onclick=()=>{fi++;showFind();};
-
 fetch('kaart_data.json?v='+BUILD).then(r=>r.json()).then(d=>{
   const dests=d.kreisen.filter(x=>x.lat!=null);
   const inbeeld=dests.reduce((s,x)=>s+x.records,0);
@@ -188,9 +171,6 @@ fetch('kaart_data.json?v='+BUILD).then(r=>r.json()).then(d=>{
     [fmt(d.meta.personen),'doorzoekbare personen'],
     [fmt(d.per_categorie.overlijden||0),'overlijdens-records'],
   ]);
-  // vondsten
-  FINDS=d.vondsten||[];
-  if(FINDS.length){document.getElementById('finds').style.display='block';showFind();}
   // grafieken
   yearChart('cHist', d.geboortejaren||{});
   const tk=[...dests].sort((a,b)=>b.records-a.records).slice(0,12);
