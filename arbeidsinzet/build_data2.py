@@ -81,10 +81,10 @@ cache = json.load(open(GEOCACHE, encoding='utf-8'))
 # ---------- 2. CSV streamen -> aggregatie + personen ----------
 rx = re.compile(r'/invnr/(\d+)/')
 dest_stat = collections.defaultdict(lambda: {"records":0,"cat":collections.Counter(),
-    "kreis":None,"zone":None,"kamp":False,"nl":collections.Counter(),"nl_generiek":0})
+    "kreis":None,"zone":None,"kamp":False,"nl":collections.Counter(),"nl_generiek":0,"g":collections.Counter()})
 origin = {}                          # NL-plaats -> {records,lat,lon,dests:Counter}
 persons = {}                         # reconstructieid -> dict
-cat_tot = collections.Counter(); jaren = collections.Counter()
+cat_tot = collections.Counter(); jaren = collections.Counter(); jaren_jaar = collections.Counter(); gender_tot = collections.Counter()
 n = 0
 for path in CSVS:
     with open(path, encoding='utf-8') as fh:
@@ -97,16 +97,21 @@ for path in CSVS:
             ds["records"] += 1; ds["cat"][info["categorie"]] += 1
             ds["kreis"] = ds["kreis"] or info["kreis"]; ds["zone"] = ds["zone"] or info["zone"]
             ds["kamp"] = ds["kamp"] or info["kamp_nabij"]
+            grow = (row['gender_interpretatievrijwilliger'] or '').strip().lower()
+            if grow.startswith('man'): ds["g"]['m'] += 1; gender_tot['m'] += 1
+            elif grow.startswith('vrouw'): ds["g"]['v'] += 1; gender_tot['v'] += 1
             cat_tot[info["categorie"]] += 1
             y = (row['byear_st'] or '').strip()[:4]
-            if y.isdigit() and 1850 <= int(y) <= 1945: jaren[int(y)//10*10] += 1
+            if y.isdigit() and 1850 <= int(y) <= 1945: jaren[int(y)//10*10] += 1; jaren_jaar[int(y)] += 1
             # herkomst
             bpl = (row['bplace'] or '').strip(); uri = row['bplace_uri'] or ''
             is_nl = 'gemeentegeschiedenis' in uri
             if is_nl and bpl:
                 ds["nl"][bpl] += 1
-                o = origin.setdefault(bpl, {"records":0,"lat":None,"lon":None,"dests":collections.Counter()})
+                o = origin.setdefault(bpl, {"records":0,"lat":None,"lon":None,"dests":collections.Counter(),"g":collections.Counter()})
                 o["records"] += 1; o["dests"][dest] += 1
+                if grow.startswith('man'): o["g"]['m'] += 1
+                elif grow.startswith('vrouw'): o["g"]['v'] += 1
                 ll = (row['bplace_latlon'] or '').strip()
                 if ll and o["lat"] is None:
                     try: la,lo = ll.split(","); o["lat"]=round(float(la),5); o["lon"]=round(float(lo),5)
@@ -155,6 +160,7 @@ for d, st in dest_stat.items():
     kreisen.append({"naam":d,"kreis":st["kreis"],"zone":st["zone"],"kamp_nabij":st["kamp"],
         "records":st["records"],"lat":coord[0] if coord else None,"lon":coord[1] if coord else None,
         "cats":dict(st["cat"]),
+        "g":{"m":st["g"].get('m',0),"v":st["g"].get('v',0)},
         "nl":[[p,c] for p,c in top_nl],
         "nl_overig": rest_nl + st["nl_generiek"]})     # 'Nederland (zonder plaats)'-bak, onderaan
 kreisen.sort(key=lambda x:-x["records"])
@@ -170,7 +176,8 @@ for naam,o in origin.items():
     if naam in HERK_FIX: o["lat"], o["lon"] = HERK_FIX[naam]
     if o["lat"] is None or o["records"] < 3: continue
     top = [[dst, c] for dst,c in o["dests"].most_common(12) if dst in kidx]
-    herkomst.append({"naam":naam,"lat":o["lat"],"lon":o["lon"],"records":o["records"],"dests":top})
+    herkomst.append({"naam":naam,"lat":o["lat"],"lon":o["lon"],"records":o["records"],"dests":top,
+                     "g":{"m":o["g"].get('m',0),"v":o["g"].get('v',0)}})
 herkomst.sort(key=lambda x:-x["records"])
 
 # ---------- 5. Personen-index (alleen met naam + minstens 1 gegeocodeerde Kreis) ----------
@@ -210,11 +217,24 @@ pout.sort(key=lambda e:e["n"])
 
 json.dump({"kreisen":kreisen,"herkomst":herkomst,"vondsten":vondsten,
     "geboortejaren":dict(sorted(jaren.items())),
+    "geboortejaren_jaar":dict(sorted(jaren_jaar.items())),
     "per_categorie":dict(cat_tot),
+    "gender":dict(gender_tot),
     "meta":{"records_totaal":n,"personen":len(pout),"unieke_herkomst":len(herkomst),
             "bron":"Nationaal Archief 2.19.323 (CC-0)"}},
     open(f"{SITE}/kaart_data.json","w",encoding='utf-8'), ensure_ascii=False, separators=(",",":"))
 json.dump(pout, open(f"{SITE}/personen.json","w",encoding='utf-8'), ensure_ascii=False, separators=(",",":"))
+
+# platte CSV-export (Kreis-niveau) voor hergebruik
+import csv
+CATS_ORD = ["arbeidsinzet","overlijden","medisch","huwelijk","geboorte"]
+with open(f"{SITE}/arbeidsinzet_kreisen.csv","w",encoding="utf-8",newline="") as f:
+    w = csv.writer(f)
+    w.writerow(["kreis","zone","personen"]+CATS_ORD+["lat","lon","top_herkomst_nl"])
+    for k in kreisen:
+        top = "; ".join(f"{p} ({c})" for p,c in k["nl"][:3])
+        w.writerow([k["naam"], k["zone"] or "", k["records"]]+[k["cats"].get(c,0) for c in CATS_ORD]+
+                   [k["lat"] if k["lat"] is not None else "", k["lon"] if k["lon"] is not None else "", top])
 import os
 print(f"kreisen: {len(kreisen)} (geocoded {sum(1 for k in kreisen if k['lat'])}) | herkomst: {len(herkomst)} | personen: {len(pout):,}")
 print(f"kaart_data.json: {os.path.getsize(SITE+'/kaart_data.json')//1024} KB | personen.json: {os.path.getsize(SITE+'/personen.json')//1024} KB")

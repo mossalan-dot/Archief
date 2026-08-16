@@ -29,6 +29,10 @@
   .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px 15px;box-shadow:var(--shadow)}
   .card.wide{grid-column:1/-1}
   .card h2{font-size:15px;margin:0 0 2px;letter-spacing:-.01em}
+  .h2row{display:flex;align-items:center;gap:10px}
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;font-size:11px;margin-left:auto}
+  .seg button{border:none;background:#fff;padding:4px 11px;cursor:pointer;color:var(--muted);font-weight:600;font-family:inherit}
+  .seg button.on{background:var(--accent);color:#fff}
   .card .cap{font-size:12.5px;color:var(--muted);margin:2px 0 13px;line-height:1.4}
   .bars{display:flex;flex-direction:column;gap:7px}
   .bar{display:grid;grid-template-columns:132px 1fr 54px;align-items:center;gap:10px;font-size:12.5px}
@@ -85,7 +89,8 @@
 
   <div class="grid">
     <div class="card wide">
-      <h2>Geboortejaar</h2>
+      <div class="h2row"><h2>Geboortejaar</h2>
+        <span class="seg" id="segJaar"><button data-g="dec" class="on">per decennium</button><button data-g="jaar">per jaar</button></span></div>
       <p class="cap">De meeste tewerkgestelden waren jonge mannen, geboren rond <b>1910–1925</b>.</p>
       <div id="cHist"></div>
     </div>
@@ -109,6 +114,11 @@
       <p class="cap">Waar de Kreise na de oorlog onder vielen.</p>
       <div class="bars" id="cZone"></div>
     </div>
+    <div class="card">
+      <h2>Geslacht</h2>
+      <p class="cap">De tewerkgestelden waren overwegend <b>mannen</b>; vrouwen komen vaker in medische en burgerlijke-stand-records voor.</p>
+      <div class="bars" id="cGender"></div>
+    </div>
   </div>
 
   <footer>
@@ -120,7 +130,7 @@
 <div id="viztip"></div>
 
 <script>
-const BUILD='20260816-3';
+const BUILD='20260817-1';
 const NA_REC='https://www.nationaalarchief.nl/onderzoeken/index/nt00475/';
 const CAT_COLOR={arbeidsinzet:'#a99a86',overlijden:'#a3312d',medisch:'#c26a3d',huwelijk:'#7a6ab0',geboorte:'#4a8f6d'};
 const CAT_LAB={arbeidsinzet:'arbeidsinzet',overlijden:'overlijden',medisch:'medisch',huwelijk:'huwelijk',geboorte:'geboorte'};
@@ -146,21 +156,28 @@ function bars(el,items,color,unit){
       `<div class="track"><div class="seg" style="width:${w}%;background:${c||color}"></div></div><div class="val">${fmt(v)}</div></div>`;
   }).join('');
 }
-function yearChart(el,gy){
-  const ks=Object.keys(gy).map(Number).sort((a,b)=>a-b); if(!ks.length){return;}
-  const W=840,H=200,pl=38,pr=12,pt=12,pb=26,iw=W-pl-pr,ih=H-pt-pb;
-  const mx=Math.max(...ks.map(k=>gy[k]),1),n=ks.length;
+function yearChart(el,data,isYear){
+  const ks=Object.keys(data).map(Number).sort((a,b)=>a-b); if(!ks.length){document.getElementById(el).innerHTML='';return;}
+  const W=840,H=200,pl=40,pr=12,pt=12,pb=26,iw=W-pl-pr,ih=H-pt-pb;
+  const mx=Math.max(...ks.map(k=>data[k]),1),n=ks.length;
   const X=i=>pl+iw*(n>1?i/(n-1):0), Y=v=>pt+ih-ih*v/mx;
-  const pts=ks.map((k,i)=>[X(i),Y(gy[k])]);
+  const pts=ks.map((k,i)=>[X(i),Y(data[k])]);
   const poly=pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ');
   const area=`${X(0).toFixed(1)},${(pt+ih).toFixed(1)} ${poly} ${X(n-1).toFixed(1)},${(pt+ih).toFixed(1)}`;
-  const dots=pts.map((p,i)=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="9" fill="transparent" data-tip="${ks[i]}–${ks[i]+9}: ${fmt(gy[ks[i]])} personen"/><circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="3.2" fill="#8a5a2b"/>`).join('');
-  const xl=ks.map((k,i)=>i%2?'':`<text x="${X(i).toFixed(1)}" y="${H-8}" font-size="10" fill="#6b7280" text-anchor="middle">${k}s</text>`).join('');
+  const tt=i=>isYear?`${ks[i]}: ${fmt(data[ks[i]])} personen`:`${ks[i]}–${ks[i]+9}: ${fmt(data[ks[i]])} personen`;
+  const dots=pts.map((p,i)=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="${isYear?6:9}" fill="transparent" data-tip="${tt(i)}"/><circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="${isYear?2:3.2}" fill="#8a5a2b"/>`).join('');
+  const step=isYear?Math.ceil(n/9):2;
+  const xl=ks.map((k,i)=>(i%step)?'':`<text x="${X(i).toFixed(1)}" y="${H-8}" font-size="10" fill="#6b7280" text-anchor="middle">${k}</text>`).join('');
   document.getElementById(el).innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="height:auto;display:block">`+
     `<line x1="${pl}" y1="${pt}" x2="${W-pr}" y2="${pt}" stroke="#eee"/><text x="${pl-6}" y="${pt+4}" font-size="10" fill="#94a3b8" text-anchor="end">${fmt(mx)}</text>`+
     `<line x1="${pl}" y1="${pt+ih}" x2="${W-pr}" y2="${pt+ih}" stroke="#e5e7eb"/>`+
     `<polygon points="${area}" fill="#8a5a2b18"/><polyline points="${poly}" fill="none" stroke="#8a5a2b" stroke-width="2.4" stroke-linejoin="round"/>${dots}${xl}</svg>`;
 }
+let GY={},GYJ={};
+document.querySelectorAll('#segJaar button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('#segJaar button').forEach(x=>x.classList.toggle('on',x===b));
+  const jaar=b.dataset.g==='jaar'; yearChart('cHist', jaar?GYJ:GY, jaar);
+}));
 
 fetch('kaart_data.json?v='+BUILD).then(r=>r.json()).then(d=>{
   const dests=d.kreisen.filter(x=>x.lat!=null);
@@ -172,7 +189,8 @@ fetch('kaart_data.json?v='+BUILD).then(r=>r.json()).then(d=>{
     [fmt(d.per_categorie.overlijden||0),'overlijdens-records'],
   ]);
   // grafieken
-  yearChart('cHist', d.geboortejaren||{});
+  GY=d.geboortejaren||{}; GYJ=d.geboortejaren_jaar||{};
+  yearChart('cHist', GY, false);
   const tk=[...dests].sort((a,b)=>b.records-a.records).slice(0,12);
   bars('cKreis', tk.map(x=>[x.naam,x.records]), '#c8863f','personen');
   const th=[...d.herkomst].sort((a,b)=>b.records-a.records).slice(0,12);
@@ -181,6 +199,8 @@ fetch('kaart_data.json?v='+BUILD).then(r=>r.json()).then(d=>{
   bars('cCat', Object.keys(pc).sort((a,b)=>pc[b]-pc[a]).map(c=>[CAT_LAB[c]||c,pc[c],CAT_COLOR[c]]), '#a99a86','records');
   const zc={}; dests.forEach(x=>{const z=x.zone||'onbekend';zc[z]=(zc[z]||0)+x.records;});
   bars('cZone', Object.keys(zc).sort((a,b)=>zc[b]-zc[a]).map(z=>[z,zc[z],ZONE_COLOR[z]]), '#b9b3a6','personen');
+  const g=d.gender||{};
+  bars('cGender', [['man',g.m||0,'#3f76c9'],['vrouw',g.v||0,'#c9527e']], '#888','personen');
 }).catch(e=>{document.getElementById('tiles').innerHTML='<div class="tile">Kon data niet laden: '+e+'</div>';});
 </script>
 </body>

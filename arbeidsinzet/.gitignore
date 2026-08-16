@@ -1,6 +1,5 @@
 # afgeleid/te groot (regenereerbaar met build_data2.py uit de NA-index-download)
 personen.json
 arbeitseinsatz/
-*.csv
 index-*.zip
 *.ead.xml

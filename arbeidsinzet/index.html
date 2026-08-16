@@ -59,8 +59,11 @@
   .klist a.pill{font-size:10.5px;color:#fff;background:var(--accent);border-radius:20px;padding:2px 9px;white-space:nowrap}
   .klist a.pill:hover{background:var(--accent-dark,#6b4420);text-decoration:none}
   .cbadge{display:inline-block;font-size:10.5px;color:#fff;border-radius:20px;padding:1px 9px;font-weight:600}
-  .rr{margin:1px 0;display:flex;justify-content:space-between;gap:10px}
-  .rr .lab{color:var(--muted)}
+  .rr{margin:1px 0;display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+  .rr>span:first-child{min-width:0}
+  .rr .lab{color:var(--muted);white-space:nowrap;flex:none}
+  .rr .plink{color:var(--accent);cursor:pointer}
+  .rr .plink:hover{text-decoration:underline}
   /* bladerlijst (‹ ›) — vaste hoogte zodat de popup niet verspringt */
   .pl-pages{min-height:130px}
   .pl-nav{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-top:6px;color:var(--muted);font-size:11.5px}
@@ -77,9 +80,27 @@
   .stog{display:flex;gap:3px;background:var(--bg);padding:3px;border-radius:8px;margin:0 0 6px;font-size:11.5px}
   .stog button{flex:1;border:0;background:transparent;padding:5px;border-radius:6px;cursor:pointer;color:var(--muted);font-weight:600}
   .stog button.on{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
-  .catf{margin-top:7px;border-top:1px solid var(--line);padding-top:7px}
-  .catf label{display:flex;align-items:center;gap:6px;font-size:11px;padding:2px 0;cursor:pointer;color:#444}
-  .catf .dot{width:9px;height:9px;border-radius:50%;flex:none}
+  /* categorie-chips (solo-toggle) in het paneel */
+  .catchips{display:flex;flex-wrap:wrap;gap:4px;margin:0 0 8px}
+  .chip{font-size:11px;padding:3px 9px;border-radius:20px;border:1px solid var(--line);background:#fff;color:#5a6b74;cursor:pointer;user-select:none}
+  .chip:hover{border-color:var(--accent)}
+  /* gender-verdeelbalkje in popups/kaart */
+  .gbar{display:flex;height:7px;border-radius:4px;overflow:hidden;margin:4px 0 2px}
+  .gbar i{display:block;height:100%}
+  .gm{background:#3f76c9}.gv{background:#c9527e}
+  .glab{font-size:11px;color:#888}
+  /* namen-zijvenster */
+  #names{position:absolute;top:12px;right:12px;z-index:1120;width:290px;max-width:calc(100vw - 24px);
+    background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.14);display:none}
+  #names .ch{padding:12px 14px 10px;border-bottom:1px solid var(--line);position:relative}
+  #names h2{font-size:14px;margin:0 6px 6px 0;padding-right:16px;line-height:1.35}
+  #names input{width:100%;border:1px solid var(--line);border-radius:8px;padding:7px 9px;font-size:12.5px;font-family:inherit;background:var(--bg)}
+  #names input:focus{outline:none;border-color:var(--accent);background:#fff}
+  #names .nlist{max-height:52vh;overflow-y:auto}
+  #names .nrow{padding:6px 14px;font-size:12.5px;cursor:pointer;border-top:1px solid #f1efe8}
+  #names .nrow:hover{background:var(--bg)}
+  #names .nrow small{color:var(--muted)}
+  .backlink{display:inline-block;margin-bottom:8px;font-size:12px;color:var(--accent);cursor:pointer}
   .foot{font-size:11px;color:var(--muted);margin-top:8px}
   .legend{position:absolute;bottom:22px;left:12px;z-index:1000;background:rgba(255,255,255,.94);border:1px solid var(--line);
     border-radius:9px;padding:8px 11px;font-size:11px;box-shadow:0 2px 10px rgba(0,0,0,.08)}
@@ -129,6 +150,8 @@
     <div class="sug" id="sug"></div>
   </div>
 
+  <div class="catchips" id="catchips" style="display:none"></div>
+
   <div class="nav">
     <span class="src">Bron: <a href="https://www.nationaalarchief.nl/onderzoeken/archief/2.19.323" target="_blank" rel="noopener">NA, Arbeidsinzet 2.19.323</a> · CC-0</span>
   </div>
@@ -141,11 +164,16 @@
   <div class="cb" id="cardbody"></div>
 </div>
 
+<div id="names"><button class="x" onclick="closeNames()">×</button>
+  <div class="ch" id="nhead"></div>
+  <div class="nlist" id="nlist"></div>
+</div>
+
 <a class="fbk" href="mailto:mossalan@gmail.com?subject=Arbeidsinzet-kaart%3A%20feedback%20of%20bugmelding" title="Feedback of een fout melden">✉︎ Feedback</a>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const BUILD='20260816-5';
+const BUILD='20260817-1';
 const NA_REC='https://www.nationaalarchief.nl/onderzoeken/index/nt00475/';
 const NA_Q='https://www.nationaalarchief.nl/onderzoeken/index/nt00475?searchTerm=';
 const NL=[52.15,5.4], DE=[51.2,9.6];
@@ -162,7 +190,7 @@ const deacc=s=>String(s).normalize('NFD').replace(/[̀-ͯ]/g,'');   // ü→u, �
 const naSearch=t=>NA_Q+encodeURIComponent(deacc(t))+'&activeTab=nt00475';
 
 const state={mode:'bestemming', stog:'alles', cats:new Set(CATS.map(c=>c[0]))};
-let DATA=null, PERS=null, persLoading=false, placeIdx=[], kByName={}, markerByKreis={};
+let DATA=null, PERS=null, persLoading=false, placeIdx=[], kByName={}, kIndexByName={}, markerByKreis={}, NAMES=[], lastNamesCtx=null;
 function catVal(d){ if(state.cats.size===CATS.length) return d.records; let s=0; state.cats.forEach(c=>s+=(d.cats[c]||0)); return s; }
 const map=L.map('map',{zoomControl:false}).setView(DE,6);
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
@@ -172,27 +200,39 @@ const gHi=L.layerGroup().addTo(map);       // puls-highlight
 
 function buildLegend(){
   const t=state.mode==='herkomst'?'personen per herkomstplaats':'personen per Kreis';
-  let html=`<div style="font-weight:600;margin-bottom:4px;color:#444">${t}</div>`+
+  document.getElementById('legend').innerHTML=`<div style="font-weight:600;margin-bottom:4px;color:#444">${t}</div>`+
     CHO_COLS.map((c,i)=>`<div style="display:flex;align-items:center;gap:6px;line-height:1.55"><span style="width:12px;height:12px;background:${c};border:.5px solid #0003;border-radius:50%;display:inline-block"></span>${CHO_LABS[i]}</div>`).join('')+
     '<div style="margin-top:5px;color:#888">klik voor detail</div>';
-  if(state.mode==='bestemming')
-    html+='<div class="catf">'+CATS.map(([k,l,col])=>`<label><input type="checkbox" data-cat="${k}" ${state.cats.has(k)?'checked':''}><span class="dot" style="background:${col}"></span>${l}</label>`).join('')+'</div>';
-  const el=document.getElementById('legend'); el.innerHTML=html;
-  el.querySelectorAll('[data-cat]').forEach(cb=>cb.addEventListener('change',e=>{
-    const k=e.target.dataset.cat;
-    e.target.checked?state.cats.add(k):state.cats.delete(k);
-    if(state.cats.size===0){state.cats.add(k);e.target.checked=true;return;}   // minstens één aan
-    render();
+}
+// categorie-chips in het paneel — solo-toggle (klik = alleen deze, nogmaals = alles)
+function buildCatChips(){
+  const box=document.getElementById('catchips');
+  box.style.display = state.mode==='bestemming' ? 'flex' : 'none';
+  if(state.mode!=='bestemming') return;
+  const alles=state.cats.size===CATS.length;
+  box.innerHTML=CATS.map(([k,l,col])=>{
+    const on=state.cats.has(k);
+    return `<span class="chip${on?' on':''}" data-cat="${k}" style="${on?`background:${col};border-color:${col};color:#fff`:''}">${l}</span>`;
+  }).join('');
+  box.querySelectorAll('[data-cat]').forEach(el=>el.addEventListener('click',()=>{
+    const k=el.dataset.cat;
+    state.cats = (state.cats.size===1 && state.cats.has(k)) ? new Set(CATS.map(c=>c[0])) : new Set([k]);
+    buildCatChips(); render();
   }));
 }
 
 // ---- bladerlijst met ‹ › (vaste hoogte → popup verspringt niet) ----
 let listSeq=0;
-function pagedList(items, overig, overigLabel, total){
+function pagedList(items, overig, overigLabel, total, rowLink){
   const id='pl'+(++listSeq), PER=6, pages=[];
   for(let i=0;i<items.length;i+=PER) pages.push(items.slice(i,i+PER));
   if(!pages.length) pages.push([]);
-  const row=([naam,c])=>`<div class="rr"><span>${esc(naam)}</span><span class="lab">${fmt(c)}${total?' · '+Math.round(100*c/total)+'%':''}</span></div>`;
+  const row=([naam,c])=>{
+    const val=`${fmt(c)}${total?' · '+Math.round(100*c/total)+'%':''}`;
+    const lk=rowLink?rowLink(naam):null;
+    const nm=(lk&&lk.ki!=null)?`<span class="plink" data-bp="${esc(lk.bp)}" data-ki="${lk.ki}">${esc(naam)}</span>`:esc(naam);
+    return `<div class="rr"><span>${nm}</span><span class="lab">${val}</span></div>`;
+  };
   const pg=pages.map((p,i)=>`<div class="pl-pg"${i?' hidden':''}>${p.map(row).join('')}</div>`).join('');
   let html=`<div class="pl" id="${id}" data-pg="0" data-n="${pages.length}"><div class="pl-pages">${pg}</div>`;
   if(pages.length>1) html+=`<div class="pl-nav"><span class="pg-arrow" onclick="pgNav('${id}',-1)">‹</span><span class="pg-ind">1/${pages.length}</span><span class="pg-arrow" onclick="pgNav('${id}',1)">›</span></div>`;
@@ -207,23 +247,33 @@ window.pgNav=function(id,dir){
   const ind=el.querySelector('.pg-ind'); if(ind) ind.textContent=(pg+1)+'/'+n;
 };
 
+const ZONE_FLAG={Amerikaanse:'🇺🇸',Engelse:'🇬🇧',Franse:'🇫🇷',Russische:'🇷🇺'};
+function genderBar(g){
+  if(!g||(!g.m&&!g.v)) return '';
+  const t=g.m+g.v, mp=Math.round(100*g.m/t);
+  return `<div class="gbar"><i class="gm" style="width:${mp}%"></i><i class="gv" style="width:${100-mp}%"></i></div>`+
+    `<div class="glab">${mp}% man · ${100-mp}% vrouw</div>`;
+}
 // ---- Kreis-popup (bestemming) ----
 function kreisCard(d){
+  const ki=DATA.kreisen.indexOf(d);
   const other=Object.entries(d.cats).filter(([k])=>k!=='arbeidsinzet').sort((a,b)=>b[1]-a[1])
     .map(([k,v])=>`${CATLAB[k]||k} ${fmt(v)}`).join(' · ');
   const nlTot=d.nl.reduce((s,x)=>s+x[1],0)+(d.nl_overig||0);
-  const orig=pagedList(d.nl, d.nl_overig, 'Nederland (zonder plaats)', nlTot);
-  return `<b>${esc(d.naam)}</b>${d.kreis&&d.kreis!==d.naam?` <span style="color:#888">· Kreis ${esc(d.kreis)}</span>`:''}`+
-    `${d.zone?` <span style="color:#aaa">· ${esc(d.zone)} zone</span>`:''}<br>`+
+  const orig=pagedList(d.nl, d.nl_overig, 'Nederland (zonder plaats)', nlTot, plaats=>({bp:plaats, ki}));
+  const zone=d.zone?` <span style="color:#999">· ${ZONE_FLAG[d.zone]||''} ${esc(d.zone)} zone</span>`:'';
+  return `<b>${esc(d.naam)}</b>${d.kreis&&d.kreis!==d.naam?` <span style="color:#888">· Kreis ${esc(d.kreis)}</span>`:''}${zone}<br>`+
     `<b style="font-size:12px">${fmt(d.records)}</b> personen${other?` <span style="color:#999">· waarvan ${other}</span>`:''}`+
-    `<div style="margin-top:8px;border-top:1px solid #eee;padding-top:7px"><div style="color:#888;margin-bottom:4px">herkomst:</div>${orig}</div>`+
+    genderBar(d.g)+
+    `<div style="margin-top:8px;border-top:1px solid #eee;padding-top:7px"><div style="color:#888;margin-bottom:4px">herkomst <span style="color:#bbb">(klik voor namen)</span>:</div>${orig}</div>`+
     `<div style="margin-top:9px"><a href="${naSearch(d.naam)}" target="_blank" rel="noopener" style="font-size:12px">zoeken bij het Nationaal Archief →</a></div>`;
 }
 // ---- Herkomst-popup (NL) ----
 function herkomstCard(o){
-  const dst=pagedList(o.dests, 0, '', o.records);
+  const dst=pagedList(o.dests, 0, '', o.records, knaam=>({bp:o.naam, ki:kIndexByName[knaam]}));
   return `<b>${esc(o.naam)}</b><br><b style="font-size:12px">${fmt(o.records)}</b> personen (hier geboren)`+
-    `<div style="margin-top:8px;border-top:1px solid #eee;padding-top:7px"><div style="color:#888;margin-bottom:4px">tewerkgesteld in:</div>${dst}</div>`+
+    genderBar(o.g)+
+    `<div style="margin-top:8px;border-top:1px solid #eee;padding-top:7px"><div style="color:#888;margin-bottom:4px">tewerkgesteld in <span style="color:#bbb">(klik voor namen)</span>:</div>${dst}</div>`+
     `<div style="margin-top:9px"><a href="${naSearch(o.naam)}" target="_blank" rel="noopener" style="font-size:12px">zoeken bij het Nationaal Archief →</a></div>`;
 }
 
@@ -242,7 +292,7 @@ function render(){
       m.bindPopup(kreisCard(d),{maxWidth:280}); markerByKreis[d.naam]=m; gDot.addLayer(m);
     });
   }
-  buildLegend();
+  buildLegend(); buildCatChips();
 }
 
 function setMode(m,keepCard){
@@ -266,14 +316,14 @@ function highlightKreisen(idxs){
   else if(pts.length>1) map.fitBounds(pts,{padding:[70,70],maxZoom:9});
 }
 function nlDate(s){ s=String(s||''); const m=s.match(/^(\d{4})-(\d{2})-(\d{2})$/); return m?`${m[3]}-${m[2]}-${m[1]}`:s; }
-function personCard(p){
+function personCard(p, fromNames){
   const badges=(p.c||[]).filter(c=>c!=='medisch'&&c!=='overlijden').map(c=>{
     const col=(CATS.find(x=>x[0]===c)||[])[2]||'#888';
     return `<span class="cbadge" style="background:${col}">${CATLAB[c]||c}</span>`;
   }).join(' ');
   const head=`<h2>${esc(p.n)}</h2>${badges?`<div style="margin-top:5px">${badges}</div>`:''}`;
   const gl=p.g==='m'?'man':p.g==='v'?'vrouw':'';
-  let body='';
+  let body=(fromNames&&lastNamesCtx)?`<span class="backlink" onclick="reopenNames()">‹ terug naar de lijst</span>`:'';
   if(p.bd||p.p) body+=`<div class="kv"><b>Geboren</b> ${esc(nlDate(p.bd)||'—')}${p.p?` · ${esc(p.p)}`:''}</div>`;
   if(gl) body+=`<div class="kv"><b>Geslacht</b> ${gl}</div>`;
   if(p.dd) body+=`<div class="kv"><b>Overleden</b> ${esc(nlDate(p.dd))}${p.dp?` · ${esc(p.dp)}`:''}</div>`;
@@ -289,12 +339,15 @@ function personCard(p){
   document.getElementById('cardbody').innerHTML=body;
   document.getElementById('card').style.display='block';
 }
-function selectPerson(p){
+function selectPerson(p, fromNames){
   document.getElementById('q').value=''; document.getElementById('sug').style.display='none';
+  if(!fromNames) lastNamesCtx=null;
+  closeNames();
   setMode('bestemming',true);
   highlightKreisen(p.k);
-  personCard(p);
+  personCard(p, fromNames);
 }
+window.reopenNames=function(){ if(lastNamesCtx) openNames(lastNamesCtx.bplace, lastNamesCtx.ki); };
 function flyKreis(ki){ const k=DATA.kreisen[ki]; if(!k||k.lat==null) return;
   map.setView([k.lat,k.lon],9,{animate:true});
   setTimeout(()=>L.popup({maxWidth:280}).setLatLng([k.lat,k.lon]).setContent(kreisCard(k)).openOn(map),300);
@@ -304,10 +357,36 @@ window.flyKreis=flyKreis; window.closeCard=closeCard;
 
 // ---- index + zoeken ----
 function buildIndex(){
-  DATA.kreisen.forEach(d=>{ if(d.lat==null) return; kByName[d.naam]=d;
+  DATA.kreisen.forEach((d,i)=>{ kIndexByName[d.naam]=i; if(d.lat==null) return; kByName[d.naam]=d;
     placeIdx.push({naam:d.naam,records:d.records,type:'kreis',ref:d}); });
   DATA.herkomst.forEach(o=>placeIdx.push({naam:o.naam,records:o.records,type:'herkomst',ref:o}));
 }
+// ---- namen-zijvenster: personen uit een herkomstplaats in een Kreis ----
+function openNames(bplace, ki){
+  loadPersons(()=>{
+    closeCard();
+    lastNamesCtx={bplace,ki};
+    NAMES=PERS.filter(p=>p.p===bplace && p.k.includes(ki)).sort((a,b)=>a.n.localeCompare(b.n));
+    const kn=(DATA.kreisen[ki]||{}).naam||'';
+    document.getElementById('nhead').innerHTML=`<h2>${esc(bplace)} → ${esc(kn)}</h2>`+
+      `<div style="font-size:11.5px;color:var(--muted);margin-bottom:7px">${fmt(NAMES.length)} ${NAMES.length===1?'persoon':'personen'} met een naam in deze bron</div>`+
+      `<input id="nsearch" placeholder="Filter op naam…" autocomplete="off">`;
+    document.getElementById('names').style.display='block';
+    renderNames('');
+    const s=document.getElementById('nsearch'); s.addEventListener('input',e=>renderNames(e.target.value)); s.focus();
+  });
+}
+function renderNames(q){
+  q=q.trim().toLowerCase();
+  const list=q?NAMES.filter(p=>p.n.toLowerCase().includes(q)):NAMES, show=list.slice(0,300);
+  document.getElementById('nlist').innerHTML=show.map(p=>{
+    const i=PERS.indexOf(p);
+    return `<div class="nrow" data-i="${i}"><b>${esc(p.n)}</b> <small>· ${p.bd?esc(nlDate(p.bd)):'?'}${p.k.length>1?' · '+p.k.length+' Kreisen':''}</small></div>`;
+  }).join('')+(list.length>300?`<div class="nrow" style="color:#999;cursor:default">… en ${fmt(list.length-300)} meer — filter op naam</div>`:'');
+  document.querySelectorAll('#nlist .nrow[data-i]').forEach(el=>el.addEventListener('click',()=>selectPerson(PERS[+el.dataset.i],true)));
+}
+function closeNames(){ document.getElementById('names').style.display='none'; }
+window.openNames=openNames; window.closeNames=closeNames;
 function loadPersons(cb){
   if(PERS){cb&&cb();return;} if(persLoading){return;}
   persLoading=true;
@@ -360,6 +439,7 @@ document.querySelectorAll('#stog button').forEach(b=>b.addEventListener('click',
 document.getElementById('q').addEventListener('input',e=>runSearch(e.target.value));
 document.getElementById('q').addEventListener('focus',()=>loadPersons());
 document.addEventListener('click',e=>{ if(!e.target.closest('.search')) document.getElementById('sug').style.display='none'; });
+document.addEventListener('click',e=>{ const el=e.target.closest('.plink[data-bp]'); if(el){ map.closePopup(); openNames(el.dataset.bp, +el.dataset.ki); } });
 
 fetch('kaart_data.json?v='+BUILD).then(r=>r.json())
   .then(d=>{DATA=d;buildIndex();render();})
