@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """Gedeelde functie-categorisering + soort-tekening voor de RGD-pijplijn.
-Volgorde telt: eerste match wint (specifieke gebouwtypen vóór generieke)."""
+Volgorde telt: eerste match wint (specifieke gebouwtypen vóór generieke).
+Trefwoorden matchen op WOORDBEGIN (\\b), zodat 'stal' niet matcht in 'installatie'."""
+import re
 
 FUNC = [
     ("politie", "👮", ["politiebureau", "politiepost", "marechaussee", "politie"]),
@@ -22,16 +24,20 @@ FUNC = [
                                    "rijksgebouw", "gouvernement", "provinciehuis", "provinciaal", "raadhuis",
                                    "stadhuis", "secretarie", "ijkkantoor", "munt", "kadaster", "arbeidsbureau"]),
     ("waterstaat & techniek", "🌊", ["sluis", "gemaal", "brug", "haven", "vuurtoren", "waterleiding",
-                                     "duiker", "stuw", "kanaal"]),
+                                     "duiker", "stuw", "kanaal", "riool", "zuivering", "pompstation"]),
     ("landbouw & veeteelt", "🚜", ["proefboerderij", "boerderij", "stal", "abattoir", "slachthuis", "hoeve"]),
     ("woningbouw", "🏠", ["woonhuis", "woning", "villa", "landhuis", "dienstwoning", "ambtswoning",
                           "herenhuis", "wooncomplex"]),
 ]
 
+def _hit(kw, low):
+    k = re.escape(kw)                                     # grens aan minstens één kant:
+    return re.search(r"\b" + k, low) or re.search(k + r"\b", low)  # voor- óf achtervoegsel, niet midden-in-woord
+
 def categorie(s):
     low = (s or "").lower()
     for name, em, kws in FUNC:
-        if any(k in low for k in kws):
+        if any(_hit(k, low) for k in kws):
             return name, em
     return "overig", "📐"
 

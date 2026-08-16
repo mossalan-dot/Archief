@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """Bouw de RGD-kaart (Leaflet + markercluster). Data wordt EXTERN geladen (data.json).
 Argument = 'all' (hele objectenarchief) of één stad."""
-import json, os, sys
+import json, os, sys, re
 from collections import Counter
 from rgd_categories import categorie
 
@@ -11,12 +11,15 @@ PLACE = sys.argv[1] if len(sys.argv) > 1 else "all"
 ALL = PLACE.lower() == "all"
 SITE = f"{WORK}/../site"
 P = json.load(open(f"{WORK}/rgd_{'all' if ALL else PLACE.lower().replace(' ','_')}.json", encoding="utf-8"))
-P = [p for p in P if p.get("lat") is not None]
+P = [p for p in P if p.get("lat") is not None
+     and (p.get("uid") or "").strip() and p.get("stad") != "Geordend per gemeente"]  # tussenkop-nodes weren
 for p in P:
     if p.get("mat") == "overig": p["mat"] = "tekening"   # 'overig' materiaal onder tekening
     p["cat"], p["emoji"] = categorie(p.get("titel", ""))  # hercategoriseren met verbeterde trefwoorden
-    for k in ("locatie", "gebouw"):                       # vierkante haken (editoriale toevoeging) strippen
-        if p.get(k): p[k] = p[k].replace("[", "").replace("]", "").strip()
+    for k in ("locatie", "gebouw"):                       # haken + losse leestekens aan begin/eind strippen
+        if p.get(k):
+            v = p[k].replace("[", "").replace("]", "")
+            p[k] = re.sub(r"^[\s,/;:.\-]+|[\s,/;:.\-]+$", "", v)
     p["invnr"] = p["uid"].split("-")[0].split(".")[0]     # afgekort inventarisnummer (1.1-1.48 -> 1)
 
 nbl = sum(x["n_bladen"] for x in P)
@@ -98,6 +101,14 @@ html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Ro
 .wdlink:hover{text-decoration:underline}
 .dossbar{display:block;margin-top:10px;background:var(--accent);color:#fff;text-align:center;padding:9px 10px;border-radius:9px;font-weight:700;font-size:12.5px;text-decoration:none}
 .dossbar:hover{background:var(--accent-dark)}
+.backlink{display:inline-block;font-size:12px;color:var(--accent);cursor:pointer;margin:0 0 8px;text-decoration:none}
+.backlink:hover{text-decoration:underline}
+.lsearch{width:100%;font:inherit;font-size:12.5px;padding:6px 10px;border:1px solid var(--line);border-radius:8px;margin:8px 0 4px}
+.lrows{max-height:calc(100vh - 190px);overflow:auto}
+.lrow{display:flex;gap:8px;align-items:baseline;padding:7px 2px;border-bottom:1px solid #f1f5f9;cursor:pointer;font-size:12.5px}
+.lrow:hover{background:#f0fafc}
+.lrow .lem{flex:none}.lrow .ltx{flex:1;min-width:0}.lrow .ltx b{color:var(--ink);font-weight:600}
+.lrow .lstad{color:var(--muted)}.lrow .lyr{color:var(--muted);font-variant-numeric:tabular-nums;flex:none}
 .emoji-marker div{font-size:20px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4));text-align:center;line-height:1}
 .credit{position:fixed;left:14px;bottom:8px;z-index:1000;font-size:10px;color:#374151;background:#ffffffcc;padding:2px 7px;border-radius:6px}
 .fbk{position:fixed;bottom:12px;right:12px;z-index:1200;font-size:12px;color:var(--accent);text-decoration:none;background:var(--panel);
@@ -133,9 +144,14 @@ const esc=s=>(s==null?'':''+s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>'
 const map=L.map('map',{preferCanvas:false,zoomControl:false}).setView(__VIEW__);
 L.control.zoom({position:'bottomright'}).addTo(map);
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{subdomains:'abcd',maxZoom:19,attribution:''}).addTo(map);
-const cluster=L.markerClusterGroup({maxClusterRadius:44,spiderfyOnMaxZoom:true,chunkedLoading:true}).addTo(map);
+const cluster=L.markerClusterGroup({maxClusterRadius:44,spiderfyOnMaxZoom:false,zoomToBoundsOnClick:false,showCoverageOnHover:false,chunkedLoading:true}).addTo(map);
+cluster.on('clusterclick',a=>{                      // brede cluster: inzoomen; samenvallende punten: lijst
+  const kids=a.layer.getAllChildMarkers(), b=a.layer.getBounds();
+  const wide=(b.getNorth()-b.getSouth())>0.02||(b.getEast()-b.getWest())>0.03;
+  if(wide && map.getZoom()<13){ map.fitBounds(b.pad(0.2)); } else { showList(kids.map(m=>m._p)); }
+});
 let DATA=[], YMIN=0, YMAX=0, cats=[], soorten=[], mats=[], st={mat:new Set(),cat:new Set(),soort:new Set(),y0:0,y1:0,q:''};
-let CUR=null, CSC=[], CIX=0;
+let CUR=null, CSC=[], CIX=0, CURLIST=null, CURFROM=false;
 
 function chip(label,em,n,on){return `<span class="chip ${on?'on':'off'}">${em?em+' ':''}${esc(label)} <span class="n">${n}</span></span>`;}
 function drawChips(){
@@ -162,14 +178,32 @@ function render(){
   cluster.clearLayers(); let n=0; const ms=[];
   DATA.forEach(p=>{ if(!match(p))return; n++;
     const m=L.marker([p.lat,p.lon],{icon:L.divIcon({className:'emoji-marker',html:`<div>${p.emoji}</div>`,iconSize:[24,24],iconAnchor:[12,12]})});
-    m.on('click',()=>showDetail(p)); ms.push(m);
+    m._p=p; m.on('click',()=>showDetail(p)); ms.push(m);
   });
   cluster.addLayers(ms);
   document.getElementById('cnt').textContent=n;
 }
-function showDetail(p){ CUR=p; CSC=p.sheets||[];
+function showDetail(p,fromList){ CUR=p; CURFROM=!!fromList; CSC=p.sheets||[];
   CIX=CSC.findIndex(s=>s.thumb); if(CIX<0)CIX=0;
   renderDetail(); map.setView([p.lat,p.lon],Math.max(map.getZoom(),15),{animate:true}); }
+function showList(list){ CURLIST=list; const d=document.getElementById('detail'); d.className='show';
+  const stad=list.every(p=>p.stad===list[0].stad)?list[0].stad:'';
+  d.innerHTML=`<div class="dwrap"><button class="dclose" onclick="document.getElementById('detail').className=''">×</button>`
+    +`<div class="dtitle">${list.length} bouwprojecten${stad?' · '+esc(stad):''}</div>`
+    +`<input id="lsearch" class="lsearch" placeholder="Filter op gebouw of straat…" oninput="updateListRows()">`
+    +`<div id="lrows" class="lrows"></div></div>`;
+  updateListRows();
+}
+function updateListRows(){
+  const q=(document.getElementById('lsearch').value||'').toLowerCase();
+  const rows=CURLIST.filter(p=>!q||((p.gebouw||'')+' '+(p.locatie||'')+' '+(p.stad||'')).toLowerCase().includes(q));
+  let h=''; rows.slice(0,500).forEach(p=>{ const i=CURLIST.indexOf(p);
+    h+=`<div class="lrow" onclick="showDetail(CURLIST[${i}],true)"><span class="lem">${p.emoji}</span>`
+      +`<span class="ltx"><b>${esc(p.gebouw||p.titel)}</b>${p.locatie?' <span class="lstad">'+esc(p.locatie)+'</span>':''}</span>`
+      +`<span class="lyr">${p.jaar_min||''}</span></div>`;
+  });
+  document.getElementById('lrows').innerHTML=h||'<div style="color:var(--muted);font-size:12.5px;padding:8px 2px">Niets gevonden.</div>';
+}
 function carouNav(dr){ if(CSC.length){ CIX=(CIX+dr+CSC.length)%CSC.length; renderDetail(); } }
 function renderDetail(){
   const p=CUR, d=document.getElementById('detail'); d.className='show';
@@ -184,13 +218,14 @@ function renderDetail(){
   }
   const n=p.n_bladen, bl=n+' blad'+(n===1?'':'en');
   d.innerHTML=`<div class="dwrap"><button class="dclose" onclick="document.getElementById('detail').className=''">×</button>
+    ${CURFROM&&CURLIST?`<a class="backlink" onclick="showList(CURLIST)">‹ Terug naar de lijst (${CURLIST.length})</a>`:''}
     <div class="dtitle">${esc(p.gebouw||p.titel)}</div>
     <div class="dloc">${p.locatie?esc(p.locatie)+', ':''}${esc(p.stad)}</div>
     <div class="catbadge">${p.emoji} ${esc(p.cat)}</div>
     ${carou}
     <div class="dmeta"><b>${esc(per)}</b> · ${esc(p.soort)} · ${bl}${p.n_micro?` · ${p.n_micro} microfilm`:''}${p.schalen&&p.schalen.length?` · schaal ${esc(p.schalen.join(', '))}`:''}</div>
     ${p.wd?`<a class="wdlink" href="${esc(p.wd.url)}" target="_blank" rel="noopener">🔗 Wikidata: ${esc(p.wd.label)} ↗</a>`:''}
-    <a class="dossbar" href="${na}" target="_blank" rel="noopener">📄 Inventaris ${esc(p.invnr)} bij het Nationaal Archief</a>
+    <a class="dossbar" href="${na}" target="_blank" rel="noopener">📄 Inv.nr. ${esc(p.invnr)} bij het Nationaal Archief</a>
   </div>`;
 }
 const rmin=document.getElementById('rmin'),rmax=document.getElementById('rmax'),rfill=document.getElementById('rfill');

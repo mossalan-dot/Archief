@@ -27,12 +27,12 @@ def get(url):
 PDOK = "https://api.pdok.nl/bzk/locatieserver/search/v3_1/free?"
 PREC = {"adres": "adres", "weg": "straat", "postcode": "adres", "woonplaats": "plaats",
         "gemeente": "plaats", "wijk": "buurt", "buurt": "buurt"}
-def pdok(q):
-    if q in PC: return PC[q]
+def pdok(q, fq):
+    key = q + "||" + ";".join(fq)
+    if key in PC: return PC[key]
     hit = None
     try:
-        d = json.loads(get(PDOK + urllib.parse.urlencode({"q": q, "rows": 1,
-            "fq": "type:(adres OR weg OR woonplaats OR gemeente)"})))
+        d = json.loads(get(PDOK + urllib.parse.urlencode({"q": q, "rows": 1, "fq": fq}, doseq=True)))
         docs = d.get("response", {}).get("docs", [])
         if docs:
             m = re.search(r"POINT\(([-\d.]+) ([-\d.]+)\)", docs[0].get("centroide_ll", ""))
@@ -41,8 +41,16 @@ def pdok(q):
         time.sleep(0.15)
     except Exception as e:
         print("  ! pdok", q, e)
-    PC[q] = hit
+    PC[key] = hit
     return hit
+
+def geocode(stad, loc):
+    """Adres GEBONDEN aan de kop-stad; lukt dat niet, dan de stad zelf (nooit een andere stad)."""
+    bind = f'woonplaatsnaam:"{stad}" OR gemeentenaam:"{stad}"'
+    if loc:
+        h = pdok(f"{loc}, {stad}", ["type:(adres OR weg)", bind])
+        if h: return h
+    return pdok(stad, ["type:(woonplaats OR gemeente)"])   # stad-terugval
 
 def scan_urls(mets):
     if mets not in MC:
@@ -61,12 +69,10 @@ def scan_urls(mets):
 npd = nsc = done = 0
 for p in P:
     done += 1
-    if p.get("lat") is None:                       # geocode
+    if p.get("lat") is None:                       # geocode (gebonden aan de kop-stad)
         stad = p.get("stad", PLACE)
-        loc = (p.get("locatie") or "").split("/")[0].split(",")[0].strip()
-        hit = pdok(f"{loc}, {stad}") if loc else None
-        if not hit and loc: hit = pdok(f"{loc} {stad}")
-        if not hit: hit = pdok(stad)               # stad-terugval
+        loc = (p.get("locatie") or "").replace("[", "").replace("]", "").split("/")[0].split(",")[0].strip()
+        hit = geocode(stad, loc)
         if hit:
             p["lat"] = round(hit["lat"], 6); p["lon"] = round(hit["lon"], 6)
             p["prec"] = PREC.get(hit["type"], hit["type"]); p["bron_geo"] = "pdok"; p["geo_naam"] = hit["naam"]
