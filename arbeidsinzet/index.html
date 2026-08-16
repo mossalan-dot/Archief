@@ -80,8 +80,16 @@
   .stog{display:flex;gap:3px;background:var(--bg);padding:3px;border-radius:8px;margin:0 0 6px;font-size:11.5px}
   .stog button{flex:1;border:0;background:transparent;padding:5px;border-radius:6px;cursor:pointer;color:var(--muted);font-weight:600}
   .stog button.on{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
-  /* categorie-chips (solo-toggle) in het paneel */
-  .catchips{display:flex;flex-wrap:wrap;gap:4px;margin:0 0 8px}
+  /* uitklapbare categorie-filter (solo-toggle-chips) in het paneel */
+  .acc{margin:0 0 8px;border-top:1px solid var(--line);padding-top:9px}
+  .acc>summary{list-style:none;display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#5a6b74;cursor:pointer;text-transform:uppercase;letter-spacing:.03em}
+  .acc>summary::-webkit-details-marker{display:none}
+  .acc>summary::after{content:"▸";margin-left:auto;color:#9ca3af;font-size:11px;transition:transform .15s}
+  .acc[open]>summary::after{transform:rotate(90deg)}
+  .acc[open]>summary{margin-bottom:8px}
+  .acc.filtered>summary{color:var(--accent)}
+  .acc.filtered>summary::before{content:"●";font-size:8px;color:var(--accent)}
+  .catchips{display:flex;flex-wrap:wrap;gap:4px}
   .chip{font-size:11px;padding:3px 9px;border-radius:20px;border:1px solid var(--line);background:#fff;color:#5a6b74;cursor:pointer;user-select:none}
   .chip:hover{border-color:var(--accent)}
   /* gender-verdeelbalkje in popups/kaart */
@@ -150,7 +158,9 @@
     <div class="sug" id="sug"></div>
   </div>
 
-  <div class="catchips" id="catchips" style="display:none"></div>
+  <details class="acc" id="catfilter" open style="display:none"><summary>Categorie</summary>
+    <div class="catchips" id="catchips"></div>
+  </details>
 
   <div class="nav">
     <span class="src">Bron: <a href="https://www.nationaalarchief.nl/onderzoeken/archief/2.19.323" target="_blank" rel="noopener">NA, Arbeidsinzet 2.19.323</a> · CC-0</span>
@@ -173,7 +183,7 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const BUILD='20260817-1';
+const BUILD='20260817-2';
 const NA_REC='https://www.nationaalarchief.nl/onderzoeken/index/nt00475/';
 const NA_Q='https://www.nationaalarchief.nl/onderzoeken/index/nt00475?searchTerm=';
 const NL=[52.15,5.4], DE=[51.2,9.6];
@@ -206,10 +216,10 @@ function buildLegend(){
 }
 // categorie-chips in het paneel — solo-toggle (klik = alleen deze, nogmaals = alles)
 function buildCatChips(){
-  const box=document.getElementById('catchips');
-  box.style.display = state.mode==='bestemming' ? 'flex' : 'none';
+  const det=document.getElementById('catfilter'), box=document.getElementById('catchips');
+  det.style.display = state.mode==='bestemming' ? 'block' : 'none';
   if(state.mode!=='bestemming') return;
-  const alles=state.cats.size===CATS.length;
+  det.classList.toggle('filtered', state.cats.size!==CATS.length);
   box.innerHTML=CATS.map(([k,l,col])=>{
     const on=state.cats.has(k);
     return `<span class="chip${on?' on':''}" data-cat="${k}" style="${on?`background:${col};border-color:${col};color:#fff`:''}">${l}</span>`;
