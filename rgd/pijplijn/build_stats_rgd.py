@@ -100,6 +100,8 @@ h1{{font-size:25px;margin:0;letter-spacing:-.02em}}.sub{{color:var(--muted);font
 @media(max-width:720px){{.kpis{{grid-template-columns:1fr 1fr}}.two{{grid-template-columns:1fr}}.row{{grid-template-columns:130px 1fr 46px}}}}
 .foot{{margin-top:26px;font-size:13px;color:var(--muted)}}.foot a{{color:var(--accent)}}
 #tip{{position:fixed;z-index:9999;background:#1f2937;color:#fff;font-size:12px;padding:6px 9px;border-radius:7px;pointer-events:none;opacity:0;transition:opacity .1s;max-width:270px;line-height:1.45;box-shadow:0 6px 18px rgba(0,0,0,.22)}}
+.fbk{{position:fixed;bottom:12px;right:12px;z-index:1200;font-size:12px;color:var(--accent);text-decoration:none;background:var(--card);border:1px solid var(--line);padding:6px 12px;border-radius:20px;box-shadow:0 1px 5px rgba(0,0,0,.14)}}
+.fbk:hover{{background:#fff;border-color:var(--accent)}}
 </style></head><body>
 <nav class="ptabs"><a href="../">🗺️ Kaart</a><a href="./" class="on">📊 Inzichten</a><a href="../over/">ℹ️ Over</a><a href="https://archief.alanmoss.nl/" class="ext">← Archiefprojecten</a></nav>
 <main>
@@ -117,6 +119,7 @@ h1{{font-size:25px;margin:0;letter-spacing:-.02em}}.sub{{color:var(--muted);font
   <div class="panel"><h2>Per decennium (bouw- of tekeningjaar)</h2>{linechart(dec_order, dec)}</div>
   <div class="foot">Cijfers over de plaats-georganiseerde secties (IB/IIB tekeningen, IC foto's, ID bestekken). Bron: Nationaal Archief 4.RGD (CC0). Onderdeel van de <a href="https://archief.alanmoss.nl/">archiefprojecten</a>.</div>
 </main>
+<a class="fbk" href="mailto:mossalan@gmail.com?subject=RGD-tekeningenkaart%3A%20feedback%20of%20bugmelding" title="Feedback of een fout melden">✉︎ Feedback</a>
 <div id="tip"></div>
 <script>
 (function(){{
