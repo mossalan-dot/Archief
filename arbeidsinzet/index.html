@@ -12,10 +12,10 @@
   *{box-sizing:border-box}
   html,body{margin:0;height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg)}
   #map{position:absolute;inset:0;background:#dfe7ea}
-  .ptabs{position:absolute;top:12px;left:12px;z-index:1001;display:flex;gap:5px;background:rgba(255,255,255,.94);
-    padding:5px;border-radius:12px 12px 0 0;box-shadow:0 2px 14px rgba(0,0,0,.10);border:1px solid var(--line);border-bottom:0;
+  .ptabs{position:absolute;top:12px;left:12px;z-index:1001;display:flex;gap:2px;background:rgba(255,255,255,.94);
+    padding:4px 6px;border-radius:12px 12px 0 0;box-shadow:0 2px 14px rgba(0,0,0,.10);border:1px solid var(--line);border-bottom:0;
     width:300px;max-width:calc(100vw - 24px);justify-content:space-between}
-  .ptabs a{padding:6px 8px;border-radius:7px;text-decoration:none;color:#5a6b74;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+  .ptabs a{padding:5px 5px;border-radius:7px;text-decoration:none;color:#5a6b74;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap}
   .ptabs a.on{background:var(--accent);color:#fff}
   .ptabs a:not(.on):hover{background:var(--bg);color:var(--accent)}
   .panel{position:absolute;top:46px;left:12px;z-index:1000;width:300px;max-width:calc(100vw - 24px);
@@ -56,7 +56,8 @@
   .klist li{padding:5px 0;border-top:1px solid #f1efe8;display:flex;justify-content:space-between;gap:8px;align-items:center}
   .klist a{color:var(--accent);text-decoration:none}
   .klist a:hover{text-decoration:underline}
-  .pill{font-size:10.5px;color:#fff;background:var(--accent);border-radius:20px;padding:1px 7px;white-space:nowrap}
+  .klist a.pill{font-size:10.5px;color:#fff;background:var(--accent);border-radius:20px;padding:2px 9px;white-space:nowrap}
+  .klist a.pill:hover{background:var(--accent-dark,#6b4420);text-decoration:none}
   .cbadge{display:inline-block;font-size:10.5px;color:#fff;border-radius:20px;padding:1px 9px;font-weight:600}
   .rr{margin:1px 0;display:flex;justify-content:space-between;gap:10px}
   .rr .lab{color:var(--muted)}
@@ -105,10 +106,11 @@
 
 <div class="panel"><div class="pad">
   <h1><span class="tag">AI</span> Arbeidsinzet 1940–1945
-    <span class="info">i<span class="tip">De index van de collectie Arbeidsinzet van het Nederlandse Rode Kruis:
-    Nederlanders die tijdens de bezetting in Duitsland werkten of terechtkwamen. Vooral <b>arbeidsinzet</b> (94%),
-    maar ook <b>overlijdens</b> (5%), <b>medische</b> en burgerlijke-stand-records (huwelijk, geboorte).
-    De bron is onvolledig — het toont overgeleverde records, geen volledige aantallen.</span></span></h1>
+    <span class="info">i<span class="tip">Gemeentelijke registratielijsten (per <b>Kreis</b>) van Nederlanders in Duitsland,
+    verzameld door het Nederlandse Rode Kruis. Het merendeel betreft de <b>arbeidsinzet</b> — gedwongen én vrijwillige
+    tewerkstelling — maar de lijsten bevatten ook <b>slachtoffers</b> (bijvoorbeeld uit concentratiekampen) en mensen die
+    kort vóór, tijdens of na de oorlog in Duitsland woonden en werkten. De bron is onvolledig: overgeleverde records,
+    geen volledige aantallen.</span></span></h1>
   <p class="lead">Nederlanders tewerkgesteld in Duitsland — zoek een <b>persoon</b> of plaats.</p>
 
   <div class="modes" id="modes">
@@ -143,7 +145,7 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const BUILD='20260816-3';
+const BUILD='20260816-5';
 const NA_REC='https://www.nationaalarchief.nl/onderzoeken/index/nt00475/';
 const NA_Q='https://www.nationaalarchief.nl/onderzoeken/index/nt00475?searchTerm=';
 const NL=[52.15,5.4], DE=[51.2,9.6];
@@ -186,16 +188,16 @@ function buildLegend(){
 
 // ---- bladerlijst met ‹ › (vaste hoogte → popup verspringt niet) ----
 let listSeq=0;
-function pagedList(items, overig, overigLabel){
+function pagedList(items, overig, overigLabel, total){
   const id='pl'+(++listSeq), PER=6, pages=[];
   for(let i=0;i<items.length;i+=PER) pages.push(items.slice(i,i+PER));
   if(!pages.length) pages.push([]);
-  const row=([naam,c])=>`<div class="rr"><span>${esc(naam)}</span><span class="lab">${fmt(c)}</span></div>`;
+  const row=([naam,c])=>`<div class="rr"><span>${esc(naam)}</span><span class="lab">${fmt(c)}${total?' · '+Math.round(100*c/total)+'%':''}</span></div>`;
   const pg=pages.map((p,i)=>`<div class="pl-pg"${i?' hidden':''}>${p.map(row).join('')}</div>`).join('');
   let html=`<div class="pl" id="${id}" data-pg="0" data-n="${pages.length}"><div class="pl-pages">${pg}</div>`;
   if(pages.length>1) html+=`<div class="pl-nav"><span class="pg-arrow" onclick="pgNav('${id}',-1)">‹</span><span class="pg-ind">1/${pages.length}</span><span class="pg-arrow" onclick="pgNav('${id}',1)">›</span></div>`;
   html+='</div>';
-  if(overig>0) html+=`<div class="rr pl-overig"><span>${overigLabel}</span><span class="lab">${fmt(overig)}</span></div>`;
+  if(overig>0) html+=`<div class="rr pl-overig"><span>${overigLabel}</span><span class="lab">${fmt(overig)}${total?' · '+Math.round(100*overig/total)+'%':''}</span></div>`;
   return html;
 }
 window.pgNav=function(id,dir){
@@ -209,7 +211,8 @@ window.pgNav=function(id,dir){
 function kreisCard(d){
   const other=Object.entries(d.cats).filter(([k])=>k!=='arbeidsinzet').sort((a,b)=>b[1]-a[1])
     .map(([k,v])=>`${CATLAB[k]||k} ${fmt(v)}`).join(' · ');
-  const orig=pagedList(d.nl, d.nl_overig, 'Nederland (zonder plaats)');
+  const nlTot=d.nl.reduce((s,x)=>s+x[1],0)+(d.nl_overig||0);
+  const orig=pagedList(d.nl, d.nl_overig, 'Nederland (zonder plaats)', nlTot);
   return `<b>${esc(d.naam)}</b>${d.kreis&&d.kreis!==d.naam?` <span style="color:#888">· Kreis ${esc(d.kreis)}</span>`:''}`+
     `${d.zone?` <span style="color:#aaa">· ${esc(d.zone)} zone</span>`:''}<br>`+
     `<b style="font-size:12px">${fmt(d.records)}</b> personen${other?` <span style="color:#999">· waarvan ${other}</span>`:''}`+
@@ -218,7 +221,7 @@ function kreisCard(d){
 }
 // ---- Herkomst-popup (NL) ----
 function herkomstCard(o){
-  const dst=pagedList(o.dests, 0, '');
+  const dst=pagedList(o.dests, 0, '', o.records);
   return `<b>${esc(o.naam)}</b><br><b style="font-size:12px">${fmt(o.records)}</b> personen (hier geboren)`+
     `<div style="margin-top:8px;border-top:1px solid #eee;padding-top:7px"><div style="color:#888;margin-bottom:4px">tewerkgesteld in:</div>${dst}</div>`+
     `<div style="margin-top:9px"><a href="${naSearch(o.naam)}" target="_blank" rel="noopener" style="font-size:12px">zoeken bij het Nationaal Archief →</a></div>`;
@@ -327,15 +330,16 @@ function runSearch(term){
   if(t.length<2){sug.style.display='none';return;}
   const wantP=state.stog!=='persoon', wantN=state.stog!=='plaats';
   let html=''; window._nh=[];
-  const ph=wantP?placeIdx.filter(x=>x.naam.toLowerCase().includes(t)).sort((a,b)=>b.records-a.records).slice(0,4):[];
-  if(ph.length) html+='<div class="hdr">Plaatsen</div>'+ph.map((h,i)=>
-    `<a data-p="${i}"><b>${esc(h.naam)}</b> <small>· ${h.type==='kreis'?'Kreis, '+fmt(h.records)+' pers.':'herkomst, '+fmt(h.records)+' pers.'}</small></a>`).join('');
+  const wantType=state.mode==='herkomst'?'herkomst':'kreis';   // Plaatsen volgen de actieve modus
+  const ph=wantP?placeIdx.filter(x=>x.type===wantType && x.naam.toLowerCase().includes(t)).sort((a,b)=>b.records-a.records).slice(0,4):[];
+  if(ph.length) html+=`<div class="hdr">${wantType==='kreis'?'Bestemmingen (Kreis)':'Herkomstplaatsen'}</div>`+ph.map((h,i)=>
+    `<a data-p="${i}"><b>${esc(h.naam)}</b> <small>· ${fmt(h.records)} pers.</small></a>`).join('');
   if(wantN){
     if(!PERS){ html+='<div class="hdr">Personen</div><a style="color:#999;cursor:default">personen laden…</a>'; loadPersons(()=>runSearch(term)); }
     else {
       const nh=PERS.filter(x=>x.n.toLowerCase().includes(t)).slice(0,7);
       if(nh.length){ html+='<div class="hdr">Personen</div>'+nh.map((h,i)=>
-        `<a data-pp="${i}"><b>${esc(h.n)}</b> <small>· ${(h.bd||'').slice(0,4)||'?'}${h.p?', '+esc(h.p):''} → ${h.k.length} ${h.k.length===1?'Kreis':'Kreisen'}</small></a>`).join('');
+        `<a data-pp="${i}"><b>${esc(h.n)}</b> <small>· ${h.bd?esc(nlDate(h.bd)):'?'}${h.p?', '+esc(h.p):''} → ${h.k.length} ${h.k.length===1?'Kreis':'Kreisen'}</small></a>`).join('');
         window._nh=nh; }
       else if(t.length>=3) html+='<div class="hdr">Personen</div><a style="color:#999;cursor:default">geen persoon gevonden</a>';
     }
