@@ -95,11 +95,6 @@
       <div id="cHist"></div>
     </div>
     <div class="card">
-      <h2>Geslacht</h2>
-      <p class="cap">Overwegend <b>mannen</b>; vrouwen komen vaker in medische en burgerlijke-stand-records voor.</p>
-      <div id="cGender"></div>
-    </div>
-    <div class="card">
       <h2>Grootste Kreise</h2>
       <p class="cap">Duitse districten met de meeste personen.</p>
       <div class="bars" id="cKreis"></div>
@@ -111,8 +106,8 @@
       <div class="bars" id="cHerk"></div>
     </div>
     <div class="card wide">
-      <h2>Overlijdens door de tijd</h2>
-      <p class="cap">Het aantal geregistreerde overlijdens loopt op naar de laatste oorlogsjaren <b>1944–1945</b>.</p>
+      <h2>Sterfgevallen door de tijd</h2>
+      <p class="cap">Het aantal geregistreerde sterfgevallen loopt op naar de laatste oorlogsjaren <b>1944–1945</b>.</p>
       <div id="cSterf"></div>
     </div>
     <div class="card wide">
@@ -121,8 +116,13 @@
       <div id="cLeeftijd"></div>
     </div>
     <div class="card">
+      <h2>Geslacht</h2>
+      <p class="cap">Overwegend <b>mannen</b>; vrouwen komen vaker in medische en burgerlijke-stand-records voor.</p>
+      <div id="cGender"></div>
+    </div>
+    <div class="card">
       <h2>Categorie van het record</h2>
-      <p class="cap">Naast arbeidsinzet ook overlijdens, medische en burgerlijke-stand-records.</p>
+      <p class="cap">Naast arbeidsinzet ook sterfgevallen, medische en burgerlijke-stand-records.</p>
       <div id="cCat"></div>
     </div>
     <div class="card">
@@ -146,7 +146,7 @@
 <div id="viztip"></div>
 
 <script>
-const BUILD='20260817-17';
+const BUILD='20260817-18';
 const NA_REC='https://www.nationaalarchief.nl/onderzoeken/index/nt00475/';
 const CAT_COLOR={arbeidsinzet:'#a99a86',overlijden:'#a3312d',medisch:'#c26a3d',huwelijk:'#7a6ab0',geboorte:'#4a8f6d'};
 const CAT_LAB={arbeidsinzet:'arbeidsinzet',overlijden:'overlijden',medisch:'medisch',huwelijk:'huwelijk',geboorte:'geboorte'};
@@ -197,8 +197,9 @@ function decadeBars(el,data){
   const ks=Object.keys(data).map(Number).sort((a,b)=>a-b); if(!ks.length){document.getElementById(el).innerHTML='';return;}
   const W=840,H=250,pl=46,pr=12,pt=12,pb=26,iw=W-pl-pr,ih=H-pt-pb;
   const mx=Math.max(...ks.map(k=>data[k]),1),n=ks.length,bw=iw/n*0.62;
-  const bars=ks.map((k,i)=>{const x=pl+iw*(i+0.5)/n,h=ih*data[k]/mx,y=pt+ih-h;
-    return `<rect x="${(x-bw/2).toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="2" fill="#c8863f" data-tip="${k}–${k+9}: ${fmt(data[k])} personen"/>`+
+  const bars=ks.map((k,i)=>{const x=pl+iw*(i+0.5)/n,h=ih*data[k]/mx,y=pt+ih-h,cw=iw/n;
+    return `<rect x="${(x-cw/2).toFixed(1)}" y="${pt}" width="${cw.toFixed(1)}" height="${ih}" fill="transparent" data-tip="${k}–${k+9}: ${fmt(data[k])} personen"/>`+
+      `<rect x="${(x-bw/2).toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="2" fill="#c8863f"/>`+
       `<text x="${x.toFixed(1)}" y="${H-8}" font-size="10" fill="#6b7280" text-anchor="middle">${k}</text>`;}).join('');
   document.getElementById(el).innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="height:auto;display:block">${yGrid(mx,pl,pr,pt,ih,W)}${bars}</svg>`;
 }
@@ -207,8 +208,9 @@ function histChart(el,data,color,unit,xstep){
   const ks=Object.keys(data).map(Number).sort((a,b)=>a-b); if(!ks.length){document.getElementById(el).innerHTML='';return;}
   const W=840,H=250,pl=46,pr=12,pt=12,pb=26,iw=W-pl-pr,ih=H-pt-pb;
   const mx=Math.max(...ks.map(k=>data[k]),1),n=ks.length,bw=iw/n*0.72;
-  const bars=ks.map((k,i)=>{const x=pl+iw*(i+0.5)/n,h=ih*data[k]/mx,y=pt+ih-h;
-    return `<rect x="${(x-bw/2).toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="1.5" fill="${color}" data-tip="${k}: ${fmt(data[k])} ${unit}"/>`+
+  const bars=ks.map((k,i)=>{const x=pl+iw*(i+0.5)/n,h=ih*data[k]/mx,y=pt+ih-h,cw=iw/n;
+    return `<rect x="${(x-cw/2).toFixed(1)}" y="${pt}" width="${cw.toFixed(1)}" height="${ih}" fill="transparent" data-tip="${k}: ${fmt(data[k])} ${unit}"/>`+
+      `<rect x="${(x-bw/2).toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="1.5" fill="${color}"/>`+
       ((k%xstep===0)?`<text x="${x.toFixed(1)}" y="${H-8}" font-size="10" fill="#6b7280" text-anchor="middle">${k}</text>`:'');}).join('');
   document.getElementById(el).innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="height:auto;display:block">${yGrid(mx,pl,pr,pt,ih,W)}${bars}</svg>`;
 }
@@ -238,7 +240,7 @@ fetch('kaart_data.json?v='+BUILD).then(r=>r.json()).then(d=>{
     [fmt(inbeeld),'vermeldingen op de kaart','Elke Kreis-vermelding telt mee: wie in meerdere Kreise geregistreerd staat, telt meerdere keren. Vandaar hoger dan het aantal unieke personen.'],
     [fmt(dests.length),'Duitse Kreise','Van de ongeveer 1.000 Kreise die het Duitse Reich in 1939 telde. De overige ~'+(1000-dests.length)+' ontbreken: daar werden geen Nederlanders geregistreerd, of hun records gingen verloren.'],
     [fmt(d.meta.personen),'doorzoekbare personen','Unieke personen, samengevoegd via de reconstructie-id van het Nationaal Archief; daarom lager dan het aantal vermeldingen.'],
-    [fmt(d.per_categorie.overlijden||0),'overlijdens-records'],
+    [fmt(d.per_categorie.overlijden||0),'sterfgevallen (records)'],
     [fmt(d.meta.ogs_gekoppeld||0),'gekoppeld aan een oorlogsgraf','Overledenen die we konden koppelen aan de Oorlogsgravenstichting (NA-index nt00446), op achternaam + volledige sterfdatum. Op de kaart krijgen zij een link naar het grafdossier.'],
   ]);
   GY=d.geboortejaren||{}; GYJ=d.geboortejaren_jaar||{};
