@@ -1,0 +1,145 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""Bouw de repatriëringskaart (Leaflet route-/stroomkaart). Data extern in data.json.
+Routes: van -> (Suez indien Indië<->Europa zonder via) -> naar. Tijdslider per jaar, klik = detail."""
+import json, os, re
+from collections import Counter
+BASE = os.path.dirname(os.path.abspath(__file__)); SITE = f"{BASE}/site"
+R = json.load(open(f"{BASE}/repat_reizen.json", encoding='utf-8'))
+SUEZ = [29.9668, 32.5498]
+
+def is_azie(ll): return ll and ll[1] > 60
+def is_europa(ll): return ll and ll[1] < 40 and ll[0] > 35
+
+routes = []
+for r in R:
+    v, a = r.get("van_ll"), r.get("naar_ll")
+    if not v or not a: continue
+    path = [v]
+    if r.get("via_ll"): path.append(r["via_ll"])
+    elif (is_azie(v) and is_europa(a)) or (is_europa(v) and is_azie(a)): path.append(SUEZ)   # via Suez
+    path.append(a)
+    richting = "thuis" if is_europa(a) else ("uit" if is_europa(v) else "overig")
+    routes.append({"p": [[round(y,3),round(x,3)] for y,x in path], "s": r.get("schip"),
+        "vn": r.get("van_naam"), "nn": r.get("naar_naam"), "vi": r.get("via_naam"),
+        "vd": r.get("van_datum"), "ad": r.get("naar_datum"), "n": r.get("aantal"),
+        "j": r.get("jaar"), "inv": r.get("invnr"), "m": r.get("mets"), "r": richting})
+
+jaren = sorted({x["j"] for x in routes if x["j"]})
+top_schip = Counter(x["s"] for x in routes if x["s"]).most_common(1)[0]
+tot_pers = sum(x["n"] for x in routes if x["n"])
+json.dump(routes, open(f"{SITE}/data.json", "w", encoding='utf-8'), ensure_ascii=False, separators=(",", ":"))
+print(f"routes: {len(routes)} | jaren {jaren[0]}-{jaren[-1]} | schepen {len(set(x['s'] for x in routes))} | pers(bekend) {tot_pers:,}")
+
+HTML = r"""<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repatriëring uit Indië 1945–1962 — de schepen naar huis</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script>window.goatcounter={path:function(p){return location.host+p}}</script>
+<script data-goatcounter="https://stats.alanmoss.nl/count" async src="https://stats.alanmoss.nl/count.js"></script>
+<style>
+  :root{--bg:#eef1f2;--panel:#fff;--ink:#1b2a2f;--muted:#5f7178;--line:#dbe3e5;--accent:#12707f;--accent2:#c0603a}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+  #map{position:absolute;inset:0;background:#cdd9dc}
+  .ptabs{position:absolute;top:12px;left:12px;z-index:1001;display:flex;gap:2px;background:rgba(255,255,255,.94);
+    padding:4px 6px;border-radius:12px 12px 0 0;box-shadow:0 2px 14px rgba(0,0,0,.10);border:1px solid var(--line);border-bottom:0;width:320px;max-width:calc(100vw - 24px);justify-content:space-between}
+  .ptabs a{padding:5px 6px;border-radius:7px;text-decoration:none;color:#5a6b74;font-size:11.5px;font-weight:600;white-space:nowrap}
+  .ptabs a.on{background:var(--accent);color:#fff}
+  .ptabs a:not(.on):hover{background:var(--bg);color:var(--accent)}
+  .panel{position:absolute;top:46px;left:12px;z-index:1000;width:320px;max-width:calc(100vw - 24px);
+    background:var(--panel);border:1px solid var(--line);border-radius:0 0 12px 12px;box-shadow:0 4px 20px rgba(0,0,0,.09)}
+  .pad{padding:13px 15px}
+  h1{font-size:15.5px;margin:0 0 2px}
+  .lead{font-size:11.5px;color:var(--muted);margin:0 0 11px;line-height:1.5}
+  .yr{display:flex;align-items:center;gap:9px;margin:2px 0 4px}
+  .yr input{flex:1}
+  .yrlab{font-size:13px;font-weight:700;color:var(--accent);min-width:96px;text-align:right;font-variant-numeric:tabular-nums}
+  .rowbtwn{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
+  .play{border:1px solid var(--line);background:#fff;color:var(--accent);border-radius:8px;width:30px;height:30px;cursor:pointer;font-size:13px;flex:none}
+  .play:hover{background:var(--bg)}
+  .stat{font-size:12px;color:var(--muted);margin-top:9px;line-height:1.6;border-top:1px solid var(--line);padding-top:8px}
+  .stat b{color:var(--ink)}
+  .nav{display:flex;flex-wrap:wrap;gap:5px 12px;font-size:11.5px;margin-top:9px;border-top:1px solid var(--line);padding-top:9px}
+  .nav a{color:var(--accent);text-decoration:none;font-weight:500}.nav a:hover{text-decoration:underline}
+  .nav .src{flex-basis:100%;color:var(--muted);font-weight:400;margin-top:2px}
+  .legend{position:absolute;bottom:22px;left:12px;z-index:1000;background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:9px;padding:8px 11px;font-size:11px;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+  .legend i{display:inline-block;width:16px;height:3px;border-radius:2px;vertical-align:middle;margin-right:6px}
+  .fbk{position:fixed;bottom:12px;right:12px;z-index:1200;font-size:12px;color:var(--accent);text-decoration:none;background:#fff;border:1px solid var(--line);padding:6px 12px;border-radius:20px;box-shadow:0 1px 5px rgba(0,0,0,.14)}
+  .fbk:hover{border-color:var(--accent)}
+  .leaflet-popup-content{font-size:12.5px;line-height:1.5;margin:11px 13px}
+  .leaflet-popup-content b{font-size:13.5px}
+  a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div id="map"></div>
+<nav class="ptabs"><a class="on">🗺️ Kaart</a><a href="inzichten.html">📊 Inzichten</a><a href="over.html">ℹ️ Over</a><a href="https://archief.alanmoss.nl/">← Archief</a></nav>
+<div class="panel"><div class="pad">
+  <h1>🚢 Repatriëring uit Indië</h1>
+  <p class="lead">De schepen die na de oorlog en de dekolonisatie Nederlanders en militairen van Indonesië naar Nederland brachten, 1945–1962.</p>
+  <div class="yr"><button class="play" id="play">▶</button><input type="range" id="slider" min="0" max="__NJ__" value="__NJ__"><span class="yrlab" id="yrlab"></span></div>
+  <div class="rowbtwn"><span>__J0__</span><span>alle jaren</span></div>
+  <div class="stat" id="stat"></div>
+  <div class="nav"><span class="src">Bron: <a href="https://www.nationaalarchief.nl/onderzoeken/archief/2.19.277" target="_blank" rel="noopener">NA, NRK 2.19.277</a> · openbaar</span></div>
+</div></div>
+<div class="legend"><div style="font-weight:600;margin-bottom:4px;color:#444">route</div>
+  <div><i style="background:#12707f"></i>naar Nederland (thuis)</div>
+  <div><i style="background:#c0603a"></i>naar Indië / overig</div>
+  <div style="margin-top:4px;color:#888">dikte ~ aantal opvarenden · klik voor detail</div></div>
+<a class="fbk" href="mailto:mossalan@gmail.com?subject=Repatri%C3%ABringskaart%3A%20feedback%20of%20bugmelding" title="Feedback of een fout melden">✉︎ Feedback</a>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const BUILD='__BUILD__', JAREN=__JAREN__, NA='https://www.nationaalarchief.nl/onderzoeken/archief/2.19.277/invnr/';
+const fmt=n=>n.toLocaleString('nl-NL'), esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const map=L.map('map',{zoomControl:false,worldCopyJump:false}).setView([18,72],3);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{attribution:'© OpenStreetMap, © CARTO · data: NA 2.19.277',subdomains:'abcd',maxZoom:12}).addTo(map);
+const gLine=L.layerGroup().addTo(map), gHit=L.layerGroup().addTo(map);
+let DATA=null, yearMax=JAREN[JAREN.length-1];
+const COL={thuis:'#12707f',uit:'#c0603a',overig:'#c0603a'};
+function wt(n){ return n? Math.max(1.2,Math.min(7,Math.sqrt(n)/7)) : 1.2; }
+function reisPopup(d){
+  const route=[d.vn,d.vi,d.nn].filter(Boolean).join(' → ');
+  return `<b>${esc(d.s||'onbekend schip')}</b><br>${esc(route)}`+
+    `${d.vd?`<br><span style="color:#888">vertrek ${esc(d.vd)}${d.ad?' · aankomst '+esc(d.ad):''}</span>`:''}`+
+    `${d.n?`<br>${fmt(d.n)} opvarenden`:''}`+
+    (d.inv?`<br><a href="${NA}${encodeURIComponent(d.inv)}/" target="_blank" rel="noopener" style="font-size:12px">passagierslijst bij het NA →</a>`:'');
+}
+function render(){
+  if(!DATA) return;
+  gLine.clearLayers(); gHit.clearLayers();
+  let n=0, pers=0;
+  DATA.forEach(d=>{
+    if(d.j && d.j>yearMax) return;
+    n++; if(d.n) pers+=d.n;
+    const col=COL[d.r]||'#c0603a';
+    L.polyline(d.p,{color:col,weight:wt(d.n),opacity:.34,lineCap:'round'}).addTo(gLine);
+    const hit=L.polyline(d.p,{color:col,weight:12,opacity:0}).addTo(gHit);
+    hit.bindPopup(reisPopup(d),{maxWidth:250});
+    hit.on('mouseover',function(){this._l&&this._l.remove();this._l=L.polyline(d.p,{color:col,weight:wt(d.n)+2,opacity:.85}).addTo(gLine);});
+    hit.on('mouseout',function(){this._l&&this._l.remove();this._l=null;});
+  });
+  document.getElementById('stat').innerHTML=`<b>${fmt(n)}</b> reizen${yearMax<JAREN[JAREN.length-1]?` t/m <b>${yearMax}</b>`:''} · <b>${fmt(pers)}</b> opvarenden <span style="color:#aaa">(waar geteld)</span>`;
+}
+const slider=document.getElementById('slider'), yrlab=document.getElementById('yrlab');
+function setYear(i){ yearMax=+i>=JAREN.length? JAREN[JAREN.length-1]:JAREN[+i];
+  yrlab.textContent=(+i>=JAREN.length?'alle jaren':'t/m '+JAREN[+i]); render(); }
+slider.addEventListener('input',e=>setYear(e.target.value));
+let timer=null;
+document.getElementById('play').addEventListener('click',function(){
+  if(timer){clearInterval(timer);timer=null;this.textContent='▶';return;}
+  this.textContent='⏸'; let i=0; slider.value=0; setYear(0);
+  timer=setInterval(()=>{ i++; if(i>JAREN.length){clearInterval(timer);timer=null;this.textContent='▶';return;}
+    slider.value=i; setYear(i); },700);
+});
+fetch('data.json?v='+BUILD).then(r=>r.json()).then(d=>{DATA=d; setYear(JAREN.length); });
+</script>
+</body>
+</html>"""
+HTML = (HTML.replace("__NJ__", str(len(jaren))).replace("__J0__", str(jaren[0]))
+        .replace("__JAREN__", json.dumps(jaren)).replace("__BUILD__", "20260818-1"))
+os.makedirs(SITE, exist_ok=True)
+open(f"{SITE}/index.html", "w", encoding='utf-8').write(HTML)
+print("geschreven: site/index.html + data.json")
