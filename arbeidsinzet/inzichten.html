@@ -130,7 +130,7 @@
 <div id="viztip"></div>
 
 <script>
-const BUILD='20260817-3';
+const BUILD='20260817-5';
 const NA_REC='https://www.nationaalarchief.nl/onderzoeken/index/nt00475/';
 const CAT_COLOR={arbeidsinzet:'#a99a86',overlijden:'#a3312d',medisch:'#c26a3d',huwelijk:'#7a6ab0',geboorte:'#4a8f6d'};
 const CAT_LAB={arbeidsinzet:'arbeidsinzet',overlijden:'overlijden',medisch:'medisch',huwelijk:'huwelijk',geboorte:'geboorte'};
@@ -213,6 +213,7 @@ fetch('kaart_data.json?v='+BUILD).then(r=>r.json()).then(d=>{
     [fmt(dests.length),'Duitse Kreise'],
     [fmt(d.meta.personen),'doorzoekbare personen','Unieke personen, samengevoegd via de reconstructie-id van het Nationaal Archief — daarom lager dan het aantal vermeldingen.'],
     [fmt(d.per_categorie.overlijden||0),'overlijdens-records'],
+    [fmt(d.meta.ogs_gekoppeld||0),'gekoppeld aan een oorlogsgraf','Overledenen die we konden koppelen aan de Oorlogsgravenstichting (NA-index nt00446), op achternaam + volledige sterfdatum. Op de kaart krijgen zij een link naar het grafdossier.'],
   ]);
   GY=d.geboortejaren||{}; GYJ=d.geboortejaren_jaar||{};
   decadeBars('cHist', GY);

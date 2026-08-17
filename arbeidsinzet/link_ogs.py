@@ -57,5 +57,9 @@ for p in P:
 
 json.dump(P, open(PJSON, "w", encoding='utf-8'), ensure_ascii=False, separators=(",", ":"))
 dood = sum(1 for p in P if len(p.get('dd', '')) >= 10)
+KD = f"{BASE}/site/kaart_data.json"
+kd = json.load(open(KD, encoding='utf-8'))
+kd['meta']['ogs_gekoppeld'] = matched; kd['meta']['overledenen'] = dood
+json.dump(kd, open(KD, "w", encoding='utf-8'), ensure_ascii=False, separators=(",", ":"))
 print(f"OGS-koppeling: {matched:,} van {dood:,} overledenen gekoppeld ({round(100*matched/dood)}%); {ambig} te ambigu overgeslagen")
 print(f"personen.json: {os.path.getsize(PJSON)//1024//1024} MB")

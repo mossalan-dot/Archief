@@ -183,7 +183,7 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const BUILD='20260817-4';
+const BUILD='20260817-5';
 const NA_REC='https://www.nationaalarchief.nl/onderzoeken/index/nt00475/';
 const NA_Q='https://www.nationaalarchief.nl/onderzoeken/index/nt00475?searchTerm=';
 const NL=[52.15,5.4], DE=[51.2,9.6];
@@ -347,8 +347,8 @@ function personCard(p, fromNames){
   if(p.dd){                                              // overledene → extra oorlogsbronnen
     body+=`<div style="margin-top:10px;border-top:1px solid #eee;padding-top:8px;font-size:12px">`+
       `<div style="color:#888;margin-bottom:5px">Overledene — verdere bronnen:</div>`+
-      (p.ogs?`<a href="https://www.nationaalarchief.nl/onderzoeken/index/nt00446/${encodeURIComponent(p.ogs)}" target="_blank" rel="noopener" style="display:block;margin-bottom:3px">⚰️ Oorlogsgravenstichting-dossier (NA) →</a>`:'')+
-      `<a href="https://www.oorlogsbronnen.nl/mensen?term=${encodeURIComponent(p.n)}" target="_blank" rel="noopener" style="display:block">🔎 Zoek bij Oorlogsbronnen →</a>`+
+      (p.ogs?`<a href="https://www.nationaalarchief.nl/onderzoeken/index/nt00446/${encodeURIComponent(p.ogs)}" target="_blank" rel="noopener" style="display:block;margin-bottom:3px">🕯️ Oorlogsgravenstichting-dossier (NA) →</a>`:'')+
+      `<a href="https://www.oorlogsbronnen.nl/mensen?term=${encodeURIComponent(p.n)}" target="_blank" rel="noopener" style="display:block">Zoek bij Oorlogsbronnen →</a>`+
     `</div>`;
   }
   body+=`<div class="foot"><a href="${naSearch(p.n)}" target="_blank" rel="noopener">Zoeken bij het NA →</a></div>`;
