@@ -100,6 +100,17 @@
       <div id="cGender"></div>
     </div>
     <div class="card">
+      <h2>Grootste Kreise</h2>
+      <p class="cap">Duitse districten met de meeste personen.</p>
+      <div class="bars" id="cKreis"></div>
+    </div>
+    <div class="card">
+      <div class="h2row"><h2>Grootste herkomstplaatsen</h2>
+        <span class="seg" id="segHerk"><button data-h="plaats" class="on">plaats</button><button data-h="prov">provincie</button></span></div>
+      <p class="cap">Nederlandse geboorteplaatsen met de meeste personen.</p>
+      <div class="bars" id="cHerk"></div>
+    </div>
+    <div class="card">
       <h2>Categorie van het record</h2>
       <p class="cap">Naast arbeidsinzet ook overlijdens, medische en burgerlijke-stand-records.</p>
       <div id="cCat"></div>
@@ -108,16 +119,6 @@
       <h2>Bezettingszone</h2>
       <p class="cap">Waar de Kreise na de oorlog onder vielen.</p>
       <div id="cZone"></div>
-    </div>
-    <div class="card">
-      <h2>Grootste Kreise</h2>
-      <p class="cap">Duitse districten met de meeste personen.</p>
-      <div class="bars" id="cKreis"></div>
-    </div>
-    <div class="card">
-      <h2>Grootste herkomstplaatsen</h2>
-      <p class="cap">Nederlandse geboorteplaatsen met de meeste personen.</p>
-      <div class="bars" id="cHerk"></div>
     </div>
   </div>
 
@@ -130,7 +131,7 @@
 <div id="viztip"></div>
 
 <script>
-const BUILD='20260817-5';
+const BUILD='20260817-7';
 const NA_REC='https://www.nationaalarchief.nl/onderzoeken/index/nt00475/';
 const CAT_COLOR={arbeidsinzet:'#a99a86',overlijden:'#a3312d',medisch:'#c26a3d',huwelijk:'#7a6ab0',geboorte:'#4a8f6d'};
 const CAT_LAB={arbeidsinzet:'arbeidsinzet',overlijden:'overlijden',medisch:'medisch',huwelijk:'huwelijk',geboorte:'geboorte'};
@@ -156,16 +157,17 @@ function bars(el,items,color,unit,total){
       `<div class="track"><div class="seg" style="width:${w}%;background:${c||color}"></div></div><div class="val">${fmt(v)}</div></div>`;
   }).join('');
 }
-// SVG-donut: items = [[label,val,color],…]
+// SVG-donut: items = [[label,val,color],…] — groter, legenda eronder
 function donut(el,items){
   items=items.filter(i=>i[1]>0);
-  const tot=items.reduce((s,i)=>s+i[1],0)||1, R=43, C=2*Math.PI*R, cx=60, cy=60; let off=0;
+  const tot=items.reduce((s,i)=>s+i[1],0)||1, R=54, C=2*Math.PI*R, cx=70, cy=70; let off=0;
+  const pctS=v=>{const p=100*v/tot; return p<1?p.toFixed(2):p<10?p.toFixed(1):''+Math.round(p);};
   const arcs=items.map(([l,v,c])=>{
-    const len=v/tot*C, s=`<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="${c}" stroke-width="20" stroke-dasharray="${len.toFixed(2)} ${(C-len).toFixed(2)}" stroke-dashoffset="${(-off).toFixed(2)}" transform="rotate(-90 ${cx} ${cy})" data-tip="${esc(l)}: ${fmt(v)} · ${Math.round(100*v/tot)}%"/>`;
+    const len=v/tot*C, s=`<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="${c}" stroke-width="24" stroke-dasharray="${len.toFixed(2)} ${(C-len).toFixed(2)}" stroke-dashoffset="${(-off).toFixed(2)}" transform="rotate(-90 ${cx} ${cy})" data-tip="${esc(l)}: ${fmt(v)} · ${pctS(v)}%"/>`;
     off+=len; return s;
   }).join('');
-  const leg=items.map(([l,v,c])=>`<div style="display:flex;align-items:center;gap:6px;font-size:12px;margin:3px 0"><span style="width:10px;height:10px;border-radius:50%;background:${c};flex:none"></span>${esc(l)}<span style="color:#888;margin-left:auto;padding-left:10px">${Math.round(100*v/tot)}%</span></div>`).join('');
-  document.getElementById(el).innerHTML=`<div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><svg viewBox="0 0 120 120" width="120" height="120" style="flex:none">${arcs}</svg><div style="flex:1;min-width:130px">${leg}</div></div>`;
+  const leg=items.map(([l,v,c])=>`<div style="display:flex;align-items:center;gap:6px;font-size:12px"><span style="width:10px;height:10px;border-radius:50%;background:${c};flex:none"></span>${esc(l)} <span style="color:#888">${pctS(v)}%</span></div>`).join('');
+  document.getElementById(el).innerHTML=`<div style="display:flex;flex-direction:column;align-items:center;gap:12px"><svg viewBox="0 0 140 140" width="152" height="152">${arcs}</svg><div style="display:flex;flex-wrap:wrap;justify-content:center;gap:4px 14px">${leg}</div></div>`;
 }
 function niceStep(v){const p=Math.pow(10,Math.floor(Math.log10(v)));const f=v/p;return (f<1.5?1:f<3?2:f<7?5:10)*p;}
 function yGrid(mx,pl,pr,pt,ih,W){
@@ -194,8 +196,7 @@ function yearChart(el,data,isYear){
   const poly=pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ');
   const area=`${X(0).toFixed(1)},${(pt+ih).toFixed(1)} ${poly} ${X(n-1).toFixed(1)},${(pt+ih).toFixed(1)}`;
   const dots=pts.map((p,i)=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="6" fill="transparent" data-tip="${ks[i]}: ${fmt(data[ks[i]])} personen"/><circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="2" fill="#8a5a2b"/>`).join('');
-  const step=Math.ceil(n/9);
-  const xl=ks.map((k,i)=>(i%step)?'':`<text x="${X(i).toFixed(1)}" y="${H-8}" font-size="10" fill="#6b7280" text-anchor="middle">${k}</text>`).join('');
+  const xl=ks.map((k,i)=>(k%10)?'':`<text x="${X(i).toFixed(1)}" y="${H-8}" font-size="10" fill="#6b7280" text-anchor="middle">${k}</text>`).join('');
   document.getElementById(el).innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="height:auto;display:block">${yGrid(mx,pl,pr,pt,ih,W)}`+
     `<polygon points="${area}" fill="#8a5a2b18"/><polyline points="${poly}" fill="none" stroke="#8a5a2b" stroke-width="2.4" stroke-linejoin="round"/>${dots}${xl}</svg>`;
 }
@@ -222,6 +223,15 @@ fetch('kaart_data.json?v='+BUILD).then(r=>r.json()).then(d=>{
   const herkTot=d.herkomst.reduce((s,x)=>s+x.records,0);
   const th=[...d.herkomst].sort((a,b)=>b.records-a.records).slice(0,12);
   bars('cHerk', th.map(x=>[x.naam,x.records]), '#7c9a6b','personen', herkTot);
+  const provAgg={}; d.herkomst.forEach(o=>{if(o.prov)provAgg[o.prov]=(provAgg[o.prov]||0)+o.records;});
+  const provTot=Object.values(provAgg).reduce((a,b)=>a+b,0)||1;
+  document.querySelectorAll('#segHerk button').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('#segHerk button').forEach(x=>x.classList.toggle('on',x===b));
+    if(b.dataset.h==='prov'){
+      const pk=Object.keys(provAgg).sort((a,b)=>provAgg[b]-provAgg[a]);
+      bars('cHerk', pk.map(p=>[p,provAgg[p]]), '#7c9a6b','personen', provTot);
+    } else bars('cHerk', th.map(x=>[x.naam,x.records]), '#7c9a6b','personen', herkTot);
+  }));
   const pc=d.per_categorie;
   donut('cCat', Object.keys(pc).sort((a,b)=>pc[b]-pc[a]).map(c=>[CAT_LAB[c]||c,pc[c],CAT_COLOR[c]]));
   const zc={}; dests.forEach(x=>{const z=x.zone||'onbekend';zc[z]=(zc[z]||0)+x.records;});

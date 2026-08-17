@@ -12,7 +12,9 @@ Twee weergaven (Herkomst NL / Bestemmingen DE) als gegradeerde bolletjes, klikba
    `reconstructieid`, en schrijft `kaart_data.json` (kreisen + herkomst + gender + geboortejaren) en
    `personen.json` (~300.000 personen, lazy geladen op de kaart) + `arbeidsinzet_kreisen.csv`.
 2. `geocode_missing.py` — geocodeert Kreisen zonder coördinaat (Nominatim, met naam-opschoning).
-3. `link_ogs.py` — koppelt de **overledenen** aan de **Oorlogsgravenstichting**-index
+3. `provincie_herkomst.py` — voegt `prov` (provincie) toe aan elke NL-herkomstplaats (PDOK naam-lookup,
+   gecachet) voor de plaats/provincie-toggle op de inzichten-pagina.
+4. `link_ogs.py` — koppelt de **overledenen** aan de **Oorlogsgravenstichting**-index
    (NA nt00446, `~/Downloads/NT00446_OORLOGSGRAVEN.csv`) op achternaam + volledige sterfdatum
    (voornaam/geboorteplaats als tiebreak) → voegt `ogs` (UUID) toe aan `personen.json`.
    In de kaart krijgt een overledene dan een link naar het OGS-dossier bij het NA + een

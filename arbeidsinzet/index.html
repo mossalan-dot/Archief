@@ -89,9 +89,9 @@
   .acc[open]>summary{margin-bottom:8px}
   .acc.filtered>summary{color:var(--accent)}
   .acc.filtered>summary::before{content:"●";font-size:8px;color:var(--accent)}
-  .catchips{display:flex;flex-wrap:wrap;gap:4px}
-  .chip{font-size:11px;padding:3px 9px;border-radius:20px;border:1px solid var(--line);background:#fff;color:#5a6b74;cursor:pointer;user-select:none}
-  .chip:hover{border-color:var(--accent)}
+  .catchips{display:flex;flex-direction:column;gap:1px}
+  .catck{display:flex;align-items:center;gap:7px;font-size:12px;padding:2px 0;cursor:pointer;color:#444}
+  .catck .dot{width:10px;height:10px;border-radius:50%;flex:none}
   /* gender-verdeelbalkje in popups/kaart */
   .gbar{display:flex;height:7px;border-radius:4px;overflow:hidden;margin:4px 0 2px}
   .gbar i{display:block;height:100%}
@@ -134,7 +134,7 @@
 </nav>
 
 <div class="panel"><div class="pad">
-  <h1><span class="tag">AI</span> Arbeidsinzet 1940–1945
+  <h1>Arbeidsinzet 1940–1945
     <span class="info">i<span class="tip">Gemeentelijke registratielijsten (per <b>Kreis</b>) van Nederlanders in Duitsland,
     verzameld door het Nederlandse Rode Kruis. Het merendeel betreft de <b>arbeidsinzet</b> — gedwongen én vrijwillige
     tewerkstelling — maar de lijsten bevatten ook <b>slachtoffers</b> (bijvoorbeeld uit concentratiekampen) en mensen die
@@ -158,7 +158,7 @@
     <div class="sug" id="sug"></div>
   </div>
 
-  <details class="acc" id="catfilter" open style="display:none"><summary>Categorie</summary>
+  <details class="acc" id="catfilter" style="display:none"><summary>Categorie</summary>
     <div class="catchips" id="catchips"></div>
   </details>
 
@@ -183,7 +183,7 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const BUILD='20260817-5';
+const BUILD='20260817-7';
 const NA_REC='https://www.nationaalarchief.nl/onderzoeken/index/nt00475/';
 const NA_Q='https://www.nationaalarchief.nl/onderzoeken/index/nt00475?searchTerm=';
 const NL=[52.15,5.4], DE=[51.2,9.6];
@@ -220,13 +220,12 @@ function buildCatChips(){
   det.style.display = state.mode==='bestemming' ? 'block' : 'none';
   if(state.mode!=='bestemming') return;
   det.classList.toggle('filtered', state.cats.size!==CATS.length);
-  box.innerHTML=CATS.map(([k,l,col])=>{
-    const on=state.cats.has(k);
-    return `<span class="chip${on?' on':''}" data-cat="${k}" style="${on?`background:${col};border-color:${col};color:#fff`:''}">${l}</span>`;
-  }).join('');
-  box.querySelectorAll('[data-cat]').forEach(el=>el.addEventListener('click',()=>{
-    const k=el.dataset.cat;
-    state.cats = (state.cats.size===1 && state.cats.has(k)) ? new Set(CATS.map(c=>c[0])) : new Set([k]);
+  box.innerHTML=CATS.map(([k,l,col])=>
+    `<label class="catck"><input type="checkbox" data-cat="${k}" ${state.cats.has(k)?'checked':''}><span class="dot" style="background:${col}"></span>${l}</label>`).join('');
+  box.querySelectorAll('[data-cat]').forEach(cb=>cb.addEventListener('change',e=>{
+    const k=e.target.dataset.cat;
+    e.target.checked?state.cats.add(k):state.cats.delete(k);
+    if(state.cats.size===0){state.cats.add(k);e.target.checked=true;return;}  // minstens één aan
     buildCatChips(); render();
   }));
 }
@@ -322,8 +321,9 @@ function highlightKreisen(idxs){
   idxs.forEach(i=>{ const k=DATA.kreisen[i]; if(!k||k.lat==null) return; pts.push([k.lat,k.lon]);
     L.marker([k.lat,k.lon],{icon:L.divIcon({className:'',html:'<div class="pulse"></div>',iconSize:[15,15],iconAnchor:[7,7]}),zIndexOffset:1000}).addTo(gHi);
   });
-  if(pts.length===1) map.setView(pts[0],8,{animate:true});
-  else if(pts.length>1) map.fitBounds(pts,{padding:[70,70],maxZoom:9});
+  // ná de eventuele mode-setView: alle gemarkeerde punten in beeld
+  setTimeout(()=>{ if(pts.length===1) map.setView(pts[0],8,{animate:true});
+    else if(pts.length>1) map.fitBounds(pts,{paddingTopLeft:[40,40],paddingBottomRight:[310,40],maxZoom:9,animate:true}); },60);
 }
 function nlDate(s){ s=String(s||''); const m=s.match(/^(\d{4})-(\d{2})-(\d{2})$/); return m?`${m[3]}-${m[2]}-${m[1]}`:s; }
 function personCard(p, fromNames){
@@ -334,9 +334,11 @@ function personCard(p, fromNames){
   const head=`<h2>${esc(p.n)}</h2>${badges?`<div style="margin-top:5px">${badges}</div>`:''}`;
   const gl=p.g==='m'?'man':p.g==='v'?'vrouw':'';
   let body=(fromNames&&lastNamesCtx)?`<span class="backlink" onclick="reopenNames()">‹ terug naar de lijst</span>`:'';
-  if(p.bd||p.p) body+=`<div class="kv"><b>Geboren</b> ${esc(nlDate(p.bd)||'—')}${p.p?` · ${esc(p.p)}`:''}</div>`;
+  if(p.bd) body+=`<div class="kv"><b>Geboren</b> ${esc(nlDate(p.bd))}</div>`;
+  if(p.p) body+=`<div class="kv"><b>Geboorteplaats</b> ${esc(p.p)}</div>`;
   if(gl) body+=`<div class="kv"><b>Geslacht</b> ${gl}</div>`;
-  if(p.dd) body+=`<div class="kv"><b>Overleden</b> ${esc(nlDate(p.dd))}${p.dp?` · ${esc(p.dp)}`:''}</div>`;
+  if(p.dd) body+=`<div class="kv"><b>Overleden</b> ${esc(nlDate(p.dd))}</div>`;
+  if(p.dp) body+=`<div class="kv"><b>Overlijdensplaats</b> ${esc(p.dp)}</div>`;
   const n=p.k.length;
   body+=`<div style="margin-top:9px;color:#666">Gevonden in <b>${n}</b> ${n===1?'Kreis':'Kreisen'}${n>1?' — dezelfde persoon komt in meerdere administraties voor':''}:</div>`;
   body+='<ul class="klist">'+p.k.map((ki,j)=>{
@@ -347,7 +349,7 @@ function personCard(p, fromNames){
   if(p.dd){                                              // overledene → extra oorlogsbronnen
     body+=`<div style="margin-top:10px;border-top:1px solid #eee;padding-top:8px;font-size:12px">`+
       `<div style="color:#888;margin-bottom:5px">Overledene — verdere bronnen:</div>`+
-      (p.ogs?`<a href="https://www.nationaalarchief.nl/onderzoeken/index/nt00446/${encodeURIComponent(p.ogs)}" target="_blank" rel="noopener" style="display:block;margin-bottom:3px">🕯️ Oorlogsgravenstichting-dossier (NA) →</a>`:'')+
+      (p.ogs?`<a href="https://www.nationaalarchief.nl/onderzoeken/index/nt00446/${encodeURIComponent(p.ogs)}" target="_blank" rel="noopener" style="display:block;margin-bottom:3px">Oorlogsgravenstichting-dossier (NA) →</a>`:'')+
       `<a href="https://www.oorlogsbronnen.nl/mensen?term=${encodeURIComponent(p.n)}" target="_blank" rel="noopener" style="display:block">Zoek bij Oorlogsbronnen →</a>`+
     `</div>`;
   }
