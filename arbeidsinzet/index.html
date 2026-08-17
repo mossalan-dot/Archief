@@ -53,7 +53,8 @@
   .kv{margin:2px 0;color:#444}
   .kv b{color:var(--ink);font-weight:600}
   .klist{margin:7px 0 0;padding:0;list-style:none}
-  .klist li{padding:5px 0;border-top:1px solid #f1efe8;display:flex;justify-content:space-between;gap:8px;align-items:center}
+  .klist li{padding:5px 0;border-top:1px solid #f1efe8;display:flex;justify-content:space-between;gap:6px;align-items:center;flex-wrap:wrap}
+  .klist .scans{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
   .klist a{color:var(--accent);text-decoration:none}
   .klist a:hover{text-decoration:underline}
   .klist a.pill{font-size:10.5px;color:#fff;background:var(--accent);border-radius:20px;padding:2px 9px;white-space:nowrap}
@@ -183,7 +184,7 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const BUILD='20260817-8';
+const BUILD='20260817-13';
 const NA_REC='https://www.nationaalarchief.nl/onderzoeken/index/nt00475/';
 const NA_Q='https://www.nationaalarchief.nl/onderzoeken/index/nt00475?searchTerm=';
 const NL=[52.15,5.4], DE=[51.2,9.6];
@@ -342,11 +343,13 @@ function personCard(p, fromNames){
   if(p.dd) body+=`<div class="kv"><b>Overleden</b> ${esc(nlDate(p.dd))}</div>`;
   if(p.dp) body+=`<div class="kv"><b>Overlijdensplaats</b> ${esc(p.dp)}</div>`;
   const n=p.k.length;
-  body+=`<div style="margin-top:9px;color:#666">Gevonden in <b>${n}</b> ${n===1?'Kreis':'Kreisen'}${n>1?' — dezelfde persoon komt in meerdere administraties voor':''}:</div>`;
+  const totRec=(p.r||[]).reduce((s,a)=>s+(Array.isArray(a)?a.length:(a?1:0)),0);
+  body+=`<div style="margin-top:9px;color:#666"><b>${totRec}</b> record${totRec===1?'':'s'} in <b>${n}</b> ${n===1?'Kreis':'Kreisen'}${n>1?' — dezelfde persoon komt in meerdere administraties voor':''}:</div>`;
   body+='<ul class="klist">'+p.k.map((ki,j)=>{
-    const k=DATA.kreisen[ki], rid=p.r[j];
-    return `<li><a href="#" onclick="flyKreis(${ki});return false;">${esc(k.naam)}</a>`+
-      (rid?` <a class="pill" href="${NA_REC}${encodeURIComponent(rid)}" target="_blank" rel="noopener">Naar scan ↗</a>`:'')+`</li>`;
+    const k=DATA.kreisen[ki];
+    const recids=(Array.isArray(p.r[j])?p.r[j]:[p.r[j]]).filter(Boolean);
+    const scans=recids.map((rid,ri)=>`<a class="pill" href="${NA_REC}${encodeURIComponent(rid)}" target="_blank" rel="noopener">${recids.length>1?'scan '+(ri+1):'Naar scan'} ↗</a>`).join(' ');
+    return `<li><a href="#" onclick="flyKreis(${ki});return false;">${esc(k.naam)}</a><span class="scans">${scans}</span></li>`;
   }).join('')+'</ul>';
   if(p.dd){                                              // overledene → extra oorlogsbronnen
     body+=`<div style="margin-top:10px;border-top:1px solid #eee;padding-top:8px;font-size:12px">`+

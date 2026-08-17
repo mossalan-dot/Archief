@@ -146,7 +146,8 @@ for path in CSVS:
                 if dd and not p["dd"]: p["dd"]=dd
                 dp=(row['dplace'] or '').strip()
                 if dp and not p["dp"]: p["dp"]=dp
-            p["dests"][dest] = row['id'].strip() or p["dests"].get(dest,"")  # 1 record-id per Kreis
+            rid = row['id'].strip()
+            if rid: p["dests"].setdefault(dest, []).append(rid)   # álle record-ids per Kreis
 print(f"records: {n:,} | bestemmingen: {len(dest_stat):,} | herkomst-NL: {len(origin):,} | personen: {len(persons):,}")
 
 # ---------- 3. Kreisen samenstellen ----------
@@ -185,9 +186,9 @@ pout = []
 for rid,p in persons.items():
     if not p["n"]: continue
     ks=[]; rs=[]
-    for dst,recid in p["dests"].items():
+    for dst,recids in p["dests"].items():
         i = kidx.get(dst)
-        if i is not None and kreisen[i]["lat"] is not None: ks.append(i); rs.append(recid)
+        if i is not None and kreisen[i]["lat"] is not None: ks.append(i); rs.append(recids)  # recids = lijst
     if not ks: continue
     e = {"n":p["n"],"k":ks,"r":rs}
     if p["bd"]: e["bd"]=p["bd"]
@@ -217,7 +218,8 @@ geboorte = next((e for e in pout if "geboorte" in e.get("c",[]) and e.get("p")),
 overleden = next((e for e in sorted(pout,key=lambda e:-len(e["k"])) if e.get("dd") and e.get("dp")), None)
 def vd(e, kop, tekst):
     return {"kop":kop,"naam":e["n"],"jaar":e.get("bd","")[:4],"plaats":e.get("p",""),
-            "kreisen":[kname(i) for i in e["k"]][:8],"tekst":tekst,"record":e["r"][0] if e.get("r") else ""}
+            "kreisen":[kname(i) for i in e["k"]][:8],"tekst":tekst,
+            "record":(e["r"][0][0] if e.get("r") and e["r"][0] else "")}
 vondsten = []
 if meeste: vondsten.append(vd(meeste,"Meeste Kreisen",f"komt voor in {len(meeste['k'])} verschillende Kreisen"))
 if huwelijk: vondsten.append(vd(huwelijk,"Huwelijk","in de administratie staat ook een huwelijk geregistreerd"))
