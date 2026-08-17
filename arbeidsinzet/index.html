@@ -55,10 +55,14 @@
   .klist{margin:7px 0 0;padding:0;list-style:none}
   .klist li{padding:5px 0;border-top:1px solid #f1efe8;display:flex;justify-content:space-between;gap:6px;align-items:center;flex-wrap:wrap}
   .klist .scans{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+  .pill.scantog{cursor:pointer;user-select:none}
+  .klist .scanlist{flex-basis:100%;display:flex;flex-direction:column;gap:3px;margin:5px 0 3px 2px;padding-left:8px;border-left:2px solid #eee}
+  .klist .scanlist a{font-size:12px;color:var(--accent);text-decoration:none}
+  .klist .scanlist a:hover{text-decoration:underline}
   .klist a{color:var(--accent);text-decoration:none}
   .klist a:hover{text-decoration:underline}
-  .klist a.pill{font-size:10.5px;color:#fff;background:var(--accent);border-radius:20px;padding:2px 9px;white-space:nowrap}
-  .klist a.pill:hover{background:var(--accent-dark,#6b4420);text-decoration:none}
+  .klist .pill{font-size:10.5px;color:#fff;background:var(--accent);border-radius:20px;padding:2px 9px;white-space:nowrap;text-decoration:none}
+  .klist .pill:hover{background:var(--accent-dark,#6b4420);text-decoration:none}
   .cbadge{display:inline-block;font-size:10.5px;color:#fff;border-radius:20px;padding:1px 9px;font-weight:600}
   .rr{margin:1px 0;display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
   .rr>span:first-child{min-width:0}
@@ -96,7 +100,7 @@
   /* gender-verdeelbalkje in popups/kaart */
   .gbar{display:flex;height:7px;border-radius:4px;overflow:hidden;margin:4px 0 2px}
   .gbar i{display:block;height:100%}
-  .gm{background:#3f76c9}.gv{background:#c9527e}
+  .gm{background:#4c8c8c}.gv{background:#c58b3c}
   .glab{font-size:11px;color:#888}
   /* namen-zijvenster */
   #names{position:absolute;top:12px;right:12px;z-index:1120;width:290px;max-width:calc(100vw - 24px);
@@ -137,11 +141,11 @@
 <div class="panel"><div class="pad">
   <h1>Arbeidsinzet 1940–1945
     <span class="info">i<span class="tip">Gemeentelijke registratielijsten (per <b>Kreis</b>) van Nederlanders in Duitsland,
-    verzameld door het Nederlandse Rode Kruis. Het merendeel betreft de <b>arbeidsinzet</b> — gedwongen én vrijwillige
-    tewerkstelling — maar de lijsten bevatten ook <b>slachtoffers</b> (bijvoorbeeld uit concentratiekampen) en mensen die
+    verzameld door het Nederlandse Rode Kruis. Het merendeel betreft de <b>arbeidsinzet</b> (gedwongen én vrijwillige
+    tewerkstelling), maar de lijsten bevatten ook <b>slachtoffers</b> (bijvoorbeeld uit concentratiekampen) en mensen die
     kort vóór, tijdens of na de oorlog in Duitsland woonden en werkten. De bron is onvolledig: overgeleverde records,
     geen volledige aantallen.</span></span></h1>
-  <p class="lead">Nederlanders tewerkgesteld in Duitsland — zoek een <b>persoon</b> of plaats.</p>
+  <p class="lead">Nederlanders tewerkgesteld in Duitsland. Zoek een <b>persoon</b> of plaats.</p>
 
   <div class="modes" id="modes">
     <button data-m="herkomst">Herkomst</button>
@@ -184,7 +188,7 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const BUILD='20260817-13';
+const BUILD='20260817-15';
 const NA_REC='https://www.nationaalarchief.nl/onderzoeken/index/nt00475/';
 const NA_Q='https://www.nationaalarchief.nl/onderzoeken/index/nt00475?searchTerm=';
 const NL=[52.15,5.4], DE=[51.2,9.6];
@@ -344,16 +348,23 @@ function personCard(p, fromNames){
   if(p.dp) body+=`<div class="kv"><b>Overlijdensplaats</b> ${esc(p.dp)}</div>`;
   const n=p.k.length;
   const totRec=(p.r||[]).reduce((s,a)=>s+(Array.isArray(a)?a.length:(a?1:0)),0);
-  body+=`<div style="margin-top:9px;color:#666"><b>${totRec}</b> record${totRec===1?'':'s'} in <b>${n}</b> ${n===1?'Kreis':'Kreisen'}${n>1?' — dezelfde persoon komt in meerdere administraties voor':''}:</div>`;
+  body+=`<div style="margin-top:9px;color:#666"><b>${totRec}</b> record${totRec===1?'':'s'} in <b>${n}</b> ${n===1?'Kreis':'Kreisen'}${n>1?'; dezelfde persoon komt in meerdere administraties voor':''}:</div>`;
   body+='<ul class="klist">'+p.k.map((ki,j)=>{
     const k=DATA.kreisen[ki];
     const recids=(Array.isArray(p.r[j])?p.r[j]:[p.r[j]]).filter(Boolean);
-    const scans=recids.map((rid,ri)=>`<a class="pill" href="${NA_REC}${encodeURIComponent(rid)}" target="_blank" rel="noopener">${recids.length>1?'scan '+(ri+1):'Naar scan'} ↗</a>`).join(' ');
-    return `<li><a href="#" onclick="flyKreis(${ki});return false;">${esc(k.naam)}</a><span class="scans">${scans}</span></li>`;
+    let right='', sub='';
+    if(recids.length===1){
+      right=`<a class="pill" href="${NA_REC}${encodeURIComponent(recids[0])}" target="_blank" rel="noopener">Naar scan ↗</a>`;
+    }else if(recids.length>1){
+      const id='sc'+ki+'_'+j;
+      right=`<span class="pill scantog" onclick="var e=document.getElementById('${id}');e.hidden=!e.hidden;this.textContent=(e.hidden?'${recids.length} scans ▾':'${recids.length} scans ▴')">${recids.length} scans ▾</span>`;
+      sub=`<div class="scanlist" id="${id}" hidden>`+recids.map((rid,ri)=>`<a href="${NA_REC}${encodeURIComponent(rid)}" target="_blank" rel="noopener">Naar scan ${ri+1} →</a>`).join('')+`</div>`;
+    }
+    return `<li><a href="#" onclick="flyKreis(${ki});return false;">${esc(k.naam)}</a><span class="scans">${right}</span>${sub}</li>`;
   }).join('')+'</ul>';
   if(p.dd){                                              // overledene → extra oorlogsbronnen
     body+=`<div style="margin-top:10px;border-top:1px solid #eee;padding-top:8px;font-size:12px">`+
-      `<div style="color:#888;margin-bottom:5px">Overledene — verdere bronnen:</div>`+
+      `<div style="color:#888;margin-bottom:5px">Bronnen bij deze overledene:</div>`+
       (p.ogs?`<a href="https://www.nationaalarchief.nl/onderzoeken/index/nt00446/${encodeURIComponent(p.ogs)}" target="_blank" rel="noopener" style="display:block;margin-bottom:3px">Oorlogsgravenstichting-dossier (NA) →</a>`:'')+
       `<a href="https://www.oorlogsbronnen.nl/mensen?term=${encodeURIComponent(p.n)}" target="_blank" rel="noopener" style="display:block">Zoek bij Oorlogsbronnen →</a>`+
     `</div>`;
@@ -406,7 +417,7 @@ function renderNames(q){
   document.getElementById('nlist').innerHTML=show.map(p=>{
     const i=PERS.indexOf(p);
     return `<div class="nrow" data-i="${i}"><b>${esc(p.n)}</b> <small>· ${p.bd?esc(nlDate(p.bd)):'?'}${p.k.length>1?' · '+p.k.length+' Kreisen':''}</small></div>`;
-  }).join('')+(list.length>300?`<div class="nrow" style="color:#999;cursor:default">… en ${fmt(list.length-300)} meer — filter op naam</div>`:'');
+  }).join('')+(list.length>300?`<div class="nrow" style="color:#999;cursor:default">… en ${fmt(list.length-300)} meer (filter op naam)</div>`:'');
   document.querySelectorAll('#nlist .nrow[data-i]').forEach(el=>el.addEventListener('click',()=>selectPerson(PERS[+el.dataset.i],true)));
 }
 function closeNames(){ document.getElementById('names').style.display='none'; }

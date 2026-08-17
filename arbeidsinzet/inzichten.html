@@ -82,7 +82,7 @@
   </header>
 
   <p class="lead">Nederlanders die tijdens de bezetting in Duitsland werkten of terechtkwamen, uit de geïndexeerde
-  collectie van het Nederlandse Rode Kruis. <b>De bron is onvolledig</b> — veel materiaal ging verloren, en
+  collectie van het Nederlandse Rode Kruis. <b>De bron is onvolledig</b>: veel materiaal ging verloren, en
   vrijwillige en gedwongen tewerkstelling zijn niet altijd te scheiden. De cijfers tellen overgeleverde records.</p>
 
   <div class="tiles" id="tiles"></div>
@@ -110,14 +110,14 @@
       <p class="cap">Nederlandse geboorteplaatsen met de meeste personen.</p>
       <div class="bars" id="cHerk"></div>
     </div>
-    <div class="card">
+    <div class="card wide">
       <h2>Overlijdens door de tijd</h2>
       <p class="cap">Het aantal geregistreerde overlijdens loopt op naar de laatste oorlogsjaren <b>1944–1945</b>.</p>
       <div id="cSterf"></div>
     </div>
-    <div class="card">
+    <div class="card wide">
       <h2>Leeftijd bij overlijden</h2>
-      <p class="cap">De meesten waren jong — velen begin twintig.</p>
+      <p class="cap">De meesten waren jong, velen begin twintig.</p>
       <div id="cLeeftijd"></div>
     </div>
     <div class="card">
@@ -141,7 +141,7 @@
 <div id="viztip"></div>
 
 <script>
-const BUILD='20260817-12';
+const BUILD='20260817-15';
 const NA_REC='https://www.nationaalarchief.nl/onderzoeken/index/nt00475/';
 const CAT_COLOR={arbeidsinzet:'#a99a86',overlijden:'#a3312d',medisch:'#c26a3d',huwelijk:'#7a6ab0',geboorte:'#4a8f6d'};
 const CAT_LAB={arbeidsinzet:'arbeidsinzet',overlijden:'overlijden',medisch:'medisch',huwelijk:'huwelijk',geboorte:'geboorte'};
@@ -162,7 +162,7 @@ function tiles(rows){document.getElementById('tiles').innerHTML=rows.map(([n,l,t
 function bars(el,items,color,unit,total){
   const mx=Math.max(...items.map(i=>i[1]),1);
   document.getElementById(el).innerHTML=items.map(([lab,v,c])=>{
-    const w=Math.max(2,Math.round(100*v/mx)), pct=total?' · '+(100*v/total).toFixed(1)+'%':'';
+    const w=Math.max(2,Math.round(100*v/mx)), pct=total?' · '+(100*v/total).toFixed(1).replace('.',',')+'%':'';
     return `<div class="bar" data-tip="${esc(lab)}: ${fmt(v)} ${unit}${pct}"><div class="lab">${esc(lab)}</div>`+
       `<div class="track"><div class="seg" style="width:${w}%;background:${c||color}"></div></div><div class="val">${fmt(v)}</div></div>`;
   }).join('');
@@ -171,7 +171,7 @@ function bars(el,items,color,unit,total){
 function donut(el,items){
   items=items.filter(i=>i[1]>0);
   const tot=items.reduce((s,i)=>s+i[1],0)||1, R=54, C=2*Math.PI*R, cx=70, cy=70; let off=0;
-  const pctS=v=>{const p=100*v/tot; return p<1?p.toFixed(2):p<10?p.toFixed(1):''+Math.round(p);};
+  const pctS=v=>{const p=100*v/tot; return (p<1?p.toFixed(2):p<10?p.toFixed(1):''+Math.round(p)).replace('.',',');};
   const arcs=items.map(([l,v,c])=>{
     const len=v/tot*C, s=`<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="${c}" stroke-width="24" stroke-dasharray="${len.toFixed(2)} ${(C-len).toFixed(2)}" stroke-dashoffset="${(-off).toFixed(2)}" transform="rotate(-90 ${cx} ${cy})" data-tip="${esc(l)}: ${fmt(v)} · ${pctS(v)}%"/>`;
     off+=len; return s;
@@ -232,7 +232,7 @@ fetch('kaart_data.json?v='+BUILD).then(r=>r.json()).then(d=>{
   tiles([
     [fmt(inbeeld),'vermeldingen op de kaart','Elke Kreis-vermelding telt mee: wie in meerdere Kreise geregistreerd staat, telt meerdere keren. Vandaar hoger dan het aantal unieke personen.'],
     [fmt(dests.length),'Duitse Kreise'],
-    [fmt(d.meta.personen),'doorzoekbare personen','Unieke personen, samengevoegd via de reconstructie-id van het Nationaal Archief — daarom lager dan het aantal vermeldingen.'],
+    [fmt(d.meta.personen),'doorzoekbare personen','Unieke personen, samengevoegd via de reconstructie-id van het Nationaal Archief; daarom lager dan het aantal vermeldingen.'],
     [fmt(d.per_categorie.overlijden||0),'overlijdens-records'],
     [fmt(d.meta.ogs_gekoppeld||0),'gekoppeld aan een oorlogsgraf','Overledenen die we konden koppelen aan de Oorlogsgravenstichting (NA-index nt00446), op achternaam + volledige sterfdatum. Op de kaart krijgen zij een link naar het grafdossier.'],
   ]);
@@ -259,7 +259,7 @@ fetch('kaart_data.json?v='+BUILD).then(r=>r.json()).then(d=>{
   const zc={}; dests.forEach(x=>{const z=x.zone||'onbekend';zc[z]=(zc[z]||0)+x.records;});
   donut('cZone', Object.keys(zc).sort((a,b)=>zc[b]-zc[a]).map(z=>[z,zc[z],ZONE_COLOR[z]]));
   const g=d.gender||{};
-  donut('cGender', [['man',g.m||0,'#3f76c9'],['vrouw',g.v||0,'#c9527e']]);
+  donut('cGender', [['man',g.m||0,'#4c8c8c'],['vrouw',g.v||0,'#c58b3c']]);
 }).catch(e=>{document.getElementById('tiles').innerHTML='<div class="tile">Kon data niet laden: '+e+'</div>';});
 </script>
 </body>
