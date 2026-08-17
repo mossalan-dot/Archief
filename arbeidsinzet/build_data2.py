@@ -198,6 +198,17 @@ for rid,p in persons.items():
     if p["cats"]: e["c"]=sorted(p["cats"])
     pout.append(e)
 
+# ---------- overlijden: sterfjaar + leeftijd (per persoon, ingetogen) ----------
+sterfjaar = collections.Counter(); leeftijd = collections.Counter()
+for p in persons.values():
+    dd = p.get('dd', ''); bd = p.get('bd', '')
+    if len(dd) >= 4 and dd[:4].isdigit():
+        dy = int(dd[:4])
+        if 1938 <= dy <= 1948: sterfjaar[dy] += 1
+        if len(bd) >= 4 and bd[:4].isdigit():
+            age = dy - int(bd[:4])
+            if 10 <= age <= 90: leeftijd[age] += 1
+
 # ---------- Bijzondere vondsten (voor het inzichten-dashboard) ----------
 def kname(i): return kreisen[i]["naam"]
 meeste = max(pout, key=lambda e:len(e["k"]))
@@ -218,6 +229,8 @@ pout.sort(key=lambda e:e["n"])
 json.dump({"kreisen":kreisen,"herkomst":herkomst,"vondsten":vondsten,
     "geboortejaren":dict(sorted(jaren.items())),
     "geboortejaren_jaar":dict(sorted(jaren_jaar.items())),
+    "sterfjaar":dict(sorted(sterfjaar.items())),
+    "overlijdensleeftijd":dict(sorted(leeftijd.items())),
     "per_categorie":dict(cat_tot),
     "gender":dict(gender_tot),
     "meta":{"records_totaal":n,"personen":len(pout),"unieke_herkomst":len(herkomst),
