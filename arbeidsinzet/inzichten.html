@@ -130,6 +130,11 @@
       <p class="cap">Waar de Kreise na de oorlog onder vielen.</p>
       <div id="cZone"></div>
     </div>
+    <div class="card">
+      <h2>Dekking van de Duitse Kreise</h2>
+      <p class="cap">Van de circa <b>1.000</b> Kreise die het Reich in 1939 telde, staan er <b>609</b> op de kaart. De rest had geen Nederlandse tewerkgestelden of het materiaal ging verloren (bij benadering).</p>
+      <div id="cDekking"></div>
+    </div>
   </div>
 
   <footer>
@@ -141,7 +146,7 @@
 <div id="viztip"></div>
 
 <script>
-const BUILD='20260817-16';
+const BUILD='20260817-17';
 const NA_REC='https://www.nationaalarchief.nl/onderzoeken/index/nt00475/';
 const CAT_COLOR={arbeidsinzet:'#a99a86',overlijden:'#a3312d',medisch:'#c26a3d',huwelijk:'#7a6ab0',geboorte:'#4a8f6d'};
 const CAT_LAB={arbeidsinzet:'arbeidsinzet',overlijden:'overlijden',medisch:'medisch',huwelijk:'huwelijk',geboorte:'geboorte'};
@@ -231,7 +236,7 @@ fetch('kaart_data.json?v='+BUILD).then(r=>r.json()).then(d=>{
   const inbeeld=dests.reduce((s,x)=>s+x.records,0);
   tiles([
     [fmt(inbeeld),'vermeldingen op de kaart','Elke Kreis-vermelding telt mee: wie in meerdere Kreise geregistreerd staat, telt meerdere keren. Vandaar hoger dan het aantal unieke personen.'],
-    [fmt(dests.length),'Duitse Kreise'],
+    [fmt(dests.length),'Duitse Kreise','Van de ongeveer 1.000 Kreise die het Duitse Reich in 1939 telde. De overige ~'+(1000-dests.length)+' ontbreken: daar werden geen Nederlanders geregistreerd, of hun records gingen verloren.'],
     [fmt(d.meta.personen),'doorzoekbare personen','Unieke personen, samengevoegd via de reconstructie-id van het Nationaal Archief; daarom lager dan het aantal vermeldingen.'],
     [fmt(d.per_categorie.overlijden||0),'overlijdens-records'],
     [fmt(d.meta.ogs_gekoppeld||0),'gekoppeld aan een oorlogsgraf','Overledenen die we konden koppelen aan de Oorlogsgravenstichting (NA-index nt00446), op achternaam + volledige sterfdatum. Op de kaart krijgen zij een link naar het grafdossier.'],
@@ -258,6 +263,7 @@ fetch('kaart_data.json?v='+BUILD).then(r=>r.json()).then(d=>{
   donut('cCat', Object.keys(pc).sort((a,b)=>pc[b]-pc[a]).map(c=>[CAT_LAB[c]||c,pc[c],CAT_COLOR[c]]));
   const zc={}; dests.forEach(x=>{const z=x.zone||'onbekend';zc[z]=(zc[z]||0)+x.records;});
   donut('cZone', Object.keys(zc).sort((a,b)=>zc[b]-zc[a]).map(z=>[z,zc[z],ZONE_COLOR[z]]));
+  donut('cDekking', [['met Nederlandse records',dests.length,'#8a5a2b'],['zonder of niet bewaard',Math.max(0,1000-dests.length),'#cdbf9f']]);
   const g=d.gender||{};
   donut('cGender', [['man',g.m||0,'#4c8c8c'],['vrouw',g.v||0,'#c58b3c']]);
 }).catch(e=>{document.getElementById('tiles').innerHTML='<div class="tile">Kon data niet laden: '+e+'</div>';});
