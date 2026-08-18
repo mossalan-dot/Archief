@@ -100,9 +100,13 @@ def parse_loc(v):
     if not m:
         return {'camp': None, 'place': t, 'country': '', 'key': ''}
     place = m.group('place').strip()
+    place = PLACE_FIX.get(place, place)                 # bekende spelfouten normaliseren
     country = m.group('country').strip()
     return {'camp': (m.group('camp') or None), 'place': place, 'country': country,
             'key': f"{place}|{country}"}
+
+# bekende spelfouten in plaatsnamen uit de brondata -> canonieke vorm
+PLACE_FIX = {'Schotlland': 'Schotland'}
 
 # ---------- inlezen ----------
 wb = openpyxl.load_workbook(XLSX, read_only=True, data_only=True)

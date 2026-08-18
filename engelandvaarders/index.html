@@ -68,7 +68,8 @@
   .rgen{font-size:12px;background:#eef6f8;color:var(--accent);border:1px solid #d5e9ee;border-radius:20px;
     padding:2px 10px;cursor:pointer;white-space:nowrap}
   .rgen:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
-  .rgmore{font-size:11.5px;color:var(--muted);align-self:center;padding:2px 4px}
+  .rgmore{font-size:11.5px;color:var(--accent);align-self:center;padding:2px 6px;cursor:pointer;border-radius:20px}
+  .rgmore:hover{background:#eef6f8;text-decoration:underline}
   .hlpmark{background:none;border:none}
   .hlpdot{width:22px;height:22px;display:flex;align-items:center;justify-content:center;
     background:var(--accent);color:#fff;border:2px solid #fff;border-radius:50%;
@@ -337,14 +338,14 @@ map.on('click',()=>{ if(Date.now()-lineClickAt<80) return;   // niet meteen slui
 function interact(){ state.blank=false; state.focusId=null; const s=document.getElementById('search'); if(s)s.classList.remove('glow'); }
 
 Promise.all([
-  fetch('people.json?v=14').then(r=>r.json()),
-  fetch('geocache.json?v=14').then(r=>r.json()),
-  fetch('woon_geocache.json?v=14').then(r=>r.ok?r.json():{}).catch(()=>({})),
+  fetch('people.json?v=15').then(r=>r.json()),
+  fetch('geocache.json?v=15').then(r=>r.json()),
+  fetch('woon_geocache.json?v=15').then(r=>r.ok?r.json():{}).catch(()=>({})),
   fetch('helpers.json?v=14').then(r=>r.ok?r.json():[]).catch(()=>[])
 ]).then(([people,geo,woon,helpers])=>{
   PEOPLE=people; GEO=geo; WOON=woon||{}; HELPERS=helpers||[];
   buildLegend(); buildLines(); buildHeatSets(); wire(); apply();
-  let nd=0,nh=0,cc={afg:0,twijfel:0,indie:0}; LINES.forEach(l=>{ if(l._cat!=='kern') cc[l._cat]++; else if(l._dashed) nh++; else nd++; });
+  let nd=0,nh=0,cc={afg:0,twijfel:0,indie:0}; LINES.forEach(l=>{ if(l._sub) return; if(l._cat!=='kern') cc[l._cat]++; else if(l._dashed) nh++; else nd++; });
   document.getElementById('showall').textContent='Toon alle '+PEOPLE.length.toLocaleString('nl')+' reizen';
   document.getElementById('nKern').textContent=nd+nh;
   document.getElementById('nDetail').textContent=nd;
@@ -429,24 +430,57 @@ function animateRoute(id){
   },30);
 }
 
+// een routepunt is "onnauwkeurig" als alleen het land bekend is, of als er een regio
+// (Schotland/Engeland/…) i.p.v. een plaats staat — dat stuk tekenen we gestippeld
+const IMPRECISE_REGIO=new Set(['schotland','engeland','wales','ierland','noord-ierland']);
+function stepImprecise(s){ const pl=(s.place||'').trim(); if(!pl) return true; return IMPRECISE_REGIO.has(pl.toLowerCase()); }
+// splits een route in aaneengesloten stukken met dezelfde stijl; een segment is gestippeld
+// zodra één van beide eindpunten onnauwkeurig is. Aangrenzende stukken delen het grenspunt.
+function segRuns(pcs){
+  const runs=[];
+  for(let i=1;i<pcs.length;i++){
+    const dash=!!(pcs[i-1].imp||pcs[i].imp), last=runs[runs.length-1];
+    if(last && last.dash===dash) last.pts.push(pcs[i].c);
+    else runs.push({dash, pts:[pcs[i-1].c, pcs[i].c]});
+  }
+  return runs;
+}
 function buildLines(){
   for(const p of PEOPLE){
-    let latlngs=[], dashed=false;
-    if(p.heeft_route){
-      for(const s of p.route){ const c=coordOf(s.key); if(c) latlngs.push(c); }
-      latlngs=unwrapLng(latlngs);
+    const cat=catOf(p), rand=cat!=='kern';
+    const col=ROUTE_COLORS[p.hoofdroute]||"#8a8f98";   // altijd naar hoofdroute (ook randgevallen zichtbaar)
+    const yr=(p.datumvertr||"").slice(0,4), yearN=/^\d{4}$/.test(yr)?+yr:0;
+
+    // kernroutes met echte stops: per segment tekenen, onnauwkeurige stukken gestippeld
+    if(p.heeft_route && !rand){
+      let pcs=[];
+      for(const s of p.route){ const c=coordOf(s.key); if(c) pcs.push({c, imp:stepImprecise(s)}); }
+      const uc=unwrapLng(pcs.map(o=>o.c)); pcs.forEach((o,i)=>o.c=uc[i]);
+      if(pcs.length>=2){
+        const baseW=2, baseO=.75;
+        segRuns(pcs).forEach((run,ri)=>{
+          const line=L.polyline(run.pts,{renderer,color:col,weight:baseW,opacity:baseO,dashArray:run.dash?"2 6":null});
+          line._p=p; line._dashed=false; line._cat=cat; line._year=yearN; line._uncertain=run.dash; if(ri>0) line._sub=true;
+          line.on('click',()=>{ lineClickAt=Date.now(); showDetail(p); });
+          line.on('mouseover',()=>line.setStyle({weight:4,opacity:1}));
+          line.on('mouseout',()=>line.setStyle({weight:baseW,opacity:baseO}));
+          LINES.push(line);
+        });
+        continue;
+      }
     }
+
+    // randgevallen + terugval herkomst → VK: één lijn (ongewijzigd)
+    let latlngs=[], dashed=false;
+    if(p.heeft_route){ for(const s of p.route){ const c=coordOf(s.key); if(c) latlngs.push(c); } latlngs=unwrapLng(latlngs); }
     if(latlngs.length<2){
-      // val terug op herkomst → VK stippellijn
       const o=coordOf(p.vertrek_key)||coordOf(p.geboorte_key);
       if(o){ latlngs=[o,UK_END]; dashed=true; } else { continue; }
     }
-    const cat=catOf(p), rand=cat!=='kern';
-    const col=ROUTE_COLORS[p.hoofdroute]||"#8a8f98";   // altijd naar hoofdroute (ook randgevallen zichtbaar)
     const baseW=rand?1.4:(dashed?1.4:2), baseO=rand?.5:(dashed?.5:.75);
     const dash=rand?"5 5":(dashed?"3 5":null);         // randgevallen gestippeld ter onderscheiding
     const line=L.polyline(latlngs,{renderer, color:col, weight:baseW, opacity:baseO, dashArray:dash});
-    const yr=(p.datumvertr||"").slice(0,4); line._p=p; line._dashed=dashed; line._cat=cat; line._year=/^\d{4}$/.test(yr)?+yr:0;
+    line._p=p; line._dashed=dashed; line._cat=cat; line._year=yearN;
     line.on('click',()=>{ lineClickAt=Date.now(); showDetail(p); });
     line.on('mouseover',()=>line.setStyle({weight:dashed?3:4,opacity:1}));
     line.on('mouseout',()=>line.setStyle({weight:baseW,opacity:baseO}));
@@ -472,6 +506,10 @@ function buildHeatSets(){
   BEST_PLACES=Object.values(b).sort((a,b2)=>b2.n-a.n);
 }
 function heatFor(mode){ return mode==='herkomst'?HERK_PLACES:BEST_PLACES; }
+// klap de resterende (verborgen) chips uit als op "+N meer" wordt geklikt
+function revealMore(el){ const box=el.parentNode; if(!box) return;
+  box.querySelectorAll('.rghid').forEach(x=>{ x.style.display=''; x.classList.remove('rghid'); }); el.remove(); }
+
 // ---- helpers-laag (passeurs, onderduikgevers, ontsnappingslijnen) ----
 function helperPopup(g){
   let b=`<div class="hpop"><div class="hph">Helpers in ${esc(g.plaats)} <span class="hpc">(${esc(g.land)})</span></div>`;
@@ -480,10 +518,10 @@ function helperPopup(g){
        (h.rol?`<span class="hprol">${esc(h.rol)}</span>`:'')+
        (h.beroep&&h.beroep!==h.rol?`<div class="hpm">${esc(h.beroep)}</div>`:'')+
        (h.opmerkingen?`<div class="hpo">${esc(h.opmerkingen)}</div>`:'');
-    if(h.helped&&h.helped.length){ const show=h.helped.slice(0,8);
+    if(h.helped&&h.helped.length){
       b+=`<div class="hph2">Hielp ${h.helped.length} Engelandvaarder${h.helped.length>1?'s':''}:</div><div class="rgens">`+
-         show.map(x=>`<span class="rgen" onclick="gotoPerson('${x.id}')">${esc(x.naam)}</span>`).join('')+
-         (h.helped.length>show.length?`<span class="rgmore">+${h.helped.length-show.length} meer</span>`:'')+`</div>`;
+         h.helped.map((x,i)=>`<span class="rgen${i>=8?' rghid':''}"${i>=8?' style="display:none"':''} onclick="gotoPerson('${x.id}')">${esc(x.naam)}</span>`).join('')+
+         (h.helped.length>8?`<span class="rgmore" onclick="revealMore(this)">+${h.helped.length-8} meer</span>`:'')+`</div>`;
     }
     b+=`</div>`;
   }
@@ -694,7 +732,7 @@ function apply(){
       if(ok && line._dashed && !state.showDashed) ok=false;
       if(ok && !line._dashed && !state.showDetail) ok=false;
     }
-    if(ok){ if(!map.hasLayer(line)) line.addTo(map); shown++; }
+    if(ok){ if(!map.hasLayer(line)) line.addTo(map); if(!line._sub) shown++; }
     else if(map.hasLayer(line)) map.removeLayer(line);
   }
   const c=document.getElementById('count');
@@ -758,8 +796,8 @@ function showDetail(p){
       ? `<details class="rdet sub"><summary>Reisverloop, ${p.route.length} stops</summary>${stops}</details>`
       : ((landenKv?`<div class="rsep"></div>`:"")+stops))+
     ((p.reisgenoten&&p.reisgenoten.length)?`<details class="rdet"><summary>Reisgenoten (${p.reisgenoten.length})</summary><div class="rgens">`+
-      p.reisgenoten.slice(0,12).map(r=>`<span class="rgen" onclick="gotoPerson('${r.id}')">${esc(r.naam)}</span>`).join('')+
-      (p.reisgenoten.length>12?`<span class="rgmore">+${p.reisgenoten.length-12} meer</span>`:"")+`</div></details>`:"")+
+      p.reisgenoten.map((r,i)=>`<span class="rgen${i>=12?' rghid':''}"${i>=12?' style="display:none"':''} onclick="gotoPerson('${r.id}')">${esc(r.naam)}</span>`).join('')+
+      (p.reisgenoten.length>12?`<span class="rgmore" onclick="revealMore(this)">+${p.reisgenoten.length-12} meer</span>`:"")+`</div></details>`:"")+
     ((p.geholpen_door&&p.geholpen_door.length)?`<details class="rdet"><summary>Geholpen door (${p.geholpen_door.length})</summary><div class="rgens">`+
       p.geholpen_door.map(h=>`<span class="rgen hlp" onclick="gotoHelper('${h.id}')">${esc(h.naam)}${h.plaats?` <span class="rgloc">${esc(h.plaats)}</span>`:''}</span>`).join('')+`</div></details>`:"")+
     `<h3>Bron</h3>`+
