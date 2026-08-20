@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inzichten — Holland-Amerika Lijn 1900–1969</title>
+<style>
+  :root{--accent:#0e7490;--accent2:#c0603a;--ink:#1c2a30;--muted:#5a6b74;--line:#e3e0d8;--bg:#f4f1ea;--panel:#fbfaf6}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+  .ptabs{display:flex;gap:2px;background:#fff;padding:8px 12px;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+  .ptabs a{padding:6px 10px;border-radius:7px;text-decoration:none;color:#5a6b74;font-size:13px;font-weight:600}
+  .ptabs a.on{background:var(--accent);color:#fff}
+  .wrap{max-width:900px;margin:0 auto;padding:22px 18px 60px}
+  h1{font-size:23px;margin:.1em 0}
+  .lead{color:var(--muted);font-size:14px;margin:2px 0 16px}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0 22px}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .kpi b{display:block;font-size:23px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .kpi span{font-size:11.5px;color:var(--muted)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:14px 0}
+  .card h2{font-size:16px;margin:0 0 2px;color:var(--accent)}
+  .card p.sub{font-size:12px;color:var(--muted);margin:0 0 10px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:680px){.grid2{grid-template-columns:1fr}}
+  svg{display:block;width:100%;height:auto;overflow:visible}
+  .bar{fill:var(--accent)}
+  .bar2{fill:var(--accent2)}
+  .blab{font-size:11px;fill:var(--ink)}
+  .bval{font-size:11px;fill:var(--muted);font-variant-numeric:tabular-nums}
+  .ax{stroke:#d9d5cc;stroke-width:1}
+  .axlab{font-size:10px;fill:#9aa4a9}
+  .foot{margin-top:26px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+  .foot a{color:var(--accent)}
+  .note{font-size:11px;color:var(--muted);margin-top:6px}
+</style>
+</head>
+<body>
+<nav class="ptabs">
+  <a href="index.html">🚢 Kaart</a><a class="on">📊 Inzichten</a><a href="over.html">ℹ️ Over</a><a href="https://archief.alanmoss.nl/">← Archief</a>
+</nav>
+<div class="wrap">
+  <h1>Inzichten — Holland-Amerika Lijn, 1900–1969</h1>
+  <p class="lead">Zeventig jaar passagiersverkeer tussen Rotterdam en de Nieuwe Wereld, in cijfers. Aantallen zijn schattingen, geijkt op de exacte jaartotalen.</p>
+  <div class="kpis" id="kpis"></div>
+
+  <div class="card">
+    <h2>Passagiers per jaar</h2>
+    <p class="sub">Exacte jaartotalen (beide richtingen) uit de volledige index van 2,77 miljoen vermeldingen.</p>
+    <div id="c_year"></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>Grootste bestemmingen</h2>
+      <p class="sub">Emigratie naar Amerika (geschat, geijkt).</p>
+      <div id="c_dest"></div>
+    </div>
+    <div class="card">
+      <h2>Meest gevaren schepen</h2>
+      <p class="sub">Naar aantal geplaatste passagiers in de steekproef.</p>
+      <div id="c_ship"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Emigratie versus retour, per decennium</h2>
+    <p class="sub">Reizen naar Amerika (<span style="color:var(--accent)">teal</span>) en terug naar Europa (<span style="color:var(--accent2)">oranje</span>).</p>
+    <div id="c_dec"></div>
+  </div>
+
+  <p class="foot">Bron: Stadsarchief Rotterdam, HAL 318-04 · via <a href="https://www.openarchieven.nl/indexen/27/passagierslijsten-holland-amerika-lijn" target="_blank" rel="noopener">Open Archieven</a> (CC0). Zie <a href="over.html">Over</a> voor de methode. Onderdeel van de <a href="https://archief.alanmoss.nl/">archiefkaarten</a>.</p>
+</div>
+<script>
+const A='#0e7490', A2='#c0603a';
+const nl=n=>Math.round(n).toLocaleString('nl');
+const esc=s=>(s==null?'':''+s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function svg(w,h){return `<svg viewBox="0 0 ${w} ${h}">`;}
+
+fetch('data.json?v=20260818-17').then(r=>r.json()).then(d=>{
+  const F=y=>(d.meta.factor[y]||1);
+  // aggregaties uit voyages
+  const west={},east={},decW={},decE={}; let sumW=0,sumE=0;
+  d.voyages.forEach(v=>{ const f=F(v.y),dec=Math.floor(v.y/10)*10, isW=v.dir==='west';
+    const tgt=isW?west:east, dt=isW?decW:decE;
+    for(const p in v.d){ const w=v.d[p]*f; tgt[p]=(tgt[p]||0)+w; if(isW)sumW+=w; else sumE+=w; dt[dec]=(dt[dec]||0)+w; } });
+  const exact=d.meta.exact, years=Object.keys(exact).map(Number).sort((a,b)=>a-b);
+  // KPI's
+  document.getElementById('kpis').innerHTML=[
+    ['📇',nl(d.meta.exact_som),'passagiers­vermeldingen (exact)'],
+    ['🚢',nl(sumW),'emigranten naar Amerika (± geschat)'],
+    ['↩︎',nl(sumE),'terug naar Europa (± geschat)'],
+    ['⚓',d.ships.length+'+','schepen in de steekproef'],
+    ['📅','1900–1969','70 jaar'],
+  ].map(k=>`<div class="kpi"><b>${k[1]}</b><span>${k[2]}</span></div>`).join('');
+
+  // --- jaargrafiek (area) ---
+  (function(){ const W=860,H=210,pl=48,pr=12,pt=12,pb=24, iw=W-pl-pr, ih=H-pt-pb;
+    const mx=Math.max(...years.map(y=>exact[y]));
+    const X=y=>pl+(y-years[0])/(years[years.length-1]-years[0])*iw;
+    const Y=v=>pt+ih-(v/mx)*ih;
+    let path='M'+X(years[0])+','+Y(exact[years[0]]);
+    years.forEach(y=>path+=' L'+X(y).toFixed(1)+','+Y(exact[y]).toFixed(1));
+    const area=path+` L${X(years[years.length-1])},${pt+ih} L${X(years[0])},${pt+ih} Z`;
+    let g=svg(W,H);
+    // y-gridlines
+    for(let i=0;i<=4;i++){ const v=mx*i/4,yy=Y(v); g+=`<line class="ax" x1="${pl}" y1="${yy}" x2="${W-pr}" y2="${yy}"/><text class="axlab" x="${pl-6}" y="${yy+3}" text-anchor="end">${nl(v)}</text>`; }
+    g+=`<path d="${area}" fill="${A}" opacity="0.13"/><path d="${path}" fill="none" stroke="${A}" stroke-width="2"/>`;
+    // x-labels per 10 jaar + piekmarkering
+    years.filter(y=>y%10===0).forEach(y=>g+=`<text class="axlab" x="${X(y)}" y="${H-6}" text-anchor="middle">${y}</text>`);
+    const peak=years.reduce((a,y)=>exact[y]>exact[a]?y:a,years[0]);
+    g+=`<circle cx="${X(peak)}" cy="${Y(exact[peak])}" r="3" fill="${A2}"/><text x="${X(peak)}" y="${Y(exact[peak])-7}" text-anchor="middle" style="font-size:10.5px;fill:${A2}">piek ${peak}: ${nl(exact[peak])}</text>`;
+    document.getElementById('c_year').innerHTML=g+'</svg>';
+  })();
+
+  // --- horizontale bars helper ---
+  function hbars(el,items,color){ const n=items.length, rh=22, W=420, lab=120, pr=54, iw=W-lab-pr, H=n*rh+6;
+    const mx=Math.max(...items.map(i=>i[1]));
+    let g=svg(W,H);
+    items.forEach((it,i)=>{ const y=i*rh+3, bw=Math.max(1,it[1]/mx*iw);
+      g+=`<text class="blab" x="${lab-6}" y="${y+14}" text-anchor="end">${esc(it[0]).slice(0,20)}</text>`;
+      g+=`<rect x="${lab}" y="${y+4}" width="${bw.toFixed(1)}" height="14" rx="2" fill="${color}"/>`;
+      g+=`<text class="bval" x="${lab+bw+5}" y="${y+14}">${nl(it[1])}</text>`; });
+    document.getElementById(el).innerHTML=g+'</svg>';
+  }
+  const topDest=Object.entries(west).sort((a,b)=>b[1]-a[1]).slice(0,15);
+  hbars('c_dest',topDest,A);
+  hbars('c_ship',d.ships.slice(0,15).map(s=>[s[0],s[1]]),A);
+
+  // --- decennium grouped bars ---
+  (function(){ const decs=[]; for(let dd=1900;dd<=1960;dd+=10) decs.push(dd);
+    const W=860,H=200,pl=44,pr=10,pt=10,pb=26, iw=W-pl-pr, ih=H-pt-pb;
+    const mx=Math.max(...decs.map(dd=>Math.max(decW[dd]||0,decE[dd]||0)));
+    const bw=iw/decs.length, gap=bw*0.18, half=(bw-gap*2)/2;
+    let g=svg(W,H);
+    for(let i=0;i<=4;i++){ const v=mx*i/4,yy=pt+ih-(v/mx)*ih; g+=`<line class="ax" x1="${pl}" y1="${yy}" x2="${W-pr}" y2="${yy}"/><text class="axlab" x="${pl-6}" y="${yy+3}" text-anchor="end">${nl(v)}</text>`; }
+    decs.forEach((dd,i)=>{ const x0=pl+i*bw+gap; const w=decW[dd]||0,e=decE[dd]||0;
+      const hw=(w/mx)*ih, he=(e/mx)*ih;
+      g+=`<rect x="${x0}" y="${pt+ih-hw}" width="${half}" height="${hw}" fill="${A}"/>`;
+      g+=`<rect x="${x0+half}" y="${pt+ih-he}" width="${half}" height="${he}" fill="${A2}"/>`;
+      g+=`<text class="axlab" x="${x0+half}" y="${H-8}" text-anchor="middle">${dd}s</text>`; });
+    document.getElementById('c_dec').innerHTML=g+'</svg>';
+  })();
+}).catch(e=>{document.querySelector('.wrap').insertAdjacentHTML('beforeend','<p style="color:#a3312d">Kon de data niet laden.</p>');});
+</script>
+</body>
+</html>

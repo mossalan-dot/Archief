@@ -1,0 +1,6 @@
+geo/cities*.txt
+geo/cities*.zip
+harvest_19*.json
+harvest_20*.json
+*.pyc
+__pycache__/

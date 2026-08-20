@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Holland-Amerika Lijn — emigranten 1900–1969</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  :root{--accent:#0e7490;--accent2:#c0603a;--ink:#1c2a30;--muted:#6b7a80;--line:#e3e0d8;--bg:#f4f1ea;--panel:#fbfaf6}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink)}
+  #map{position:absolute;inset:0;background:#dfe7ea}
+  a{color:var(--accent)}
+  .ptabs{position:absolute;top:12px;left:12px;z-index:1001;display:flex;gap:2px;background:rgba(255,255,255,.94);
+    padding:4px 6px;border-radius:12px 12px 0 0;box-shadow:0 2px 14px rgba(0,0,0,.10);border:1px solid var(--line);border-bottom:0;
+    width:340px;max-width:calc(100vw - 24px);justify-content:space-between}
+  .ptabs a{padding:5px 6px;border-radius:7px;text-decoration:none;color:#5a6b74;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap}
+  .ptabs a.on{background:var(--accent);color:#fff}
+  .panel{position:absolute;top:46px;left:12px;z-index:1000;width:340px;max-width:calc(100vw - 24px);
+    background:var(--panel);border:1px solid var(--line);border-radius:0 0 12px 12px;box-shadow:0 4px 20px rgba(0,0,0,.09)}
+  .pad{padding:13px 15px}
+  h1{font-size:15px;margin:0 0 3px;display:flex;align-items:center;gap:7px}
+  .lead{font-size:11.5px;color:var(--muted);margin:0 0 10px;line-height:1.5}
+  .modes{display:flex;gap:4px;background:var(--bg);padding:4px;border-radius:10px;margin:0 0 9px}
+  .modes button{flex:1;border:0;background:transparent;padding:8px 3px;border-radius:7px;font-size:12.5px;cursor:pointer;color:var(--muted);font-weight:500}
+  .modes button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+  .searchbar{position:relative;margin:0 0 9px}
+  .searchbar input{width:100%;border:1px solid var(--line);border-radius:9px;padding:9px 30px 9px 32px;font-size:12.5px;font-family:inherit;background:var(--bg)}
+  .searchbar input:focus{outline:none;border-color:var(--accent);background:#fff}
+  .searchbar .ic{position:absolute;left:11px;top:9px;color:var(--muted)}
+  .searchbar .clr{position:absolute;right:8px;top:7px;border:0;background:none;color:#999;font-size:16px;cursor:pointer;display:none}
+  .kpi{display:flex;align-items:baseline;gap:7px;margin:2px 0 9px}
+  .kpi b{font-size:24px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .kpi span{font-size:11.5px;color:var(--muted)}
+  .slider{display:flex;align-items:center;gap:9px;margin:2px 0 4px}
+  .slider button{border:1px solid var(--line);background:#fff;border-radius:8px;width:30px;height:30px;cursor:pointer;font-size:13px;color:var(--accent)}
+  .slider input{flex:1;accent-color:var(--accent)}
+  .yr{font-size:12px;font-weight:600;color:var(--accent);min-width:70px;text-align:right;font-variant-numeric:tabular-nums}
+  .nav{font-size:11.5px;margin-top:10px;border-top:1px solid var(--line);padding-top:9px;color:var(--muted)}
+  .nav a{color:var(--accent)}
+  .note{font-size:10.5px;color:var(--muted);margin-top:6px;line-height:1.45}
+  /* rechter zijpaneel */
+  #side{position:absolute;top:46px;right:12px;z-index:1050;width:300px;max-width:calc(100vw - 24px);
+    background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.15);display:none;max-height:calc(100% - 66px);overflow:hidden}
+  #side .sh{padding:12px 14px 9px;border-bottom:1px solid var(--line);position:relative}
+  #side .sh h2{font-size:15px;margin:0 4px 2px 0;padding-right:18px}
+  #side .sh .sub{font-size:11.5px;color:var(--muted)}
+  #side .x{position:absolute;top:9px;right:11px;cursor:pointer;color:#999;font-size:18px;border:0;background:none}
+  #side .sb{padding:10px 14px 13px;font-size:12.5px;overflow-y:auto;max-height:calc(100vh - 190px)}
+  .rrow{padding:7px 4px;border-top:1px solid #f1efe8;cursor:pointer;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+  .rrow:hover{background:var(--bg)}
+  .rrow .nm{font-weight:600}.rrow .mt{font-size:10.5px;color:var(--muted)}
+  .rrow .ct{color:var(--accent);font-variant-numeric:tabular-nums;font-size:11.5px}
+  .rhdr{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700;margin:8px 0 2px}
+  .bars{display:flex;align-items:flex-end;gap:3px;height:44px;margin:6px 0 2px}
+  .bars .b{flex:1;background:var(--accent);opacity:.85;border-radius:2px 2px 0 0;min-height:2px}
+  .barsx{display:flex;justify-content:space-between;font-size:9.5px;color:#9aa4a9}
+  .chip{display:inline-block;background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:2px 9px;margin:2px 4px 0 0;font-size:11px;cursor:pointer}
+  .chip:hover{border-color:var(--accent);color:var(--accent)}
+  .lnk{margin-top:9px;font-size:12px}
+  .legend{position:absolute;bottom:22px;left:12px;z-index:900;background:rgba(255,255,255,.94);border:1px solid var(--line);
+    border-radius:9px;padding:8px 11px;font-size:11px;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+  .legend .rw{display:flex;align-items:center;gap:6px;line-height:1.55}
+  .legend .rw i{width:12px;height:12px;border-radius:50%;border:.5px solid #0003;display:inline-block}
+  .fbk{position:fixed;bottom:12px;right:12px;z-index:1200;font-size:12px;color:var(--accent);text-decoration:none;background:#fff;border:1px solid var(--line);padding:6px 12px;border-radius:20px;box-shadow:0 1px 5px rgba(0,0,0,.14)}
+</style>
+</head>
+<body>
+<div id="map"></div>
+<nav class="ptabs">
+  <a class="on">🚢 Kaart</a><a href="inzichten.html">📊 Inzichten</a><a href="over.html">ℹ️ Over</a><a href="https://archief.alanmoss.nl/">← Archief</a>
+  <span style="flex:1"></span><a style="color:#b06a2c;background:#fdf4ec">schatting</a>
+</nav>
+
+<div class="panel"><div class="pad">
+  <h1>🚢 Holland-Amerika Lijn</h1>
+  <p class="lead">Emigranten van Rotterdam naar de Nieuwe Wereld. Waar gingen de passagiers heen — en met welk schip? <span id="perlab"></span></p>
+  <div class="modes" id="modes">
+    <button data-m="west" class="on">Emigratie ▸ Amerika</button>
+    <button data-m="east">Retour ▸ Europa</button>
+  </div>
+  <div class="searchbar">
+    <span class="ic">🔍</span>
+    <input id="q" placeholder="Zoek een schip of bestemming…" autocomplete="off">
+    <button class="clr" id="qclr" title="wissen">×</button>
+  </div>
+  <div class="kpi"><b id="kcount">–</b><span id="klabel"></span></div>
+  <div class="slider">
+    <button id="play" title="Afspelen">▶</button>
+    <input type="range" id="yr"><span class="yr" id="yrlab"></span>
+  </div>
+  <div class="nav">Bron: <a href="https://stadsarchief.rotterdam.nl/holland-amerika-lijn" target="_blank" rel="noopener">Stadsarchief Rotterdam</a>, HAL 318-04 · via Open Archieven · CC0</div>
+  <div class="note" id="note"></div>
+</div></div>
+
+<div id="side"><div class="sh"><button class="x" onclick="closeSide()">×</button><h2 id="sideTitle"></h2><div class="sub" id="sideSub"></div></div><div class="sb" id="sideBody"></div></div>
+
+<div class="legend"><div style="font-weight:600;color:#444;margin-bottom:4px">passagiers per bestemming</div><div id="lrows"></div></div>
+<a class="fbk" href="mailto:mossalan@gmail.com?subject=HAL-kaart" title="Feedback">✉︎ Feedback</a>
+
+<script>
+const BUILD='20260818-19';
+const CHO_COLS=['#cfe8ec','#9bd0d8','#66b2c0','#3a92a4','#1f7183','#0e4d5c'];
+const CHO_BREAKS=[50,250,1500,6000,20000];
+const CHO_LABS=['< 50','50–250','250–1.500','1.500–6.000','6.000–20.000','20.000+'];
+function choColor(n){for(let i=CHO_BREAKS.length-1;i>=0;i--)if(n>=CHO_BREAKS[i])return CHO_COLS[i+1];return CHO_COLS[0];}
+const map=L.map('map',{minZoom:2,maxZoom:9,worldCopyJump:true}).setView([44,-40],3);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',{subdomains:'abcd',maxZoom:10,attribution:'&copy; OpenStreetMap, &copy; CARTO · data: Stadsarchief Rotterdam / Open Archieven'}).addTo(map);
+const gLine=L.layerGroup().addTo(map),gDot=L.layerGroup().addTo(map),gHi=L.layerGroup().addTo(map);
+let DATA=null,state={mode:'west',year:9999,ship:''},Y0,Y1;
+const esc=s=>(s==null?'':''+s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const nl=n=>Math.round(n).toLocaleString('nl');
+function CO(p){return DATA.coords[p];}
+function F(y){return (DATA.meta.factor[String(y)]||1);}
+function panelPad(){return window.innerWidth>640?360:20;}
+
+// aggregeer voyages -> plaats -> {n(geijkt), ships{}, scan, years{}}
+function aggregate(shipFilter){
+  const A={};
+  for(const v of DATA.voyages){
+    if(v.dir!==state.mode||v.y>state.year) continue;
+    if(shipFilter && v.s!==shipFilter) continue;
+    const f=F(v.y);
+    for(const p in v.d){ const a=A[p]||(A[p]={n:0,ships:{},scan:null,years:{}});
+      const w=v.d[p]*f; a.n+=w; a.years[v.y]=(a.years[v.y]||0)+w;
+      if(!a.scan&&v.scan){a.scan=v.scan;} if(v.s) a.ships[v.s]=(a.ships[v.s]||0)+w; }
+  }
+  return A;
+}
+function render(fit){
+  gLine.clearLayers(); gDot.clearLayers();
+  const H=DATA.origin[state.mode], A=aggregate(state.ship);
+  const ents=Object.entries(A).filter(([p])=>CO(p)).sort((a,b)=>b[1].n-a[1].n);
+  let total=0; const lls=[H];
+  ents.forEach(([p,a])=>{const c=CO(p); L.polyline([H,[c[0],c[1]]],{color:'#0e7490',weight:.7,opacity:.15,interactive:false}).addTo(gLine);});
+  ents.forEach(([p,a])=>{ total+=a.n; const c=CO(p); lls.push([c[0],c[1]]);
+    const m=L.circleMarker([c[0],c[1]],{radius:6,color:'#41535a',weight:.7,fillColor:choColor(a.n),fillOpacity:.92});
+    m.on('click',()=>openPlace(p)); gDot.addLayer(m);
+  });
+  L.circleMarker(H,{radius:6,color:'#0e7490',weight:2,fillColor:'#fff',fillOpacity:1}).bindTooltip(state.mode==='west'?'Rotterdam':'New York',{direction:'top'}).addTo(gDot);
+  if(fit&&ents.length){try{
+    // kader op de kern in de regio van de modus (west=Amerika, oost=Europa), niet op verre uitschieters
+    const reg=ents.filter(([p])=>{const lo=CO(p)[1]; return state.mode==='west'?lo<-20:lo>-20;});
+    const use=reg.length?reg:ents; const totN=use.reduce((s,e)=>s+e[1].n,0); let cum=0; const core=[H];
+    for(const [p,a] of use){ cum+=a.n; const c=CO(p); core.push([c[0],c[1]]); if(cum>=0.95*totN) break; }
+    const b=L.latLngBounds(core);const z=Math.min(5,map.getBoundsZoom(b,false,L.point(panelPad(),60)));
+    const dpp=360/(256*Math.pow(2,z)); map.setView([b.getCenter().lat,b.getCenter().lng+(panelPad()/2)*dpp],z,{animate:false});}catch(e){}}
+  document.getElementById('kcount').textContent='± '+nl(total);
+  document.getElementById('klabel').textContent=(state.mode==='west'?'passagiers naar Amerika':'naar Europa')+' · t/m '+state.year+(state.ship?' · '+state.ship:'');
+}
+
+// ---- rechter zijpaneel ----
+function openSide(title,sub,html){ document.getElementById('sideTitle').innerHTML=title;
+  document.getElementById('sideSub').innerHTML=sub||''; document.getElementById('sideBody').innerHTML=html;
+  document.getElementById('side').style.display='block'; }
+function closeSide(){ document.getElementById('side').style.display='none'; document.getElementById('q').value=''; document.getElementById('qclr').style.display='none';
+  state.ship=''; clearHi(); render(); }
+window.closeSide=closeSide;
+function clearHi(){ gHi.clearLayers(); }
+function bars(years){ // years: {y:count} -> mini-bars over hele periode
+  const ys=[]; for(let y=Y0;y<=Y1;y++) ys.push(years[y]||0); const mx=Math.max(1,...ys);
+  return `<div class="bars">${ys.map(v=>`<div class="b" style="height:${Math.round(6+94*v/mx)}%"></div>`).join('')}</div>`+
+    `<div class="barsx"><span>${Y0}</span><span>${Y1}</span></div>`;
+}
+function openShip(name){
+  state.ship=name; render(true);
+  const vs=DATA.voyages.filter(v=>v.s===name);
+  const ys=vs.map(v=>v.y).filter(Boolean);
+  const yc={}; const dc={}; let tot=0;
+  vs.forEach(v=>{ if(v.dir!==state.mode) return; const f=F(v.y);
+    for(const p in v.d){ const w=v.d[p]*f; yc[v.y]=(yc[v.y]||0)+w; if(CO(p)){dc[p]=(dc[p]||0)+w; tot+=w;} } });
+  const top=Object.entries(dc).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  const jour='https://stadsarchief.rotterdam.nl/zoek-alles?mivast=184&miadt=184&milang=nl&mizig=210&micode=318-05&miview=tbl&mizk_alle='+encodeURIComponent(name);
+  const wiki='https://nl.wikipedia.org/wiki/Speciaal:Zoeken?search='+encodeURIComponent(name+' schip Holland-Amerika Lijn');
+  const wd='https://www.wikidata.org/w/index.php?search='+encodeURIComponent(name+' Holland America Line ship');
+  openSide('⚓ '+esc(name), `${vs.length} reizen in de steekproef · actief ${ys.length?Math.min(...ys)+'–'+Math.max(...ys):'?'}`,
+    `<div class="rhdr">passagiers per jaar (${state.mode==='west'?'emigratie':'retour'}, geijkt)</div>${bars(yc)}`+
+    `<div class="rhdr">grootste bestemmingen</div>`+
+    top.map(([p,n])=>`<div class="rrow" onclick="openPlace('${esc(p).replace(/'/g,"\\'")}')"><span class="nm">${esc(p)}</span><span class="ct">± ${nl(n)}</span></div>`).join('')+
+    `<div class="lnk"><a href="${jour}" target="_blank" rel="noopener">scheepsjournaal (318-05) bij het Stadsarchief →</a></div>`+
+    `<div class="lnk" style="margin-top:4px;color:var(--muted)">Meer over dit schip: <a href="${wiki}" target="_blank" rel="noopener">Wikipedia</a> · <a href="${wd}" target="_blank" rel="noopener">Wikidata</a></div>`);
+}
+window.openShip=openShip;
+function openPlace(place){
+  const c=CO(place); if(c){ clearHi(); L.circleMarker([c[0],c[1]],{radius:12,color:'#c0603a',weight:2,fill:false}).addTo(gHi); map.panTo([c[0],c[1]],{animate:true}); }
+  const A=aggregate(state.ship); const a=A[place]; if(!a){ return; }
+  const ships=Object.entries(a.ships).sort((x,y)=>y[1]-x[1]).slice(0,6);
+  const scan=a.scan?`<div class="lnk"><a href="${a.scan}" target="_blank" rel="noopener">originele passagierslijst (scan) bij het Stadsarchief Rotterdam →</a></div>`:'';
+  openSide(esc(place), `± ${nl(a.n)} passagiers${state.ship?' · '+esc(state.ship):''} · t/m ${state.year}`,
+    `<div class="rhdr">verloop per jaar (geijkt)</div>${bars(a.years)}`+
+    `<div class="rhdr">meest gevaren schepen hierheen</div>`+
+    ships.map(([s,n])=>`<div class="rrow" onclick="openShip('${esc(s).replace(/'/g,"\\'")}')"><span class="nm">${esc(s)}</span><span class="ct">± ${nl(n)}</span></div>`).join('')+scan);
+}
+window.openPlace=openPlace;
+
+// ---- zoeken: resultaten in het zijpaneel ----
+function doSearch(q){
+  q=q.trim().toLowerCase(); const clr=document.getElementById('qclr');
+  if(!q){ clr.style.display='none'; closeSide(); return; }
+  clr.style.display='block';
+  const ships=DATA.ships.filter(s=>s[0].toLowerCase().includes(q)).slice(0,8);
+  const places=Object.keys(DATA.coords).filter(p=>p.toLowerCase().includes(q)).slice(0,8);
+  let html='';
+  if(ships.length){ html+='<div class="rhdr">Schepen</div>'+ships.map(s=>`<div class="rrow" onclick="openShip('${esc(s[0]).replace(/'/g,"\\'")}')"><span><span class="nm">${esc(s[0])}</span></span><span class="mt">${nl(s[1])} pass.</span></div>`).join(''); }
+  if(places.length){ html+='<div class="rhdr">Bestemmingen</div>'+places.map(p=>`<div class="rrow" onclick="openPlace('${esc(p).replace(/'/g,"\\'")}')"><span class="nm">${esc(p)}</span></div>`).join(''); }
+  if(!html) html='<div style="color:#8a949a;padding:8px 4px">Niets gevonden.</div>';
+  openSide('Zoekresultaten','“'+esc(q)+'”',html);
+}
+document.getElementById('q').addEventListener('input',e=>doSearch(e.target.value));
+document.getElementById('qclr').addEventListener('click',()=>{document.getElementById('q').value='';doSearch('');});
+document.querySelectorAll('#modes button').forEach(b=>b.addEventListener('click',()=>{state.mode=b.dataset.m;document.querySelectorAll('#modes button').forEach(x=>x.classList.toggle('on',x===b));render(true);}));
+(function(){document.getElementById('lrows').innerHTML=CHO_COLS.map((c,i)=>`<div class="rw"><i style="background:${c}"></i>${CHO_LABS[i]}</div>`).join('')+'<div style="margin-top:5px;color:#8a949a">geijkt op exacte jaartotalen</div>';})();
+
+fetch('data.json?v='+BUILD).then(r=>r.json()).then(d=>{
+  DATA=d; const ys=Object.keys(d.meta.exact).map(Number); Y0=Math.min(...ys); Y1=Math.max(...ys); state.year=Y1;
+  const yr=document.getElementById('yr'); yr.min=Y0; yr.max=Y1; yr.value=Y1; yr.step=1;
+  document.getElementById('yrlab').textContent='t/m '+Y1;
+  document.getElementById('perlab').textContent=`Periode ${Y0}–${Y1}.`;
+  yr.addEventListener('input',e=>{state.year=+e.target.value;document.getElementById('yrlab').textContent='t/m '+state.year;render();});
+  document.getElementById('play').addEventListener('click',function(){ if(window._t){clearInterval(window._t);window._t=null;this.textContent='▶';return;}
+    this.textContent='⏸';state.year=Y0;yr.value=Y0;document.getElementById('yrlab').textContent='t/m '+Y0;render();const self=this;
+    window._t=setInterval(()=>{if(state.year>=Y1){clearInterval(window._t);window._t=null;self.textContent='▶';return;}state.year++;yr.value=state.year;document.getElementById('yrlab').textContent='t/m '+state.year;render();},750);});
+  render(true);
+  const m=d.meta, pct=Math.round(100*m.geocoded/Math.max(1,m.totaal));
+  document.getElementById('note').innerHTML=`Geschatte aantallen: een steekproef van <b>${nl(m.sample_folios)}</b> registerbladen, <b>geijkt op de exacte jaartotalen</b> (samen ${nl(m.exact_som)} passagiers ${Y0}–${Y1}). Bestemming geplaatst voor ~${pct}%. Klik een bol of zoek links.`;
+}).catch(()=>{document.getElementById('note').textContent='Kon de data niet laden.';});
+</script>
+</body>
+</html>

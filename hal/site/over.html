@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Over — Holland-Amerika Lijn emigrantenkaart</title>
+<style>
+  :root{--accent:#0e7490;--ink:#1c2a30;--muted:#5a6b74;--line:#e3e0d8;--bg:#f4f1ea;--panel:#fbfaf6}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+  .ptabs{display:flex;gap:2px;background:#fff;padding:8px 12px;border-bottom:1px solid var(--line);position:sticky;top:0}
+  .ptabs a{padding:6px 10px;border-radius:7px;text-decoration:none;color:#5a6b74;font-size:13px;font-weight:600}
+  .ptabs a.on{background:var(--accent);color:#fff}
+  .wrap{max-width:760px;margin:0 auto;padding:26px 20px 60px}
+  h1{font-size:24px;margin:.2em 0 .1em}
+  h2{font-size:17px;margin:1.6em 0 .3em;color:var(--accent)}
+  .lead{color:var(--muted);font-size:15px}
+  .badge{display:inline-block;background:#fdf4ec;color:#b06a2c;border:1px solid #f0dcc8;border-radius:20px;padding:2px 10px;font-size:12px;font-weight:600}
+  a{color:var(--accent)}
+  table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}
+  th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left}
+  th{color:var(--muted);font-weight:600}
+  td.n{text-align:right;font-variant-numeric:tabular-nums}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:14px 0}
+  ul{padding-left:20px}
+  .foot{margin-top:30px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+</style>
+</head>
+<body>
+<nav class="ptabs">
+  <a href="index.html">🚢 Kaart</a><a href="inzichten.html">📊 Inzichten</a><a class="on">ℹ️ Over</a><a href="https://archief.alanmoss.nl/">← Archief</a>
+</nav>
+<div class="wrap">
+  <span class="badge">geschatte aantallen</span>
+  <h1>Emigranten van de Holland-Amerika Lijn, 1900–1969</h1>
+  <p class="lead">Waar gingen de passagiers heen die zeventig jaar lang vanuit Rotterdam de oceaan overstaken — en met welk schip? Deze kaart maakt de bestemmingen zichtbaar op basis van de passagierslijsten.</p>
+
+  <h2>De bron</h2>
+  <p>Van 1873 tot ver in de twintigste eeuw vervoerde de Holland-Amerika Lijn zakenlui, toeristen en emigranten naar Amerika. De <b>passagierslijsten 1900–1969</b> (Stadsarchief Rotterdam, archief <b>318-04</b>, Passage A) zijn dankzij een crowdsourceproject met ±1.600 vrijwilligers doorzoekbaar gemaakt en als open data ontsloten via <a href="https://www.openarchieven.nl/indexen/27/passagierslijsten-holland-amerika-lijn" target="_blank" rel="noopener">Open Archieven</a> (bijna 2,8 miljoen persoonsvermeldingen, licentie <b>CC0</b>). Elke reis linkt terug naar de originele scan bij het Stadsarchief.</p>
+
+  <h2>Wat u ziet</h2>
+  <ul>
+    <li><b>Emigratie ▸ Amerika</b> — reizen vanuit Rotterdam; elke passagier heeft een genoteerde eindbestemming (New York, maar ook diep het Canadese en Amerikaanse binnenland in).</li>
+    <li><b>Retour ▸ Europa</b> — de tegenrichting: reizigers vanuit New York terug naar Europese steden, met in de vroege periode een opvallende terugkeer naar Midden- en Oost-Europa.</li>
+    <li>De <b>tijdbalk</b> toont zeventig jaar migratie: de piek vóór 1914, de crisis- en oorlogsjaren, en de naoorlogse emigratiegolf.</li>
+    <li>Zoek een <b>schip</b> of <b>plaats</b> — de resultaten openen in een zijpaneel, met links naar de originele lijst en het scheepsjournaal (318-05).</li>
+  </ul>
+
+  <h2>Methode: geschat, geijkt op exacte totalen</h2>
+  <div class="card">
+    <p style="margin:.2em 0">De aantallen zijn <b>schattingen</b>. De exacte <b>jaartotalen</b> komen uit de statistiek-API van Open Archieven (alle 2,78 miljoen vermeldingen); de <b>bestemmings- en schipverdeling</b> komt uit een steekproef van ~11.000 registerbladen, die per jaar wordt <b>opgeschaald naar het exacte jaartotaal</b>. De kaart is dus exact in de totalen en representatief in de spreiding.</p>
+  </div>
+
+  <h2>Dekking en beperkingen</h2>
+  <p>Van de bestemmingen is gemiddeld ~86% geografisch te plaatsen, sterk afhankelijk van de periode:</p>
+  <table>
+    <tr><th>Tijdvak</th><th class="n">Geplaatst</th><th>Belangrijkste beperking</th></tr>
+    <tr><td>vóór 1930</td><td class="n">~93%</td><td>—</td></tr>
+    <tr><td>1930–1949</td><td class="n">~87%</td><td>crisis/oorlog, kleine steekproef</td></tr>
+    <tr><td>1950–1969</td><td class="n">~82%</td><td>bestemming vaak afgekort tot een letter</td></tr>
+  </table>
+  <p>In de naoorlogse serie <i>Passagestaten</i> is de bestemming vaak tot een code afgekort. De duidelijke zijn gedecodeerd (<code>N.</code> = New York, <code>Mo.</code> = Montreal, <code>Hal.</code> = Halifax, <code>Qu.</code> = Quebec); een aantal ambigue letters is bewust ongeplaatst gelaten. Voor onderzoek op persoonsniveau kunt u het beste terecht bij <a href="https://www.openarchieven.nl/indexen/27/passagierslijsten-holland-amerika-lijn" target="_blank" rel="noopener">Open Archieven</a> of het <a href="https://stadsarchief.rotterdam.nl/holland-amerika-lijn" target="_blank" rel="noopener">Stadsarchief Rotterdam</a>.</p>
+
+  <p class="foot">Data: Stadsarchief Rotterdam / Open Archieven (CC0). Plaatsen: GeoNames. Kaart: OpenStreetMap &amp; CARTO. Onderdeel van de <a href="https://archief.alanmoss.nl/">archiefkaarten</a>. Feedback? <a href="mailto:mossalan@gmail.com?subject=HAL-kaart">mail gerust</a>.</p>
+</div>
+</body>
+</html>
