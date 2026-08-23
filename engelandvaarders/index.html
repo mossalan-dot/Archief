@@ -17,18 +17,31 @@
   #map{position:absolute;inset:0;background:#eef1f4}
   .leaflet-container{background:#dfe6ec}
   /* zwevend zijpaneel — Carnegie-stijl */
-  #side{position:absolute;top:60px;left:14px;bottom:14px;width:334px;background:rgba(255,255,255,.96);
+  #side{position:absolute;top:60px;left:14px;width:334px;max-height:calc(100vh - 74px);background:rgba(255,255,255,.985);
     border:1px solid var(--line);border-radius:14px;box-shadow:0 6px 24px rgba(0,0,0,.12);
-    z-index:1000;display:flex;flex-direction:column;overflow:hidden}
+    z-index:1000;display:flex;flex-direction:column;overflow:hidden;
+    transition:width .28s ease, transform .28s ease}
   .shead{display:flex;align-items:center;gap:11px;padding:14px 16px 10px}
   .shead .icon{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));
     display:flex;align-items:center;justify-content:center;font-size:22px;flex:none;box-shadow:0 2px 6px rgba(14,116,144,.28)}
   .shead h1{font-size:15px;margin:0;line-height:1.2}
   .shead .sub{font-size:11.5px;color:var(--muted);margin-top:2px}
+  .scollapse{margin-left:auto;align-self:flex-start;border:1px solid var(--accent-dark);background:var(--accent-dark);color:#fff;border-radius:7px;width:24px;height:24px;cursor:pointer;font-size:15px;line-height:1;flex:none}
+  .scollapse:hover{background:var(--accent);border-color:var(--accent)}
+  body.side-collapsed #side{transform:translateX(-360px)}
+  #reopen{position:absolute;top:60px;left:14px;width:44px;height:170px;z-index:999;background:rgba(255,255,255,.985);
+    border:1px solid var(--line);border-radius:14px;box-shadow:0 6px 24px rgba(0,0,0,.12);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--accent-dark);
+    opacity:0;transform:translateX(-26px);pointer-events:none;transition:opacity .18s ease, transform .18s ease}
+  #reopen span{transform:rotate(90deg);white-space:nowrap;font-weight:700;font-size:15.5px;letter-spacing:.06em}
+  #reopen:hover{background:#eef6f8;border-color:var(--accent)}
+  body.side-collapsed #reopen{opacity:1;transform:translateX(0);pointer-events:auto;transition:opacity .2s ease .3s, transform .22s ease .3s}
   #count{padding:0 16px 12px;border-bottom:1px solid var(--line)}
   #count b{font-size:26px;font-weight:650;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--ink)}
   #count span{font-size:12px;color:var(--muted);margin-left:6px}
   .scroll{overflow-y:auto;padding:14px 16px;flex:1}
+  .pfoot{border-top:1px solid var(--line);margin-top:4px;padding-top:11px;font-size:12px}
+  .pfoot a{color:var(--accent);text-decoration:none}.pfoot a:hover{text-decoration:underline}
   .grp{margin-bottom:16px}
   .grp h2{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 8px}
   .grp h2.ch{display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none}
@@ -70,6 +83,13 @@
   .rgen:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
   .rgmore{font-size:11.5px;color:var(--accent);align-self:center;padding:2px 6px;cursor:pointer;border-radius:20px}
   .rgmore:hover{background:#eef6f8;text-decoration:underline}
+  .nlist{margin-top:3px}
+  .nlist .nrow{padding:5px 3px;font-size:12.5px;color:var(--accent);cursor:pointer;border-bottom:1px solid #f1f5f9;line-height:1.3}
+  .nlist .nrow:hover{background:#f0f9ff}
+  .nlist .nrow .nloc{color:#9099a3;font-size:11px;font-weight:400}
+  .npager{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-top:7px;font-size:11px;color:var(--muted)}
+  .npager button{border:1px solid var(--line);background:#fff;border-radius:6px;width:24px;height:22px;cursor:pointer;color:var(--accent);font-size:13px;line-height:1}
+  .npager button:disabled{color:#cbd2d8;cursor:default}
   .hlpmark{background:none;border:none}
   .hlpdot{width:22px;height:22px;display:flex;align-items:center;justify-content:center;
     background:var(--accent);color:#fff;border:2px solid #fff;border-radius:50%;
@@ -99,8 +119,8 @@
   .sfoot a:hover{text-decoration:underline}
   .sfoot a.back{color:var(--muted)}
   /* detail */
-  #detail{position:absolute;top:12px;right:12px;width:300px;max-height:calc(100% - 24px);background:var(--panel);
-    border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.18);z-index:1001;display:none;overflow:auto}
+  #detail{position:absolute;top:0;right:0;bottom:0;width:344px;background:var(--panel);
+    border-left:1px solid var(--line);box-shadow:-6px 0 24px rgba(0,0,0,.10);z-index:1001;display:none;overflow:auto}
   #detail .dh{padding:14px 16px 10px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--panel)}
   #detail .dh b{font-size:15px}
   #detail .dh .rlabel{font-size:11.5px;color:var(--muted);margin-top:2px}
@@ -145,7 +165,7 @@
     box-shadow:0 8px 30px rgba(0,0,0,.35)}
   #blankscrim .bh span{display:block;font-weight:400;font-size:13px;color:#cbd5e1;margin-top:5px}
   /* modus-schakelaar */
-  .modes{display:flex;gap:2px;margin:0 16px 12px;background:#eef1f4;border-radius:9px;padding:3px}
+  .modes{display:flex;gap:2px;margin:14px 16px 12px;background:#eef1f4;border-radius:9px;padding:3px}
   .modes button{flex:1;border:none;background:none;font-size:13px;padding:7px 8px;border-radius:7px;cursor:pointer;color:var(--muted);font-weight:500}
   .modes button.on{background:#fff;color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.12)}
   /* start-hint: prominente "toon alle"-knop */
@@ -218,15 +238,14 @@
 </style>
 </head>
 <body>
-<nav class="ptabs ptabs-float"><a href="index.html" class="on">🗺️ Kaart</a><a href="dashboard.html">📊 Inzichten</a><a href="over.html">ℹ️ Over</a><a href="https://archief.alanmoss.nl/" class="ext" title="Alle archiefprojecten">← Archief</a></nav>
-<a class="fbk" href="mailto:mossalan@gmail.com?subject=Engelandvaarders%3A%20feedback%20of%20bugmelding" title="Feedback of een fout melden">✉︎ Feedback</a>
-<div id="map"></div>
+<nav class="ptabs ptabs-float"><a href="index.html" class="on">🗺️ Kaart</a><a href="dashboard.html">📊 Inzichten</a><a href="over.html">ℹ️ Over</a><a href="https://archief.alanmoss.nl/" class="ext" title="Alle archiefprojecten">← Archief</a></nav><div id="map"></div>
 <div id="blankscrim"><div class="bh">Begin met verkennen<span>zoek een persoon, of toon alle reizen — links in het paneel</span></div></div>
 <aside id="side">
   <div class="shead">
     <div class="icon">⛵</div>
     <div><h1>Reizen van de Engelandvaarders</h1>
       <div class="sub">1940–1945 · verzetsdeelnemers op weg naar Engeland</div></div>
+    <button class="scollapse" onclick="collapseSide(true)" title="Zoekmodule inklappen">‹</button>
   </div>
   <div id="count"></div>
   <div class="modes" id="modes"><button data-mode="herkomst">Herkomst</button><button data-mode="routes" class="on">Routes</button><button data-mode="bestemming">Bestemmingen</button><button data-mode="helpers">Helpers</button></div>
@@ -252,9 +271,8 @@
       </div>
     </div>
     <div class="grp collapsed">
-      <h2 class="ch">Categorieën<span class="chev">▾</span></h2>
+      <h2 class="ch"><span>Categorieën <span class="hint" data-tip="Naast de eigenlijke Engelandvaarders ook verwante groepen: afgevallen (wél vertrokken, niet in het VK aangekomen), twijfelgevallen en Indiëvaarders, als gestippelde lijnen.">ⓘ</span></span><span class="chev">▾</span></h2>
       <div class="gbody">
-        <p class="grpdesc">Naast de eigenlijke Engelandvaarders ook verwante groepen: afgevallen (wél vertrokken, niet in het VK aangekomen), twijfelgevallen en Indiëvaarders, als gestippelde lijnen.</p>
         <label class="ck"><input type="checkbox" id="ckKern" checked> Engelandvaarders <span class="n" id="nKern"></span></label>
         <label class="ck"><input type="checkbox" id="ckAfg" checked> Afgevallen <span class="n" id="nAfg"></span></label>
         <label class="ck"><input type="checkbox" id="ckTwijfel" checked> Twijfelgevallen <span class="n" id="nTwijfel"></span></label>
@@ -268,7 +286,9 @@
         <label class="ck"><input type="checkbox" id="ckDashed" checked> Herkomstlijnen (zonder detail) <span class="n" id="nDashed"></span></label>
       </div>
     </div>
+    <div class="pfoot"><a href="mailto:mossalan@gmail.com?subject=Engelandvaarders%3A%20feedback%20of%20bugmelding">✉︎ Feedback of een fout melden</a></div>
   </div></aside>
+<div id="reopen" onclick="collapseSide(false)" title="Zoekmodule openen"><span>Zoeken</span></div>
 <div id="detail"><span class="close" onclick="hideDetail()">×</span><div class="dh"></div><div class="db"></div></div>
 <div id="welcome"><div class="box">
   <div class="wicon">⛵</div>
@@ -277,7 +297,7 @@
   <ul>
     <li><b>Filter</b> links op hoofdroute, vertrekjaar en weergave.</li>
     <li><b>Zoek</b> een persoon op naam en spring naar zijn of haar route.</li>
-    <li>Klik op een <b>lijn</b> voor het reisverloop en de links naar de recordpagina en scan bij het Nationaal Archief.</li>
+    <li>Klik op een <b>lijn</b> voor het reisverloop en de link naar het record bij het Nationaal Archief.</li>
   </ul>
   <div class="wf"><label><input type="checkbox" id="wdismiss"> niet meer tonen</label>
     <button onclick="closeWelcome()">Kaart verkennen →</button></div>
@@ -318,6 +338,7 @@ function flag(country){
 }
 
 let map = L.map('map',{preferCanvas:true,minZoom:3,zoomControl:false,worldCopyJump:true}).setView([52,7],4.5);
+map.on('popupopen', e=>{ try{ initLists(e.popup.getElement()); }catch(_){} });
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',{
   attribution:'© OpenStreetMap © CARTO · data: Nationaal Archief',
   subdomains:'abcd',maxZoom:12}).addTo(map);
@@ -506,9 +527,30 @@ function buildHeatSets(){
   BEST_PLACES=Object.values(b).sort((a,b2)=>b2.n-a.n);
 }
 function heatFor(mode){ return mode==='herkomst'?HERK_PLACES:BEST_PLACES; }
-// klap de resterende (verborgen) chips uit als op "+N meer" wordt geklikt
-function revealMore(el){ const box=el.parentNode; if(!box) return;
-  box.querySelectorAll('.rghid').forEach(x=>{ x.style.display=''; x.classList.remove('rghid'); }); el.remove(); }
+// klikbare namenlijst met paginatie (‹ ›) als er te veel namen zijn
+const NPAGE=10;
+function nameList(items, fn){
+  const id='nl'+Math.random().toString(36).slice(2,8);
+  const rows=items.map(it=>`<div class="nrow" onclick="${fn}('${it.id}')">${esc(it.naam)}${it.loc?` <span class="nloc">${esc(it.loc)}</span>`:''}</div>`).join('');
+  const pager=items.length>NPAGE
+    ? `<div class="npager"><span class="npos"></span><button onclick="pageN('${id}',-1)">‹</button><button onclick="pageN('${id}',1)">›</button></div>` : '';
+  return `<div class="nlist" id="${id}" data-page="0" data-n="${items.length}">${rows}</div>${pager}`;
+}
+function applyPage(el){
+  const n=+el.dataset.n, pg=+el.dataset.page, rows=el.children;
+  for(let i=0;i<rows.length;i++) rows[i].style.display=(i>=pg*NPAGE && i<(pg+1)*NPAGE)?'':'none';
+  const pager=el.nextElementSibling;
+  if(pager&&pager.classList.contains('npager')){
+    pager.querySelector('.npos').textContent=`${pg*NPAGE+1}–${Math.min((pg+1)*NPAGE,n)} van ${n}`;
+    pager.querySelectorAll('button')[0].disabled=pg<=0;
+    pager.querySelectorAll('button')[1].disabled=pg>=Math.ceil(n/NPAGE)-1;
+  }
+}
+function pageN(id,dir){
+  const el=document.getElementById(id); const max=Math.ceil(+el.dataset.n/NPAGE)-1;
+  el.dataset.page=Math.max(0,Math.min(max,+el.dataset.page+dir)); applyPage(el);
+}
+function initLists(root){ (root||document).querySelectorAll('.nlist').forEach(applyPage); }
 
 // ---- helpers-laag (passeurs, onderduikgevers, ontsnappingslijnen) ----
 function helperPopup(g){
@@ -519,9 +561,8 @@ function helperPopup(g){
        (h.beroep&&h.beroep!==h.rol?`<div class="hpm">${esc(h.beroep)}</div>`:'')+
        (h.opmerkingen?`<div class="hpo">${esc(h.opmerkingen)}</div>`:'');
     if(h.helped&&h.helped.length){
-      b+=`<div class="hph2">Hielp ${h.helped.length} Engelandvaarder${h.helped.length>1?'s':''}:</div><div class="rgens">`+
-         h.helped.map((x,i)=>`<span class="rgen${i>=8?' rghid':''}"${i>=8?' style="display:none"':''} onclick="gotoPerson('${x.id}')">${esc(x.naam)}</span>`).join('')+
-         (h.helped.length>8?`<span class="rgmore" onclick="revealMore(this)">+${h.helped.length-8} meer</span>`:'')+`</div>`;
+      b+=`<div class="hph2">Hielp ${h.helped.length} Engelandvaarder${h.helped.length>1?'s':''}:</div>`+
+         nameList(h.helped.map(x=>({id:x.id,naam:x.naam})),'gotoPerson');
     }
     b+=`</div>`;
   }
@@ -795,20 +836,20 @@ function showDetail(p){
     (p.heeft_route
       ? `<details class="rdet sub"><summary>Reisverloop, ${p.route.length} stops</summary>${stops}</details>`
       : ((landenKv?`<div class="rsep"></div>`:"")+stops))+
-    ((p.reisgenoten&&p.reisgenoten.length)?`<details class="rdet"><summary>Reisgenoten (${p.reisgenoten.length})</summary><div class="rgens">`+
-      p.reisgenoten.map((r,i)=>`<span class="rgen${i>=12?' rghid':''}"${i>=12?' style="display:none"':''} onclick="gotoPerson('${r.id}')">${esc(r.naam)}</span>`).join('')+
-      (p.reisgenoten.length>12?`<span class="rgmore" onclick="revealMore(this)">+${p.reisgenoten.length-12} meer</span>`:"")+`</div></details>`:"")+
-    ((p.geholpen_door&&p.geholpen_door.length)?`<details class="rdet"><summary>Geholpen door (${p.geholpen_door.length})</summary><div class="rgens">`+
-      p.geholpen_door.map(h=>`<span class="rgen hlp" onclick="gotoHelper('${h.id}')">${esc(h.naam)}${h.plaats?` <span class="rgloc">${esc(h.plaats)}</span>`:''}</span>`).join('')+`</div></details>`:"")+
+    ((p.reisgenoten&&p.reisgenoten.length)?`<details class="rdet"><summary>Reisgenoten (${p.reisgenoten.length})</summary>`+
+      nameList(p.reisgenoten.map(r=>({id:r.id,naam:r.naam})),'gotoPerson')+`</details>`:"")+
+    ((p.geholpen_door&&p.geholpen_door.length)?`<details class="rdet"><summary>Geholpen door (${p.geholpen_door.length})</summary>`+
+      nameList(p.geholpen_door.map(h=>({id:h.id,naam:h.naam,loc:h.plaats})),'gotoHelper')+`</details>`:"")+
     `<h3>Bron</h3>`+
-    (p.record_link?`<div><a href="${esc(p.record_link)}" target="_blank" rel="noopener">Bekijk het record bij het Nationaal Archief →</a></div>`:"")+
-    (p.na_link?`<div style="margin-top:6px"><a href="${esc(p.na_link)}" target="_blank" rel="noopener" style="font-size:12px;color:var(--muted)">Scan van het dossier${archiefNr(p.na_link)?` (${archiefNr(p.na_link)})`:''} →</a></div>`:"")+
+    ((p.record_link||p.na_link)?`<div><a href="${esc(p.record_link||p.na_link)}" target="_blank" rel="noopener">Bekijk bij het Nationaal Archief →</a></div>`:"")+
     (p.link?`<div style="margin-top:6px"><a href="${esc(p.link)}" target="_blank" rel="noopener" style="font-size:12px;color:var(--muted)">Meer op Oorlogsbronnen.nl →</a></div>`:"");
   document.getElementById('detail').style.display='block'; document.body.classList.add('detail-open');
+  initLists(document.getElementById('detail')); collapseSide(true);
 }
+function collapseSide(on){ if(window.innerWidth>640) document.body.classList.toggle('side-collapsed', on); }
 function hideDetail(){
   clearAnim();
-  document.getElementById('detail').style.display='none'; document.body.classList.remove('detail-open');
+  document.getElementById('detail').style.display='none'; document.body.classList.remove('detail-open'); collapseSide(false);
   if(state.focusId){ state.focusId=null; if(!state.solo && !state.q) state.blank=true; }
   apply();
 }

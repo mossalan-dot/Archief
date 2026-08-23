@@ -81,9 +81,10 @@ html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Ro
 .lrow .lstad{color:var(--muted)}.lrow .lyr{color:var(--muted);font-variant-numeric:tabular-nums;flex:none}
 .emoji-marker div{font-size:20px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4));text-align:center;line-height:1}
 .credit{position:fixed;left:14px;bottom:8px;z-index:1000;font-size:10px;color:#374151;background:#ffffffcc;padding:2px 7px;border-radius:6px}
-.fbk{position:fixed;bottom:12px;right:12px;z-index:1200;font-size:12px;color:var(--accent);text-decoration:none;background:var(--panel);
-  border:1px solid var(--line);padding:6px 12px;border-radius:20px;box-shadow:0 1px 5px rgba(0,0,0,.14)}
-.fbk:hover{background:#fff;border-color:var(--accent)}
+.srcline{padding:0 16px 10px;font-size:11.5px;color:var(--muted)}
+.srcline a{color:var(--accent);text-decoration:none;font-weight:500}.srcline a:hover{text-decoration:underline}
+.pfoot{border-top:1px solid var(--line);padding:11px 16px;font-size:12px}
+.pfoot a{color:var(--accent);text-decoration:none}.pfoot a:hover{text-decoration:underline}
 @media(max-width:640px){#side{width:calc(100vw - 28px)}}
 </style>
 </head>
@@ -92,18 +93,18 @@ html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Ro
 <div id="map"></div>
 <div id="side">
   <div class="phead"><div class="plogo">📐</div><div><h1>Tekeningenarchief RGD</h1><div class="sub">Nederland · hele objectenarchief</div></div></div>
-  <div class="pcount"><b id="cnt">…</b> bouwprojecten <span style="color:var(--muted)">· 28.458 bladen (Nationaal Archief 4.RGD)</span></div>
+  <div class="pcount"><b id="cnt">…</b> bouwprojecten <span style="color:var(--muted)">· 28.458 bladen</span></div>
+  <div class="srcline">Bron: <a href="https://www.nationaalarchief.nl/onderzoeken/archief/4.RGD" target="_blank" rel="noopener">NA, Rijksgebouwendienst 4.RGD</a></div>
   <div class="psearch"><input id="q" type="search" placeholder="Zoek op plaats, gebouw of straat…" autocomplete="off"></div>
-  <details class="sec"><summary><h2>Materiaal</h2></summary><div class="secbody"><div class="chips" id="matchips"></div></div></details>
   <details class="sec"><summary><h2>Functie</h2></summary><div class="secbody"><div class="chips" id="catchips"></div></div></details>
   <details class="sec"><summary><h2>Soort tekening</h2></summary><div class="secbody"><div class="chips" id="soortchips"></div></div></details>
   <details class="sec noco" open><summary><h2>Periode <span id="yrlab" style="color:var(--muted);text-transform:none;letter-spacing:0"></span></h2></summary>
     <div class="secbody"><div class="rangewrap"><div class="rtrack"></div><div class="rfill" id="rfill"></div>
       <input type="range" id="rmin" class="rr"><input type="range" id="rmax" class="rr"></div>
     <div class="yr"><span id="y0"></span><span id="y1"></span></div></div></details>
+  <div class="pfoot"><a href="mailto:mossalan@gmail.com?subject=RGD-tekeningenkaart%3A%20feedback%20of%20bugmelding">✉︎ Feedback of een fout melden</a></div>
 </div>
 <div id="detail"></div>
-<a class="fbk" href="mailto:mossalan@gmail.com?subject=RGD-tekeningenkaart%3A%20feedback%20of%20bugmelding" title="Feedback of een fout melden">✉︎ Feedback</a>
 <div class="credit">Kaart © OpenStreetMap-bijdragers · data: Nationaal Archief 4.RGD (CC0)</div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
@@ -125,11 +126,9 @@ let CUR=null, CSC=[], CIX=0, CURLIST=null, CURFROM=false;
 
 function chip(label,em,n,on){return `<span class="chip ${on?'on':'off'}">${em?em+' ':''}${esc(label)} <span class="n">${n}</span></span>`;}
 function drawChips(){
-  const mm={},cc={},sc={}; DATA.forEach(p=>{mm[p.mat]=(mm[p.mat]||0)+1;cc[p.cat]=(cc[p.cat]||0)+1;sc[p.soort]=(sc[p.soort]||0)+1;});
-  document.getElementById('matchips').innerHTML=mats.map(m=>chip(m,MAT_EM[m]||'',mm[m],st.mat.has(m))).join('');
+  const cc={},sc={}; DATA.forEach(p=>{cc[p.cat]=(cc[p.cat]||0)+1;sc[p.soort]=(sc[p.soort]||0)+1;});
   document.getElementById('catchips').innerHTML=cats.map(c=>chip(c,EM[c],cc[c],st.cat.has(c))).join('');
   document.getElementById('soortchips').innerHTML=soorten.map(s=>chip(s,'',sc[s],st.soort.has(s))).join('');
-  document.querySelectorAll('#matchips .chip').forEach((el,i)=>el.onclick=()=>toggle(st.mat,mats,mats[i]));
   document.querySelectorAll('#catchips .chip').forEach((el,i)=>el.onclick=()=>toggle(st.cat,cats,cats[i]));
   document.querySelectorAll('#soortchips .chip').forEach((el,i)=>el.onclick=()=>toggle(st.soort,soorten,soorten[i]));
 }
@@ -139,7 +138,7 @@ function toggle(set,all,v){
   drawChips(); render();
 }
 function match(p){
-  if(!st.mat.has(p.mat)||!st.cat.has(p.cat)||!st.soort.has(p.soort)) return false;
+  if(!st.cat.has(p.cat)||!st.soort.has(p.soort)) return false;
   if(!(p.jaar_max==null||p.jaar_max>=st.y0)||!(p.jaar_min==null||p.jaar_min<=st.y1)) return false;
   if(st.q){ const h=((p.stad||'')+' '+(p.gebouw||'')+' '+(p.locatie||'')+' '+(p.titel||'')).toLowerCase(); if(h.indexOf(st.q)<0) return false; }
   return true;
@@ -203,14 +202,19 @@ function ylab(){document.getElementById('yrlab').textContent=(st.y0===YMIN&&st.y
 function rfl(){const sp=(YMAX-YMIN)||1,a=(st.y0-YMIN)/sp*100,b=(st.y1-YMIN)/sp*100;rfill.style.left=a+'%';rfill.style.width=(b-a)+'%';}
 function onYear(){st.y0=Math.min(+rmin.value,+rmax.value);st.y1=Math.max(+rmin.value,+rmax.value);ylab();rfl();render();}
 document.getElementById('q').oninput=e=>{st.q=e.target.value.trim().toLowerCase();render();};
+document.getElementById('q').addEventListener('keydown',e=>{        // Enter: zoom passend op alle treffers
+  if(e.key!=='Enter') return;
+  const pts=DATA.filter(match).map(p=>[p.lat,p.lon]);
+  if(pts.length){ map.closePopup(); map.fitBounds(L.latLngBounds(pts).pad(0.15),{maxZoom:16}); }
+});
 
 fetch('./data.json').then(r=>r.json()).then(d=>{
   DATA=d;
   const yrs=DATA.flatMap(p=>[p.jaar_min,p.jaar_max]).filter(Boolean);
   YMIN=Math.min(...yrs); YMAX=Math.max(...yrs);
   const byCnt=k=>{const m={};DATA.forEach(p=>m[p[k]]=(m[p[k]]||0)+1);return Object.keys(m).sort((a,b)=>m[b]-m[a]);};
-  mats=byCnt('mat'); cats=byCnt('cat'); soorten=byCnt('soort');
-  st.mat=new Set(mats); st.cat=new Set(cats); st.soort=new Set(soorten); st.y0=YMIN; st.y1=YMAX;
+  cats=byCnt('cat'); soorten=byCnt('soort');
+  st.cat=new Set(cats); st.soort=new Set(soorten); st.y0=YMIN; st.y1=YMAX;
   [rmin,rmax].forEach(r=>{r.min=YMIN;r.max=YMAX;r.step=1;}); rmin.value=YMIN; rmax.value=YMAX;
   document.getElementById('y0').textContent=YMIN; document.getElementById('y1').textContent=YMAX;
   rmin.oninput=onYear; rmax.oninput=onYear; rfl();
