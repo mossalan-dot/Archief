@@ -50,7 +50,7 @@ for r in recs:
             if p in s or ("te " + p) in s:
                 segi = i; break
         seg = segs[segi] if segi >= 0 else r["desc"]
-        cat = categorize(seg, det)
+        cat = categorize(seg, det, p)
         res = outcome(seg)
         seg_hl = segi if len(segs) > 1 and segi >= 0 else -1
         # prefer street/waterway-level coordinate if we have a good one
@@ -81,7 +81,7 @@ for r in recs:
     # handmatige plaatsbepaling als het reguliere patroon niets vond
     if not placed_any and str(r["nr"]) in mcoords:
         mc = mcoords[str(r["nr"])]
-        cat = categorize(r["desc"], det)
+        cat = categorize(r["desc"], det, mc.get("place", ""))
         points.append({
             "nr": r["nr"], "desc": r["desc"], "year": r["year"], "y": r["year_from"],
             "place": mc.get("place", ""), "lat": round(mc["lat"], 5), "lon": round(mc["lon"], 5),
@@ -195,9 +195,9 @@ TPL = r"""<!doctype html>
   .ybadge{font-variant-numeric:tabular-nums;font-weight:700;font-size:12px;color:var(--accent)}
   /* dual-thumb range slider */
   .rangewrap{position:relative;height:26px;margin-top:8px}
-  .rangetrack{position:absolute;top:11px;left:2px;right:2px;height:4px;border-radius:3px;background:#e5e7eb}
-  .rangefill{position:absolute;top:11px;height:4px;border-radius:3px;background:var(--accent)}
-  .rangewrap input[type=range]{position:absolute;top:0;left:0;width:100%;height:26px;margin:0;
+  .rangetrack{position:absolute;top:11px;left:8px;right:8px;height:4px;border-radius:3px;background:#e5e7eb}
+  .rangefill{position:absolute;top:0;height:4px;border-radius:3px;background:var(--accent)}
+  .rangewrap input[type=range]{position:absolute;top:0;left:8px;right:8px;height:26px;margin:0;
     -webkit-appearance:none;appearance:none;background:none;pointer-events:none}
   .rangewrap input[type=range]::-webkit-slider-runnable-track{height:26px;background:none}
   .rangewrap input[type=range]::-moz-range-track{height:26px;background:none}
@@ -227,12 +227,13 @@ TPL = r"""<!doctype html>
   .lhead .x:hover{background:#00000010;color:var(--ink)}
   #listSearch{margin:10px 14px 6px;padding:7px 10px;border:1px solid #d1d5db;border-radius:9px;font-size:12px}
   #listRows{overflow:auto;padding:2px 8px 10px}
-  .lrow{display:flex;gap:8px;align-items:baseline;padding:7px 8px;border-radius:9px;cursor:pointer;border-bottom:1px solid #f1f5f9}
+  .lrow{display:flex;gap:8px;align-items:flex-start;padding:7px 8px;border-radius:9px;cursor:pointer;border-bottom:1px solid #f1f5f9}
   .lrow:hover{background:#f0f9ff}
-  .lrow .lnr{font-weight:700;font-size:11px;color:#fff;background:#334155;border-radius:5px;padding:1px 5px;flex:none}
-  .lrow .lem{font-size:14px;flex:none}
-  .lrow .ltx{font-size:12px;line-height:1.25;overflow:hidden}
-  .lrow .lyr{margin-left:auto;font-size:10px;color:var(--muted);flex:none;font-variant-numeric:tabular-nums}
+  .lrow .lnr{font-weight:700;font-size:11px;color:#fff;background:#334155;border-radius:5px;padding:2px 5px;flex:none;
+    min-width:42px;text-align:center;box-sizing:border-box;line-height:1.3}
+  .lrow .lem{font-size:14px;flex:none;width:20px;text-align:center;line-height:1.35}
+  .lrow .ltx{font-size:12px;line-height:1.35;overflow:hidden;padding-top:1px}
+  .lrow .lyr{margin-left:auto;font-size:10px;color:var(--muted);flex:none;font-variant-numeric:tabular-nums;line-height:1.6;padding-top:1px}
 
   /* ---- niet-op-de-kaart: knop rechtsonder + paneel ---- */
   #unBtn{position:absolute;z-index:1000;right:14px;bottom:14px;display:flex;align-items:center;gap:7px;
@@ -244,7 +245,6 @@ TPL = r"""<!doctype html>
     max-height:calc(100vh - 28px);background:var(--panel);backdrop-filter:blur(10px);border-radius:16px;
     box-shadow:var(--shadow);display:none;flex-direction:column;overflow:hidden}
   #unpanel.open{display:flex}
-  #unNote{padding:0 14px 8px;font-size:11px;color:var(--muted);line-height:1.4}
   #unRows{overflow:auto;padding:2px 8px 10px}
   .urow{padding:8px 9px;border-bottom:1px solid #f1f5f9}
   .urow .uhd{display:flex;gap:7px;align-items:center;margin-bottom:3px}
@@ -309,8 +309,7 @@ TPL = r"""<!doctype html>
     <div class="row">
       <label class="lbl">Periode <span class="ybadge"><span id="yfromO"></span>–<span id="ytoO"></span></span></label>
       <div class="rangewrap">
-        <div class="rangetrack"></div>
-        <div class="rangefill" id="rangefill"></div>
+        <div class="rangetrack"><div class="rangefill" id="rangefill"></div></div>
         <input id="yfrom" type="range">
         <input id="yto" type="range">
       </div>
@@ -346,11 +345,10 @@ TPL = r"""<!doctype html>
 <button id="unBtn">📋 Niet op de kaart <span class="unc" id="unCt"></span></button>
 <div id="unpanel">
   <div class="lhead">
-    <div><div class="lt">Niet op de kaart</div><div class="lc" id="unCount"></div></div>
+    <div><div class="lt">Niet op de kaart <span class="qm" data-help="nietopkaart">?</span></div><div class="lc" id="unCount"></div></div>
     <button class="x" id="unClose" title="Sluiten">×</button>
   </div>
   <input id="unSearch" type="search" placeholder="Filter op naam, nr. of reden">
-  <div id="unNote">Dossiers zonder plaatsbare locatie — administratieve/ondersteuningsdossiers, reddingen op open zee, of plaatsen die we niet betrouwbaar konden thuisbrengen. Wél te openen bij het Nationaal Archief.</div>
   <div id="unRows"></div>
 </div>
 
@@ -626,7 +624,8 @@ catBox.addEventListener('click',e=>{
 const HELP={
   aard:'De soort redding, afgeleid uit de beschrijving:<br>🌊 <b>Binnenwater</b>, 🚢 <b>zee/kust</b> en 🧊 <b>ijs</b> — samen ruim driekwart · 🚗 <b>auto te water</b> · 🚂 <b>trein/spoor</b> · ✈️ <b>vliegtuig</b> · 🔥 <b>brand</b> · 🐴 <b>op hol geslagen dier</b> · 💨 <b>gasverstikking</b> (put/riool) · 🧱 <b>instorting</b> (bedolven/bouwput).<br>❔ <b>Onvermeld</b> = de aard staat er niet bij; 🆘 <b>Overig</b> = alles daarbuiten (oorlogstuig, elektrocutie, uitschieters).<br><span style="color:#6b7280">Klik een categorie om alléén die te tonen; klik nogmaals voor alles.</span>',
   afloop:'<b>Geslaagd</b>: de drenkeling of gewonde werd gered. <b>Poging</b>: het lukte niet, of de redder kwam zelf om. <b>Afgewezen</b>: het bestuur kende geen onderscheiding toe. <b>Ondersteuning</b>: steun aan nabestaanden, zonder eigen reddingsplaats.',
-  openbaar:'<b>Openbaar</b>: vrij in te zien. <b>Beperkt openbaar</b>: beperkt vanwege de <b>persoonlijke levenssfeer</b> van de betrokkenen; deze dossiers worden pas na een wettelijke termijn openbaar. Inzage vooraf kan via een verzoek bij het <a href="https://www.nationaalarchief.nl/onderzoeken/zoekhulpen/inzage-in-beperkt-openbaar-archief" target="_blank" rel="noopener">Nationaal Archief</a>.'
+  openbaar:'<b>Openbaar</b>: vrij in te zien. <b>Beperkt openbaar</b>: beperkt vanwege de <b>persoonlijke levenssfeer</b> van de betrokkenen; deze dossiers worden pas na een wettelijke termijn openbaar. Inzage vooraf kan via een verzoek bij het <a href="https://www.nationaalarchief.nl/onderzoeken/zoekhulpen/inzage-in-beperkt-openbaar-archief" target="_blank" rel="noopener">Nationaal Archief</a>.',
+  nietopkaart:'Dossiers zonder plaatsbare locatie: administratieve of ondersteuningsdossiers, reddingen op open zee, of plaatsen die we niet betrouwbaar konden thuisbrengen. Wél te openen bij het Nationaal Archief.'
 };
 const mtt=document.createElement('div'); mtt.id='mtt'; document.body.appendChild(mtt);
 let mttT;
