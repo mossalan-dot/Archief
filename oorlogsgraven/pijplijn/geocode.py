@@ -156,6 +156,11 @@ CURATED = {
     "Neustadt Holstein, Landkreis Oldenburg Holstein": (54.11, 10.82), "Ammendorf, Saalkreis": (51.42, 11.99),
     "Burgsteinfurt": (52.15, 7.35), "Frankfort am Main": (50.11, 8.68),
     "Berlijn-Spandau, D.": (52.54, 13.20), "Tröbitz, Landkreis Luckau": (51.62, 13.55),
+    # extra Indië (bevestigd)
+    "Kesilir": (-8.45, 114.15), "Soekoen": (-7.99, 112.62), "Patjet": (-7.62, 112.53),
+    "Tigaroenggoe": (2.60, 98.90), "Lengkong nabij Jember": (-8.20, 113.70),
+    "Si Rengorengo, Kamp 5": (2.30, 99.00), "Si Rengorengo, kamp 5": (2.30, 99.00),
+    "Lawe Sigala Sigala": (3.40, 97.90), "Lawe Sigala 2": (3.40, 97.90),
     # Duitse arbeidsinzet-plaatsen komen uit seed_cache
 }
 CURATED["Ellecom"] = (52.0139, 6.0947)
