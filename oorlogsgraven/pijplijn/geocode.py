@@ -103,6 +103,11 @@ CURATED = {
     "Bougainville": (-6.3000, 155.5000), "Kario/Haroekoe": (-3.5800, 128.4500),
     "Si Rengorengo": (2.3000, 99.0000), "Lawe Sigala 2": (3.4000, 97.9000),
     "Hindato, Thailand": (14.5000, 98.9000), "Tamarkan, Thailand": (14.0417, 99.5117),
+    # historische exonymen
+    "Constantinopel": (41.0082, 28.9784), "Weenen": (48.2082, 16.3738),
+    "Koningsbergen": (54.7104, 20.4522), "Dantzig": (54.3520, 18.6466),
+    "Lemberg": (49.8397, 24.0297), "Breslau": (51.1079, 17.0385),
+    "Praag": (50.0755, 14.4378), "Warschau": (52.2297, 21.0122),
     # Duitse arbeidsinzet-plaatsen komen uit seed_cache
 }
 CURATED["Ellecom"] = (52.0139, 6.0947)
@@ -164,6 +169,7 @@ def main():
             k2 = re.sub(r"\ba[/ ]?d\b.*$", "", k2).strip()
             k2 = re.sub(r"[,(].*$", "", k2).strip()
             k2 = re.sub(r"\s+[a-z]{1,2}\.?$", "", k2).strip()     # land-afk. "B." "PL." "D." weg
+            k2 = re.sub(r"\s+(belgie|belgi|belg|blg|duitsland|frankrijk|engeland|nederland|polen|denemarken|oostenrijk)\.?$", "", k2).strip()
             if k in gz:
                 coord = gz[k][:2]
             elif k2 and k2 in gz:

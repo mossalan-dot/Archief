@@ -9,8 +9,11 @@ from collections import defaultdict, Counter
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = "/Users/alan/Downloads/NT00446_OORLOGSGRAVEN_verrijkt.csv"
 
-# plaatsen die geen kaartpunt zijn -> 'niet op de kaart'
-VAAG = re.compile(r"onbekend|^omg\.|midden-europa|oceaan|zee\b|nabij|a[/ ]?b\b|^\?|volle zee|op transport|onderweg", re.I)
+# plaatsen die geen kaartpunt zijn -> 'niet op de kaart' (precies, zodat echte
+# plaatsen als Zierikzee/Egmond aan Zee wél geplaatst worden)
+VAAG = re.compile(r"onbekend|niets bekend|^omg\.|omgeving|midden-?europa|oost-?europa|"
+                  r"\boceaan\b|op zee|volle zee|\bab\b|op transport|onderweg|^\?|"
+                  r",? \d+ ?km$|^duitsland$|^rusland$|^engeland$|^frankrijk$|^belgi", re.I)
 
 def norm(p):
     p = (p or "").strip()
@@ -31,6 +34,19 @@ def main():
     vaag_h = Counter(); vaag_o = Counter()
     persons = []
     rows = list(csv.DictReader(open(SRC, encoding="utf-8")))
+    # dedup: zelfde inventarisnummer = zelfde persoon (A = openbaar dossier 1947,
+    # B = correspondentiedossier 1995). Houd A als primair, B-UUID als tweede link.
+    from collections import defaultdict as _dd
+    byinv = _dd(list)
+    for r in rows:
+        byinv[r["vwz_inventarisnummer"]].append(r)
+    merged = []
+    for inv, grp in byinv.items():
+        grp.sort(key=lambda r: r["ove_dateofcapture"])   # 1947 (openbaar) eerst
+        prim = grp[0]
+        prim["_na2"] = grp[1]["vwz_UUID"].strip() if len(grp) > 1 else ""
+        merged.append(prim)
+    rows = merged
     for i, r in enumerate(rows):
         gp = norm(r["prs_geboorteplaats"]); op = norm(r["prs_overlijdensplaats"])
         if gp:
@@ -47,6 +63,7 @@ def main():
             "inv": r["vwz_inventarisnummer"],
             "url": r["oorlogsgravenstichting_url"],
             "na": r["vwz_UUID"].strip(),
+            "na2": r.get("_na2", ""),
         })
     # geocoding-targets: alle niet-vage plaatsen uit beide lagen, met totaaltelling
     targets = Counter()

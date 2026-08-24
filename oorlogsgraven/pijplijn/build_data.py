@@ -15,6 +15,15 @@ persons = json.load(open(HERE + "/persons.json", encoding="utf-8"))
 agg = json.load(open(HERE + "/aggregaten.json", encoding="utf-8"))
 geo = json.load(open(HERE + "/geocode.json", encoding="utf-8"))  # {place:[lat,lon]}
 
+def clean_label(name):
+    """Uniforme weergavenaam: land-suffixen en Kreis-toevoegsels eraf."""
+    s = re.sub(r"\s+(stadt|land)kreis\b.*$", "", name, flags=re.I).strip()
+    s = re.sub(r"[,\s]+(belgi[eë]|belg|blg|duitsland|frankrijk|engeland|nederland|polen|"
+               r"denemarken|oostenrijk|provincie\s+\w+)\.?$", "", s, flags=re.I).strip()
+    s = re.sub(r",\s*[A-Za-z]{1,4}\.?$", "", s).strip()   # ", Fr"  ", DK"  ", NOI"
+    s = re.sub(r"\s+[A-Z]{1,2}\.$", "", s).strip()        # " O."  " D."
+    return s or name
+
 def build_layer(counts):
     """Groepeer geocode-bare plaatsen op coördinaat. Geeft (dots, place->dotindex)."""
     by_coord = defaultdict(lambda: {"n": 0, "names": Counter()})
@@ -29,7 +38,7 @@ def build_layer(counts):
     place2idx = {}
     for (lat, lon), d in sorted(by_coord.items(), key=lambda kv: -kv[1]["n"]):
         idx = len(dots)
-        label = d["names"].most_common(1)[0][0]
+        label = clean_label(d["names"].most_common(1)[0][0])
         dots.append({"p": label, "lat": lat, "lon": lon, "n": d["n"]})
         for place in d["names"]:
             place2idx[place] = idx
@@ -60,7 +69,7 @@ for p in persons:
     upath = u[len(HOST):] if u.startswith(HOST) else ""
     pers_out.append({
         "n": p["n"], "gd": p["gd"], "gp": p["gp"], "od": p["od"], "op": p["op"],
-        "nat": p["nat"], "u": upath, "na": p.get("na", ""),
+        "nat": p["nat"], "u": upath, "na": p.get("na", ""), "na2": p.get("na2", ""),
         "hi": h2i.get(p["gp"], -1), "oi": o2i.get(p["op"], -1),
     })
 
