@@ -161,6 +161,14 @@ CURATED = {
     "Tigaroenggoe": (2.60, 98.90), "Lengkong nabij Jember": (-8.20, 113.70),
     "Si Rengorengo, Kamp 5": (2.30, 99.00), "Si Rengorengo, kamp 5": (2.30, 99.00),
     "Lawe Sigala Sigala": (3.40, 97.90), "Lawe Sigala 2": (3.40, 97.90),
+    # correcties van foute geocoderingen (matchten VS/Afrika i.p.v. Indië/Cariben)
+    "Oma, eil. Haroekoe": (-3.58, 128.45), "Haria": (-3.60, 128.65),
+    "Haria, Saparoea": (-3.60, 128.65), "Saba, NA": (17.63, -63.24),
+    "Kema": (1.36, 125.08), "Banda": (-4.53, 129.90), "Neira": (-4.53, 129.90),
+    "Deli": (3.58, 98.67), "Paso": (-3.63, 128.25), "Amèt": (-3.58, 128.65),
+    "Tepa": (-8.00, 129.50), "Flores": (-8.60, 121.00), "Banka": (-2.30, 106.10),
+    "Kuima": (14.50, 98.90), "Kuima, Thailand": (14.50, 98.90), "Mandor": (0.30, 109.27),
+    "Minoa": (14.30, 98.90), "Minoa, Thailand": (14.30, 98.90), "New Britain": (-5.50, 151.50),
     # Duitse arbeidsinzet-plaatsen komen uit seed_cache
 }
 CURATED["Ellecom"] = (52.0139, 6.0947)
@@ -175,7 +183,7 @@ def _add(gz, c, base_boost=0, classes=None):
     except ValueError:
         return
     cc = c[8]
-    pref = {"NL": 3_000_000, "DE": 400_000, "PL": 300_000, "BE": 200_000,
+    pref = {"NL": 3_000_000, "DE": 400_000, "PL": 300_000, "ID": 220_000, "BE": 200_000,
             "FR": 150_000, "GB": 120_000}.get(cc, 0)
     score = pop + pref + base_boost
     names = [c[1], c[2]] + (c[3].split(",") if c[3] else [])

@@ -147,7 +147,7 @@
 <div class="credit">Kaart © OpenStreetMap-bijdragers</div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const BUILD='20260824-5';
+const BUILD='20260824-6';
 const TOTAAL=197865;
 const esc=s=>(s==null?'':''+s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmt=n=>(n||0).toLocaleString('nl');
@@ -211,6 +211,7 @@ function openDot(i, fromClick){
 // ---- namenpaneel (vast, rechts) met paginering + filter ----
 let nAll=null, nFiltered=null, nPage=0; const NPER=100;
 function showNamesPanel(title, list){
+  document.getElementById('nok').classList.remove('open');   // niet-op-kaart-lijst sluiten
   nAll=list.sort((a,b)=>a.n.localeCompare(b.n,'nl'));
   document.getElementById('nTitle').textContent=title;
   document.getElementById('nCount').innerHTML=`${fmt(nAll.length)} vastgelegde personen · ${lblOmg()}`;

@@ -88,7 +88,7 @@ function bindTips(){const tip=document.getElementById('viztip');
     el.addEventListener('mousemove',e=>{let x=e.clientX+14,y=e.clientY+14;if(x+tip.offsetWidth>innerWidth-8)x=e.clientX-tip.offsetWidth-14;tip.style.left=x+'px';tip.style.top=y+'px';});
     el.addEventListener('mouseleave',()=>tip.classList.remove('on'));});}
 
-fetch('../ogs_data.json?v=20260824-5').then(r=>r.json()).then(D=>{
+fetch('../ogs_data.json?v=20260824-6').then(r=>r.json()).then(D=>{
   const s=D.stats;
   document.getElementById('kpis').innerHTML=[
     [nl(s.totaal),'personen in het archief','Unieke personen; dubbele records (openbaar + correspondentiedossier) zijn samengevoegd.'],

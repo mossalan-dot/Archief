@@ -13,7 +13,8 @@ SRC = "/Users/alan/Downloads/NT00446_OORLOGSGRAVEN_verrijkt.csv"
 # plaatsen als Zierikzee/Egmond aan Zee wél geplaatst worden)
 VAAG = re.compile(r"onbekend|niets bekend|^omg\.|omgeving|midden-?europa|oost-?europa|"
                   r"\boceaan\b|op zee|volle zee|\bab\b|op transport|onderweg|^\?|"
-                  r",? \d+ ?km$|^duitsland$|^rusland$|^engeland$|^frankrijk$|^belgi", re.I)
+                  r",? \d+ ?km$|^duitsland$|^rusland$|^engeland$|^frankrijk$|^belgi|"
+                  r"^china$|^korea$|^indie$|^amerika$", re.I)
 
 def norm(p):
     p = (p or "").strip()
