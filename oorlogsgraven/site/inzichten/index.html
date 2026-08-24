@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inzichten · Oorlogsgravenstichting op de kaart</title>
+<style>
+  :root{--bg:#eef0f2;--panel:#fff;--ink:#232a31;--muted:#6b7480;--line:#dde1e5;--accent:#4a5a6a;--accent-dark:#33414e}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+  .ptabs{display:flex;gap:2px;background:#fff;padding:8px 12px;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+  .ptabs a{padding:6px 10px;border-radius:7px;text-decoration:none;color:var(--muted);font-size:13px;font-weight:600}
+  .ptabs a.on{background:var(--accent);color:#fff}
+  .wrap{max-width:900px;margin:0 auto;padding:22px 18px 60px}
+  h1{font-size:22px;margin:.1em 0;font-weight:700}
+  .lead{color:var(--muted);font-size:14px;margin:2px 0 18px;max-width:70ch}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0 20px}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .kpi b{display:block;font-size:23px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .kpi span{font-size:11.5px;color:var(--muted)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:14px 0}
+  .card h2{font-size:15px;margin:0 0 2px;color:var(--accent)}
+  .card .sub{font-size:12px;color:var(--muted);margin:0 0 12px}
+  svg{display:block;width:100%;height:auto;overflow:visible}
+  .bar{fill:var(--accent)}
+  .blab{font-size:11px;fill:var(--ink)}
+  .bval{font-size:11px;fill:var(--muted);font-variant-numeric:tabular-nums}
+  .ax{stroke:#d5dade;stroke-width:1}.axlab{font-size:10px;fill:#9aa4ac}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:680px){.grid2{grid-template-columns:1fr}}
+  .foot{margin-top:26px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+  .foot a{color:var(--accent)}
+</style>
+</head>
+<body>
+<nav class="ptabs"><a href="../">🗺️ Kaart</a><a class="on">📊 Inzichten</a><a href="../over/">ℹ️ Over</a><a href="https://archief.alanmoss.nl/">← Archief</a></nav>
+<div class="wrap">
+  <h1>Inzichten</h1>
+  <p class="lead">Cijfers achter het archief van de Oorlogsgravenstichting. Het zijn grote getallen, maar achter elk ervan gaat een mens schuil. De aantallen zijn bedoeld als context, niet als eindpunt.</p>
+  <div class="kpis" id="kpis"></div>
+
+  <div class="card">
+    <h2>Omgekomen per jaar</h2>
+    <p class="sub">De piek in 1942 en 1943 valt samen met de deportaties naar de vernietigingskampen.</p>
+    <div id="c_death"></div>
+  </div>
+
+  <div class="card">
+    <h2>Geboortejaar</h2>
+    <p class="sub">Naar geboortejaar, voor zover bekend. Alle leeftijden zijn getroffen, van pasgeborenen tot ouderen.</p>
+    <div id="c_birth"></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card"><h2>Meeste sterfteplaatsen</h2><p class="sub">Waar de meesten omkwamen.</p><div id="c_od"></div></div>
+    <div class="card"><h2>Meeste herkomstplaatsen</h2><p class="sub">Waar de meesten vandaan kwamen.</p><div id="c_gp"></div></div>
+  </div>
+
+  <div class="card">
+    <h2>Nationaliteit</h2>
+    <p class="sub">Naast Nederlandse slachtoffers rusten er ook geallieerde militairen (Gemenebest, Canadees) in Nederlandse oorlogsgraven.</p>
+    <div id="c_nat"></div>
+  </div>
+
+  <p class="foot">Bron: Nationaal Archief, toegang <b>2.19.255</b> (Oorlogsgravenstichting). Zie <a href="../over/">Over</a> voor bron en methode. Onderdeel van de <a href="https://archief.alanmoss.nl/">archiefprojecten</a>.</p>
+</div>
+<script>
+const A='#4a5a6a';
+const nl=n=>Math.round(n).toLocaleString('nl');
+const esc=s=>(s==null?'':''+s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function svg(w,h){return `<svg viewBox="0 0 ${w} ${h}">`;}
+
+fetch('../ogs_data.json?v=20260824-1').then(r=>r.json()).then(D=>{
+  const s=D.stats;
+  document.getElementById('kpis').innerHTML=[
+    [nl(s.totaal),'personen in het archief'],
+    [nl(s.met_geboortedatum),'met bekende geboortedatum'],
+    [nl(D.herkomst.length+D.overlijden.length),'plaatsen op de kaart'],
+    ['1940–1945','oorlogsjaren'],
+  ].map(k=>`<div class="kpi"><b>${k[0]}</b><span>${k[1]}</span></div>`).join('');
+
+  // kolomgrafiek per jaar
+  function yearchart(el,obj,lo,hi,peakNote){
+    const years=[];for(let y=lo;y<=hi;y++)years.push(y);
+    const W=860,H=200,pl=44,pr=10,pt=12,pb=26,iw=W-pl-pr,ih=H-pt-pb;
+    const mx=Math.max(...years.map(y=>obj[y]||0));
+    const bw=iw/years.length;
+    let g=svg(W,H);
+    for(let i=0;i<=4;i++){const v=mx*i/4,yy=pt+ih-(v/mx)*ih;g+=`<line class="ax" x1="${pl}" y1="${yy}" x2="${W-pr}" y2="${yy}"/><text class="axlab" x="${pl-6}" y="${yy+3}" text-anchor="end">${nl(v)}</text>`;}
+    years.forEach((y,i)=>{const v=obj[y]||0,h=(v/mx)*ih,x=pl+i*bw+bw*0.15,w=bw*0.7;
+      g+=`<rect class="bar" x="${x}" y="${pt+ih-h}" width="${w}" height="${h}" rx="1"/>`;
+      if(y%5===0||y===hi)g+=`<text class="axlab" x="${x+w/2}" y="${H-8}" text-anchor="middle">${y}</text>`;});
+    document.getElementById(el).innerHTML=g+'</svg>';
+  }
+  const dy=Object.keys(s.sterfjaar).map(Number);
+  yearchart('c_death',s.sterfjaar,1940,1947);
+  yearchart('c_birth',s.geboortejaar,1860,1945);
+
+  // horizontale bars
+  function hbars(el,items){const n=items.length,rh=22,W=420,lab=150,pr=54,iw=W-lab-pr,H=n*rh+6;
+    const mx=Math.max(...items.map(i=>i.n));let g=svg(W,H);
+    items.forEach((it,i)=>{const y=i*rh+3,bw=Math.max(1,it.n/mx*iw);
+      g+=`<text class="blab" x="${lab-6}" y="${y+14}" text-anchor="end">${esc(it.p).slice(0,22)}</text>`;
+      g+=`<rect class="bar" x="${lab}" y="${y+4}" width="${bw.toFixed(1)}" height="14" rx="2"/>`;
+      g+=`<text class="bval" x="${lab+bw+5}" y="${y+14}">${nl(it.n)}</text>`;});
+    document.getElementById(el).innerHTML=g+'</svg>';}
+  hbars('c_od',s.top_overlijden.slice(0,12));
+  hbars('c_gp',s.top_herkomst.slice(0,12));
+
+  // nationaliteit
+  const nat=Object.entries(s.nationaliteit).map(([p,n])=>({p:p.charAt(0)+p.slice(1).toLowerCase(),n})).slice(0,8);
+  hbars('c_nat',nat);
+}).catch(()=>{document.querySelector('.wrap').insertAdjacentHTML('beforeend','<p style="color:#a3312d">Kon de data niet laden.</p>');});
+</script>
+</body>
+</html>

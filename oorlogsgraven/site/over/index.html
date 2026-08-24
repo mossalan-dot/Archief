@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Over · Oorlogsgravenstichting op de kaart</title>
+<style>
+  :root{--bg:#eef0f2;--panel:#fff;--ink:#232a31;--muted:#6b7480;--line:#dde1e5;--accent:#4a5a6a}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg);line-height:1.62}
+  .ptabs{display:flex;gap:2px;background:#fff;padding:8px 12px;border-bottom:1px solid var(--line);position:sticky;top:0}
+  .ptabs a{padding:6px 10px;border-radius:7px;text-decoration:none;color:var(--muted);font-size:13px;font-weight:600}
+  .ptabs a.on{background:var(--accent);color:#fff}
+  .wrap{max-width:760px;margin:0 auto;padding:26px 20px 60px}
+  h1{font-size:23px;margin:.2em 0 .1em}
+  h2{font-size:16px;margin:1.6em 0 .3em;color:var(--accent)}
+  .lead{color:var(--muted);font-size:15px}
+  a{color:var(--accent)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:14px 0}
+  ul{padding-left:20px}li{margin:4px 0}
+  .downloads{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+  .downloads a{font-size:14px;text-decoration:none;padding:9px 15px;border:1px solid var(--line);border-radius:9px;color:var(--accent);background:#fff;font-weight:600}
+  .downloads a:hover{border-color:var(--accent);background:#f2f5f7}
+  .foot{margin-top:30px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+</style>
+</head>
+<body>
+<nav class="ptabs"><a href="../">🗺️ Kaart</a><a href="../inzichten/">📊 Inzichten</a><a class="on">ℹ️ Over</a><a href="https://archief.alanmoss.nl/">← Archief</a></nav>
+<div class="wrap">
+  <h1>Over deze kaart</h1>
+  <p class="lead">Een sobere kaart bij het archief van de Oorlogsgravenstichting: waar de Nederlandse oorlogsslachtoffers vandaan kwamen, en waar zij zijn omgekomen.</p>
+
+  <h2>De bron</h2>
+  <p>De gegevens komen uit het archief van de <b>Oorlogsgravenstichting</b>, bewaard bij het Nationaal Archief onder toegang <a href="https://www.nationaalarchief.nl/onderzoeken/archief/2.19.255" target="_blank" rel="noopener">2.19.255</a>. Het bevat ruim 206.000 personen: burgers en militairen die tijdens en kort na de Tweede Wereldoorlog zijn omgekomen, onder wie de vele slachtoffers van de Jodenvervolging en de slachtoffers in voormalig Nederlands-Indië. Ook geallieerde militairen die in Nederlandse oorlogsgraven rusten, zijn opgenomen.</p>
+
+  <h2>Wat u ziet</h2>
+  <ul>
+    <li><b>Herkomst</b>: de geboorteplaats. In deze weergave kleurt vooral Nederland: dit waren onze buren, stadgenoten en dorpsgenoten. Amsterdam springt eruit door de zware tol onder de Joodse gemeenschap.</li>
+    <li><b>Waar omgekomen</b>: de sterfteplaats. Hier verschuift het beeld naar de kampen in Duitsland en Polen, en naar de plaatsen in Zuidoost-Azië.</li>
+    <li>Elke stip bundelt de mensen op die plaats; de kleur geeft het <b>aantal</b> aan. Klik erop voor de namen, met geboorte- en overlijdensdatum en een link naar de persoonspagina van de Oorlogsgravenstichting.</li>
+  </ul>
+  <div class="card" style="font-size:14px">De aantallen bij plaatsen als Auschwitz en Sobibor zijn groot. We tonen ze zoals ze zijn, maar met terughoudendheid: geen felle kleuren, geen ranglijst van leed. Elk punt staat voor mensen, niet voor een getal.</div>
+
+  <h2>Plaatsbepaling</h2>
+  <p>Van de vermeldingen kon ongeveer <b>93%</b> op de kaart worden geplaatst. De concentratiekampen en hun buitencommando's zijn samengebracht op het hoofdkamp; de historische spellingen uit Nederlands-Indië en de kampen zijn zo goed mogelijk thuisgebracht. Wie op zee omkwam, "op transport" was, of van wie alleen een land of "onbekend" is vastgelegd, staat niet als punt op de kaart maar is wel terug te vinden via de knop <b>Niet op de kaart</b>. Deze mensen horen er evengoed bij.</p>
+
+  <h2>Geboortedata</h2>
+  <p>In de oorspronkelijke index ontbreken de geboortedata. Voor ruim <b>126.000</b> personen zijn ze aangevuld door elke vermelding via het inventarisnummer te koppelen aan de persoonspagina van de Oorlogsgravenstichting, en ter controle te vergelijken op overlijdensdatum.</p>
+
+  <h2>Gegevens &amp; broncode</h2>
+  <p>De brondata van het Nationaal Archief is vrij te gebruiken (CC0).</p>
+  <div class="downloads">
+    <a href="../ogs_data.json" download>⬇️ Kaartdata (JSON)</a>
+    <a href="https://github.com/mossalan-dot/Archief/tree/main/oorlogsgraven" target="_blank" rel="noopener">💻 Broncode (GitHub)</a>
+  </div>
+
+  <p class="foot">Data: Nationaal Archief (CC0), toegang 2.19.255. Persoonspagina's: <a href="https://oorlogsgravenstichting.nl" target="_blank" rel="noopener">Oorlogsgravenstichting</a>. Plaatsen: GeoNames. Kaart: OpenStreetMap &amp; CARTO. Onderdeel van de <a href="https://archief.alanmoss.nl/">archiefprojecten</a>. Met respect samengesteld; fouten of aanvullingen? <a href="mailto:mossalan@gmail.com?subject=OGS-kaart">mail gerust</a>.</p>
+</div>
+</body>
+</html>

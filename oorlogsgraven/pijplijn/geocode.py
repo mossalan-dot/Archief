@@ -1,0 +1,166 @@
+#!/usr/bin/env python3
+"""Stap 2: geocoding van de plaatsnamen.
+GeoNames cities1000 (NL/DE/PL-voorkeur) + een gecureerde lijst voor de
+concentratie-/vernietigingskampen en de plaatsen in voormalig Nederlands-Indië.
+Schrijft geocode.json = {plaatsnaam: [lat, lon]} en rapporteert dekking naar personen."""
+import csv, json, os, re, unicodedata
+from collections import Counter
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+
+def strip(s):
+    s = unicodedata.normalize("NFKD", s or "").encode("ascii", "ignore").decode().lower().strip()
+    return re.sub(r"[-]+", " ", s)  # streepjes = spaties (Gross-Rosen == Gross Rosen)
+
+# kampnaam ergens in de string -> coördinaten van het (hoofd)kamp
+CAMPS = {
+    "neuengamme": (53.4281, 10.2344), "auschwitz": (50.0353, 19.1783),
+    "monowitz": (50.0353, 19.1783), "birkenau": (50.0353, 19.1783),
+    "gross rosen": (50.9853, 16.2831), "buchenwald": (51.0222, 11.2483),
+    "dachau": (48.2694, 11.4342), "mauthausen": (48.2583, 14.5008),
+    "sachsenhausen": (52.7658, 13.2631), "oranienburg": (52.7550, 13.2420),
+    "ravensbruck": (53.1897, 13.1681), "flossenburg": (49.7342, 12.3572),
+    "natzweiler": (48.4569, 7.2564), "stutthof": (54.3278, 18.9436),
+    "sobibor": (51.4472, 23.5942), "treblinka": (52.6314, 22.0519),
+    "bergen belsen": (52.7575, 9.9075), "theresienstadt": (50.5133, 14.1483),
+    "majdanek": (51.2233, 22.6106), "blechhammer": (50.3500, 18.3100),
+    "westerbork": (52.9183, 6.6064),
+}
+
+# ---- gecureerde coördinaten (exact zoals in de CSV) ----
+CURATED = {
+    # vernietigings- en concentratiekampen
+    "Auschwitz": (50.0353, 19.1783), "Omg. Auschwitz": (50.0353, 19.1783),
+    "Omg. van Auschwitz": (50.0353, 19.1783), "Auschwitz-Birkenau": (50.0353, 19.1783),
+    "Sobibor": (51.4472, 23.5942), "Sobibór": (51.4472, 23.5942),
+    "Bergen-Belsen": (52.7575, 9.9075), "Mauthausen": (48.2583, 14.5008),
+    "Neuengamme": (53.4281, 10.2344), "Westerbork": (52.9183, 6.6064),
+    "Vught": (51.6403, 5.2842), "Dachau": (48.2694, 11.4342),
+    "Buchenwald": (51.0222, 11.2483), "Ravensbrück": (53.1897, 13.1681),
+    "Ravensbruck": (53.1897, 13.1681), "Treblinka": (52.6314, 22.0519),
+    "Theresienstadt": (50.5133, 14.1483), "Gross-Rosen": (50.9853, 16.2831),
+    "Groß-Rosen": (50.9853, 16.2831), "Natzweiler": (48.4569, 7.2564),
+    "Flossenbürg": (49.7342, 12.3572), "Flossenburg": (49.7342, 12.3572),
+    "Stutthof": (54.3278, 18.9436), "Sachsenhausen": (52.7658, 13.2631),
+    "Majdanek": (51.2233, 22.6106), "Lublin": (51.2465, 22.5684),
+    "Kamp Amersfoort": (52.1497, 5.3708), "Amersfoort": (52.1561, 5.3878),
+    # Nederlands-Indië (historische spelling -> moderne coördinaten)
+    "Batavia": (-6.175, 106.827), "Soerabaja": (-7.2575, 112.7521),
+    "Bandoeng": (-6.9175, 107.6191), "Semarang": (-6.9667, 110.4167),
+    "Tjimahi": (-6.8722, 107.5425), "Ambarawa": (-7.2631, 110.4039),
+    "Buitenzorg": (-6.5950, 106.7892), "Medan": (3.5952, 98.6722),
+    "Palembang": (-2.9761, 104.7754), "Makassar": (-5.1477, 119.4327),
+    "Padang": (-0.9471, 100.4172), "Soerakarta": (-7.5755, 110.8243),
+    "Malang": (-7.9666, 112.6326), "Djakarta": (-6.175, 106.827),
+    "Tjilatjap": (-7.7279, 109.0154), "Magelang": (-7.4706, 110.2178),
+    "Fort de Kock": (-0.3050, 100.3692), "Balikpapan": (-1.2379, 116.8529),
+    "Bandjermasin": (-3.3199, 114.5908), "Pontianak": (-0.0263, 109.3425),
+    "Menado": (1.4748, 124.8421), "Kediri": (-7.8480, 112.0178),
+    "Tjiandjoer": (-6.8201, 107.1385), "Garoet": (-7.2116, 107.9086),
+    "Poerwokerto": (-7.4218, 109.2346), "Pekalongan": (-6.8886, 109.6753),
+    "Bangkok": (13.7563, 100.5018), "Pakan Baroe": (0.5071, 101.4478),
+    "Soengei Geroeng": (-0.72, 100.20),
+    "Nagasaki": (32.7503, 129.8779), "Hirohata": (34.80, 134.68),
+    "Fukuoka": (33.5904, 130.4017), "Nagoya": (35.1815, 136.9066),
+    "Meester-Cornelis": (-6.2247, 106.8706), "Batavia-Antjol": (-6.1230, 106.8370),
+    "Banjoebiroe": (-7.2800, 110.4200), "Banjoebiroe, kamp 10": (-7.2800, 110.4200),
+    "Bodjonegoro": (-7.1500, 111.8800), "Omgeving Bodjonegoro": (-7.1500, 111.8800),
+    "Pajacombo": (-0.2200, 100.6300), "Tandjong Priok": (-6.1050, 106.8800),
+    "Tjiandjoer": (-6.8201, 107.1385), "Soekaboemi": (-6.9277, 106.9300),
+    "Tasikmalaja": (-7.3506, 108.2172), "Cheribon": (-6.7320, 108.5523),
+    "Tjirebon": (-6.7320, 108.5523), "Djokja": (-7.7956, 110.3695),
+    "Jogjakarta": (-7.7956, 110.3695), "Djokjakarta": (-7.7956, 110.3695),
+    "Blitar": (-8.0983, 112.1681), "Madioen": (-7.6298, 111.5239),
+    "Probolinggo": (-7.7543, 113.2159), "Kepandjen": (-8.1300, 112.5700),
+    "Ambon": (-3.6954, 128.1814), "Koepang": (-10.1772, 123.6070),
+    # Birma-Siam-spoorweg (Thailand/Birma)
+    "Chungkai": (14.0100, 99.5100), "Kuie, Thailand": (14.0200, 99.5300),
+    "Tamarkan": (14.0417, 99.5117), "Nong Pladoek": (13.9840, 99.8000),
+    "Tarsau": (14.3800, 98.9500), "Kanburi": (14.0227, 99.5328),
+    "Kanchanaburi": (14.0227, 99.5328), "Wampo": (14.2000, 99.1200),
+    "Kuie": (14.0200, 99.5300), "Rintin, Thailand": (14.6000, 98.8000),
+    "Takanon, Thailand": (14.7000, 98.6000), "Kinsayok": (14.5000, 98.9000),
+    "Kinsayok, Thailand": (14.5000, 98.9000), "Hintok": (14.4500, 98.9500),
+    "Loeboek Linggau, kamp Belalau": (-3.3000, 102.8600),
+    "Loeboek Linggau": (-3.3000, 102.8600), "Tjiaterstelling": (-6.7500, 107.6500),
+    "Banjoebiroe, kamp 11": (-7.2800, 110.4200), "Schoppinitz": (50.2600, 19.0500),
+    # Duitse arbeidsinzet-plaatsen komen uit seed_cache
+}
+CURATED["Ellecom"] = (52.0139, 6.0947)
+
+def _add(gz, c, base_boost=0, classes=None):
+    if len(c) < 15:
+        return
+    if classes and c[6] not in classes:
+        return
+    try:
+        lat, lon, pop = float(c[4]), float(c[5]), int(c[14] or 0)
+    except ValueError:
+        return
+    cc = c[8]
+    pref = {"NL": 3_000_000, "DE": 400_000, "PL": 300_000, "BE": 200_000,
+            "FR": 150_000, "GB": 120_000}.get(cc, 0)
+    score = pop + pref + base_boost
+    names = [c[1], c[2]] + (c[3].split(",") if c[3] else [])
+    for nm in names:
+        k = strip(nm)
+        if k and (k not in gz or score > gz[k][2]):
+            gz[k] = (lat, lon, score)
+
+def build_gazetteer():
+    gz = {}
+    p = os.path.join(HERE, "cities1000.txt")
+    if os.path.exists(p):
+        for line in open(p, encoding="utf-8"):
+            _add(gz, line.split("\t"))
+    # volledige NL-dump wint (alle woonplaatsen + gemeenten), hoge boost
+    p = os.path.join(HERE, "NL.txt")
+    if os.path.exists(p):
+        for line in open(p, encoding="utf-8"):
+            _add(gz, line.split("\t"), base_boost=5_000_000, classes={"P", "A"})
+    return gz
+
+def main():
+    targets = json.load(open(HERE + "/geocode_targets.json", encoding="utf-8"))
+    seed = json.load(open(HERE + "/seed_cache.json", encoding="utf-8"))
+    gz = build_gazetteer()
+    print(f"gazetteer: {len(gz)} namen")
+    out = {}
+    hit_p = miss_p = 0
+    misses = Counter()
+    for place, cnt in targets.items():
+        coord = None
+        k = strip(place)
+        if place in CURATED:
+            coord = CURATED[place]
+        elif place in seed:
+            coord = tuple(seed[place])
+        elif any(camp in k for camp in CAMPS):  # subcommando -> hoofdkamp
+            coord = next(c for camp, c in CAMPS.items() if camp in k)
+        else:
+            # strip Stadtkreis/Landkreis-suffix, "a/d Ruhr", en alles na komma/haakje
+            k2 = re.sub(r"^stad\s+", "", k)                       # "Stad Almelo" -> Almelo
+            k2 = re.sub(r"\b(stadt|land)?kreis\b.*$", "", k2).strip()
+            k2 = re.sub(r"\ba[/ ]?d\b.*$", "", k2).strip()
+            k2 = re.sub(r"[,(].*$", "", k2).strip()
+            k2 = re.sub(r"\s+[a-z]{1,2}\.?$", "", k2).strip()     # land-afk. "B." "PL." "D." weg
+            if k in gz:
+                coord = gz[k][:2]
+            elif k2 and k2 in gz:
+                coord = gz[k2][:2]
+        if coord:
+            out[place] = [round(coord[0], 4), round(coord[1], 4)]
+            hit_p += cnt
+        else:
+            miss_p += cnt
+            misses[place] = cnt
+    json.dump(out, open(HERE + "/geocode.json", "w", encoding="utf-8"), ensure_ascii=False)
+    tot = hit_p + miss_p
+    print(f"geocoded: {len(out)}/{len(targets)} plaatsen | dekking naar personen: {hit_p}/{tot} = {100*hit_p/tot:.1f}%")
+    print("grootste missers (plaats: personen):")
+    for p, c in misses.most_common(25):
+        print(f"  {c:6}  {p}")
+    json.dump(dict(misses.most_common()), open(HERE + "/geocode_misses.json", "w", encoding="utf-8"), ensure_ascii=False)
+
+if __name__ == "__main__":
+    main()

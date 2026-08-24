@@ -1,0 +1,14 @@
+# grote/downloadbare gazetteers en regenereerbare tussenbestanden
+pijplijn/cities1000.txt
+pijplijn/cities15000.txt
+pijplijn/admin1.txt
+pijplijn/NL.txt
+pijplijn/NL.zip
+pijplijn/seed_cache.json
+pijplijn/persons.json
+pijplijn/aggregaten.json
+pijplijn/geocode_targets.json
+pijplijn/geocode.json
+pijplijn/geocode_misses.json
+# personen.json (35MB) wordt via build_data.py gegenereerd en met scp gedeployed
+site/personen.json
