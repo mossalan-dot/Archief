@@ -60,7 +60,7 @@ for p in persons:
     upath = u[len(HOST):] if u.startswith(HOST) else ""
     pers_out.append({
         "n": p["n"], "gd": p["gd"], "gp": p["gp"], "od": p["od"], "op": p["op"],
-        "nat": p["nat"], "u": upath,
+        "nat": p["nat"], "u": upath, "na": p.get("na", ""),
         "hi": h2i.get(p["gp"], -1), "oi": o2i.get(p["op"], -1),
     })
 

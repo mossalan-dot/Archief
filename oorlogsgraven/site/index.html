@@ -32,12 +32,16 @@
   #viztip.on{opacity:1}
   .srcline{font-size:11.5px;color:var(--muted);margin:6px 0 8px}
   .srcline a{color:var(--accent);text-decoration:none;font-weight:500}.srcline a:hover{text-decoration:underline}
-  .count{font-size:12px;color:var(--muted);margin:0 0 10px}.count b{color:var(--accent);font-variant-numeric:tabular-nums}
-  .modes{display:flex;gap:4px;background:var(--bg);padding:4px;border-radius:10px;margin:2px 0 6px}
-  .modes button{flex:1;border:0;background:transparent;padding:8px 3px;border-radius:7px;font-size:12.5px;cursor:pointer;color:var(--muted);font-weight:600}
-  .modes button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.10)}
-  .stog{display:flex;gap:3px;background:var(--bg);padding:3px;border-radius:8px;margin:0 0 8px;font-size:11.5px}
-  .stog button{flex:1;border:0;background:transparent;padding:6px;border-radius:6px;cursor:pointer;color:var(--muted);font-weight:600}
+  .count{font-size:12px;color:var(--muted);margin:0 0 4px}.count b{color:var(--accent);font-variant-numeric:tabular-nums}.count .pct{color:var(--muted)}
+  .flabel{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700;margin:11px 0 4px}
+  /* primaire kaartlaag-keuze: prominent */
+  .modes{display:flex;gap:5px}
+  .modes button{flex:1;border:1px solid var(--line);background:#fff;padding:9px 6px;border-radius:9px;font-size:13px;cursor:pointer;color:var(--muted);font-weight:600}
+  .modes button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  /* zoekgroep: subtieler, duidelijk ondergeschikt */
+  .searchgroup{margin-top:2px;border-top:1px solid var(--line);padding-top:2px}
+  .stog{display:flex;gap:3px;background:var(--bg);padding:3px;border-radius:8px;margin:0 0 6px;font-size:11.5px}
+  .stog button{flex:1;border:0;background:transparent;padding:5px;border-radius:6px;cursor:pointer;color:var(--muted);font-weight:600}
   .stog button.on{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
   .search{position:relative}
   .search input{width:100%;font:inherit;font-size:13px;padding:8px 11px;border:1px solid var(--line);border-radius:9px;background:#fff}
@@ -46,41 +50,52 @@
   .sug a:first-child{border-top:0}.sug a:hover{background:#f2f5f7}
   .sug .hdr{padding:5px 11px;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:#f6f8f9}
   .sug small{color:var(--muted)}
-  /* legenda linksonder */
   .legend{position:absolute;bottom:22px;left:12px;z-index:900;background:rgba(255,255,255,.94);border:1px solid var(--line);
     border-radius:9px;padding:8px 11px;font-size:11px;box-shadow:0 2px 10px rgba(0,0,0,.08)}
   .legend .lt{font-weight:600;font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:5px}
   .legrow{display:flex;align-items:center;gap:7px;line-height:1.6}
   .legrow .sw{width:12px;height:12px;border-radius:50%;border:.5px solid rgba(0,0,0,.2);flex:none}
-  .pfoot{border-top:1px solid var(--line);padding:11px 16px;font-size:12px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+  .pfoot{border-top:1px solid var(--line);padding:11px 16px;font-size:12px}
   .pfoot a{color:var(--accent);text-decoration:none}.pfoot a:hover{text-decoration:underline}
-  /* namenpaneel rechtsboven */
-  #names{position:absolute;top:60px;right:14px;z-index:1120;width:320px;max-width:calc(100vw - 28px);max-height:calc(100vh - 74px);
-    overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:0 6px 24px rgba(0,0,0,.14);display:none}
-  #names .nh{padding:13px 15px 8px;position:sticky;top:0;background:var(--panel);border-bottom:1px solid var(--line)}
-  #names .nh .lt{font-weight:700;font-size:14.5px}
-  #names .nh .lc{font-size:12px;color:var(--muted);margin-top:1px}
-  #names .x{position:absolute;top:11px;right:12px;cursor:pointer;color:var(--muted);font-size:18px;line-height:1}
-  #names .nfilter{width:100%;font:inherit;font-size:12px;padding:6px 10px;border:1px solid var(--line);border-radius:8px;margin-top:8px}
-  #names .nlist{padding:4px 6px 10px}
-  #names .nrow{padding:6px 9px;font-size:12.5px;border-top:1px solid #f1f3f5;line-height:1.35}
+  /* namenpaneel: vast, rechts, volledige hoogte */
+  #names{position:fixed;top:0;right:0;bottom:0;z-index:1120;width:360px;max-width:100vw;display:none;flex-direction:column;
+    background:var(--panel);border-left:1px solid var(--line);box-shadow:-6px 0 24px rgba(0,0,0,.10)}
+  #names.show{display:flex}
+  #names .nh{padding:14px 16px 10px;border-bottom:1px solid var(--line);position:relative;flex:none}
+  #names .nh .lt{font-weight:700;font-size:15.5px;padding-right:22px}
+  #names .nh .lc{font-size:12px;color:var(--muted);margin-top:2px}
+  #names .x{position:absolute;top:12px;right:14px;cursor:pointer;color:var(--muted);font-size:20px;line-height:1}
+  #names .nfilter{width:100%;font:inherit;font-size:12px;padding:6px 10px;border:1px solid var(--line);border-radius:8px;margin-top:9px}
+  #names .nlist{overflow:auto;padding:4px 8px 6px;flex:1}
+  #names .nrow{padding:7px 8px;font-size:12.5px;border-top:1px solid #f1f3f5;line-height:1.4}
   #names .nrow:first-child{border-top:0}
   #names .nrow .nm{font-weight:600}
   #names .nrow .dt{color:var(--muted);font-size:11.5px}
   #names .nrow a{color:var(--accent);text-decoration:none;font-size:11.5px}#names .nrow a:hover{text-decoration:underline}
-  #nokBtn{position:fixed;right:14px;bottom:14px;z-index:1100}
-  #nok{position:fixed;right:14px;bottom:54px;z-index:1100;width:320px;max-width:calc(100vw - 28px);max-height:60vh;overflow:auto;
-    background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:0 6px 24px rgba(0,0,0,.14);display:none;padding:12px 14px}
-  #nok .lt{font-weight:700;font-size:13.5px}#nok .x{float:right;cursor:pointer;color:var(--muted)}
-  #nok .nrow{display:flex;justify-content:space-between;gap:10px;font-size:12px;padding:3px 0;border-top:1px solid #eef1f3}
+  #names .pager{flex:none;display:flex;align-items:center;justify-content:center;gap:12px;padding:9px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+  #names .pager button{width:28px;height:28px;border:1px solid var(--line);background:#fff;border-radius:7px;cursor:pointer;color:var(--ink)}
+  #names .pager button:disabled{opacity:.4;cursor:default}
+  /* niet op de kaart — Carnegie-stijl */
+  #nokBtn{position:fixed;right:14px;bottom:14px;z-index:1100;display:flex;align-items:center;gap:7px;background:#fff;
+    border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:12px;color:var(--ink);cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.10)}
+  #nokBtn:hover{border-color:var(--accent)}
+  #nokBtn .unc{font-size:11px;color:#fff;background:var(--accent);border-radius:20px;padding:1px 7px;font-variant-numeric:tabular-nums}
+  #nok{position:fixed;right:14px;bottom:14px;z-index:1102;width:360px;max-width:calc(100vw - 28px);max-height:min(70vh,540px);
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:0 6px 24px rgba(0,0,0,.16);display:none;flex-direction:column}
+  #nok.open{display:flex}
+  #nok .nhd{padding:13px 15px 9px;border-bottom:1px solid var(--line);position:relative}
+  #nok .lt{font-weight:700;font-size:14px}#nok .lc{font-size:12px;color:var(--muted);margin-top:1px}
+  #nok .x{position:absolute;top:11px;right:13px;cursor:pointer;color:var(--muted);font-size:18px}
+  #nok .note{font-size:11.5px;color:var(--muted);padding:8px 15px 4px}
+  #nok .rows{overflow:auto;padding:0 8px 10px}
+  #nok .nrow{display:flex;justify-content:space-between;gap:10px;font-size:12px;padding:5px 7px;border-top:1px solid #eef1f3}
   #nok .nrow b{color:var(--accent);font-variant-numeric:tabular-nums;font-weight:600}
-  #nok .note{font-size:11.5px;color:var(--muted);margin:4px 0 8px}
   .credit{position:fixed;left:14px;bottom:8px;z-index:1000;font-size:10px;color:#5a636c;background:#ffffffcc;padding:2px 7px;border-radius:6px}
   #map.zooming .leaflet-overlay-pane{opacity:0;transition:none}
   .leaflet-popup-content{font-size:12.5px;line-height:1.5;margin:11px 13px}
   .leaflet-popup-content b{font-size:13.5px}
   a{color:var(--accent)}
-  @media(max-width:640px){#side,#names,#nok{width:calc(100vw - 28px)}.legend{bottom:56px}}
+  @media(max-width:640px){#side,#nok{width:calc(100vw - 28px)}#names{width:100vw}.legend{bottom:56px}}
 </style>
 </head>
 <body>
@@ -88,37 +103,51 @@
 <div id="map"></div>
 <div id="viztip"></div>
 <aside id="side"><div class="pad">
-  <h1>Oorlogsgravenstichting<span class="qm" data-tip="De personen uit het archief van de Oorlogsgravenstichting (Nationaal Archief, toegang 2.19.255). Elke stip bundelt de mensen die op die plaats geboren zijn, of daar zijn omgekomen. De aantallen zijn groot; achter elk punt gaan individuele levens schuil.">?</span></h1>
+  <h1>Oorlogsgravenstichting<span class="qm" data-tip="De personen uit het archief van de Oorlogsgravenstichting (Nationaal Archief, toegang 2.19.255). Elke stip bundelt de mensen die op die plaats geboren zijn, of daar zijn omgekomen. De aantallen betreffen de in dit archief vastgelegde personen; achter elk punt gaan individuele levens schuil.">?</span></h1>
   <div class="sub">Nederlandse oorlogsslachtoffers 1940–1945, op de kaart</div>
   <div class="srcline">Bron: <a href="https://www.nationaalarchief.nl/onderzoeken/archief/2.19.255" target="_blank" rel="noopener">NA, Oorlogsgravenstichting 2.19.255</a></div>
-  <div class="count"><b id="cnt">…</b> <span id="cntlbl">personen geplaatst</span></div>
+  <div class="count"><b id="cnt">…</b> <span id="cntlbl">personen geplaatst</span> <span class="pct" id="cntpct"></span></div>
+
+  <div class="flabel">Toon op de kaart</div>
   <div class="modes" id="modes">
     <button data-m="herkomst" class="on">Herkomst</button>
     <button data-m="overlijden">Waar omgekomen</button>
   </div>
-  <div class="stog" id="stog">
-    <button data-s="plaats" class="on">Plaatsen</button>
-    <button data-s="persoon">Personen</button>
+
+  <div class="searchgroup">
+    <div class="flabel">Zoeken op</div>
+    <div class="stog" id="stog">
+      <button data-s="plaats" class="on">Plaatsen</button>
+      <button data-s="persoon">Personen</button>
+    </div>
+    <div class="search"><input id="q" type="search" placeholder="Zoek een plaats…" autocomplete="off">
+      <div class="sug" id="sug"></div></div>
   </div>
-  <div class="search"><input id="q" type="search" placeholder="Zoek een plaats…" autocomplete="off">
-    <div class="sug" id="sug"></div></div>
 </div>
-  <div class="pfoot">
-    <a href="#" id="nokLink">Niet op de kaart</a>
-    <a href="mailto:mossalan@gmail.com?subject=OGS-kaart%3A%20feedback%20of%20een%20fout%20melden">✉︎ Feedback</a>
-  </div>
+  <div class="pfoot"><a href="mailto:mossalan@gmail.com?subject=OGS-kaart%3A%20feedback%20of%20een%20fout%20melden">✉︎ Feedback of een fout melden</a></div>
 </aside>
 <div class="legend" id="legend"></div>
+
 <div id="names"><span class="x" onclick="closeNames()">×</span>
   <div class="nh"><div class="lt" id="nTitle"></div><div class="lc" id="nCount"></div>
-    <input class="nfilter" id="nFilter" type="search" placeholder="Filter op naam…" oninput="renderNames()"></div>
+    <input class="nfilter" id="nFilter" type="search" placeholder="Filter op naam…" oninput="nfilter()"></div>
   <div class="nlist" id="nlist"></div>
+  <div class="pager" id="nPager"></div>
 </div>
-<div id="nok"></div>
+
+<button id="nokBtn">📋 Niet op de kaart <span class="unc" id="nokCt"></span></button>
+<div id="nok">
+  <div class="nhd"><span class="x" onclick="document.getElementById('nok').classList.remove('open')">×</span>
+    <div class="lt">Niet op de kaart <span class="qm" data-tip="Personen met een plaats die we niet als punt op de kaart konden weergeven: op zee, in transport, een omschrijving als &quot;omgeving&quot;, alleen een land, of onbekend. Zij horen er evengoed bij.">?</span></div>
+    <div class="lc" id="nokCount"></div></div>
+  <div class="note">Deze plaatsen zijn niet als punt weer te geven, maar de mensen erachter horen er evengoed bij.</div>
+  <div class="rows" id="nokRows"></div>
+</div>
 <div class="credit">Kaart © OpenStreetMap-bijdragers · data: Nationaal Archief 2.19.255</div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const BUILD='20260824-2';
+const BUILD='20260824-3';
+const TOTAAL=206197;
 const esc=s=>(s==null?'':''+s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmt=n=>(n||0).toLocaleString('nl');
 const CHO=[[1,'#c7d0d8','1'],[2,'#a9b6c1','2–5'],[6,'#8b9bab','6–25'],[26,'#6d8194','26–100'],
@@ -145,15 +174,18 @@ function bindTips(){const tip=document.getElementById('viztip');
     el.addEventListener('mousemove',e=>{let x=e.clientX+14,y=e.clientY+14;if(x+tip.offsetWidth>innerWidth-8)x=e.clientX-tip.offsetWidth-14;tip.style.left=x+'px';tip.style.top=y+'px';});
     el.addEventListener('mouseleave',()=>tip.classList.remove('on'));});}
 
+const lblOmg=()=>state.mode==='herkomst'?'hier geboren':'hier omgekomen';
 function buildLegend(){
   const t=state.mode==='herkomst'?'geboren op deze plaats':'omgekomen op deze plaats';
-  document.getElementById('legend').innerHTML=`<div class="lt">Aantal personen · ${t}</div>`+
+  document.getElementById('legend').innerHTML=`<div class="lt">Vastgelegde personen · ${t}</div>`+
     CHO.map(c=>`<div class="legrow"><span class="sw" style="background:${c[1]}"></span>${c[2]}</div>`).join('');
 }
 function updCount(){
   const dots=DATA[state.mode], n=dots.reduce((s,d)=>s+d.n,0);
   document.getElementById('cnt').textContent=fmt(n);
   document.getElementById('cntlbl').textContent = state.mode==='herkomst'?'personen op geboorteplaats':'personen op sterfteplaats';
+  document.getElementById('cntpct').textContent = `(${Math.round(100*n/TOTAAL)}% van het archief)`;
+  document.getElementById('nokCt').textContent = fmt(DATA.niet_op_kaart[state.mode].reduce((s,x)=>s+x[1],0));
 }
 function render(){
   gDot.clearLayers();
@@ -167,49 +199,62 @@ function render(){
 function loadPers(cb){ if(PERS){cb&&cb();return;} if(persLoading)return; persLoading=true;
   fetch('personen.json?v='+BUILD).then(r=>r.json()).then(d=>{PERS=d;persLoading=false;cb&&cb();}); }
 
-// klik op een stip -> kaartje-popup, met "Toon de namen"
 function openDot(i, fromClick){
   const d=DATA[state.mode][i];
-  const lbl=state.mode==='herkomst'?'hier geboren':'hier omgekomen';
-  const card=`<b>${esc(d.p)}</b><br><b style="font-size:12px">${fmt(d.n)}</b> personen ${lbl}`+
+  const card=`<b>${esc(d.p)}</b><br><b style="font-size:12px">${fmt(d.n)}</b> vastgelegde personen · ${lblOmg()}`+
     `<div style="margin-top:8px"><a href="#" onclick="openNames(${i});return false">Toon de namen →</a></div>`;
   const open=()=>L.popup({maxWidth:280}).setLatLng([d.lat,d.lon]).setContent(card).openOn(map);
   if(fromClick){ open(); }
   else { map.setView([d.lat,d.lon],Math.max(map.getZoom(),8),{animate:true}); setTimeout(open,340); }
 }
-// namenpaneel
-let curList=null, curTitle='';
+
+// ---- namenpaneel (vast, rechts) met paginering + filter ----
+let nAll=null, nFiltered=null, nPage=0; const NPER=100;
 function openNames(i){
   const d=DATA[state.mode][i], key=state.mode==='herkomst'?'hi':'oi';
   loadPers(()=>{
-    curList=PERS.filter(p=>p[key]===i); curTitle=d.p;
+    nAll=PERS.filter(p=>p[key]===i).sort((a,b)=>a.n.localeCompare(b.n,'nl'));
     document.getElementById('nTitle').textContent=d.p;
-    document.getElementById('nCount').textContent=`${fmt(curList.length)} personen ${state.mode==='herkomst'?'hier geboren':'hier omgekomen'}`;
-    document.getElementById('nFilter').value='';
-    document.getElementById('names').style.display='block';
-    renderNames();
+    document.getElementById('nCount').innerHTML=`${fmt(nAll.length)} vastgelegde personen · ${lblOmg()}`;
+    document.getElementById('nFilter').value=''; nfilter();
+    document.getElementById('names').classList.add('show');
   });
 }
-function renderNames(){
-  if(!curList)return;
+function nfilter(){
   const q=(document.getElementById('nFilter').value||'').toLowerCase();
-  const rows=q?curList.filter(p=>p.n.toLowerCase().includes(q)):curList;
-  const CAP=400;
-  let h=rows.slice(0,CAP).map(p=>{
-    const geb=nlDate(p.gd),ov=nlDate(p.od);
-    const dts=[geb?('geb. '+geb):'',ov?('overl. '+ov):''].filter(Boolean).join(' · ');
-    const link=p.u?` · <a href="https://oorlogsgravenstichting.nl/${esc(p.u)}" target="_blank" rel="noopener">OGS ↗</a>`:'';
-    const nat=p.nat&&p.nat!=='NEDERLANDS'?` <span class="dt">(${esc(p.nat.toLowerCase())})</span>`:'';
-    return `<div class="nrow"><span class="nm">${esc(p.n)}</span>${nat}<br><span class="dt">${dts}</span>${link}</div>`;
-  }).join('');
-  if(rows.length>CAP)h+=`<div class="nrow dt" style="color:#9aa4ac">… en ${fmt(rows.length-CAP)} meer (filter op naam)</div>`;
-  if(!rows.length)h='<div class="nrow dt">Geen naam gevonden.</div>';
-  document.getElementById('nlist').innerHTML=h;
+  nFiltered = q ? nAll.filter(p=>p.n.toLowerCase().includes(q)) : nAll;
+  nPage=0; renderNames();
 }
-function closeNames(){document.getElementById('names').style.display='none';}
-window.openNames=openNames; window.closeNames=closeNames;
+function personRow(p){
+  const geb=nlDate(p.gd), ov=nlDate(p.od);
+  const line = state.mode==='herkomst'
+    ? [geb?('geb. '+geb):'', ov?('overl. '+ov+(p.op?', '+esc(p.op):'')):''].filter(Boolean).join(' · ')
+    : [geb?('geb. '+geb+(p.gp?', '+esc(p.gp):'')):'', ov?('overl. '+ov):''].filter(Boolean).join(' · ');
+  const links=[];
+  if(p.na)links.push(`<a href="https://www.nationaalarchief.nl/onderzoeken/index/nt00446/${esc(p.na)}" target="_blank" rel="noopener">Dossier (NA) ↗</a>`);
+  if(p.u)links.push(`<a href="https://oorlogsgravenstichting.nl/${esc(p.u)}" target="_blank" rel="noopener">OGS ↗</a>`);
+  const foreign=(p.nat&&p.nat!=='NEDERLANDS'&&p.nat!=='ONBEKEND')?` <span class="dt">· ${esc(p.nat.toLowerCase())}</span>`:'';
+  return `<div class="nrow"><span class="nm">${esc(p.n)}</span>${foreign}<br><span class="dt">${line}</span>`+
+    (links.length?`<br>${links.join(' · ')}`:'')+`</div>`;
+}
+function renderNames(){
+  if(!nFiltered)return;
+  const pages=Math.max(1,Math.ceil(nFiltered.length/NPER));
+  if(nPage>=pages)nPage=pages-1;
+  const slice=nFiltered.slice(nPage*NPER,(nPage+1)*NPER);
+  document.getElementById('nlist').innerHTML = slice.length?slice.map(personRow).join(''):'<div class="nrow dt">Geen naam gevonden.</div>';
+  document.getElementById('nlist').scrollTop=0;
+  const pg=document.getElementById('nPager');
+  if(pages>1)pg.innerHTML=`<button onclick="npage(-1)" ${nPage===0?'disabled':''}>‹</button>`+
+    `<span>${nPage+1} / ${pages} · ${fmt(nFiltered.length)} namen</span>`+
+    `<button onclick="npage(1)" ${nPage>=pages-1?'disabled':''}>›</button>`;
+  else pg.innerHTML='';
+}
+function npage(d){const pages=Math.ceil(nFiltered.length/NPER);nPage=Math.max(0,Math.min(pages-1,nPage+d));renderNames();}
+function closeNames(){document.getElementById('names').classList.remove('show');}
+window.openNames=openNames;window.closeNames=closeNames;window.npage=npage;window.nfilter=nfilter;
 
-// zoeken — respecteert de Plaatsen/Personen-toggle
+// ---- zoeken ----
 function runSearch(term){
   const sug=document.getElementById('sug'), t=term.trim().toLowerCase();
   if(t.length<2){sug.style.display='none';return;}
@@ -237,13 +282,16 @@ function selectPerson(p){
   document.getElementById('sug').style.display='none';
   const idx=state.mode==='herkomst'?p.hi:p.oi;
   if(idx>=0){const d=DATA[state.mode][idx];map.setView([d.lat,d.lon],Math.max(map.getZoom(),8),{animate:true});
-    setTimeout(()=>{openNames(idx);document.getElementById('nFilter').value=p.n;renderNames();},360);}
+    setTimeout(()=>{openNames(idx);document.getElementById('nFilter').value=p.n;nfilter();},360);}
   else{
     const geb=nlDate(p.gd),ov=nlDate(p.od);
-    const link=p.u?`<br><a href="https://oorlogsgravenstichting.nl/${esc(p.u)}" target="_blank" rel="noopener">OGS-pagina ↗</a>`:'';
+    const links=[];
+    if(p.na)links.push(`<a href="https://www.nationaalarchief.nl/onderzoeken/index/nt00446/${esc(p.na)}" target="_blank" rel="noopener">Dossier (NA) ↗</a>`);
+    if(p.u)links.push(`<a href="https://oorlogsgravenstichting.nl/${esc(p.u)}" target="_blank" rel="noopener">OGS ↗</a>`);
     L.popup({maxWidth:280}).setLatLng(map.getCenter()).setContent(
-      `<b>${esc(p.n)}</b><br><span class="dt">${[geb?('geb. '+geb):'',ov?('overl. '+ov):''].filter(Boolean).join(' · ')}</span>`+
-      `<br><span style="color:#6b7480">${esc(p.gp||'')}${p.op?' → '+esc(p.op):''}</span> <small style="color:#9aa4ac">(in deze weergave niet op de kaart)</small>${link}`).openOn(map);
+      `<b>${esc(p.n)}</b><br><span style="color:#6b7480">${[geb?('geb. '+geb):'',ov?('overl. '+ov):''].filter(Boolean).join(' · ')}</span>`+
+      `<br><span style="color:#6b7480">${esc(p.gp||'')}${p.op?' → '+esc(p.op):''}</span> <small style="color:#9aa4ac">(in deze weergave niet op de kaart)</small>`+
+      (links.length?`<br>${links.join(' · ')}`:'')).openOn(map);
   }
 }
 document.getElementById('q').addEventListener('input',e=>{state.q=e.target.value;runSearch(e.target.value);});
@@ -263,16 +311,13 @@ document.querySelectorAll('#stog button').forEach(b=>b.addEventListener('click',
   document.getElementById('q').focus(); runSearch(document.getElementById('q').value);
 }));
 
+// niet op de kaart
 function showNok(){
-  const nok=document.getElementById('nok'); const list=DATA.niet_op_kaart[state.mode];
-  const tot=list.reduce((s,x)=>s+x[1],0);
-  nok.innerHTML=`<span class="x" onclick="document.getElementById('nok').style.display='none'">×</span>`+
-    `<div class="lt">Niet op de kaart</div>`+
-    `<div class="note">${fmt(tot)} personen met een plaats die we niet als punt konden weergeven: op zee, in transport, "omgeving", een land zonder plaats, of onbekend. Deze mensen horen er evengoed bij.</div>`+
-    list.slice(0,200).map(x=>`<div class="nrow"><span>${esc(x[0])}</span><b>${fmt(x[1])}</b></div>`).join('');
-  nok.style.display='block';
+  const list=DATA.niet_op_kaart[state.mode], tot=list.reduce((s,x)=>s+x[1],0);
+  document.getElementById('nokCount').textContent=`${fmt(tot)} personen · ${lblOmg()}`;
+  document.getElementById('nokRows').innerHTML=list.slice(0,300).map(x=>`<div class="nrow"><span>${esc(x[0])}</span><b>${fmt(x[1])}</b></div>`).join('');
 }
-document.getElementById('nokLink').addEventListener('click',e=>{e.preventDefault();const n=document.getElementById('nok');n.style.display=n.style.display==='block'?'none':'block';if(n.style.display==='block')showNok();});
+document.getElementById('nokBtn').addEventListener('click',()=>{const n=document.getElementById('nok');if(n.classList.contains('open')){n.classList.remove('open');}else{showNok();n.classList.add('open');bindTips();}});
 
 fetch('ogs_data.json?v='+BUILD).then(r=>r.json()).then(d=>{DATA=d;render();bindTips();})
   .catch(()=>{document.querySelector('.srcline').insertAdjacentHTML('afterbegin','<span style="color:#a3312d">Kon de data niet laden.</span><br>');});

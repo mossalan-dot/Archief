@@ -84,6 +84,25 @@ CURATED = {
     "Loeboek Linggau, kamp Belalau": (-3.3000, 102.8600),
     "Loeboek Linggau": (-3.3000, 102.8600), "Tjiaterstelling": (-6.7500, 107.6500),
     "Banjoebiroe, kamp 11": (-7.2800, 110.4200), "Schoppinitz": (50.2600, 19.0500),
+    # lange staart: Duitse (subkamp)plaatsen
+    "Kdo. Bobrek": (50.0353, 19.1783), "Kdo. Fürstengrube": (50.0353, 19.1783),
+    "Kdo. Weimar": (51.0222, 11.2483), "Kdo. Nordhausen": (51.5340, 10.7620),
+    "Tröbitz, Landkreis Finsterwalde": (51.6200, 13.5500),
+    "Wöbbelin Landkreis Ludwigslust": (53.3000, 11.4700), "Dorohucza, PL.": (51.1800, 23.0500),
+    "Lahde, Landkreis Minden": (52.3500, 8.9500), "Elberfeld": (51.2560, 7.1500),
+    "München-Gladbach, Stadtkreis M. Gladbach": (51.1900, 6.4400),
+    "München-Gladbach, D.": (51.1900, 6.4400), "Berlijn-Tegel, D.": (52.5900, 13.2900),
+    "Salzgitter-Heerte Stadtkreis Salzgitter": (52.1500, 10.3300),
+    "Salzgitter-Watenstedt Stadtkreis Salzgitter": (52.1500, 10.3300),
+    # lange staart: Nederlands-Indië / Pacific
+    "Pematang Siantar": (2.9600, 99.0600), "Kota Radja, NOI": (5.5500, 95.3200),
+    "Koeta Radja": (5.5500, 95.3200), "Kota Radja": (5.5500, 95.3200),
+    "Long Nawang": (2.5500, 115.4000), "Weltevreden": (-6.1700, 106.8300),
+    "Kamp Soemobito": (-7.5500, 112.3000), "Tanimbar-eilanden": (-7.5000, 131.5000),
+    "Timor": (-9.5000, 124.5000), "Hainan": (19.2000, 109.7000),
+    "Bougainville": (-6.3000, 155.5000), "Kario/Haroekoe": (-3.5800, 128.4500),
+    "Si Rengorengo": (2.3000, 99.0000), "Lawe Sigala 2": (3.4000, 97.9000),
+    "Hindato, Thailand": (14.5000, 98.9000), "Tamarkan, Thailand": (14.0417, 99.5117),
     # Duitse arbeidsinzet-plaatsen komen uit seed_cache
 }
 CURATED["Ellecom"] = (52.0139, 6.0947)
@@ -139,7 +158,8 @@ def main():
             coord = next(c for camp, c in CAMPS.items() if camp in k)
         else:
             # strip Stadtkreis/Landkreis-suffix, "a/d Ruhr", en alles na komma/haakje
-            k2 = re.sub(r"^stad\s+", "", k)                       # "Stad Almelo" -> Almelo
+            k2 = re.sub(r"^(kdo\.?|kamp)\s+", "", k)              # Kommando/Kamp <plaats> -> plaats
+            k2 = re.sub(r"^stad\s+", "", k2)                      # "Stad Almelo" -> Almelo
             k2 = re.sub(r"\b(stadt|land)?kreis\b.*$", "", k2).strip()
             k2 = re.sub(r"\ba[/ ]?d\b.*$", "", k2).strip()
             k2 = re.sub(r"[,(].*$", "", k2).strip()

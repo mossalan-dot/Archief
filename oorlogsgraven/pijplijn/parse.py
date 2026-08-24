@@ -17,9 +17,14 @@ def norm(p):
     return p
 
 def naam(r):
-    parts = [r["prs_voornamen"].strip() or r["prs_initialen"].strip(),
-             r["prs_tussenvoegsel"].strip(), r["prs_achternaam"].strip()]
-    return " ".join(x for x in parts if x)
+    """Achternaam-eerst, bv. 'Aalten, Karel van'."""
+    achter = r["prs_achternaam"].strip()
+    voor = r["prs_voornamen"].strip() or r["prs_initialen"].strip()
+    tv = r["prs_tussenvoegsel"].strip()
+    rest = " ".join(x for x in [voor, tv] if x)
+    if achter and rest:
+        return f"{achter}, {rest}"
+    return achter or rest
 
 def main():
     herkomst = Counter(); overlijden = Counter()
@@ -41,6 +46,7 @@ def main():
             "nat": r["prs_nationaliteit"].strip(),
             "inv": r["vwz_inventarisnummer"],
             "url": r["oorlogsgravenstichting_url"],
+            "na": r["vwz_UUID"].strip(),
         })
     # geocoding-targets: alle niet-vage plaatsen uit beide lagen, met totaaltelling
     targets = Counter()
