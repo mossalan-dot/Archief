@@ -17,6 +17,8 @@ VAAG = re.compile(r"onbekend|niets bekend|^omg\.|omgeving|midden-?europa|oost-?e
 
 def norm(p):
     p = (p or "").strip()
+    if p in ("?", "onbekende plaats", "Onbekend"):
+        return "onbekend"
     return p
 
 def naam(r):

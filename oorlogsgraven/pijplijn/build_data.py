@@ -74,16 +74,20 @@ for p in persons:
     })
 
 # ---- stats voor Inzichten (ingetogen) ----
-sterfjaar = Counter(); gebjaar = Counter()
+sterfjaar = Counter(); gebjaar = Counter(); sterfmaand = Counter()
 nat = Counter()
 for p in persons:
     if p["od"][:4].isdigit(): sterfjaar[p["od"][:4]] += 1
     if p["gd"][:4].isdigit(): gebjaar[p["gd"][:4]] += 1
+    m = p["od"][5:7]
+    if m.isdigit() and m != "00": sterfmaand[m] += 1
     nat[p["nat"] or "ONBEKEND"] += 1
 stats = {
     "totaal": len(persons),
     "met_geboortedatum": sum(1 for p in persons if p["gd"]),
+    "met_correspondentie": sum(1 for p in persons if p.get("na2")),
     "sterfjaar": dict(sorted(sterfjaar.items())),
+    "sterfmaand": dict(sorted(sterfmaand.items())),
     "geboortejaar": dict(sorted((y, c) for y, c in gebjaar.items() if 1850 <= int(y) <= 1945)),
     "nationaliteit": dict(nat.most_common()),
     "top_overlijden": [{"p": d["p"], "n": d["n"]} for d in over_dots[:15]],

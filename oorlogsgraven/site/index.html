@@ -89,7 +89,8 @@
   #nok .x{position:absolute;top:11px;right:13px;cursor:pointer;color:var(--muted);font-size:18px}
   #nok .note{font-size:11.5px;color:var(--muted);padding:8px 15px 4px}
   #nok .rows{overflow:auto;padding:0 8px 10px}
-  #nok .nrow{display:flex;justify-content:space-between;gap:10px;font-size:12px;padding:5px 7px;border-top:1px solid #eef1f3}
+  #nok .nrow{display:flex;justify-content:space-between;gap:10px;font-size:12px;padding:6px 7px;border-top:1px solid #eef1f3;cursor:pointer;border-radius:6px}
+  #nok .nrow:hover{background:#f2f5f7}
   #nok .nrow b{color:var(--accent);font-variant-numeric:tabular-nums;font-weight:600}
   .credit{position:fixed;left:14px;bottom:8px;z-index:1000;font-size:10px;color:#5a636c;background:#ffffffcc;padding:2px 7px;border-radius:6px}
   #map.zooming .leaflet-overlay-pane{opacity:0;transition:none}
@@ -139,16 +140,15 @@
 <button id="nokBtn">Niet op de kaart <span class="unc" id="nokCt"></span></button>
 <div id="nok">
   <div class="nhd"><span class="x" onclick="document.getElementById('nok').classList.remove('open')">×</span>
-    <div class="lt">Niet op de kaart <span class="qm" data-tip="Personen met een plaats die we niet als punt op de kaart konden weergeven: op zee, in transport, een omschrijving als &quot;omgeving&quot;, alleen een land, of onbekend. Zij horen er evengoed bij.">?</span></div>
+    <div class="lt">Niet op de kaart <span class="qm" data-tip="Personen met een plaats die niet als punt op de kaart is weer te geven: op zee, in transport, een omschrijving als &quot;omgeving&quot;, alleen een land, of onbekend. Klik een plaats voor de namen.">?</span></div>
     <div class="lc" id="nokCount"></div></div>
-  <div class="note">Deze plaatsen zijn niet als punt weer te geven, maar de mensen erachter horen er evengoed bij.</div>
   <div class="rows" id="nokRows"></div>
 </div>
-<div class="credit">Kaart © OpenStreetMap-bijdragers · data: Nationaal Archief 2.19.255</div>
+<div class="credit">Kaart © OpenStreetMap-bijdragers</div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const BUILD='20260824-4';
-const TOTAAL=206197;
+const BUILD='20260824-5';
+const TOTAAL=197865;
 const esc=s=>(s==null?'':''+s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmt=n=>(n||0).toLocaleString('nl');
 const CHO=[[1,'#c7d0d8','1'],[2,'#a9b6c1','2–5'],[6,'#8b9bab','6–25'],[26,'#6d8194','26–100'],
@@ -210,16 +210,22 @@ function openDot(i, fromClick){
 
 // ---- namenpaneel (vast, rechts) met paginering + filter ----
 let nAll=null, nFiltered=null, nPage=0; const NPER=100;
+function showNamesPanel(title, list){
+  nAll=list.sort((a,b)=>a.n.localeCompare(b.n,'nl'));
+  document.getElementById('nTitle').textContent=title;
+  document.getElementById('nCount').innerHTML=`${fmt(nAll.length)} vastgelegde personen · ${lblOmg()}`;
+  document.getElementById('nFilter').value=''; nfilter();
+  document.getElementById('names').classList.add('show');
+}
 function openNames(i){
   const d=DATA[state.mode][i], key=state.mode==='herkomst'?'hi':'oi';
-  loadPers(()=>{
-    nAll=PERS.filter(p=>p[key]===i).sort((a,b)=>a.n.localeCompare(b.n,'nl'));
-    document.getElementById('nTitle').textContent=d.p;
-    document.getElementById('nCount').innerHTML=`${fmt(nAll.length)} vastgelegde personen · ${lblOmg()}`;
-    document.getElementById('nFilter').value=''; nfilter();
-    document.getElementById('names').classList.add('show');
-  });
+  loadPers(()=>showNamesPanel(d.p, PERS.filter(p=>p[key]===i)));
 }
+function openNamesForPlace(place){
+  const key=state.mode==='herkomst'?'gp':'op';
+  loadPers(()=>showNamesPanel(place, PERS.filter(p=>p[key]===place)));
+}
+window.openNamesForPlace=openNamesForPlace;
 function nfilter(){
   const q=(document.getElementById('nFilter').value||'').toLowerCase();
   nFiltered = q ? nAll.filter(p=>p.n.toLowerCase().includes(q)) : nAll;
@@ -317,11 +323,16 @@ document.querySelectorAll('#stog button').forEach(b=>b.addEventListener('click',
 function showNok(){
   const list=DATA.niet_op_kaart[state.mode], tot=list.reduce((s,x)=>s+x[1],0);
   document.getElementById('nokCount').textContent=`${fmt(tot)} personen · ${lblOmg()}`;
-  document.getElementById('nokRows').innerHTML=list.slice(0,300).map(x=>`<div class="nrow"><span>${esc(x[0])}</span><b>${fmt(x[1])}</b></div>`).join('');
+  const rows=list.slice(0,400);
+  document.getElementById('nokRows').innerHTML=rows.map((x,i)=>`<div class="nrow" data-i="${i}"><span>${esc(x[0])}</span><b>${fmt(x[1])}</b></div>`).join('');
+  document.querySelectorAll('#nokRows .nrow').forEach((el,i)=>el.onclick=()=>openNamesForPlace(rows[i][0]));
 }
 document.getElementById('nokBtn').addEventListener('click',()=>{const n=document.getElementById('nok');if(n.classList.contains('open')){n.classList.remove('open');}else{showNok();n.classList.add('open');bindTips();}});
 
-fetch('ogs_data.json?v='+BUILD).then(r=>r.json()).then(d=>{DATA=d;render();bindTips();})
+fetch('ogs_data.json?v='+BUILD).then(r=>r.json()).then(d=>{DATA=d;render();bindTips();
+    const pts=[...d.herkomst,...d.overlijden].map(x=>[x.lat,x.lon]);
+    if(pts.length)map.fitBounds(L.latLngBounds(pts),{padding:[25,25],maxZoom:6});
+  })
   .catch(()=>{document.querySelector('.srcline').insertAdjacentHTML('afterbegin','<span style="color:#a3312d">Kon de data niet laden.</span><br>');});
 </script>
 </body>

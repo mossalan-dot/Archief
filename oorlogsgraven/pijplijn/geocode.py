@@ -108,6 +108,54 @@ CURATED = {
     "Koningsbergen": (54.7104, 20.4522), "Dantzig": (54.3520, 18.6466),
     "Lemberg": (49.8397, 24.0297), "Breslau": (51.1079, 17.0385),
     "Praag": (50.0755, 14.4378), "Warschau": (52.2297, 21.0122),
+    # --- lange-staart-review (handmatig geplaatst) ---
+    # Nederlandse (oud-)gemeenten
+    "Schoterland": (52.96, 6.00), "Haskerland": (52.96, 5.80), "Wonseradeel": (53.05, 5.45),
+    "Wymbritseradiel": (53.00, 5.65), "Zwollerkerspel": (52.52, 6.12),
+    "Ambt-Hardenberg": (52.58, 6.62), "Ambt Hardenberg": (52.58, 6.62),
+    "Herwen en Aerdt": (51.87, 6.10), "Hooge en Lage Zwaluwe": (51.70, 4.68),
+    "Alphen en Riel": (51.48, 4.96), "Ginneken en Bavel": (51.55, 4.80),
+    "Hof van Delft": (52.02, 4.35), "Wijk aan Zee en Duin": (52.49, 4.60),
+    "Capelsche Veer": (51.70, 4.95), "Etten en Leur": (51.57, 4.63),
+    "Alkemade": (52.20, 4.62), "Bergum": (53.19, 5.99),
+    "Hengelo Gld.": (52.005, 6.294), "Hengelo (Gld)": (52.005, 6.294),
+    "Hengelo G.": (52.005, 6.294), "Hengelo Gld": (52.005, 6.294),
+    # Antillen
+    "Curaçao, NA": (12.17, -68.99), "Bonaire, NA": (12.20, -68.26),
+    # Nederlands-Indië / Pacific
+    "Kalidjati": (-6.53, 107.66), "Bandaneira": (-4.53, 129.90), "Banda Neira": (-4.53, 129.90),
+    "Amoerang": (1.18, 124.59), "Madoera": (-7.00, 113.30), "Bangka": (-2.30, 106.10),
+    "Larat": (-7.14, 131.78), "Larat-Tanimbar-eilanden": (-7.14, 131.78), "Watidal, Larat": (-7.14, 131.78),
+    "Medan-Brastagi": (3.20, 98.51), "Brastagi, kamp Brastagi": (3.20, 98.51),
+    "Tanah Grogot": (-1.91, 116.19), "Sanggau Ledo": (0.93, 109.55), "Sario-Menado": (1.47, 124.84),
+    "Tretes": (-7.70, 112.63), "Tjibadak": (-6.90, 106.78), "Boemiajoe": (-7.21, 109.01),
+    "Hutumuri": (-3.67, 128.28), "Tuhaha": (-3.58, 128.62), "Kampili, kamp": (-5.28, 119.55),
+    "Padang Pandjang": (-0.46, 100.40), "Sawahloento, NOI.": (-0.68, 100.78),
+    "Pakatto": (-5.30, 119.50), "Tjimahi Centr. Hosp.": (-6.87, 107.54),
+    "Cococo, Port. Timor": (-8.90, 125.70), "Port. Timor": (-8.90, 125.70),
+    "Palau-eilanden": (7.50, 134.60), "Moji, Japan": (33.94, 130.96),
+    "Fukuoka kamp 6, Orio Japan": (33.87, 130.70),
+    # Birma-Siam-spoorweg (Thailand)
+    "Tarsao": (14.38, 98.95), "Tarsao, Thailand": (14.38, 98.95), "Koedjie": (14.50, 98.90),
+    "Koedjie, Thailand": (14.50, 98.90), "Nakompaton": (13.82, 100.06), "Nakompaton, Thailand": (13.82, 100.06),
+    "Rintin": (14.60, 98.80), "Takanon": (14.70, 98.60), "Brangkasi": (14.30, 98.90),
+    "Brangkasi, Thailand": (14.30, 98.90), "Banggan, Thailand": (14.80, 98.50),
+    "Nompladuk I": (13.98, 99.80), "Nompladuk II": (13.98, 99.80), "Nonpladuk II": (13.98, 99.80),
+    "Nompladuk I, Thailand": (13.98, 99.80), "Nompladuk II, Thailand": (13.98, 99.80),
+    # Duitse plaatsen / (sub)kampen
+    "Kdo. Gusen": (48.26, 14.45), "Kdo. Golleschau": (49.75, 18.72), "Gräditz": (50.75, 16.45),
+    "Hamborn": (51.49, 6.75), "Bentheim": (52.30, 7.16), "Rheydt, D.": (51.16, 6.44),
+    "Oberndorf am Neckar, Landkreis Rottweil": (48.29, 8.57),
+    "Walsum, Landkreis Dinslaken": (51.53, 6.68), "Dülken, Landkreis Kempen-Krefeld": (51.25, 6.32),
+    "Bienen, Landkreis Rees": (51.83, 6.29), "Salzgitter-Hallendorf Stadtkreis Salzgitter": (52.13, 10.36),
+    "Salzgitter-Watenstedt, Stadtkreis Salzgitter": (52.13, 10.36),
+    "Salzgitter-Drütte Stadtkreis Salzgitter": (52.13, 10.36),
+    "Verden-Aller Landkreis Verden": (52.92, 9.23), "Peres, Landkreis Borna": (51.13, 12.47),
+    "Ohrbeck Landkreis Osnabrück": (52.23, 8.10), "Vaihingen Enz, Landkreis Vaihingen": (48.93, 8.96),
+    "Bedburg-Hau, Landkreis Kleve": (51.75, 6.20), "Gelsenkirchen-Buer, Stadtkreis Gelsenkirchen": (51.58, 7.10),
+    "Neustadt Holstein, Landkreis Oldenburg Holstein": (54.11, 10.82), "Ammendorf, Saalkreis": (51.42, 11.99),
+    "Burgsteinfurt": (52.15, 7.35), "Frankfort am Main": (50.11, 8.68),
+    "Berlijn-Spandau, D.": (52.54, 13.20), "Tröbitz, Landkreis Luckau": (51.62, 13.55),
     # Duitse arbeidsinzet-plaatsen komen uit seed_cache
 }
 CURATED["Ellecom"] = (52.0139, 6.0947)
@@ -169,7 +217,8 @@ def main():
             k2 = re.sub(r"\ba[/ ]?d\b.*$", "", k2).strip()
             k2 = re.sub(r"[,(].*$", "", k2).strip()
             k2 = re.sub(r"\s+[a-z]{1,2}\.?$", "", k2).strip()     # land-afk. "B." "PL." "D." weg
-            k2 = re.sub(r"\s+(belgie|belgi|belg|blg|duitsland|frankrijk|engeland|nederland|polen|denemarken|oostenrijk)\.?$", "", k2).strip()
+            k2 = re.sub(r"\s+(belgie|belgi|belg|blg|duitsland|frankrijk|engeland|nederland|polen|denemarken|"
+                        r"oostenrijk|hongarije|hong|tsjechoslowakije|joegoslavie|italie|zwitserland|noorwegen)\.?$", "", k2).strip()
             if k in gz:
                 coord = gz[k][:2]
             elif k2 and k2 in gz:
