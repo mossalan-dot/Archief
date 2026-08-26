@@ -13,10 +13,10 @@
   html,body{margin:0;height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg)}
   #map{position:absolute;inset:0;background:#e7eaec}
   .leaflet-container{background:#e7eaec}
-  .ptabs{position:fixed;top:14px;left:14px;z-index:1200;display:flex;gap:2px;width:340px;max-width:calc(100vw - 28px);
-    justify-content:space-between;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);
+  .ptabs{position:fixed;top:14px;left:14px;z-index:1200;display:flex;gap:2px;flex-wrap:wrap;width:auto;max-width:calc(100vw - 28px);
+    justify-content:flex-start;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);
     border:1px solid var(--line);border-radius:12px;padding:4px 6px;box-shadow:0 2px 12px rgba(0,0,0,.08)}
-  .ptabs a{font-size:12.5px;color:var(--ink);text-decoration:none;padding:6px 9px;border-radius:8px;white-space:nowrap}
+  .ptabs a{font-size:12px;color:var(--ink);text-decoration:none;padding:6px 8px;border-radius:8px;white-space:nowrap}
   .ptabs a.on{background:var(--accent);color:#fff}
   .ptabs a:not(.on):hover{background:#eef2f5;color:var(--accent)}
   .ptabs a.ext{color:var(--accent)}
@@ -102,7 +102,7 @@
 </style>
 </head>
 <body>
-<nav class="ptabs"><a href="./" class="on">🗺️ Kaart</a><a href="./inzichten/">📊 Inzichten</a><a href="./over/">ℹ️ Over</a><a href="https://archief.alanmoss.nl/" class="ext" title="Alle archiefprojecten">← Archief</a></nav>
+<nav class="ptabs"><a href="./" class="on">🗺️ Kaart</a><a href="./inzichten/">📊 Inzichten</a><a href="./archief/">🗄️ Kampdossiers</a><a href="./over/">ℹ️ Over</a><a href="https://archief.alanmoss.nl/" class="ext" title="Alle archiefprojecten">← Archief</a></nav>
 <div id="map"></div>
 <div id="viztip"></div>
 <aside id="side"><div class="pad">
@@ -149,7 +149,7 @@
 <div class="credit">Kaart © OpenStreetMap-bijdragers</div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const BUILD='20260826-2';
+const BUILD='20260826-3';
 const TOTAAL=197865;
 const esc=s=>(s==null?'':''+s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmt=n=>(n||0).toLocaleString('nl');
@@ -212,10 +212,20 @@ function cleanPlace(s){
 function refLinks(d){
   return d.ob?`<div style="margin-top:5px"><a href="${esc(d.ob)}" target="_blank" rel="noopener">Bronnen op Oorlogsbronnen ↗</a></div>`:'';
 }
+// Rode Kruis-kampdossiers: doorklik vanaf een kampstip naar de archiefpagina
+let NRKMATCH=null;
+fetch('nrk_match.json?v='+BUILD).then(r=>r.json()).then(m=>{NRKMATCH=m;}).catch(()=>{});
+function nrmKey(s){return (s||'').replace(/\(.*?\)/g,'').normalize('NFKD').replace(/[̀-ͯ]/g,'')
+  .toLowerCase().replace(/[^a-z0-9 ]/g,'').replace(/\s+/g,' ').trim();}
+function archiefSlug(label){ if(!NRKMATCH)return null; return NRKMATCH[nrmKey(cleanPlace(label))]||NRKMATCH[nrmKey(label)]||null; }
+function archiefLink(label){
+  const s=archiefSlug(label);
+  return s?`<div style="margin-top:5px"><a href="archief/?k=${encodeURIComponent(s)}">Rode Kruis-archief over dit kamp →</a></div>`:'';
+}
 function openDot(i, fromClick){
   const d=DATA[state.mode][i];
   const card=`<b>${esc(d.p)}</b><br><b style="font-size:12px">${fmt(d.n)}</b> vastgelegde personen · ${lblOmg()}`+
-    refLinks(d)+
+    refLinks(d)+ archiefLink(d.p)+
     `<div style="margin-top:8px"><a href="#" onclick="openNames(${i});return false">Toon de namen →</a></div>`;
   const open=()=>L.popup({maxWidth:280}).setLatLng([d.lat,d.lon]).setContent(card).openOn(map);
   if(fromClick){ open(); }
@@ -229,7 +239,10 @@ function showNamesPanel(title, list, ob){
   nAll=list.sort((a,b)=>a.n.localeCompare(b.n,'nl'));
   document.getElementById('nTitle').textContent=title;
   document.getElementById('nCount').innerHTML=`${fmt(nAll.length)} vastgelegde personen · ${lblOmg()}`;
-  document.getElementById('nRef').innerHTML = ob?`<a href="${esc(ob)}" target="_blank" rel="noopener">Bronnen op Oorlogsbronnen ↗</a>`:'';
+  const al=archiefSlug(title);
+  document.getElementById('nRef').innerHTML =
+    (ob?`<a href="${esc(ob)}" target="_blank" rel="noopener">Bronnen op Oorlogsbronnen ↗</a>`:'')+
+    (al?`${ob?' · ':''}<a href="archief/?k=${encodeURIComponent(al)}">Rode Kruis-archief →</a>`:'');
   document.getElementById('nFilter').value=''; nfilter();
   document.getElementById('names').classList.add('show');
 }
