@@ -190,7 +190,7 @@ for rid,p in persons.items():
         i = kidx.get(dst)
         if i is not None and kreisen[i]["lat"] is not None: ks.append(i); rs.append(recids)  # recids = lijst
     if not ks: continue
-    e = {"n":p["n"],"k":ks,"r":rs}
+    e = {"id":rid,"n":p["n"],"k":ks,"r":rs}   # reconstructieid = stabiele deeplink-sleutel
     if p["bd"]: e["bd"]=p["bd"]
     if p["p"]: e["p"]=p["p"]
     if p["g"]: e["g"]=p["g"]

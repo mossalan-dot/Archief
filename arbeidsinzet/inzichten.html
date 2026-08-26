@@ -241,7 +241,7 @@ fetch('kaart_data.json?v='+BUILD).then(r=>r.json()).then(d=>{
     [fmt(dests.length),'Duitse Kreise','Van de ongeveer 1.000 Kreise die het Duitse Reich in 1939 telde. De overige ~'+(1000-dests.length)+' ontbreken: daar werden geen Nederlanders geregistreerd, of hun records gingen verloren.'],
     [fmt(d.meta.personen),'doorzoekbare personen','Unieke personen, samengevoegd via de reconstructie-id van het Nationaal Archief; daarom lager dan het aantal vermeldingen.'],
     [fmt(d.per_categorie.overlijden||0),'sterfgevallen (records)'],
-    [fmt(d.meta.ogs_gekoppeld||0),'gekoppeld aan een oorlogsgraf','Overledenen die we konden koppelen aan de Oorlogsgravenstichting (NA-index nt00446), op achternaam + volledige sterfdatum. Op de kaart krijgen zij een link naar het grafdossier.'],
+    [fmt(d.meta.ogs_gekoppeld||0),'gekoppeld aan een oorlogsgraf','Personen die we konden koppelen aan de Oorlogsgravenstichting (NA-index nt00446), op achternaam + eerste initiaal + een exacte datum (geboorte- óf sterfdatum). '+(d.meta.ogs_zeker?fmt(d.meta.ogs_zeker)+' daarvan zijn door twee onafhankelijke datums (of datum én plaats) bevestigd; ':'')+'de overige zijn waarschijnlijke koppelingen. Op de kaart leidt hun kaartje rechtstreeks naar de Oorlogsgraven-kaart.'],
   ]);
   GY=d.geboortejaren||{}; GYJ=d.geboortejaren_jaar||{};
   decadeBars('cHist', GY);

@@ -149,7 +149,7 @@
 <div class="credit">Kaart © OpenStreetMap-bijdragers</div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const BUILD='20260826-1';
+const BUILD='20260826-2';
 const TOTAAL=197865;
 const esc=s=>(s==null?'':''+s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmt=n=>(n||0).toLocaleString('nl');
@@ -256,6 +256,8 @@ function personRow(p){
   if(p.na)links.push(`<a href="https://www.nationaalarchief.nl/onderzoeken/index/nt00446/${esc(p.na)}" target="_blank" rel="noopener">Dossier (NA) ↗</a>`);
   if(p.na2)links.push(`<a href="https://www.nationaalarchief.nl/onderzoeken/index/nt00446/${esc(p.na2)}" target="_blank" rel="noopener">Correspondentiedossier (NA) ↗</a>`);
   if(p.u)links.push(`<a href="https://oorlogsgravenstichting.nl/${esc(p.u)}" target="_blank" rel="noopener">OGS ↗</a>`);
+  if(p.ai){const zeker=p.aiz!=='w';
+    links.push(`<a href="https://arbeidsinzet.alanmoss.nl/?p=${esc(p.ai)}" target="_blank" rel="noopener" title="${zeker?'Ook opgeroepen voor de Arbeidsinzet. Koppeling bevestigd op naam en twee onafhankelijke datums (of naam, datum én plaats).':'Mogelijk ook opgeroepen voor de Arbeidsinzet. Waarschijnlijke koppeling: naam en één datum komen overeen, zonder verdere bevestiging.'}">Arbeidsinzet-kaart${zeker?'':' (?)'} ↗</a>`);}
   const foreign=(p.nat&&p.nat!=='NEDERLANDS'&&p.nat!=='ONBEKEND')?` <span class="dt">· ${esc(p.nat.toLowerCase())}</span>`:'';
   const pill=!p.gd?` <span class="pill">geboortedatum niet gematcht</span>`:'';
   return `<div class="nrow"><span class="nm">${esc(p.n)}</span>${foreign}<br><span class="dt">${line}</span>${pill}`+
@@ -318,6 +320,20 @@ function selectPerson(p){
       (links.length?`<br>${links.join(' · ')}`:'')).openOn(map);
   }
 }
+// deeplink vanaf de Arbeidsinzet-kaart: ?p=<NA-UUID> opent de persoon
+function openPerson(na){
+  loadPers(()=>{
+    const p=PERS.find(x=>x.na===na||x.na2===na);
+    if(!p)return;
+    const want=(p.oi>=0)?'overlijden':(p.hi>=0?'herkomst':state.mode);
+    if(state.mode!==want){
+      state.mode=want;
+      document.querySelectorAll('#modes button').forEach(x=>x.classList.toggle('on',x.dataset.m===want));
+      render();
+    }
+    selectPerson(p);
+  });
+}
 document.getElementById('q').addEventListener('input',e=>{state.q=e.target.value;runSearch(e.target.value);});
 document.getElementById('q').addEventListener('focus',()=>{if(state.stog==='persoon')loadPers();});
 document.addEventListener('click',e=>{if(!e.target.closest('.search'))document.getElementById('sug').style.display='none';});
@@ -348,6 +364,8 @@ document.getElementById('nokBtn').addEventListener('click',()=>{const n=document
 fetch('ogs_data.json?v='+BUILD).then(r=>r.json()).then(d=>{DATA=d;render();bindTips();
     const pts=[...d.herkomst,...d.overlijden].map(x=>[x.lat,x.lon]);
     if(pts.length)map.fitBounds(L.latLngBounds(pts),{padding:[25,25],maxZoom:6});
+    const pid=new URLSearchParams(location.search).get('p');
+    if(pid)openPerson(pid);
   })
   .catch(()=>{document.querySelector('.srcline').insertAdjacentHTML('afterbegin','<span style="color:#a3312d">Kon de data niet laden.</span><br>');});
 </script>

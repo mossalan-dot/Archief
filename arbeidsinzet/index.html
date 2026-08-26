@@ -186,7 +186,7 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const BUILD='20260821-01';
+const BUILD='20260826-01';
 const NA_REC='https://www.nationaalarchief.nl/onderzoeken/index/nt00475/';
 const NA_Q='https://www.nationaalarchief.nl/onderzoeken/index/nt00475?searchTerm=';
 const NL=[52.15,5.4], DE=[51.2,9.6];
@@ -375,9 +375,11 @@ function personCard(p, fromNames){
     }
     return `<li><a href="#" onclick="flyKreis(${ki});return false;">${esc(k.naam)}</a><span class="scans">${right}</span>${sub}</li>`;
   }).join('')+'</ul>';
-  if(p.dd){                                              // overledene → extra oorlogsbronnen
+  if(p.ogs||p.dd){                                       // in de oorlogsgraven / andere bronnen
+    const zeker=p.ogz!=='w';
     body+=`<div style="margin-top:10px;border-top:1px solid #eee;padding-top:8px;font-size:12px">`+
-      `<div style="color:#888;margin-bottom:5px">Bronnen bij deze overledene:</div>`+
+      `<div style="color:#888;margin-bottom:5px">Deze persoon in andere bronnen:</div>`+
+      (p.ogs?`<a href="https://ogs.alanmoss.nl/?p=${encodeURIComponent(p.ogs)}" target="_blank" rel="noopener" style="display:block;margin-bottom:3px;font-weight:600" title="${zeker?'Ook vastgelegd door de Oorlogsgravenstichting. Koppeling bevestigd op naam en twee onafhankelijke datums (of naam, datum én plaats).':'Mogelijk ook vastgelegd door de Oorlogsgravenstichting. Waarschijnlijke koppeling: naam en één datum komen overeen, zonder verdere bevestiging.'}">Op de Oorlogsgraven-kaart${zeker?'':' (?)'} →</a>`:'')+
       (p.ogs?`<a href="https://www.nationaalarchief.nl/onderzoeken/index/nt00446/${encodeURIComponent(p.ogs)}" target="_blank" rel="noopener" style="display:block;margin-bottom:3px">Oorlogsgravenstichting-dossier (NA) →</a>`:'')+
       `<a href="https://www.oorlogsbronnen.nl/mensen?term=${encodeURIComponent(p.n)}" target="_blank" rel="noopener" style="display:block">Zoek bij Oorlogsbronnen →</a>`+
     `</div>`;
@@ -489,7 +491,10 @@ document.addEventListener('click',e=>{ if(!e.target.closest('.search')) document
 document.addEventListener('click',e=>{ const el=e.target.closest('.plink[data-bp]'); if(el){ map.closePopup(); openNames(el.dataset.bp, +el.dataset.ki); } });
 
 fetch('kaart_data.json?v='+BUILD).then(r=>r.json())
-  .then(d=>{DATA=d;buildIndex();render();})
+  .then(d=>{DATA=d;buildIndex();render();
+    const pid=new URLSearchParams(location.search).get('p');   // deeplink vanaf de OGS-kaart
+    if(pid)loadPersons(()=>{const p=PERS.find(x=>String(x.id)===String(pid));if(p)selectPerson(p);});
+  })
   .catch(()=>{document.querySelector('.srcline').insertAdjacentHTML('afterbegin','<span style="color:#a3312d">Kon data niet laden.</span><br>');});
 </script>
 </body>
