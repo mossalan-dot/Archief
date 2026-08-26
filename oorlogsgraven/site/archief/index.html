@@ -84,8 +84,9 @@
   <div class="legend">
     <h3>Openbaarheid</h3>
     <div class="row"><span class="badge o">openbaar</span><span>Vrij te raadplegen.</span></div>
-    <div class="row"><span style="white-space:nowrap"><span class="badge b">beperkt (A)</span> <span class="badge b">beperkt (B)</span></span><span>Niet vrij te raadplegen. Inzage kan alleen na een aanvraag, waarvoor een medewerker van het Nationaal Archief eerst vooronderzoek doet. A en B verschillen alleen in de procedure.</span></div>
-    <p class="muted">Aanvragen en uitleg: zoekhulp <a href="https://www.nationaalarchief.nl/onderzoeken/zoekhulpen/oorlogsarchief-rode-kruis" target="_blank" rel="noopener">Oorlogsarchief Nederlandse Rode Kruis</a>.</p>
+    <div class="row"><span class="badge b">beperkt (A)</span><span>Niet vrij te raadplegen; inzage kan aan de informatiebalie van de studiezaal van het Nationaal Archief.</span></div>
+    <div class="row"><span class="badge b">beperkt (B)</span><span>Niet vrij te raadplegen; inzage alleen na een aanvraag, waarvoor een medewerker van het Nationaal Archief eerst vooronderzoek doet.</span></div>
+    <p class="muted">Van beperkt (A) en (B) mogen geen kopieën worden gemaakt. Aanvragen en uitleg: zoekhulp <a href="https://www.nationaalarchief.nl/onderzoeken/zoekhulpen/oorlogsarchief-rode-kruis" target="_blank" rel="noopener">Oorlogsarchief Nederlandse Rode Kruis</a>.</p>
   </div>
 
   <div class="toolbar">
@@ -99,7 +100,7 @@
 </div>
 
 <script>
-const BUILD='20260826-4';
+const BUILD='20260826-5';
 const CATLAB={concentratiekamp:'Concentratiekampen',interneringskamp:'Internerings-, straf- & dwangarbeidskampen',werkkamp:'Werkkampen',gevangenis:'Gevangenissen'};
 const CATSHORT={concentratiekamp:'Concentratiekampen',interneringskamp:'Interneringskampen',werkkamp:'Werkkampen',gevangenis:'Gevangenissen'};
 const TAG={concentratiekamp:'Concentratiekamp',interneringskamp:'Interneringskamp',werkkamp:'Werkkamp',gevangenis:'Gevangenis'};
@@ -120,7 +121,9 @@ function chips(){
     c.appendChild(b);});
 }
 function campBody(k){
-  const meta=`<div class="cmeta">Toegang <a href="https://www.nationaalarchief.nl/onderzoeken/archief/${esc(k.arch)}" target="_blank" rel="noopener">${esc(k.arch)}</a> · ${ARCHNAAM[k.arch]||''} — ${nl(k.n)} stukken.</div>`;
+  const archs=(k.archs||[k.arch]);
+  const toeg=archs.map(a=>`<a href="https://www.nationaalarchief.nl/onderzoeken/archief/${esc(a)}" target="_blank" rel="noopener" title="${esc(ARCHNAAM[a]||'')}">${esc(a)}</a>`).join(' · ');
+  const meta=`<div class="cmeta">${archs.length>1?'Toegangen':'Toegang'} ${toeg}${archs.length===1?' · '+esc(ARCHNAAM[archs[0]]||''):''} — ${nl(k.n)} stukken.</div>`;
   const themes=k.themes.map(th=>{
     const o=th.items.filter(i=>!i.b).length, b=th.items.filter(i=>i.b).length;
     return `<details class="theme"><summary><span class="tw">${esc(th.thema)}</span><span class="tc">`+
@@ -128,9 +131,8 @@ function campBody(k){
       (b?`<span class="split"><span class="dot b"></span>${b}</span>`:'')+`</span></summary>`+
       th.items.map(i=>{
         const arch=i.a||k.arch;
-        const src=(i.a&&i.a!==k.arch)?`<span class="src">${esc(i.a)}</span> `:'';
-        return `<div class="drow">${badge(i.b,k.regime)}<span class="dt">${src}${esc(i.t)}</span>`+
-          (i.inv?`<a class="dl" href="${invUrl(i.inv,arch)}" target="_blank" rel="noopener">inv.nr ${esc(i.inv)} ↗</a>`:'')+`</div>`;
+        return `<div class="drow">${badge(i.b,k.regime)}<span class="dt">${esc(i.t)}</span>`+
+          (i.inv?`<a class="dl" href="${invUrl(i.inv,arch)}" target="_blank" rel="noopener">${esc(arch)}, inv.nr ${esc(i.inv)} ↗</a>`:'')+`</div>`;
       }).join('')+`</details>`;
   }).join('');
   return meta+themes;

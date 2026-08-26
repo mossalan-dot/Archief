@@ -62,7 +62,8 @@
 const BUILD='20260818-1', JAREN=[1945, 1946, 1947, 1948, 1949, 1950, 1951, 1952, 1953, 1957, 1958, 1959, 1960], NA='https://www.nationaalarchief.nl/onderzoeken/archief/2.19.277/invnr/';
 const fmt=n=>n.toLocaleString('nl-NL'), esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const map=L.map('map',{zoomControl:false,worldCopyJump:false}).setView([18,72],3);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{attribution:'© OpenStreetMap, © CARTO · data: NA 2.19.277',subdomains:'abcd',maxZoom:12}).addTo(map);
+L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',{attribution:'© Esri, HERE, Garmin, OpenStreetMap · data: NA 2.19.277',maxZoom:12,maxNativeZoom:12}).addTo(map);
+L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}',{maxZoom:12,maxNativeZoom:12}).addTo(map);
 const gLine=L.layerGroup().addTo(map), gHit=L.layerGroup().addTo(map);
 let DATA=null, yearMax=JAREN[JAREN.length-1];
 const COL={thuis:'#12707f',uit:'#c0603a',overig:'#c0603a'};

@@ -105,7 +105,7 @@ html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Ro
   <div class="pfoot"><a href="mailto:mossalan@gmail.com?subject=RGD-tekeningenkaart%3A%20feedback%20of%20bugmelding">✉︎ Feedback of een fout melden</a></div>
 </div>
 <div id="detail"></div>
-<div class="credit">Kaart © OpenStreetMap-bijdragers · data: Nationaal Archief 4.RGD (CC0)</div>
+<div class="credit">Kaart © Esri, HERE, Garmin, OpenStreetMap-bijdragers · data: Nationaal Archief 4.RGD (CC0)</div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 <script>
@@ -114,7 +114,8 @@ const MAT_EM={tekening:'📐',foto:'📷',bestek:'📄',overig:'📎'};
 const esc=s=>(s==null?'':''+s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const map=L.map('map',{preferCanvas:false,zoomControl:false}).setView([52.15,5.4],7);
 L.control.zoom({position:'bottomright'}).addTo(map);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{subdomains:'abcd',maxZoom:19,attribution:''}).addTo(map);
+L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,maxNativeZoom:16,attribution:''}).addTo(map);
+L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,maxNativeZoom:16,attribution:''}).addTo(map);
 const cluster=L.markerClusterGroup({maxClusterRadius:44,spiderfyOnMaxZoom:false,zoomToBoundsOnClick:false,showCoverageOnHover:false,chunkedLoading:true}).addTo(map);
 cluster.on('clusterclick',a=>{                      // brede cluster: inzoomen; samenvallende punten: lijst
   const kids=a.layer.getAllChildMarkers(), b=a.layer.getBounds();

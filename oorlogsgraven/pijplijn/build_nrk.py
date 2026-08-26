@@ -107,10 +107,14 @@ def register(naam, cat, arch, regime, secs, extra_keys=()):
     while sl in used: sl += "-x"
     used.add(sl)
     themes = [{"thema": th, "items": its} for th, its in secs.items() if its]
+    for t in themes:
+        for it in t["items"]:
+            it.setdefault("a", arch)                  # elk stuk krijgt zijn eigen toegang
     n = sum(len(t["items"]) for t in themes)
     op = sum(1 for t in themes for i in t["items"] if not i["b"])
+    archs = sorted({i["a"] for t in themes for i in t["items"]})
     kampen.append({"slug": sl, "naam": naam, "cat": cat, "arch": arch, "regime": regime,
-                   "n": n, "open": op, "beperkt": n - op, "themes": themes})
+                   "archs": archs, "n": n, "open": op, "beperkt": n - op, "themes": themes})
     add_match(naam, sl)
     for k in extra_keys: match[mkey(k)] = sl
     return sl
@@ -120,7 +124,7 @@ r321 = ead("2.19.321")
 CAT = {"Concentratiekampen op alfabetische ordening": "concentratiekamp",
        "Internerings-, straf-, en dwangarbeidskampen": "interneringskamp",
        "Werkkampen": "werkkamp", "Gevangenissen": "gevangenis"}
-wb321 = None
+wb321 = []
 for c01 in r321.find(".//archdesc/dsc").findall("./c"):
     cat = txt(c01.find("./did/unittitle"))
     if cat not in CAT: continue
@@ -129,23 +133,39 @@ for c01 in r321.find(".//archdesc/dsc").findall("./c"):
         if is_file(c02):                    # losse documenten direct onder de categorie (bv. Werkkampen)
             stray.append(item(c02)); continue
         naam = txt(c02.find("./did/unittitle"))
-        secs = extract_sections(c02)
-        if naam == "Westerbork":            # bewaar; ga samen met de diepe 2.19.296
-            wb321 = secs; continue
-        register(naam, CAT[cat], "2.19.321", "B", secs)
+        if naam == "Westerbork":            # de 9 stukken gaan samen met de diepe 2.19.296
+            wb321 = [{**item(lf), "a": "2.19.321"} for lf in leaves(c02)]; continue
+        register(naam, CAT[cat], "2.19.321", "B", extract_sections(c02))
     if stray:                               # bundel die documenten tot één entry per categorie
         register(cat, CAT[cat], "2.19.321", "B", OrderedDict([("Stukken", stray)]))
 
-# ---- 2.19.296 Westerbork + 2.19.315 Amersfoort: secties = eigen serie-indeling ----
-def whole_archive(a, naam, cat, regime, merge=None):
-    secs = extract_sections(ead(a).find(".//archdesc/dsc"), classify_direct=False)
-    if merge:
-        secs["Overige stukken (toegang 2.19.321)"] = [{**i, "a": "2.19.321"}
-                                                      for v in merge.values() for i in v]
-    register(naam, cat, a, regime, secs)
+# ---- Westerbork/Amersfoort: aparte toegangen, ondergebracht in de 2.19.321-thematiek ----
+def walk_items(node, prefix=""):
+    """Loop alle stukken af met de keten van bovenliggende serietitels als context."""
+    for c in node.findall("./c"):
+        if is_file(c):
+            yield c, prefix
+        else:
+            head = txt(c.find("./did/unittitle"))
+            yield from walk_items(c, f"{prefix} — {head}" if prefix else head)
 
-whole_archive("2.19.296", "Westerbork", "concentratiekamp", "B", merge=wb321)
-whole_archive("2.19.315", "Amersfoort", "concentratiekamp", "B")
+def classified_archive(a, naam, cat, regime, extra=()):
+    """Classificeer alle stukken naar de 2.19.321-onderwerpen (met serie-context),
+    per stuk blijft de eigen toegang (a) behouden. Zo houdt één kamp één structuur,
+    ook over meerdere toegangen heen."""
+    secs = OrderedDict()
+    def add(it): secs.setdefault(theme(it["t"]), []).append(it)
+    for lf, ctx in walk_items(ead(a).find(".//archdesc/dsc")):
+        it = item(lf); it["a"] = a
+        th = theme(f"{ctx} {it['t']}")                     # classificeer mét serie-context
+        if ctx and len(it["t"]) < 42:                      # kale reeks/vervolg → context ervoor
+            it["t"] = f"{ctx.split(' — ')[-1]} — {it['t']}"
+        secs.setdefault(th, []).append(it)
+    for it in extra: add(it)
+    register(naam, cat, a, regime, OrderedDict((t, secs[t]) for t in ORDER if t in secs))
+
+classified_archive("2.19.296", "Westerbork", "concentratiekamp", "B", extra=wb321)
+classified_archive("2.19.315", "Amersfoort", "concentratiekamp", "B")
 
 # ---- 2.19.283 Bandoeng/Tjimahi: alfabetisch kaartsysteem (Japans interneringskamp, regime A) ----
 b283 = OrderedDict()

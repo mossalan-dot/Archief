@@ -339,12 +339,12 @@ function flag(country){
 
 let map = L.map('map',{preferCanvas:true,minZoom:3,zoomControl:false,worldCopyJump:true}).setView([52,7],4.5);
 map.on('popupopen', e=>{ try{ initLists(e.popup.getElement()); }catch(_){} });
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',{
-  attribution:'© OpenStreetMap © CARTO · data: Nationaal Archief',
+L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',{
+  attribution:'© Esri, HERE, Garmin, OpenStreetMap · data: Nationaal Archief',
   subdomains:'abcd',maxZoom:12}).addTo(map);
 // labels-laag (boven de heatmap; alleen in warmtekaart-modus getoond)
 map.createPane('labels'); map.getPane('labels').style.zIndex=620; map.getPane('labels').style.pointerEvents='none';
-const labelsLayer=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png',{
+const labelsLayer=L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}',{
   subdomains:'abcd',maxZoom:12,pane:'labels'});
 
 const renderer = L.canvas({padding:.5, tolerance:8});  // ruimere klik-tolerantie voor dunne lijnen
