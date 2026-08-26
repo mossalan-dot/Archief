@@ -4,32 +4,31 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rode Kruis-archief · Oorlogsgravenstichting op de kaart</title>
-<meta name="description" content="De kamp- en gevangenisdossiers van het Nederlandse Rode Kruis (Nationaal Archief 2.19.321), per plek en per thema, met openbaarheidsstatus.">
+<meta name="description" content="Bronnen uit het Oorlogsarchief van het Nederlandse Rode Kruis, per kamp en per onderwerp, met openbaarheidsstatus — als aanvulling op de OGS-dossiers.">
 <style>
   :root{--bg:#eef0f2;--panel:#fff;--ink:#232a31;--muted:#6b7480;--line:#dde1e5;--accent:#4a5a6a;--accent-dark:#33414e;--card2:#e7ebef;
     --open:#3f7a6d;--open-bg:#e7f0ed;--beperkt:#9a6a3b;--beperkt-bg:#f3ebe1}
   *{box-sizing:border-box}
   body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
-  .ptabs{display:flex;gap:2px;background:#fff;padding:8px 12px;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5;flex-wrap:wrap}
+  .ptabs{display:flex;gap:2px;background:#fff;padding:8px 12px;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:6;flex-wrap:wrap}
   .ptabs a{padding:6px 10px;border-radius:7px;text-decoration:none;color:var(--muted);font-size:13px;font-weight:600}
   .ptabs a.on{background:var(--accent);color:#fff}
   .ptabs a:not(.on):hover{background:var(--bg);color:var(--accent)}
   .wrap{max-width:900px;margin:0 auto;padding:22px 18px 60px}
   h1{font-size:22px;margin:.1em 0;font-weight:700}
-  .lead{color:#374151;font-size:14.5px;margin:2px 0 16px;max-width:76ch}
-  .lead a{color:var(--accent)}
+  .lead{color:#374151;font-size:14px;margin:4px 0 16px;max-width:74ch}
   a{color:var(--accent)}
   /* openbaarheid-legenda */
-  .legend{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 16px;margin:0 0 18px;font-size:13px}
-  .legend h3{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:0 0 8px}
+  .legend{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 15px;margin:0 0 16px;font-size:13px}
+  .legend h3{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:0 0 8px}
   .legend .row{display:flex;gap:9px;align-items:baseline;margin:5px 0;line-height:1.45}
-  .legend .muted{color:var(--muted);font-size:12.5px;margin-top:8px}
-  .badge{display:inline-block;font-size:11px;font-weight:600;padding:1px 8px;border-radius:20px;white-space:nowrap;flex:none}
+  .legend .muted{color:var(--muted);font-size:12.5px;margin-top:9px}
+  .badge{display:inline-block;font-size:11px;font-weight:600;padding:1px 8px;border-radius:20px;white-space:nowrap;text-align:center}
   .badge.o{color:var(--open);background:var(--open-bg)}
   .badge.b{color:var(--beperkt);background:var(--beperkt-bg)}
   /* toolbar */
-  .toolbar{display:flex;flex-wrap:wrap;gap:9px 12px;align-items:center;margin:0 0 14px;position:sticky;top:41px;
-    background:var(--bg);padding:10px 0;z-index:4;border-bottom:1px solid var(--line)}
+  .toolbar{display:flex;flex-wrap:wrap;gap:9px 12px;align-items:center;margin:0 0 12px;position:sticky;top:41px;
+    background:var(--bg);padding:10px 0;z-index:5;border-bottom:1px solid var(--line)}
   .search{position:relative;flex:1 1 220px;min-width:170px}
   .search input{width:100%;font:inherit;font-size:13.5px;padding:9px 12px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink)}
   .search input:focus{outline:2px solid var(--accent);border-color:var(--accent)}
@@ -37,165 +36,141 @@
   .chip{font-size:12px;font-weight:600;padding:6px 11px;border-radius:20px;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--muted);user-select:none}
   .chip[aria-pressed="true"]{color:#fff;background:var(--accent);border-color:var(--accent)}
   .rescount{font-size:12px;color:var(--muted);margin-left:auto;font-variant-numeric:tabular-nums}
-  /* kamp-lijst */
-  .grp{margin:18px 0 6px}
-  .grp-h{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);font-weight:700;margin:0 0 6px}
-  .camp{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;
-    padding:11px 14px;margin-bottom:7px;cursor:pointer;text-decoration:none;color:inherit}
-  .camp:hover{border-color:var(--accent)}
+  /* categorie-kop */
+  .grp-h{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);font-weight:700;margin:16px 0 6px}
+  /* kamp-accordeon */
+  .camp{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:7px;overflow:hidden}
+  .camp>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:11px 14px}
+  .camp>summary::-webkit-details-marker{display:none}
+  .camp>summary::before{content:"▸";color:var(--muted);font-size:12px;transition:transform .15s;flex:none}
+  .camp[open]>summary::before{transform:rotate(90deg)}
+  .camp[open]>summary{border-bottom:1px solid var(--line)}
   .camp .nm{font-weight:600;font-size:14.5px;flex:1;min-width:0}
-  .camp .meta{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;display:flex;gap:6px;align-items:center}
-  .camp .arr{color:var(--muted);font-size:16px}
+  .camp .meta{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;display:flex;gap:8px;align-items:center}
   .split{display:inline-flex;gap:5px;align-items:center;font-size:11.5px}
-  .dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+  .dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex:none}
   .dot.o{background:var(--open)}.dot.b{background:var(--beperkt)}
-  /* detail */
-  .backlink{display:inline-block;font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;margin-bottom:10px;cursor:pointer}
-  .chead{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px;margin-bottom:4px}
-  .chead h1{margin:0}
-  .ctag{font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--accent);background:var(--card2);padding:2px 9px;border-radius:20px}
-  .cmeta{color:var(--muted);font-size:13px;margin:2px 0 16px}
-  .theme{background:var(--panel);border:1px solid var(--line);border-radius:11px;margin-bottom:9px;overflow:hidden}
-  .theme>summary{list-style:none;cursor:pointer;padding:12px 15px;display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px}
+  .cbody{padding:6px 14px 12px}
+  .cmeta{font-size:12.5px;color:var(--muted);margin:6px 0 10px}
+  .cmeta a{color:var(--accent)}
+  /* thema-accordeon (ingesprongen) */
+  .theme{border:1px solid var(--line);border-radius:9px;margin:6px 0;overflow:hidden;background:#fcfcfb}
+  .theme>summary{list-style:none;cursor:pointer;padding:9px 12px;display:flex;align-items:center;gap:9px;font-weight:600;font-size:13.5px}
   .theme>summary::-webkit-details-marker{display:none}
-  .theme>summary .tw{flex:1}
-  .theme>summary .tc{font-size:12px;color:var(--muted);font-weight:500;font-variant-numeric:tabular-nums;display:flex;gap:6px;align-items:center}
-  .theme>summary::after{content:"▸";color:var(--muted);font-size:12px;transition:transform .15s}
-  .theme[open]>summary::after{transform:rotate(90deg)}
+  .theme>summary::before{content:"▸";color:var(--muted);font-size:11px;transition:transform .15s;flex:none}
+  .theme[open]>summary::before{transform:rotate(90deg)}
+  .theme>summary .tw{flex:1;min-width:0}
+  .theme>summary .tc{font-size:11.5px;color:var(--muted);font-weight:500;font-variant-numeric:tabular-nums;display:flex;gap:6px;align-items:center}
   .theme[open]>summary{border-bottom:1px solid var(--line)}
-  .dlist{padding:4px 0}
-  .drow{display:grid;grid-template-columns:auto 1fr auto;gap:11px;align-items:baseline;padding:8px 15px;border-top:1px solid #f1f3f5;font-size:13px}
+  .drow{display:grid;grid-template-columns:82px 1fr auto;gap:11px;align-items:baseline;padding:7px 13px;border-top:1px solid #f1f3f5;font-size:13px}
   .drow:first-child{border-top:0}
+  .drow .badge{justify-self:start}
   .drow .dt{line-height:1.45;min-width:0}
-  .drow .dl{font-size:12px;white-space:nowrap;text-decoration:none;color:var(--accent);font-weight:500}
+  .drow .src{font-size:11px;color:var(--beperkt);font-weight:600}
+  .drow .dl{font-size:12px;white-space:nowrap;text-decoration:none;color:var(--accent);font-weight:500;font-variant-numeric:tabular-nums}
   .drow .dl:hover{text-decoration:underline}
-  @media(max-width:560px){.drow{grid-template-columns:auto 1fr;gap:4px 10px}.drow .dl{grid-column:2}}
-  .foot{margin-top:30px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;max-width:78ch}
+  @media(max-width:560px){.drow{grid-template-columns:78px 1fr;gap:3px 10px}.drow .dl{grid-column:2}}
+  .foot{margin-top:26px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;max-width:78ch}
   .foot a{color:var(--accent)}
-  .hidden{display:none}
   @media (prefers-reduced-motion: reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 <nav class="ptabs"><a href="../">🗺️ Kaart</a><a href="../inzichten/">📊 Inzichten</a><a class="on">🗄️ Kampdossiers</a><a href="../over/">ℹ️ Over</a><a href="https://archief.alanmoss.nl/">← Archief</a></nav>
 <div class="wrap">
+  <h1>Rode Kruis-archief — kampen en gevangenissen</h1>
+  <p class="lead">Bronnen uit het Oorlogsarchief van het Nederlandse Rode Kruis die de OGS-dossiers kunnen aanvullen, per kamp en per onderwerp ontsloten. Vanaf de <a href="../">kaart</a> is er per kamp naartoe te klikken.</p>
 
-  <!-- LIJST -->
-  <div id="listView">
-    <h1>Rode Kruis-archief — kampen en gevangenissen</h1>
-    <p class="lead">De Oorlogsgravenstichting en het Nederlandse Rode Kruis zijn verschillende organisaties, die tijdens en na de oorlog samenwerkten. Als <b>aanvullende bron</b> bij de graven bracht het Rode Kruis de kampen zelf in kaart. Deze pagina ontsluit die kamp­dossiers: <a href="https://www.nationaalarchief.nl/onderzoeken/archief/2.19.321" target="_blank" rel="noopener">2.19.321 — Kampen en Gevangenissen</a>, aangevuld met de eigen archieven van <b>Westerbork</b> (2.19.296) en <b>Amersfoort</b> (2.19.315) en de Japanse interneringskampen <b>Bandoeng/Tjimahi</b> (2.19.283). De ordening volgt die van het archief zelf — per plek, naar onderwerp (transporten, overledenen, repatriëring, ooggetuigenverklaringen…) — met per stuk de openbaarheidsstatus en een ingang naar het Nationaal Archief. Vanaf de <a href="../">kaart</a> is er per kamp naar deze pagina door te klikken.</p>
-
-    <div class="legend">
-      <h3>Openbaarheid</h3>
-      <div class="row"><span class="badge o">openbaar</span><span>Vrij in te zien — algemene rapporten en overzichten, maar óók namenlijsten van <b>overleden</b> personen (voor overledenen gelden de privacybeperkingen niet).</span></div>
-      <div class="row"><span class="badge b">beperkt (B)</span><span>De meeste kampdossiers (2.19.321, Westerbork, Amersfoort): meestal namenlijsten met persoonsgegevens. Inzage verloopt via een procedure.</span></div>
-      <div class="row"><span class="badge b">beperkt (A)</span><span>O.a. de Japanse kaartsystemen (Bandoeng/Tjimahi): aan te vragen aan de <b>informatiebalie</b> in de studiezaal.</span></div>
-      <p class="muted">Zie de zoekhulp <a href="https://www.nationaalarchief.nl/onderzoeken/zoekhulpen/inzage-in-beperkt-openbaar-archief" target="_blank" rel="noopener">Inzage in beperkt openbaar archief</a> voor het inzage- en kopieerbeleid.</p>
-    </div>
-
-    <div class="toolbar">
-      <label class="search"><input id="q" type="search" placeholder="Zoek een kamp of gevangenis…" autocomplete="off" aria-label="Zoek"></label>
-      <div class="chips" id="chips"></div>
-      <span class="rescount" id="rescount"></span>
-    </div>
-    <div id="camplist"></div>
+  <div class="legend">
+    <h3>Openbaarheid</h3>
+    <div class="row"><span class="badge o">openbaar</span><span>Vrij te raadplegen.</span></div>
+    <div class="row"><span class="badge b">beperkt (B)</span><span>Niet vrij te raadplegen. Inzage kan alleen na een aanvraag, waarvoor een medewerker van het Nationaal Archief eerst vooronderzoek doet. A en B verschillen in de procedure.</span></div>
+    <p class="muted">Aanvragen en uitleg: zoekhulp <a href="https://www.nationaalarchief.nl/onderzoeken/zoekhulpen/oorlogsarchief-rode-kruis" target="_blank" rel="noopener">Oorlogsarchief Nederlandse Rode Kruis</a>.</p>
   </div>
 
-  <!-- DETAIL -->
-  <div id="detailView" class="hidden">
-    <a class="backlink" id="back">‹ Alle kampen</a>
-    <div class="chead"><h1 id="dNaam"></h1><span class="ctag" id="dTag"></span></div>
-    <div class="cmeta" id="dMeta"></div>
-    <div id="themes"></div>
-    <p class="foot" id="dFoot"></p>
+  <div class="toolbar">
+    <label class="search"><input id="q" type="search" placeholder="Zoek een kamp of gevangenis…" autocomplete="off" aria-label="Zoek"></label>
+    <div class="chips" id="chips"></div>
+    <span class="rescount" id="rescount"></span>
   </div>
+  <div id="list"></div>
 
-  <p class="foot">Bron: Nationaal Archief, Het Nederlandse Rode Kruis — toegangen <b>2.19.321</b> (Kampen en Gevangenissen), <b>2.19.296</b> (Westerbork), <b>2.19.315</b> (Amersfoort) en <b>2.19.283</b> (Bandoeng/Tjimahi). Thema-indeling afgeleid uit de dossieromschrijvingen (2.19.321) of de eigen serie-indeling (overige); openbaarheid zoals vastgelegd in de inventaris. Zie <a href="../over/">Over</a>.</p>
+  <p class="foot">Bron: Nationaal Archief, Het Nederlandse Rode Kruis — toegangen <b>2.19.321</b> (Kampen en Gevangenissen), <b>2.19.296</b> (Westerbork), <b>2.19.315</b> (Amersfoort) en <b>2.19.283</b> (Bandoeng/Tjimahi). Indeling en openbaarheid volgen de inventaris. Zie <a href="../over/">Over</a>.</p>
 </div>
 
 <script>
-const BUILD='20260826-3';
+const BUILD='20260826-4';
 const CATLAB={concentratiekamp:'Concentratiekampen',interneringskamp:'Internerings-, straf- & dwangarbeidskampen',werkkamp:'Werkkampen',gevangenis:'Gevangenissen'};
+const CATSHORT={concentratiekamp:'Concentratiekampen',interneringskamp:'Interneringskampen',werkkamp:'Werkkampen',gevangenis:'Gevangenissen'};
+const TAG={concentratiekamp:'Concentratiekamp',interneringskamp:'Interneringskamp',werkkamp:'Werkkamp',gevangenis:'Gevangenis'};
+const ARCHNAAM={'2.19.321':'Kampen en Gevangenissen','2.19.296':'Westerbork','2.19.315':'Amersfoort','2.19.283':'Bandoeng/Tjimahi'};
 const CATS=['concentratiekamp','interneringskamp','werkkamp','gevangenis'];
 const active=new Set(CATS);
 let DATA=null, BYSLUG={};
 const esc=s=>(s==null?'':''+s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const nl=n=>Number(n).toLocaleString('nl');
+const invUrl=(inv,arch)=>DATA.meta.invnr_base+arch+'/invnr/'+encodeURIComponent(inv);
+const badge=(b,reg)=>b?`<span class="badge b">beperkt (${reg})</span>`:'<span class="badge o">openbaar</span>';
 
-function invUrl(inv,arch){return DATA.meta.invnr_base+arch+'/invnr/'+encodeURIComponent(inv);}
-
-// ---- lijst ----
 function chips(){
   const c=document.getElementById('chips');
   CATS.forEach(k=>{const b=document.createElement('button');b.className='chip';b.setAttribute('aria-pressed','true');
-    b.textContent=CATLAB[k].replace('Internerings-, straf- & dwangarbeidskampen','Interneringskampen');
+    b.textContent=CATSHORT[k];
     b.onclick=()=>{b.getAttribute('aria-pressed')==='true'?(active.delete(k),b.setAttribute('aria-pressed','false')):(active.add(k),b.setAttribute('aria-pressed','true'));renderList();};
     c.appendChild(b);});
 }
-function renderList(){
-  const q=(document.getElementById('q').value||'').trim().toLowerCase();
-  const wrap=document.getElementById('camplist');wrap.innerHTML='';let shown=0;
-  CATS.forEach(cat=>{
-    if(!active.has(cat))return;
-    const items=DATA.kampen.filter(k=>k.cat===cat && (!q||k.naam.toLowerCase().includes(q)));
-    if(!items.length)return; shown+=items.length;
-    const g=document.createElement('div');g.className='grp';
-    g.innerHTML=`<div class="grp-h">${esc(CATLAB[cat])} · ${items.length}</div>`;
-    items.forEach(k=>{
-      const a=document.createElement('a');a.className='camp';a.href='?k='+k.slug;
-      a.onclick=e=>{e.preventDefault();openCamp(k.slug,true);};
-      a.innerHTML=`<span class="nm">${esc(k.naam)}</span>`+
-        `<span class="meta"><span class="split"><span class="dot o"></span>${nl(k.open)} openbaar</span>`+
-        `<span class="split"><span class="dot b"></span>${nl(k.beperkt)} beperkt</span></span>`+
-        `<span class="arr">›</span>`;
-      g.appendChild(a);
-    });
-    wrap.appendChild(g);
-  });
-  if(!shown)wrap.innerHTML='<p style="color:var(--muted);padding:16px 2px">Geen kamp gevonden.</p>';
-  document.getElementById('rescount').textContent=`${shown} van ${DATA.kampen.length}`;
-}
-
-// ---- detail ----
-function badge(b,reg){return b?`<span class="badge b">beperkt (${reg})</span>`:'<span class="badge o">openbaar</span>';}
-function openCamp(slug,push){
-  const k=BYSLUG[slug]; if(!k){showList(push);return;}
-  document.getElementById('listView').classList.add('hidden');
-  document.getElementById('detailView').classList.remove('hidden');
-  document.getElementById('dNaam').textContent=k.naam;
-  document.getElementById('dTag').textContent=({concentratiekamp:'Concentratiekamp',interneringskamp:'Interneringskamp',werkkamp:'Werkkamp',gevangenis:'Gevangenis'})[k.cat];
-  document.getElementById('dMeta').innerHTML=`${nl(k.n)} archiefstukken · <span style="color:var(--open)">${nl(k.open)} openbaar</span> · <span style="color:var(--beperkt)">${nl(k.beperkt)} beperkt openbaar (${k.regime})</span> · toegang ${esc(k.arch)}`;
-  const t=document.getElementById('themes');t.innerHTML='';
-  k.themes.forEach((th,ti)=>{
+function campBody(k){
+  const meta=`<div class="cmeta">Toegang <a href="https://www.nationaalarchief.nl/onderzoeken/archief/${esc(k.arch)}" target="_blank" rel="noopener">${esc(k.arch)}</a> · ${ARCHNAAM[k.arch]||''} — ${nl(k.n)} stukken.</div>`;
+  const themes=k.themes.map(th=>{
     const o=th.items.filter(i=>!i.b).length, b=th.items.filter(i=>i.b).length;
-    const d=document.createElement('details');d.className='theme';if(k.themes.length<=3||ti===0)d.open=true;
-    d.innerHTML=`<summary><span class="tw">${esc(th.thema)}</span><span class="tc">`+
+    return `<details class="theme"><summary><span class="tw">${esc(th.thema)}</span><span class="tc">`+
       (o?`<span class="split"><span class="dot o"></span>${o}</span>`:'')+
       (b?`<span class="split"><span class="dot b"></span>${b}</span>`:'')+`</span></summary>`+
-      `<div class="dlist">`+th.items.map(i=>
-        `<div class="drow">${badge(i.b,k.regime)}<span class="dt">${esc(i.t)}</span>`+
-        (i.inv?`<a class="dl" href="${invUrl(i.inv,i.a||k.arch)}" target="_blank" rel="noopener">inv.nr ${esc(i.inv)} ↗</a>`:'')+`</div>`).join('')+`</div>`;
-    t.appendChild(d);
+      th.items.map(i=>{
+        const arch=i.a||k.arch;
+        const src=(i.a&&i.a!==k.arch)?`<span class="src">${esc(i.a)}</span> `:'';
+        return `<div class="drow">${badge(i.b,k.regime)}<span class="dt">${src}${esc(i.t)}</span>`+
+          (i.inv?`<a class="dl" href="${invUrl(i.inv,arch)}" target="_blank" rel="noopener">inv.nr ${esc(i.inv)} ↗</a>`:'')+`</div>`;
+      }).join('')+`</details>`;
+  }).join('');
+  return meta+themes;
+}
+function campEl(k){
+  const d=document.createElement('details');d.className='camp';d.dataset.slug=k.slug;
+  d.innerHTML=`<summary><span class="nm">${esc(k.naam)}</span><span class="meta">`+
+    `<span class="split"><span class="dot o"></span>${nl(k.open)}</span>`+
+    `<span class="split"><span class="dot b"></span>${nl(k.beperkt)}</span></span></summary><div class="cbody"></div>`;
+  d.addEventListener('toggle',()=>{
+    if(d.open&&!d.dataset.built){d.querySelector('.cbody').innerHTML=campBody(k);d.dataset.built='1';}
+    if(d.open)history.replaceState({},'',location.pathname+'?k='+k.slug);
   });
-  document.getElementById('dFoot').innerHTML=`Alle stukken in <a href="https://www.nationaalarchief.nl/onderzoeken/archief/${esc(k.arch)}" target="_blank" rel="noopener">toegang ${esc(k.arch)}</a> bij het Nationaal Archief. Openbaarheid: zie de <a href="${DATA.meta.zoekhulp}" target="_blank" rel="noopener">zoekhulp inzage in beperkt openbaar archief</a>.`;
-  window.scrollTo(0,0);
-  if(push)history.pushState({slug},'',(location.pathname)+'?k='+slug);
+  return d;
 }
-function showList(push){
-  document.getElementById('detailView').classList.add('hidden');
-  document.getElementById('listView').classList.remove('hidden');
-  if(push)history.pushState({},'',location.pathname);
+function renderList(){
+  const q=(document.getElementById('q').value||'').trim().toLowerCase();
+  const wrap=document.getElementById('list');wrap.innerHTML='';let shown=0;
+  CATS.forEach(cat=>{
+    if(!active.has(cat))return;
+    const items=DATA.kampen.filter(k=>k.cat===cat&&(!q||k.naam.toLowerCase().includes(q)));
+    if(!items.length)return; shown+=items.length;
+    const h=document.createElement('div');h.className='grp-h';h.textContent=`${CATLAB[cat]} · ${items.length}`;
+    wrap.appendChild(h);
+    items.forEach(k=>wrap.appendChild(campEl(k)));
+  });
+  if(!shown)wrap.innerHTML='<p style="color:var(--muted);padding:14px 2px">Geen kamp gevonden.</p>';
+  document.getElementById('rescount').textContent=`${shown} van ${DATA.kampen.length}`;
 }
-document.getElementById('back').onclick=()=>showList(true);
-addEventListener('popstate',()=>{const s=new URLSearchParams(location.search).get('k');s?openCamp(s,false):showList(false);});
-
+function openSlug(slug){
+  const el=document.querySelector(`.camp[data-slug="${CSS.escape(slug)}"]`);
+  if(el){el.open=true; el.scrollIntoView({block:'start',behavior:'instant'});}
+}
 fetch('../nrk_kampen.json?v='+BUILD).then(r=>r.json()).then(d=>{
   DATA=d; d.kampen.forEach(k=>BYSLUG[k.slug]=k);
   chips(); renderList();
-  const s=new URLSearchParams(location.search).get('k');
-  if(s)openCamp(s,false);
   document.getElementById('q').addEventListener('input',renderList);
-}).catch(()=>{document.getElementById('camplist').innerHTML='<p style="color:#a3312d">Kon de data niet laden.</p>';});
+  const s=new URLSearchParams(location.search).get('k');
+  if(s&&BYSLUG[s]) setTimeout(()=>openSlug(s),40);
+}).catch(()=>{document.getElementById('list').innerHTML='<p style="color:#a3312d">Kon de data niet laden.</p>';});
 </script>
 </body>
 </html>

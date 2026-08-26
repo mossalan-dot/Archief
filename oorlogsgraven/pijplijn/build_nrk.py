@@ -41,7 +41,11 @@ def leaves(node): return [c for c in node.iter() if c.tag == "c" and not c.finda
 def is_file(c): return not c.findall("./c")
 def item(lf, prefix=""):
     ti = txt(lf.find("./did/unittitle")) or ""
-    if prefix:                                   # vervolgstuk: hoofdbeschrijving uit de ouder ervoor
+    date = re.sub(r"[.\s]+$", "", txt(lf.find("./did/unitdate")))   # bv. '1946,1953'
+    if date:                                      # titel eindigt vaak op komma + weggevallen jaartal
+        ti = ti.rstrip()
+        ti = f"{ti} {date}" if ti.endswith(",") else (f"{ti}, {date}" if ti else date)
+    if prefix:                                    # vervolgstuk: hoofdbeschrijving uit de ouder ervoor
         ti = f"{prefix} — {ti}" if ti else prefix
     inv = next((txt(u) for u in lf.findall("./did/unitid") if re.match(r"^\d+$", txt(u))), "")
     return {"t": ti or "(geen beschrijving)", "inv": inv, "b": 1 if lf.find("./accessrestrict") is not None else 0}
@@ -120,12 +124,17 @@ wb321 = None
 for c01 in r321.find(".//archdesc/dsc").findall("./c"):
     cat = txt(c01.find("./did/unittitle"))
     if cat not in CAT: continue
+    stray = []
     for c02 in c01.findall("./c"):
+        if is_file(c02):                    # losse documenten direct onder de categorie (bv. Werkkampen)
+            stray.append(item(c02)); continue
         naam = txt(c02.find("./did/unittitle"))
         secs = extract_sections(c02)
         if naam == "Westerbork":            # bewaar; ga samen met de diepe 2.19.296
             wb321 = secs; continue
         register(naam, CAT[cat], "2.19.321", "B", secs)
+    if stray:                               # bundel die documenten tot één entry per categorie
+        register(cat, CAT[cat], "2.19.321", "B", OrderedDict([("Stukken", stray)]))
 
 # ---- 2.19.296 Westerbork + 2.19.315 Amersfoort: secties = eigen serie-indeling ----
 def whole_archive(a, naam, cat, regime, merge=None):
