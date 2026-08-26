@@ -83,12 +83,13 @@
   <!-- LIJST -->
   <div id="listView">
     <h1>Rode Kruis-archief — kampen en gevangenissen</h1>
-    <p class="lead">Naast de graven documenteerde het Nederlandse Rode Kruis de kampen zelf. Deze pagina ontsluit het archief <a href="https://www.nationaalarchief.nl/onderzoeken/archief/2.19.321" target="_blank" rel="noopener">2.19.321 — Kampen en Gevangenissen</a>: per plek, geordend naar thema (overledenen, transporten, repatriëring, ooggetuigenverklaringen…), met per stuk de openbaarheidsstatus en een ingang naar het Nationaal Archief. Vanaf de <a href="../">kaart</a> is er per kamp naar deze pagina door te klikken.</p>
+    <p class="lead">De Oorlogsgravenstichting en het Nederlandse Rode Kruis zijn verschillende organisaties, die tijdens en na de oorlog samenwerkten. Als <b>aanvullende bron</b> bij de graven bracht het Rode Kruis de kampen zelf in kaart. Deze pagina ontsluit die kamp­dossiers: <a href="https://www.nationaalarchief.nl/onderzoeken/archief/2.19.321" target="_blank" rel="noopener">2.19.321 — Kampen en Gevangenissen</a>, aangevuld met de eigen archieven van <b>Westerbork</b> (2.19.296) en <b>Amersfoort</b> (2.19.315) en de Japanse interneringskampen <b>Bandoeng/Tjimahi</b> (2.19.283). De ordening volgt die van het archief zelf — per plek, naar onderwerp (transporten, overledenen, repatriëring, ooggetuigenverklaringen…) — met per stuk de openbaarheidsstatus en een ingang naar het Nationaal Archief. Vanaf de <a href="../">kaart</a> is er per kamp naar deze pagina door te klikken.</p>
 
     <div class="legend">
       <h3>Openbaarheid</h3>
-      <div class="row"><span class="badge o">openbaar</span><span>Vrij in te zien — vooral algemene rapporten, overzichten en stukken zónder persoonsgegevens.</span></div>
-      <div class="row"><span class="badge b">beperkt openbaar</span><span>Meestal namenlijsten met persoonsgegevens. Dit archief is <b>deels A, deels B</b>: bij een <b>A</b>-beperking kunt u het stuk aanvragen aan de informatiebalie in de studiezaal; bij <b>B</b> geldt een zwaardere procedure.</span></div>
+      <div class="row"><span class="badge o">openbaar</span><span>Vrij in te zien — algemene rapporten en overzichten, maar óók namenlijsten van <b>overleden</b> personen (voor overledenen gelden de privacybeperkingen niet).</span></div>
+      <div class="row"><span class="badge b">beperkt (B)</span><span>De meeste kampdossiers (2.19.321, Westerbork, Amersfoort): meestal namenlijsten met persoonsgegevens. Inzage verloopt via een procedure.</span></div>
+      <div class="row"><span class="badge b">beperkt (A)</span><span>O.a. de Japanse kaartsystemen (Bandoeng/Tjimahi): aan te vragen aan de <b>informatiebalie</b> in de studiezaal.</span></div>
       <p class="muted">Zie de zoekhulp <a href="https://www.nationaalarchief.nl/onderzoeken/zoekhulpen/inzage-in-beperkt-openbaar-archief" target="_blank" rel="noopener">Inzage in beperkt openbaar archief</a> voor het inzage- en kopieerbeleid.</p>
     </div>
 
@@ -109,11 +110,11 @@
     <p class="foot" id="dFoot"></p>
   </div>
 
-  <p class="foot">Bron: Nationaal Archief, toegang <b>2.19.321</b> — Het Nederlandse Rode Kruis, Kampen en Gevangenissen. Thema-indeling afgeleid uit de dossieromschrijvingen; openbaarheid zoals vastgelegd in de inventaris. Zie <a href="../over/">Over</a>.</p>
+  <p class="foot">Bron: Nationaal Archief, Het Nederlandse Rode Kruis — toegangen <b>2.19.321</b> (Kampen en Gevangenissen), <b>2.19.296</b> (Westerbork), <b>2.19.315</b> (Amersfoort) en <b>2.19.283</b> (Bandoeng/Tjimahi). Thema-indeling afgeleid uit de dossieromschrijvingen (2.19.321) of de eigen serie-indeling (overige); openbaarheid zoals vastgelegd in de inventaris. Zie <a href="../over/">Over</a>.</p>
 </div>
 
 <script>
-const BUILD='20260826-1';
+const BUILD='20260826-3';
 const CATLAB={concentratiekamp:'Concentratiekampen',interneringskamp:'Internerings-, straf- & dwangarbeidskampen',werkkamp:'Werkkampen',gevangenis:'Gevangenissen'};
 const CATS=['concentratiekamp','interneringskamp','werkkamp','gevangenis'];
 const active=new Set(CATS);
@@ -121,7 +122,7 @@ let DATA=null, BYSLUG={};
 const esc=s=>(s==null?'':''+s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const nl=n=>Number(n).toLocaleString('nl');
 
-function invUrl(inv){return DATA.meta.invnr_url+encodeURIComponent(inv);}
+function invUrl(inv,arch){return DATA.meta.invnr_base+arch+'/invnr/'+encodeURIComponent(inv);}
 
 // ---- lijst ----
 function chips(){
@@ -156,14 +157,14 @@ function renderList(){
 }
 
 // ---- detail ----
-function badge(b){return b?'<span class="badge b">beperkt</span>':'<span class="badge o">openbaar</span>';}
+function badge(b,reg){return b?`<span class="badge b">beperkt (${reg})</span>`:'<span class="badge o">openbaar</span>';}
 function openCamp(slug,push){
   const k=BYSLUG[slug]; if(!k){showList(push);return;}
   document.getElementById('listView').classList.add('hidden');
   document.getElementById('detailView').classList.remove('hidden');
   document.getElementById('dNaam').textContent=k.naam;
   document.getElementById('dTag').textContent=({concentratiekamp:'Concentratiekamp',interneringskamp:'Interneringskamp',werkkamp:'Werkkamp',gevangenis:'Gevangenis'})[k.cat];
-  document.getElementById('dMeta').innerHTML=`${nl(k.n)} archiefstukken · <span style="color:var(--open)">${nl(k.open)} openbaar</span> · <span style="color:var(--beperkt)">${nl(k.beperkt)} beperkt openbaar</span>`;
+  document.getElementById('dMeta').innerHTML=`${nl(k.n)} archiefstukken · <span style="color:var(--open)">${nl(k.open)} openbaar</span> · <span style="color:var(--beperkt)">${nl(k.beperkt)} beperkt openbaar (${k.regime})</span> · toegang ${esc(k.arch)}`;
   const t=document.getElementById('themes');t.innerHTML='';
   k.themes.forEach((th,ti)=>{
     const o=th.items.filter(i=>!i.b).length, b=th.items.filter(i=>i.b).length;
@@ -172,11 +173,11 @@ function openCamp(slug,push){
       (o?`<span class="split"><span class="dot o"></span>${o}</span>`:'')+
       (b?`<span class="split"><span class="dot b"></span>${b}</span>`:'')+`</span></summary>`+
       `<div class="dlist">`+th.items.map(i=>
-        `<div class="drow">${badge(i.b)}<span class="dt">${esc(i.t)}</span>`+
-        (i.inv?`<a class="dl" href="${invUrl(i.inv)}" target="_blank" rel="noopener">inv.nr ${esc(i.inv)} ↗</a>`:'')+`</div>`).join('')+`</div>`;
+        `<div class="drow">${badge(i.b,k.regime)}<span class="dt">${esc(i.t)}</span>`+
+        (i.inv?`<a class="dl" href="${invUrl(i.inv,i.a||k.arch)}" target="_blank" rel="noopener">inv.nr ${esc(i.inv)} ↗</a>`:'')+`</div>`).join('')+`</div>`;
     t.appendChild(d);
   });
-  document.getElementById('dFoot').innerHTML=`Alle stukken in <a href="https://www.nationaalarchief.nl/onderzoeken/archief/2.19.321" target="_blank" rel="noopener">toegang 2.19.321</a> bij het Nationaal Archief. Openbaarheid: zie de <a href="${DATA.meta.zoekhulp}" target="_blank" rel="noopener">zoekhulp inzage in beperkt openbaar archief</a>.`;
+  document.getElementById('dFoot').innerHTML=`Alle stukken in <a href="https://www.nationaalarchief.nl/onderzoeken/archief/${esc(k.arch)}" target="_blank" rel="noopener">toegang ${esc(k.arch)}</a> bij het Nationaal Archief. Openbaarheid: zie de <a href="${DATA.meta.zoekhulp}" target="_blank" rel="noopener">zoekhulp inzage in beperkt openbaar archief</a>.`;
   window.scrollTo(0,0);
   if(push)history.pushState({slug},'',(location.pathname)+'?k='+slug);
 }
