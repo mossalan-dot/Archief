@@ -173,7 +173,15 @@ CURATED = {
 }
 CURATED["Ellecom"] = (52.0139, 6.0947)
 
-def _add(gz, c, base_boost=0, classes=None):
+# land-suffix (zoals in de CSV) -> ISO-landcode, om homoniemen goed te plaatsen
+SUF2CC = {"hong": "HU", "hongarije": "HU", "d": "DE", "dld": "DE", "duitsland": "DE",
+          "fr": "FR", "frankrijk": "FR", "pl": "PL", "polen": "PL", "dk": "DK",
+          "o": "AT", "oostenrijk": "AT", "it": "IT", "italie": "IT",
+          "b": "BE", "blg": "BE", "belg": "BE", "belgie": "BE",
+          "russ": "RU", "rusland": "RU", "tsj": "CZ", "zw": "CH", "zwitserland": "CH",
+          "no": "NO", "noorwegen": "NO", "eng": "GB", "engeland": "GB"}
+
+def _add(gz, gzc, c, base_boost=0, classes=None):
     if len(c) < 15:
         return
     if classes and c[6] not in classes:
@@ -189,26 +197,30 @@ def _add(gz, c, base_boost=0, classes=None):
     names = [c[1], c[2]] + (c[3].split(",") if c[3] else [])
     for nm in names:
         k = strip(nm)
-        if k and (k not in gz or score > gz[k][2]):
+        if not k:
+            continue
+        if k not in gz or score > gz[k][2]:
             gz[k] = (lat, lon, score)
+        d = gzc.setdefault(k, {})            # per land de beste kandidaat
+        if cc not in d or pop > d[cc][2]:
+            d[cc] = (lat, lon, pop)
 
 def build_gazetteer():
-    gz = {}
+    gz = {}; gzc = {}
     p = os.path.join(HERE, "cities1000.txt")
     if os.path.exists(p):
         for line in open(p, encoding="utf-8"):
-            _add(gz, line.split("\t"))
-    # volledige NL-dump wint (alle woonplaatsen + gemeenten), hoge boost
+            _add(gz, gzc, line.split("\t"))
     p = os.path.join(HERE, "NL.txt")
     if os.path.exists(p):
         for line in open(p, encoding="utf-8"):
-            _add(gz, line.split("\t"), base_boost=5_000_000, classes={"P", "A"})
-    return gz
+            _add(gz, gzc, line.split("\t"), base_boost=5_000_000, classes={"P", "A"})
+    return gz, gzc
 
 def main():
     targets = json.load(open(HERE + "/geocode_targets.json", encoding="utf-8"))
     seed = json.load(open(HERE + "/seed_cache.json", encoding="utf-8"))
-    gz = build_gazetteer()
+    gz, gzc = build_gazetteer()
     print(f"gazetteer: {len(gz)} namen")
     out = {}
     hit_p = miss_p = 0
@@ -232,10 +244,20 @@ def main():
             k2 = re.sub(r"\s+[a-z]{1,2}\.?$", "", k2).strip()     # land-afk. "B." "PL." "D." weg
             k2 = re.sub(r"\s+(belgie|belgi|belg|blg|duitsland|frankrijk|engeland|nederland|polen|denemarken|"
                         r"oostenrijk|hongarije|hong|tsjechoslowakije|joegoslavie|italie|zwitserland|noorwegen)\.?$", "", k2).strip()
-            if k in gz:
-                coord = gz[k][:2]
-            elif k2 and k2 in gz:
-                coord = gz[k2][:2]
+            # land-suffix aanwezig? plaats dan ALLEEN in dát land (Essen, D. -> Duits Essen);
+            # niet gevonden in dat land -> niet plaatsen (beter dan een verkeerd land)
+            ms = re.search(r"[,\s]+([a-z]{1,10})\.?\s*$", k)
+            forced = ms and ms.group(1) in SUF2CC
+            if forced:
+                cc = SUF2CC[ms.group(1)]
+                base = re.sub(r"[,\s]+[a-z]{1,10}\.?\s*$", "", k).strip()
+                if base in gzc and cc in gzc[base]:
+                    coord = gzc[base][cc][:2]
+            if not coord and not forced:
+                if k in gz:
+                    coord = gz[k][:2]
+                elif k2 and k2 in gz:
+                    coord = gz[k2][:2]
         if coord:
             out[place] = [round(coord[0], 4), round(coord[1], 4)]
             hit_p += cnt
