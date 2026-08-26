@@ -70,8 +70,9 @@
 
   <div class="card">
     <h2>Waar men omkwam — naar type plaats<span class="qm" data-tip="Afgeleid uit de genoemde overlijdensplaats: is die herkenbaar als concentratie-/vernietigingskamp, interneringskamp of gevangenis. Het betreft het plaatstype in het dossier, geen oordeel over de persoon zelf. Bedoeld als ingang voor onderzoek, niet als sluitende indeling; het kamp-cijfer is een ondergrens.">?</span></h2>
-    <p class="sub">Op basis van de genoemde overlijdensplaats. Vooral bedoeld als filter-ingang voor onderzoek (bijv. naar slachtoffers van kampen).</p>
+    <p class="sub">Een <b>inschatting</b> op basis van de genoemde overlijdensplaats — herkent de kaart die plaats als kamp, interneringskamp of gevangenis? Het is geen oordeel over de persoon en geen sluitende telling; vooral bedoeld als ingang voor onderzoek (bijv. naar slachtoffers van kampen).</p>
     <div id="c_type"></div>
+    <p class="sub" style="margin-top:8px">Waar de overlijdensplaats onbekend of te vaag is, valt iemand onder “onbekend”. Het kamp-cijfer is daarmee een <b>ondergrens</b>.</p>
   </div>
 
   <div class="card">
@@ -95,7 +96,7 @@ function bindTips(){const tip=document.getElementById('viztip');
     el.addEventListener('mousemove',e=>{let x=e.clientX+14,y=e.clientY+14;if(x+tip.offsetWidth>innerWidth-8)x=e.clientX-tip.offsetWidth-14;tip.style.left=x+'px';tip.style.top=y+'px';});
     el.addEventListener('mouseleave',()=>tip.classList.remove('on'));});}
 
-fetch('../ogs_data.json?v=20260824-7').then(r=>r.json()).then(D=>{
+fetch('../ogs_data.json?v=20260826-1').then(r=>r.json()).then(D=>{
   const s=D.stats;
   document.getElementById('kpis').innerHTML=[
     [nl(s.totaal),'personen in het archief','Unieke personen; dubbele records (openbaar + correspondentiedossier) zijn samengevoegd.'],

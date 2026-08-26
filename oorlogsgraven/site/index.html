@@ -149,7 +149,7 @@
 <div class="credit">Kaart © OpenStreetMap-bijdragers</div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const BUILD='20260824-7';
+const BUILD='20260826-1';
 const TOTAAL=197865;
 const esc=s=>(s==null?'':''+s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmt=n=>(n||0).toLocaleString('nl');
@@ -209,10 +209,13 @@ function cleanPlace(s){
   s=s.replace(/\s+[A-Z]{1,2}\.$/,'').trim();
   return s;
 }
+function refLinks(d){
+  return d.ob?`<div style="margin-top:5px"><a href="${esc(d.ob)}" target="_blank" rel="noopener">Bronnen op Oorlogsbronnen ↗</a></div>`:'';
+}
 function openDot(i, fromClick){
   const d=DATA[state.mode][i];
   const card=`<b>${esc(d.p)}</b><br><b style="font-size:12px">${fmt(d.n)}</b> vastgelegde personen · ${lblOmg()}`+
-    (d.ref?`<div style="margin-top:5px"><a href="${esc(d.ref)}" target="_blank" rel="noopener">Over dit kamp (Wikipedia) ↗</a></div>`:'')+
+    refLinks(d)+
     `<div style="margin-top:8px"><a href="#" onclick="openNames(${i});return false">Toon de namen →</a></div>`;
   const open=()=>L.popup({maxWidth:280}).setLatLng([d.lat,d.lon]).setContent(card).openOn(map);
   if(fromClick){ open(); }
@@ -221,18 +224,18 @@ function openDot(i, fromClick){
 
 // ---- namenpaneel (vast, rechts) met paginering + filter ----
 let nAll=null, nFiltered=null, nPage=0; const NPER=100;
-function showNamesPanel(title, list, ref){
+function showNamesPanel(title, list, ob){
   document.getElementById('nok').classList.remove('open');   // niet-op-kaart-lijst sluiten
   nAll=list.sort((a,b)=>a.n.localeCompare(b.n,'nl'));
   document.getElementById('nTitle').textContent=title;
   document.getElementById('nCount').innerHTML=`${fmt(nAll.length)} vastgelegde personen · ${lblOmg()}`;
-  document.getElementById('nRef').innerHTML = ref?`<a href="${esc(ref)}" target="_blank" rel="noopener">Over dit kamp (Wikipedia) ↗</a>`:'';
+  document.getElementById('nRef').innerHTML = ob?`<a href="${esc(ob)}" target="_blank" rel="noopener">Bronnen op Oorlogsbronnen ↗</a>`:'';
   document.getElementById('nFilter').value=''; nfilter();
   document.getElementById('names').classList.add('show');
 }
 function openNames(i){
   const d=DATA[state.mode][i], key=state.mode==='herkomst'?'hi':'oi';
-  loadPers(()=>showNamesPanel(d.p, PERS.filter(p=>p[key]===i), d.ref));
+  loadPers(()=>showNamesPanel(d.p, PERS.filter(p=>p[key]===i), d.ob));
 }
 function openNamesForPlace(place){
   const key=state.mode==='herkomst'?'gp':'op';

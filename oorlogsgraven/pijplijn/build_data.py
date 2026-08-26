@@ -5,7 +5,7 @@
 - personen gekoppeld aan hun herkomst- en overlijdensstip via index
 Schrijft site/ogs_data.json + site/personen.json.
 """
-import json, os, re, csv
+import json, os, re, csv, urllib.parse
 from collections import Counter, defaultdict
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -54,6 +54,29 @@ def camp_ref(label):
         if name in k:
             return url
     return ""
+
+# Oorlogsbronnen.nl (NIOD-netwerk) — stabiele zoek-deeplink per kampnaam.
+# Geeft bronnen, foto's en personen; werkt óók voor de Indische kampen die
+# geen Wikipedia-lemma hebben.
+OB = "https://www.oorlogsbronnen.nl/zoeken?term="
+CAMP_TERM = {  # canonieke zoekterm bij een herkende kampnaam
+    "auschwitz": "Auschwitz", "sobibor": "Sobibor", "bergen-belsen": "Bergen-Belsen",
+    "mauthausen": "Mauthausen", "neuengamme": "Neuengamme", "westerbork": "Kamp Westerbork",
+    "vught": "Kamp Vught", "dachau": "Dachau", "buchenwald": "Buchenwald",
+    "ravensbr": "Ravensbrück", "flossenb": "Flossenbürg", "natzweiler": "Natzweiler",
+    "stutthof": "Stutthof", "sachsenhausen": "Sachsenhausen", "gross-rosen": "Groß-Rosen",
+    "gross rosen": "Groß-Rosen", "theresienstadt": "Theresienstadt", "majdanek": "Majdanek",
+    "treblinka": "Treblinka", "amersfoort": "Kamp Amersfoort", "mittelbau": "Mittelbau-Dora",
+    "gusen": "Mauthausen-Gusen", "monowitz": "Auschwitz Monowitz", "birkenau": "Auschwitz-Birkenau",
+    "blechhammer": "Blechhammer", "oranienburg": "Sachsenhausen",
+}
+def oorlogsbronnen_ref(label):
+    """Zoek-deeplink: canonieke kampnaam als herkend, anders de schone plaatsnaam."""
+    k = label.lower()
+    for name, term in CAMP_TERM.items():
+        if name in k:
+            return OB + urllib.parse.quote(term)
+    return OB + urllib.parse.quote(clean_label(label))
 
 def clean_label(name):
     """Uniforme weergavenaam: land-suffixen en Kreis-toevoegsels eraf."""
@@ -117,9 +140,8 @@ for p in persons:
 # type overlijdensplaats op de sterftestippen + naslag-link voor kampen
 for d in over_dots:
     d["ctx"] = death_ctx(d["p"])
-    r = camp_ref(d["p"])
-    if r:
-        d["ref"] = r
+    if d["ctx"] in ("kamp", "gevangenis", "indie"):
+        d["ob"] = oorlogsbronnen_ref(d["p"])
 
 # ---- stats voor Inzichten (ingetogen) ----
 sterfjaar = Counter(); gebjaar = Counter(); sterfmaand = Counter(); otype = Counter()
