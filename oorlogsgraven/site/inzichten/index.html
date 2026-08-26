@@ -47,7 +47,7 @@
 <div id="viztip"></div>
 <div class="wrap">
   <h1>Inzichten</h1>
-  <p class="lead">In het archief van de Oorlogsgravenstichting is per slachtoffer een dossier bewaard. Van vrijwel iedereen een openbaar dossier (aangelegd rond 1947); voor een deel is er daarnaast een later, beperkt openbaar <b>correspondentiedossier</b> (1995–2016). De cijfers hieronder gaan over de in dit archief vastgelegde personen; ze zeggen dus iets over wat de dossiers bevatten, niet per se over volledige aantallen. Zie de <a href="https://www.nationaalarchief.nl/onderzoeken/archief/2.19.255" target="_blank" rel="noopener">toelichting bij het archief</a> voor de opzet.</p>
+  <p class="lead">In het archief van de Oorlogsgravenstichting is per slachtoffer een dossier bewaard. Van vrijwel iedereen een openbaar dossier (aangelegd rond 1947); voor een deel is er daarnaast een later, beperkt openbaar <b>correspondentiedossier</b> (1995–2016). De cijfers hieronder gaan over de in dit archief vastgelegde personen; ze zeggen dus iets over wat de dossiers bevatten, niet per se over volledige aantallen. De collectie omvat ook slachtoffers van ná de bevrijding, vooral in voormalig Nederlands-Indië (1945–1962). Zie de <a href="https://www.nationaalarchief.nl/onderzoeken/archief/2.19.255" target="_blank" rel="noopener">toelichting bij het archief</a> voor de opzet.</p>
   <div class="kpis" id="kpis"></div>
 
   <div class="card">
@@ -69,9 +69,16 @@
   </div>
 
   <div class="card">
-    <h2>Nationaliteit, anders dan Nederlands<span class="qm" data-tip="De Nederlandse slachtoffers vormen de grote meerderheid en zijn hier weggelaten. Getoond zijn de overige nationaliteiten; 'onbekend' staat onderaan.">?</span></h2>
-    <p class="sub">Onder meer geallieerde militairen (Gemenebest, Canadees) die in Nederlandse oorlogsgraven rusten.</p>
+    <h2>Waar men omkwam — naar type plaats<span class="qm" data-tip="Afgeleid uit de genoemde overlijdensplaats: is die herkenbaar als concentratie-/vernietigingskamp, interneringskamp of gevangenis. Het betreft het plaatstype in het dossier, geen oordeel over de persoon zelf. Bedoeld als ingang voor onderzoek, niet als sluitende indeling; het kamp-cijfer is een ondergrens.">?</span></h2>
+    <p class="sub">Op basis van de genoemde overlijdensplaats. Vooral bedoeld als filter-ingang voor onderzoek (bijv. naar slachtoffers van kampen).</p>
+    <div id="c_type"></div>
+  </div>
+
+  <div class="card">
+    <h2>Nationaliteit, anders dan Nederlands<span class="qm" data-tip="Gemenebest = het Britse Gemenebest (o.a. Verenigd Koninkrijk, Australië, Nieuw-Zeeland); Canadese militairen staan apart. De Nederlandse slachtoffers vormen de meerderheid en zijn hier weggelaten.">?</span></h2>
+    <p class="sub">Vooral geallieerde militairen die in Nederlandse oorlogsgraven rusten. <b>Gemenebest</b> staat voor het Britse Gemenebest (o.a. het Verenigd Koninkrijk).</p>
     <div id="c_nat"></div>
+    <p class="sub" id="natnote" style="margin-top:8px"></p>
   </div>
 
   <p class="foot">Bron: Nationaal Archief, toegang <b>2.19.255</b> (Oorlogsgravenstichting). Zie <a href="../over/">Over</a> voor bron en methode. Onderdeel van de <a href="https://archief.alanmoss.nl/">archiefprojecten</a>.</p>
@@ -88,7 +95,7 @@ function bindTips(){const tip=document.getElementById('viztip');
     el.addEventListener('mousemove',e=>{let x=e.clientX+14,y=e.clientY+14;if(x+tip.offsetWidth>innerWidth-8)x=e.clientX-tip.offsetWidth-14;tip.style.left=x+'px';tip.style.top=y+'px';});
     el.addEventListener('mouseleave',()=>tip.classList.remove('on'));});}
 
-fetch('../ogs_data.json?v=20260824-6').then(r=>r.json()).then(D=>{
+fetch('../ogs_data.json?v=20260824-7').then(r=>r.json()).then(D=>{
   const s=D.stats;
   document.getElementById('kpis').innerHTML=[
     [nl(s.totaal),'personen in het archief','Unieke personen; dubbele records (openbaar + correspondentiedossier) zijn samengevoegd.'],
@@ -113,9 +120,9 @@ fetch('../ogs_data.json?v=20260824-6').then(r=>r.json()).then(D=>{
       colChart('c_time',MND.slice(1),[...Array(12)].map((_,i)=>s.sterfmaand[String(i+1).padStart(2,'0')]||0));
       document.getElementById('s_time').textContent='Verdeling over de maanden (alle jaren samen), voor de dossiers met een bekende maand.';
     } else {
-      const ys=[];for(let y=1940;y<=1947;y++)ys.push(y);
-      colChart('c_time',ys,ys.map(y=>s.sterfjaar[y]||0));
-      document.getElementById('s_time').textContent='De pieken in 1942 en 1943 vallen samen met de deportaties.';
+      const ys=[];for(let y=1940;y<=1962;y++)ys.push(y);
+      colChart('c_time',ys.map(y=>y%5===0?y:''),ys.map(y=>s.sterfjaar[y]||0));
+      document.getElementById('s_time').textContent='De pieken in 1942–1943 vallen samen met de deportaties; de naoorlogse jaren (1946–1949) weerspiegelen de slachtoffers in Nederlands-Indië.';
     }
   }
   drawTime('jaar');
@@ -136,11 +143,16 @@ fetch('../ogs_data.json?v=20260824-6').then(r=>r.json()).then(D=>{
   hbars('c_od',s.top_overlijden.slice(0,12));
   hbars('c_gp',s.top_herkomst.slice(0,12));
 
-  // nationaliteit: Nederlands weg, onbekend onderaan
+  // type overlijdensplaats
+  const TLAB={kamp:'Concentratie-/vernietigingskamp',indie:'Interneringskamp (Indië/Japan)',gevangenis:'Gevangenis',elders:'Elders / niet nader aangeduid',onbekend:'Onbekend / geen plaats'};
+  const ot=s.overlijden_type||{};
+  hbars('c_type',['kamp','indie','gevangenis','elders','onbekend'].filter(k=>ot[k]).map(k=>({p:TLAB[k],n:ot[k]})));
+
+  // nationaliteit: Nederlands + Onbekend uit de staven; Onbekend als noot eronder
   const cap=x=>x.charAt(0)+x.slice(1).toLowerCase();
-  let nat=Object.entries(s.nationaliteit).filter(([p])=>p!=='NEDERLANDS');
-  const onb=nat.filter(([p])=>p==='ONBEKEND'); nat=nat.filter(([p])=>p!=='ONBEKEND').sort((a,b)=>b[1]-a[1]).slice(0,8).concat(onb);
+  const nat=Object.entries(s.nationaliteit).filter(([p])=>p!=='NEDERLANDS'&&p!=='ONBEKEND').sort((a,b)=>b[1]-a[1]).slice(0,10);
   hbars('c_nat',nat.map(([p,n])=>({p:cap(p),n})));
+  document.getElementById('natnote').textContent='Daarnaast '+nl(s.nationaliteit['ONBEKEND']||0)+' personen met onbekende nationaliteit.';
   bindTips();
 }).catch(()=>{document.querySelector('.wrap').insertAdjacentHTML('beforeend','<p style="color:#a3312d">Kon de data niet laden.</p>');});
 </script>

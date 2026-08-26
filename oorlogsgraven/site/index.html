@@ -64,6 +64,7 @@
   #names .nh{padding:14px 16px 10px;border-bottom:1px solid var(--line);position:relative;flex:none}
   #names .nh .lt{font-weight:700;font-size:15.5px;padding-right:22px}
   #names .nh .lc{font-size:12px;color:var(--muted);margin-top:2px}
+  #names .nref{font-size:12px;margin-top:4px}#names .nref a{color:var(--accent);text-decoration:none}#names .nref a:hover{text-decoration:underline}
   #names .x{position:absolute;top:12px;right:14px;cursor:pointer;color:var(--muted);font-size:20px;line-height:1}
   #names .nfilter{width:100%;font:inherit;font-size:12px;padding:6px 10px;border:1px solid var(--line);border-radius:8px;margin-top:9px}
   #names .nlist{overflow:auto;padding:4px 8px 6px;flex:1}
@@ -132,6 +133,7 @@
 
 <div id="names">
   <div class="nh"><span class="x" onclick="closeNames()">×</span><div class="lt" id="nTitle"></div><div class="lc" id="nCount"></div>
+    <div class="nref" id="nRef"></div>
     <input class="nfilter" id="nFilter" type="search" placeholder="Filter op naam…" oninput="nfilter()"></div>
   <div class="nlist" id="nlist"></div>
   <div class="pager" id="nPager"></div>
@@ -147,7 +149,7 @@
 <div class="credit">Kaart © OpenStreetMap-bijdragers</div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const BUILD='20260824-6';
+const BUILD='20260824-7';
 const TOTAAL=197865;
 const esc=s=>(s==null?'':''+s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmt=n=>(n||0).toLocaleString('nl');
@@ -199,9 +201,18 @@ function render(){
 function loadPers(cb){ if(PERS){cb&&cb();return;} if(persLoading)return; persLoading=true;
   fetch('personen.json?v='+BUILD).then(r=>r.json()).then(d=>{PERS=d;persLoading=false;cb&&cb();}); }
 
+function cleanPlace(s){
+  if(!s)return '';
+  s=s.replace(/\s+(stadt|land)kreis\b.*$/i,'').trim();
+  s=s.replace(/[,\s]+(belgi[eë]|belg|blg|duitsland|frankrijk|engeland|nederland|polen|denemarken|oostenrijk|hongarije|hong|provincie\s+\S+)\.?$/i,'').trim();
+  s=s.replace(/,\s*[A-Za-z]{1,4}\.?$/,'').trim();
+  s=s.replace(/\s+[A-Z]{1,2}\.$/,'').trim();
+  return s;
+}
 function openDot(i, fromClick){
   const d=DATA[state.mode][i];
   const card=`<b>${esc(d.p)}</b><br><b style="font-size:12px">${fmt(d.n)}</b> vastgelegde personen · ${lblOmg()}`+
+    (d.ref?`<div style="margin-top:5px"><a href="${esc(d.ref)}" target="_blank" rel="noopener">Over dit kamp (Wikipedia) ↗</a></div>`:'')+
     `<div style="margin-top:8px"><a href="#" onclick="openNames(${i});return false">Toon de namen →</a></div>`;
   const open=()=>L.popup({maxWidth:280}).setLatLng([d.lat,d.lon]).setContent(card).openOn(map);
   if(fromClick){ open(); }
@@ -210,17 +221,18 @@ function openDot(i, fromClick){
 
 // ---- namenpaneel (vast, rechts) met paginering + filter ----
 let nAll=null, nFiltered=null, nPage=0; const NPER=100;
-function showNamesPanel(title, list){
+function showNamesPanel(title, list, ref){
   document.getElementById('nok').classList.remove('open');   // niet-op-kaart-lijst sluiten
   nAll=list.sort((a,b)=>a.n.localeCompare(b.n,'nl'));
   document.getElementById('nTitle').textContent=title;
   document.getElementById('nCount').innerHTML=`${fmt(nAll.length)} vastgelegde personen · ${lblOmg()}`;
+  document.getElementById('nRef').innerHTML = ref?`<a href="${esc(ref)}" target="_blank" rel="noopener">Over dit kamp (Wikipedia) ↗</a>`:'';
   document.getElementById('nFilter').value=''; nfilter();
   document.getElementById('names').classList.add('show');
 }
 function openNames(i){
   const d=DATA[state.mode][i], key=state.mode==='herkomst'?'hi':'oi';
-  loadPers(()=>showNamesPanel(d.p, PERS.filter(p=>p[key]===i)));
+  loadPers(()=>showNamesPanel(d.p, PERS.filter(p=>p[key]===i), d.ref));
 }
 function openNamesForPlace(place){
   const key=state.mode==='herkomst'?'gp':'op';
@@ -235,8 +247,8 @@ function nfilter(){
 function personRow(p){
   const geb=nlDate(p.gd), ov=nlDate(p.od);
   const line = state.mode==='herkomst'
-    ? [geb?('geb. '+geb):'', ov?('overl. '+ov+(p.op?', '+esc(p.op):'')):''].filter(Boolean).join(' · ')
-    : [geb?('geb. '+geb+(p.gp?', '+esc(p.gp):'')):'', ov?('overl. '+ov):''].filter(Boolean).join(' · ');
+    ? [geb?('geb. '+geb):'', ov?('overl. '+ov+(p.op?', '+esc(cleanPlace(p.op)):'')):''].filter(Boolean).join(' · ')
+    : [geb?('geb. '+geb+(p.gp?', '+esc(cleanPlace(p.gp)):'')):'', ov?('overl. '+ov):''].filter(Boolean).join(' · ');
   const links=[];
   if(p.na)links.push(`<a href="https://www.nationaalarchief.nl/onderzoeken/index/nt00446/${esc(p.na)}" target="_blank" rel="noopener">Dossier (NA) ↗</a>`);
   if(p.na2)links.push(`<a href="https://www.nationaalarchief.nl/onderzoeken/index/nt00446/${esc(p.na2)}" target="_blank" rel="noopener">Correspondentiedossier (NA) ↗</a>`);
