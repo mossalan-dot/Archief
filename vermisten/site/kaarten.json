@@ -10,6 +10,7 @@
    "voornamen": "Anny",
    "geboren_datum": "11.9.1941",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1941-09-11",
    "beroep": "",
    "vader": "Bernard Jacques Aa",
    "moeder": "Rebecca Brandon",
@@ -32,6 +33,7 @@
    "voornamen": "Elisabeth Marianna",
    "geboren_datum": "10.9.29",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1929-09-10",
    "beroep": "zonder",
    "vader": "Uianer Aa",
    "moeder": "Emma Margaretha Baslau",
@@ -46,7 +48,8 @@
    "kaart_thumb": "https://service.archief.nl/api/file/v1/thumb/1f898993-363a-4ffb-89f9-dae96613626a",
    "onzeker": [
     "vader_voornamen",
-    "moeder_naam"
+    "moeder_naam",
+    "geboren_datum (eeuw geschat)"
    ],
    "dossier_invnr": 150,
    "dossier_serie": "A1.1",
@@ -57,6 +60,7 @@
    "voornamen": "Barbara",
    "geboren_datum": "20-10-1938",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1938-10-20",
    "beroep": "",
    "vader": "Frits Aal",
    "moeder": "Julia Broches",
@@ -81,6 +85,7 @@
    "voornamen": "Hartog",
    "geboren_datum": "8.8.63",
    "geboren_plaats": "Groningen",
+   "geboren_iso": "1863-08-08",
    "beroep": "zonder",
    "vader": "Samuel Gerrit Aalsvel",
    "moeder": "Hendel Bollegraf",
@@ -95,7 +100,8 @@
    "kaart_thumb": "https://service.archief.nl/api/file/v1/thumb/c2566638-5007-47a8-bba5-808930954a51",
    "onzeker": [
     "moeder_voornamen",
-    "gehuwd_met_voornamen"
+    "gehuwd_met_voornamen",
+    "geboren_datum (eeuw geschat)"
    ],
    "dossier_invnr": 50,
    "dossier_serie": "A1.1",
@@ -106,6 +112,7 @@
    "voornamen": "Zadok",
    "geboren_datum": "31-3-1882",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1882-03-31",
    "beroep": "",
    "vader": "Hartog Aalsvel",
    "moeder": "Roosje Kokernoot",
@@ -131,6 +138,7 @@
    "voornamen": "Betje",
    "geboren_datum": "24.3.1904",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1904-03-24",
    "beroep": "kleermaakster",
    "vader": "Mozes Aandagt",
    "moeder": "Esther Bronkhorst",
@@ -155,6 +163,7 @@
    "voornamen": "Israel",
    "geboren_datum": "12-3-1919",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1919-03-12",
    "beroep": "",
    "vader": "Meijer Aandagt",
    "moeder": "Bramotje Hilversum",
@@ -179,6 +188,7 @@
    "voornamen": "Israël",
    "geboren_datum": "25.5.09",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1909-05-25",
    "beroep": "lederbewerker",
    "vader": "Salomon Aandagt",
    "moeder": "Yetje van der Woude",
@@ -191,7 +201,9 @@
    "alfabetvak": "Aa - Adelaar",
    "kaart_scan": "https://service.archief.nl/api/file/v1/default/68d58187-6d5c-48ac-ab38-67c8676ac878",
    "kaart_thumb": "https://service.archief.nl/api/file/v1/thumb/68d58187-6d5c-48ac-ab38-67c8676ac878",
-   "onzeker": [],
+   "onzeker": [
+    "geboren_datum (eeuw geschat)"
+   ],
    "dossier_invnr": 196,
    "dossier_serie": "A1.1",
    "dossier_url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/196"
@@ -201,6 +213,7 @@
    "voornamen": "Marianne",
    "geboren_datum": "20-3-1906",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1906-03-20",
    "beroep": "",
    "vader": "David Aandagt",
    "moeder": "Anna Gresser",
@@ -223,6 +236,7 @@
    "voornamen": "Schoontje",
    "geboren_datum": "14-3-1867",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1867-03-14",
    "beroep": "",
    "vader": "Elianer Aandagt",
    "moeder": "Rea Gaarkoper",
@@ -248,6 +262,7 @@
    "voornamen": "Leendert",
    "geboren_datum": "10-10-1897",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1897-10-10",
    "beroep": "los werkman",
    "vader": "Hartog Aap",
    "moeder": "Clara Schellevisch",
@@ -272,6 +287,7 @@
    "voornamen": "Henriette",
    "geboren_datum": "13-6-99",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1899-06-13",
    "beroep": "naaister",
    "vader": "Levie Aardewerk",
    "moeder": "Vogeltje Posener",
@@ -285,7 +301,8 @@
    "kaart_scan": "https://service.archief.nl/api/file/v1/default/c4460fea-34d7-4d0f-8b00-537c37f25bef",
    "kaart_thumb": "https://service.archief.nl/api/file/v1/thumb/c4460fea-34d7-4d0f-8b00-537c37f25bef",
    "onzeker": [
-    "moeder_naam"
+    "moeder_naam",
+    "geboren_datum (eeuw geschat)"
    ],
    "dossier_invnr": 44,
    "dossier_serie": "A1.1",
@@ -296,6 +313,7 @@
    "voornamen": "Rebekka",
    "geboren_datum": "31-3-1924",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1924-03-31",
    "beroep": "naaister",
    "vader": "Jacob Aardewerk",
    "moeder": "Fentje Korper",
@@ -321,6 +339,7 @@
    "voornamen": "Manus",
    "geboren_datum": "23.8.73",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1873-08-23",
    "beroep": "bediende",
    "vader": "",
    "moeder": "",
@@ -333,7 +352,9 @@
    "alfabetvak": "Aa - Adelaar",
    "kaart_scan": "https://service.archief.nl/api/file/v1/default/e10b8c0e-a466-4082-9a45-751e9a07d902",
    "kaart_thumb": "https://service.archief.nl/api/file/v1/thumb/e10b8c0e-a466-4082-9a45-751e9a07d902",
-   "onzeker": [],
+   "onzeker": [
+    "geboren_datum (eeuw geschat)"
+   ],
    "dossier_invnr": 64,
    "dossier_serie": "A1.1",
    "dossier_url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/64"
@@ -343,6 +364,7 @@
    "voornamen": "Benjamin",
    "geboren_datum": "31-5-58",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1858-05-31",
    "beroep": "zonder",
    "vader": "Loman Jonas Abas",
    "moeder": "Vrouwtje Rosenbach",
@@ -357,7 +379,8 @@
    "kaart_thumb": "https://service.archief.nl/api/file/v1/thumb/77f86513-37f4-44d6-baa2-89ffc9397837",
    "onzeker": [
     "vader_voornamen",
-    "moeder_voornamen"
+    "moeder_voornamen",
+    "geboren_datum (eeuw geschat)"
    ],
    "dossier_invnr": 44,
    "dossier_serie": "A1.1",
@@ -368,6 +391,7 @@
    "voornamen": "Joseph",
    "geboren_datum": "8-2-1879",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1879-02-08",
    "beroep": "",
    "vader": "Abraham Abas",
    "moeder": "Saartje Wennik",
@@ -392,6 +416,7 @@
    "voornamen": "Rebecca",
    "geboren_datum": "13-3-1866",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1866-03-13",
    "beroep": "",
    "vader": "Mozes Abas",
    "moeder": "Grietje Rijden van Amstel",
@@ -417,6 +442,7 @@
    "voornamen": "Sara Betje",
    "geboren_datum": "20-11-86",
    "geboren_plaats": "Rotterdam",
+   "geboren_iso": "1886-11-20",
    "beroep": "zonder",
    "vader": "Samuel Abas",
    "moeder": "Betje Gresser",
@@ -430,7 +456,8 @@
    "kaart_scan": "https://service.archief.nl/api/file/v1/default/3ea8f47b-c56d-4203-be10-56d68cd514f0",
    "kaart_thumb": "https://service.archief.nl/api/file/v1/thumb/3ea8f47b-c56d-4203-be10-56d68cd514f0",
    "onzeker": [
-    "moeder_naam"
+    "moeder_naam",
+    "geboren_datum (eeuw geschat)"
    ],
    "dossier_invnr": 342,
    "dossier_serie": "A1.1",
@@ -441,6 +468,7 @@
    "voornamen": "Jesajas",
    "geboren_datum": "3.10.85",
    "geboren_plaats": "Würzburg (Dld.)",
+   "geboren_iso": "1885-10-03",
    "beroep": "koopman",
    "vader": "",
    "moeder": "",
@@ -454,7 +482,8 @@
    "kaart_scan": "https://service.archief.nl/api/file/v1/default/aad3452f-f481-4823-bd24-84585f144a92",
    "kaart_thumb": "https://service.archief.nl/api/file/v1/thumb/aad3452f-f481-4823-bd24-84585f144a92",
    "onzeker": [
-    "woonplaats_adres"
+    "woonplaats_adres",
+    "geboren_datum (eeuw geschat)"
    ],
    "dossier_invnr": 192,
    "dossier_serie": "A1.1",
@@ -465,6 +494,7 @@
    "voornamen": "Esther",
    "geboren_datum": "4-10-1929",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1929-10-04",
    "beroep": "",
    "vader": "David Abraham",
    "moeder": "Petronella de Vries",
@@ -487,6 +517,7 @@
    "voornamen": "Mirjam",
    "geboren_datum": "10.3.77",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1877-03-10",
    "beroep": "zonder",
    "vader": "Jonas Abraham",
    "moeder": "Rachel Samuel Jegerman",
@@ -502,7 +533,8 @@
    "onzeker": [
     "voornamen",
     "moeder_naam",
-    "moeder_voornamen"
+    "moeder_voornamen",
+    "geboren_datum (eeuw geschat)"
    ],
    "dossier_invnr": 6,
    "dossier_serie": "A1.1",
@@ -513,6 +545,7 @@
    "voornamen": "Ephraïm Machiel",
    "geboren_datum": "16.1.1886",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1886-01-16",
    "beroep": "",
    "vader": "Machiel Ephraïm Abrahams",
    "moeder": "Elisabeth Molenaar",
@@ -537,6 +570,7 @@
    "voornamen": "Judith",
    "geboren_datum": "8.6.37",
    "geboren_plaats": "'s-Gravenhage",
+   "geboren_iso": "1937-06-08",
    "beroep": "zonder",
    "vader": "Bension Jitschak Abrahams",
    "moeder": "Cecilia Ethel Levi",
@@ -550,7 +584,8 @@
    "kaart_scan": "https://service.archief.nl/api/file/v1/default/bd92b246-d16a-4767-ba3d-6d47973cfdd3",
    "kaart_thumb": "https://service.archief.nl/api/file/v1/thumb/bd92b246-d16a-4767-ba3d-6d47973cfdd3",
    "onzeker": [
-    "vader_voornamen"
+    "vader_voornamen",
+    "geboren_datum (eeuw geschat)"
    ],
    "dossier_invnr": 56,
    "dossier_serie": "A1.1",
@@ -561,6 +596,7 @@
    "voornamen": "Zipporah",
    "geboren_datum": "19-7-1891",
    "geboren_plaats": "den Haag",
+   "geboren_iso": "1891-07-19",
    "beroep": "directrice van een weeshuis",
    "vader": "Machiel Abrahams",
    "moeder": "Helene Range",
@@ -585,6 +621,7 @@
    "voornamen": "Mozes",
    "geboren_datum": "17.10.1894",
    "geboren_plaats": "Arnhem",
+   "geboren_iso": "1894-10-17",
    "beroep": "",
    "vader": "",
    "moeder": "",
@@ -607,6 +644,7 @@
    "voornamen": "Elias",
    "geboren_datum": "27-12-1924",
    "geboren_plaats": "'s-Gravenhage",
+   "geboren_iso": "1924-12-27",
    "beroep": "loopjongen",
    "vader": "Simon Abram",
    "moeder": "Flora Hens",
@@ -631,6 +669,7 @@
    "voornamen": "Louis",
    "geboren_datum": "16-11-1927",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1927-11-16",
    "beroep": "",
    "vader": "Aäron Abraham",
    "moeder": "Betje Gorcelijn",
@@ -656,6 +695,7 @@
    "voornamen": "Marianne",
    "geboren_datum": "12-11-1913",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1913-11-12",
    "beroep": "",
    "vader": "Barend Abram",
    "moeder": "Lena de Zwarte",
@@ -680,6 +720,7 @@
    "voornamen": "Schoontje",
    "geboren_datum": "24-7-1876",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1876-07-24",
    "beroep": "verstelnaaister",
    "vader": "Izak Abram",
    "moeder": "Hanna Goudsmit",
@@ -702,6 +743,7 @@
    "voornamen": "Samuel",
    "geboren_datum": "9-4-1925",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1925-04-09",
    "beroep": "retoucheur (conf.bedrijf)",
    "vader": "Beila Abramowitz",
    "moeder": "",
@@ -727,6 +769,7 @@
    "voornamen": "Gabriel",
    "geboren_datum": "25.2.23",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1923-02-25",
    "beroep": "kleermaker",
    "vader": "Abraham Acathan",
    "moeder": "Henriëtte Monnikendam",
@@ -739,7 +782,9 @@
    "alfabetvak": "Aa - Adelaar",
    "kaart_scan": "https://service.archief.nl/api/file/v1/default/f9a44de9-88a1-4e5f-9915-b6f51e00f0d7",
    "kaart_thumb": "https://service.archief.nl/api/file/v1/thumb/f9a44de9-88a1-4e5f-9915-b6f51e00f0d7",
-   "onzeker": [],
+   "onzeker": [
+    "geboren_datum (eeuw geschat)"
+   ],
    "dossier_invnr": 196,
    "dossier_serie": "A1.1",
    "dossier_url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/196"
@@ -749,6 +794,7 @@
    "voornamen": "Johannes Hubertus",
    "geboren_datum": "31-12-1861",
    "geboren_plaats": "Arcen",
+   "geboren_iso": "1861-12-31",
    "beroep": "landbouwer",
    "vader": "Petrus Achten",
    "moeder": "Joanna Catharina Nick",
@@ -773,6 +819,7 @@
    "voornamen": "Simon",
    "geboren_datum": "30.6.1906",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1906-06-30",
    "beroep": "leraar",
    "vader": "Benzion Achttienribbe",
    "moeder": "Margaretha van Praag",
@@ -795,6 +842,7 @@
    "voornamen": "Saartje",
    "geboren_datum": "13.12.1889",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1889-12-13",
    "beroep": "",
    "vader": "Abraham Achttienribben",
    "moeder": "Jetje Beber",
@@ -820,6 +868,7 @@
    "voornamen": "Haim",
    "geboren_datum": "23.5.11",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1911-05-23",
    "beroep": "mach. breier",
    "vader": "Mozes Acohen",
    "moeder": "Sara Vaz Nunes",
@@ -833,7 +882,8 @@
    "kaart_scan": "https://service.archief.nl/api/file/v1/default/a82b742a-1546-40e8-8d24-17d7e2aabe04",
    "kaart_thumb": "https://service.archief.nl/api/file/v1/thumb/a82b742a-1546-40e8-8d24-17d7e2aabe04",
    "onzeker": [
-    "beroep"
+    "beroep",
+    "geboren_datum (eeuw geschat)"
    ],
    "dossier_invnr": 196,
    "dossier_serie": "A1.1",
@@ -844,6 +894,7 @@
    "voornamen": "Jacob",
    "geboren_datum": "13-10-1903",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1903-10-13",
    "beroep": "kleermaker",
    "vader": "Mozes Acohen",
    "moeder": "Sara Vaz Nunes",
@@ -866,6 +917,7 @@
    "voornamen": "Jan",
    "geboren_datum": "16.3.1910",
    "geboren_plaats": "Hoogezand",
+   "geboren_iso": "1910-03-16",
    "beroep": "assistent-bediende",
    "vader": "Jan Wiert Adams",
    "moeder": "Trijntje de Groot",
@@ -888,6 +940,7 @@
    "voornamen": "Wilhelm",
    "geboren_datum": "15-8-1909",
    "geboren_plaats": "Deventer",
+   "geboren_iso": "1909-08-15",
    "beroep": "",
    "vader": "",
    "moeder": "",
@@ -910,6 +963,7 @@
    "voornamen": "Antonius Johannes Maria",
    "geboren_datum": "20-11-1923",
    "geboren_plaats": "Rotterdam",
+   "geboren_iso": "1923-11-20",
    "beroep": "zonder",
    "vader": "Marinus Adrianus Godefridus van Aalst",
    "moeder": "Maria Wilhelmina Antonia Wanna",
@@ -932,6 +986,7 @@
    "voornamen": "Isidore",
    "geboren_datum": "4-10-1902",
    "geboren_plaats": "Amsterdam",
+   "geboren_iso": "1902-10-04",
    "beroep": "verkoper (Bijenkorf)",
    "vader": "Emanuel van Abbe",
    "moeder": "Mietje van den Bergh",

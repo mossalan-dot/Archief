@@ -12,11 +12,34 @@ Gebruik:
 """
 import argparse
 import json
+import re
 from pathlib import Path
 
 HERE = Path(__file__).parent
 SITE = HERE.parent / "site"
 NA = "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02"
+
+
+def normalize_date(raw):
+    """'20-11-86' -> ('1886-11-20', True); '11.9.1941' -> ('1941-09-11', True).
+
+    Datums staan verbatim op de kaart (dag-maand-jaar, scheidingsteken . of -).
+    Tweecijferige jaren: de geregistreerden zijn vermisten/overledenen uit
+    1940-1945, dus geboren t/m ~1945. Heuristiek: jj 00-45 -> 19jj, jj 46-99 ->
+    18jj. Geeft (iso, zeker); zeker=False als het jaar tweecijferig (dus geraden)
+    of onparseerbaar is. De verbatim waarde blijft altijd behouden."""
+    s = (raw or "").strip()
+    m = re.match(r"^\s*(\d{1,2})[.\-/](\d{1,2})[.\-/](\d{2,4})\s*$", s)
+    if not m:
+        return "", False
+    d, mo, y = int(m.group(1)), int(m.group(2)), m.group(3)
+    if not (1 <= d <= 31 and 1 <= mo <= 12):
+        return "", False
+    zeker = len(y) == 4
+    yr = int(y)
+    if not zeker:
+        yr = 1900 + yr if yr <= 45 else 1800 + yr
+    return f"{yr:04d}-{mo:02d}-{d:02d}", zeker
 
 
 def load_jsonl(path: Path):
@@ -68,6 +91,7 @@ def main():
             "voornamen": r.get("voornamen", ""),
             "geboren_datum": r.get("geboren_datum", ""),
             "geboren_plaats": r.get("geboren_plaats", ""),
+            "geboren_iso": "",  # ingevuld na normalisatie
             "beroep": r.get("beroep", ""),
             "vader": " ".join(x for x in (r.get("vader_voornamen", ""), r.get("vader_naam", "")) if x),
             "moeder": " ".join(x for x in (r.get("moeder_voornamen", ""), r.get("moeder_naam", "")) if x),
@@ -82,6 +106,11 @@ def main():
             "kaart_thumb": m.get("thumb_url", ""),
             "onzeker": r.get("onzeker", []),
         }
+        iso, zeker = normalize_date(rec["geboren_datum"])
+        rec["geboren_iso"] = iso
+        if iso and not zeker and "geboren_datum" not in rec["onzeker"]:
+            # jaar tweecijferig op de kaart -> eeuw is geschat
+            rec["onzeker"] = rec["onzeker"] + ["geboren_datum (eeuw geschat)"]
         d = resolve_dossier(rec["dossiernr"], rec["staatscourant"], rec["aantekening"], intervallen)
         if d:
             rec["dossier_invnr"] = d["invnr"]

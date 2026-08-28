@@ -73,6 +73,19 @@ uit inv.nr 614 (“Aa – Adelaar”), verspreid over het alfabetvak, zodat de z
 en de aanpak controleerbaar is. De volledige uitlezing (`extract_cards.py` over alle
 inv.nrs) is de opschaalstap; die kost een OCR-run over ~115.000 kaarten.
 
+**Kernvelden voor de index:** naam, **geboortedatum** en **dossiernummer** — alle drie
+**getypt** op de kaart en dus betrouwbaar leesbaar. De handgeschreven velden (ouders,
+echtgeno(o)t(e)) worden wel meegenomen, maar als best-effort context met `onzeker`-vlag.
+Kosten zitten per kaart (het inlezen van de scan), niet per veld: minder velden uitlezen
+maakt een OCR-run nauwelijks goedkoper, dus we lezen de hele kaart uit.
+
+**Datumnormalisatie.** De geboortedatum staat verbatim op de kaart (bv. `20-11-86`,
+`8.8.63`, `11.9.1941`). `build_site.py` leidt daaruit een genormaliseerd `geboren_iso`
+(`1886-11-20`) af, zodat je betrouwbaar op datum/jaar kunt zoeken (en later op periode
+kunt filteren). Tweecijferige jaren: de geregistreerden zijn vermisten uit 1940–1945, dus
+`jj` 00–45 → 19jj, 46–99 → 18jj; zulke records krijgen de vlag *"geboren_datum (eeuw
+geschat)"*. De verbatim datum blijft altijd behouden en zichtbaar.
+
 Naast de standaardvelden legt de steekproef ook een **aantekening** vast waar de kaart
 géén Staatscourant-datum draagt maar een stempel *“Overlijdens-acte aanwezig”* met
 akte-verwijzing, of een bijzondere notitie (bv. een deportatie-/convooiverwijzing als

@@ -120,7 +120,7 @@ function search(q){
   q = (q||"").trim();
   const nq = q.toLowerCase();
   const list = !nq ? DATA : DATA.filter(r =>
-    [r.naam,r.voornamen,r.geboren_datum,r.geboren_plaats,r.adres,r.dossiernr,r.vader,r.moeder,r.gehuwd_met,r.aantekening]
+    [r.naam,r.voornamen,r.geboren_datum,r.geboren_iso,r.geboren_plaats,r.adres,r.dossiernr,r.vader,r.moeder,r.gehuwd_met,r.aantekening]
       .some(v => (v||"").toLowerCase().includes(nq)));
   $("count").innerHTML = `<b>${list.length.toLocaleString('nl')}</b> van ${DATA.length.toLocaleString('nl')} kaarten`;
   render(list, q);
