@@ -62,7 +62,7 @@
   </div>
 
   <div class="searchbar">
-    <input id="q" type="search" autocomplete="off" placeholder="Zoek op achternaam, voornaam, geboorteplaats, adres of dossiernummer…">
+    <input id="q" type="search" autocomplete="off" placeholder="Zoek op naam, voornaam, geboortedatum/-plaats, adres, ouders of dossiernummer…">
   </div>
   <div class="count" id="count"></div>
   <div id="results"></div>
@@ -120,7 +120,7 @@ function search(q){
   q = (q||"").trim();
   const nq = q.toLowerCase();
   const list = !nq ? DATA : DATA.filter(r =>
-    [r.naam,r.voornamen,r.geboren_plaats,r.adres,r.dossiernr,r.vader,r.moeder,r.gehuwd_met,r.aantekening]
+    [r.naam,r.voornamen,r.geboren_datum,r.geboren_plaats,r.adres,r.dossiernr,r.vader,r.moeder,r.gehuwd_met,r.aantekening]
       .some(v => (v||"").toLowerCase().includes(nq)));
   $("count").innerHTML = `<b>${list.length.toLocaleString('nl')}</b> van ${DATA.length.toLocaleString('nl')} kaarten`;
   render(list, q);
