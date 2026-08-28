@@ -1,0 +1,4871 @@
+{
+ "toegang": "2.09.34.02",
+ "bron": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02",
+ "toelichting": "Zoek een dossiernummer op in 'intervallen'. Het eerste blok waarvan lo<=nr<=hi bevat het dossier. Serie A1.1 = aangifte van overlijden gedaan (Staatscourant-datum ingevuld); serie A1.2 = geen aangifte gedaan. Bij twijfel wijst een ingevulde Staatscourant-datum op A1.1.",
+ "intervallen": [
+  {
+   "invnr": 1,
+   "lo": 1,
+   "hi": 200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/87a3aaf5-0827-4738-8106-2c4a2a4ba668",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/1"
+  },
+  {
+   "invnr": 2,
+   "lo": 201,
+   "hi": 400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/5d7b0938-1e94-44f9-b84d-6f97c2f556b0",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/2"
+  },
+  {
+   "invnr": 3,
+   "lo": 401,
+   "hi": 600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/015f7caf-9c0c-4d47-aade-2090462e68f8",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/3"
+  },
+  {
+   "invnr": 4,
+   "lo": 601,
+   "hi": 800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/d8504ff9-23da-44d7-a1f9-0c39b4bcd157",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/4"
+  },
+  {
+   "invnr": 5,
+   "lo": 801,
+   "hi": 1000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/b0774943-3c0d-4f34-99e1-c6aca8a385f9",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/5"
+  },
+  {
+   "invnr": 6,
+   "lo": 1001,
+   "hi": 1200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/6c81827b-7463-4211-92cf-982d0c73736b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/6"
+  },
+  {
+   "invnr": 7,
+   "lo": 1201,
+   "hi": 1400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/ec2ee7a5-27e7-4e0b-85d4-d6f334f2c059",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/7"
+  },
+  {
+   "invnr": 8,
+   "lo": 1401,
+   "hi": 1600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/a18d0e60-fde6-43ab-aa43-df66694174d4",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/8"
+  },
+  {
+   "invnr": 9,
+   "lo": 1601,
+   "hi": 1800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/418f8fd9-9b41-4d34-88a8-0dcc9fb980a9",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/9"
+  },
+  {
+   "invnr": 10,
+   "lo": 1801,
+   "hi": 2000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/606ecbaf-7dbe-45e9-80a7-c133b502e4c4",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/10"
+  },
+  {
+   "invnr": 11,
+   "lo": 2001,
+   "hi": 2200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/652d1aa5-197d-4266-a210-9c419dca5c5e",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/11"
+  },
+  {
+   "invnr": 12,
+   "lo": 2201,
+   "hi": 2400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/375deae8-0707-4ade-a638-56b10784e901",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/12"
+  },
+  {
+   "invnr": 13,
+   "lo": 2401,
+   "hi": 2600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/2b1de3c3-155c-443d-b21b-950964c78ede",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/13"
+  },
+  {
+   "invnr": 14,
+   "lo": 2601,
+   "hi": 2800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/b87ffd36-7f4b-4f2e-afa7-c6ebfef577b2",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/14"
+  },
+  {
+   "invnr": 15,
+   "lo": 2801,
+   "hi": 3000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/98b71c3c-4b04-496a-a8d7-e75e5415d8ed",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/15"
+  },
+  {
+   "invnr": 16,
+   "lo": 3001,
+   "hi": 3200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/62194bf2-6041-49b5-bd3c-c7fcace3388e",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/16"
+  },
+  {
+   "invnr": 17,
+   "lo": 3201,
+   "hi": 3400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/84976bb1-fd90-4d76-8d4e-dfef6a11369c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/17"
+  },
+  {
+   "invnr": 18,
+   "lo": 3401,
+   "hi": 3600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/669f46f4-6822-4147-b3ea-a0727a4938e5",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/18"
+  },
+  {
+   "invnr": 19,
+   "lo": 3601,
+   "hi": 3800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/3ea445c6-a285-4595-b7d5-74bba64696c3",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/19"
+  },
+  {
+   "invnr": 20,
+   "lo": 3801,
+   "hi": 4000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/d41ceefc-31e7-4129-b22c-3812de6fb737",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/20"
+  },
+  {
+   "invnr": 21,
+   "lo": 4001,
+   "hi": 4200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/284ee3a0-6dca-4acc-9995-23b104cca779",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/21"
+  },
+  {
+   "invnr": 22,
+   "lo": 4201,
+   "hi": 4400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/9cab154f-076c-49de-a4d1-28d51c3fefde",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/22"
+  },
+  {
+   "invnr": 23,
+   "lo": 4401,
+   "hi": 4600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/02f29ad0-bc47-41c9-b9bc-39ba8469dc56",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/23"
+  },
+  {
+   "invnr": 24,
+   "lo": 4601,
+   "hi": 4800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/26183f1a-bf66-4b0c-95fd-3b68a818badc",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/24"
+  },
+  {
+   "invnr": 25,
+   "lo": 4801,
+   "hi": 5000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/28084875-89df-4498-8839-259f846ff65a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/25"
+  },
+  {
+   "invnr": 26,
+   "lo": 5001,
+   "hi": 5200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/21dfff46-5bc5-4d29-82c2-62114f3d227c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/26"
+  },
+  {
+   "invnr": 27,
+   "lo": 5201,
+   "hi": 5400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/3e5b1a53-cc72-4662-8e24-8d41a6cbf886",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/27"
+  },
+  {
+   "invnr": 28,
+   "lo": 5401,
+   "hi": 5600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/0473524c-b528-4b28-a64f-7a1d5c4e9e1f",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/28"
+  },
+  {
+   "invnr": 29,
+   "lo": 5601,
+   "hi": 5800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/3287e4a0-7260-4701-a8af-bb0db3fcf0b6",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/29"
+  },
+  {
+   "invnr": 30,
+   "lo": 5801,
+   "hi": 6000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/d6235188-6479-4c91-a3cc-9bb9b09e6e1c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/30"
+  },
+  {
+   "invnr": 31,
+   "lo": 6001,
+   "hi": 6200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/f1137a7d-ecd9-42ce-b0ac-f90545b5d187",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/31"
+  },
+  {
+   "invnr": 32,
+   "lo": 6201,
+   "hi": 6400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/c3ae85ff-5624-4a3f-8cf6-f3818edeea40",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/32"
+  },
+  {
+   "invnr": 33,
+   "lo": 6401,
+   "hi": 6600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/62585dd4-18b5-4770-9e34-0290420a40ed",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/33"
+  },
+  {
+   "invnr": 34,
+   "lo": 6601,
+   "hi": 6800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/3e12cfd0-59e4-4881-87eb-38a60c425a15",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/34"
+  },
+  {
+   "invnr": 35,
+   "lo": 6801,
+   "hi": 7000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/5d1de3b7-3741-4429-bf57-4c4ebb4f1055",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/35"
+  },
+  {
+   "invnr": 36,
+   "lo": 7001,
+   "hi": 7200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/a06e1410-1b43-436a-b0a8-ad78f592f1d7",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/36"
+  },
+  {
+   "invnr": 37,
+   "lo": 7201,
+   "hi": 7400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/7ffc89e0-f3d3-43c4-9e7d-284c7ecbb480",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/37"
+  },
+  {
+   "invnr": 38,
+   "lo": 7401,
+   "hi": 7600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/6f40bab2-3b29-4961-9988-204f118a6920",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/38"
+  },
+  {
+   "invnr": 39,
+   "lo": 7601,
+   "hi": 7800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/2cf3de0a-ac61-49de-b8d8-2e0c261e47bc",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/39"
+  },
+  {
+   "invnr": 40,
+   "lo": 7801,
+   "hi": 8000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/85b31954-fcd1-4dd6-975a-22a8f541ab1a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/40"
+  },
+  {
+   "invnr": 41,
+   "lo": 8001,
+   "hi": 8200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/ee14a4bf-9920-4771-9d3d-8e5ade33b8c0",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/41"
+  },
+  {
+   "invnr": 42,
+   "lo": 8201,
+   "hi": 8400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/efeb8662-1dff-4f42-a6d2-e89a2f1e12c5",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/42"
+  },
+  {
+   "invnr": 43,
+   "lo": 8401,
+   "hi": 8600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/fd6e9be4-e360-40ff-9b90-feebbf80743b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/43"
+  },
+  {
+   "invnr": 44,
+   "lo": 8601,
+   "hi": 8800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/a37ee1c3-b59a-4fe6-82f6-c7c36dac9efd",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/44"
+  },
+  {
+   "invnr": 45,
+   "lo": 8801,
+   "hi": 9000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/44b26824-fcd0-4f07-b6ce-6c48dc4d1b0b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/45"
+  },
+  {
+   "invnr": 46,
+   "lo": 9001,
+   "hi": 9200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/993f283d-ecd7-40a0-9e8c-b7637b5bff9b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/46"
+  },
+  {
+   "invnr": 47,
+   "lo": 9201,
+   "hi": 9400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/9cccc0db-b4fb-4eb9-8c71-2a1914ea1efc",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/47"
+  },
+  {
+   "invnr": 48,
+   "lo": 9401,
+   "hi": 9600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/49dd04ed-9101-43fc-978f-fdd6521e7001",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/48"
+  },
+  {
+   "invnr": 49,
+   "lo": 9601,
+   "hi": 9800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/fc8df5d4-71e6-4e7f-84ab-8759e627c09f",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/49"
+  },
+  {
+   "invnr": 50,
+   "lo": 9801,
+   "hi": 10000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/3a143cff-77bd-4c83-bad3-ae484418c83e",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/50"
+  },
+  {
+   "invnr": 51,
+   "lo": 10001,
+   "hi": 10200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/5dc0cfb8-86d1-4cd0-8789-859ec7f864b4",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/51"
+  },
+  {
+   "invnr": 52,
+   "lo": 10201,
+   "hi": 10400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/282a7b85-1c16-4795-8803-018f82cbad21",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/52"
+  },
+  {
+   "invnr": 53,
+   "lo": 10401,
+   "hi": 10600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/84885fae-0288-4eb6-abdd-94ea22bf38e1",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/53"
+  },
+  {
+   "invnr": 54,
+   "lo": 10601,
+   "hi": 10800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/f752d2a7-d738-4b80-b15a-69deb0067864",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/54"
+  },
+  {
+   "invnr": 55,
+   "lo": 10801,
+   "hi": 11000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/1f31b34f-aa4a-4980-8be5-28313a721463",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/55"
+  },
+  {
+   "invnr": 56,
+   "lo": 11001,
+   "hi": 11200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/928380d4-9ace-46e6-b7cb-d1e195d38759",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/56"
+  },
+  {
+   "invnr": 57,
+   "lo": 11201,
+   "hi": 11400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/76a2dcd2-65d4-475d-ac71-03404f77a382",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/57"
+  },
+  {
+   "invnr": 58,
+   "lo": 11401,
+   "hi": 11600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/03b322de-5917-4d2c-abaa-31b8c383c444",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/58"
+  },
+  {
+   "invnr": 59,
+   "lo": 11601,
+   "hi": 11800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/358b5405-94aa-45ff-9a78-e5b7e200d2d4",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/59"
+  },
+  {
+   "invnr": 60,
+   "lo": 11801,
+   "hi": 12000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/268d092d-74af-4d75-8c1e-ff55afedc43c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/60"
+  },
+  {
+   "invnr": 61,
+   "lo": 12001,
+   "hi": 12200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/a7da19bf-59ff-4987-97a6-bafd9858e9b8",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/61"
+  },
+  {
+   "invnr": 62,
+   "lo": 12201,
+   "hi": 12400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/d868a0af-6cf4-43b5-80d1-f3ec97e49e93",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/62"
+  },
+  {
+   "invnr": 63,
+   "lo": 12401,
+   "hi": 12600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/12faaef7-f4a4-4a27-b7ad-b37762dbfdff",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/63"
+  },
+  {
+   "invnr": 64,
+   "lo": 12601,
+   "hi": 12800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/843dc361-d8fe-46ee-91e6-fb231c406404",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/64"
+  },
+  {
+   "invnr": 65,
+   "lo": 12801,
+   "hi": 13000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/f81e077f-e1be-4d04-8363-bd3ea99a1045",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/65"
+  },
+  {
+   "invnr": 66,
+   "lo": 13001,
+   "hi": 13200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/4f64ccc5-7711-4288-91a6-df3bd9ac10cb",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/66"
+  },
+  {
+   "invnr": 67,
+   "lo": 13201,
+   "hi": 13400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/d55fdc4f-5a35-4ec1-a624-fc9c05efff3a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/67"
+  },
+  {
+   "invnr": 68,
+   "lo": 13401,
+   "hi": 13600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/c0a79715-561f-4768-9765-a66d081fee1b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/68"
+  },
+  {
+   "invnr": 69,
+   "lo": 13601,
+   "hi": 13800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/46322709-2cd1-4b96-a35f-a9c431cb8eec",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/69"
+  },
+  {
+   "invnr": 70,
+   "lo": 13801,
+   "hi": 14000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/fb6e1d4d-fb89-4b72-baf5-fa0ec6e140c4",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/70"
+  },
+  {
+   "invnr": 71,
+   "lo": 14001,
+   "hi": 14200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/8516b648-b01d-4596-93ff-81d47a57f999",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/71"
+  },
+  {
+   "invnr": 72,
+   "lo": 14201,
+   "hi": 14400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/d3dec4dc-09b7-40e0-8fd6-0cf764a514f5",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/72"
+  },
+  {
+   "invnr": 73,
+   "lo": 14401,
+   "hi": 14600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/5a94321f-8ebb-4b67-b576-54a1d12d6728",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/73"
+  },
+  {
+   "invnr": 74,
+   "lo": 14601,
+   "hi": 14800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/182cc35a-dcfe-48b8-b388-8f8a871b0ee3",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/74"
+  },
+  {
+   "invnr": 75,
+   "lo": 14801,
+   "hi": 15000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/54540300-e70a-407c-80ef-75daab9c4a9c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/75"
+  },
+  {
+   "invnr": 76,
+   "lo": 15001,
+   "hi": 15200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/3bc7c2d0-30b1-4123-bc30-a5f1c7570035",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/76"
+  },
+  {
+   "invnr": 77,
+   "lo": 15201,
+   "hi": 15400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/ff9e7a92-4c5f-457b-84ad-67a13c7a6796",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/77"
+  },
+  {
+   "invnr": 78,
+   "lo": 15401,
+   "hi": 15600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/1b33d9ce-9dd1-4738-aac3-ddf7e1af666f",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/78"
+  },
+  {
+   "invnr": 79,
+   "lo": 15601,
+   "hi": 15800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/a8d821e0-ff6b-454b-b327-0da5b8964d78",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/79"
+  },
+  {
+   "invnr": 80,
+   "lo": 15801,
+   "hi": 16000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/af828bbd-6b9c-457f-98fd-c9acc2a3e169",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/80"
+  },
+  {
+   "invnr": 81,
+   "lo": 16001,
+   "hi": 16200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/a959cbcf-fcd8-40f7-a12f-9dd68afc2676",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/81"
+  },
+  {
+   "invnr": 82,
+   "lo": 16201,
+   "hi": 16400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/333c18de-94eb-47bd-bab0-0bf1dd7e7c14",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/82"
+  },
+  {
+   "invnr": 83,
+   "lo": 16401,
+   "hi": 16600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/c79218c3-8c71-4256-873f-bacd6577e220",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/83"
+  },
+  {
+   "invnr": 84,
+   "lo": 16601,
+   "hi": 16800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/c51eb61d-fda2-4b6f-8dfb-8ff1a721bacd",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/84"
+  },
+  {
+   "invnr": 85,
+   "lo": 16801,
+   "hi": 17000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/eae9d48e-5095-4f8c-a27a-b4fda7e92f81",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/85"
+  },
+  {
+   "invnr": 86,
+   "lo": 17001,
+   "hi": 17200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/e0d37ae9-c529-463f-bef5-aec88e87b721",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/86"
+  },
+  {
+   "invnr": 87,
+   "lo": 17201,
+   "hi": 17400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/8e8a5495-56b5-4480-a536-df050c58da71",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/87"
+  },
+  {
+   "invnr": 88,
+   "lo": 17401,
+   "hi": 17600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/026d586e-493d-4a4a-a886-a47c02619cff",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/88"
+  },
+  {
+   "invnr": 89,
+   "lo": 17601,
+   "hi": 17800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/3e6ea5e9-d87f-4588-bce9-933e40543734",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/89"
+  },
+  {
+   "invnr": 90,
+   "lo": 17801,
+   "hi": 18000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/f1d7dcf7-a267-49d5-86c7-b0160d1c9f7d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/90"
+  },
+  {
+   "invnr": 91,
+   "lo": 18001,
+   "hi": 18200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/ba9dbc1e-c443-48b4-b179-b000da7de711",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/91"
+  },
+  {
+   "invnr": 92,
+   "lo": 18201,
+   "hi": 18400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/86cdf2c3-bf88-4397-af1d-46e6d055cfec",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/92"
+  },
+  {
+   "invnr": 93,
+   "lo": 18401,
+   "hi": 18600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/f75e5396-bdab-4c27-849f-1f2172416506",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/93"
+  },
+  {
+   "invnr": 94,
+   "lo": 18601,
+   "hi": 18800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/bb692f39-7018-44c5-b95a-a0e04d8873fc",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/94"
+  },
+  {
+   "invnr": 95,
+   "lo": 18801,
+   "hi": 19000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/2f827f7f-8d38-4b30-924b-7eaa50cf492b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/95"
+  },
+  {
+   "invnr": 96,
+   "lo": 19001,
+   "hi": 19200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/c38b8d86-6945-4e35-b3aa-f27473ba3fba",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/96"
+  },
+  {
+   "invnr": 97,
+   "lo": 19201,
+   "hi": 19400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/158424c6-49d5-4137-a33c-5aaa618f860a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/97"
+  },
+  {
+   "invnr": 98,
+   "lo": 19401,
+   "hi": 19600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/61087125-c19e-4215-b4a5-697bd302c71d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/98"
+  },
+  {
+   "invnr": 99,
+   "lo": 19601,
+   "hi": 19800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/f4e31e17-23a9-4851-b56a-4fc5afdc0228",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/99"
+  },
+  {
+   "invnr": 100,
+   "lo": 19801,
+   "hi": 20000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/6c499a2f-4946-4e97-b36d-a579c8bae625",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/100"
+  },
+  {
+   "invnr": 101,
+   "lo": 20001,
+   "hi": 20200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/20bf80ce-ea32-461e-93a9-dfcaef9b5c30",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/101"
+  },
+  {
+   "invnr": 102,
+   "lo": 20201,
+   "hi": 20400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/562c1345-6ff2-4850-a6b3-7ccc519d6224",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/102"
+  },
+  {
+   "invnr": 103,
+   "lo": 20401,
+   "hi": 20600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/674d5f48-772c-413d-bdbb-08221415fee3",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/103"
+  },
+  {
+   "invnr": 104,
+   "lo": 20601,
+   "hi": 20800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/958a7f1d-c6d8-4ce1-b729-572a1d081427",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/104"
+  },
+  {
+   "invnr": 105,
+   "lo": 20801,
+   "hi": 21000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/0652176d-879a-446e-b7b3-28f32557931e",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/105"
+  },
+  {
+   "invnr": 106,
+   "lo": 21001,
+   "hi": 21200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/fe8019b0-c49a-4bdf-983d-cddb19335110",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/106"
+  },
+  {
+   "invnr": 107,
+   "lo": 21201,
+   "hi": 21400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/c4ba0a94-eccf-4ce7-87e8-6b57d4b4d20d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/107"
+  },
+  {
+   "invnr": 108,
+   "lo": 21401,
+   "hi": 21600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/5275b5ef-4eb5-45d2-b3ac-219a229729b5",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/108"
+  },
+  {
+   "invnr": 109,
+   "lo": 21601,
+   "hi": 21800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/82a7f188-8f1d-40e8-9baa-78e38a477cea",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/109"
+  },
+  {
+   "invnr": 110,
+   "lo": 21801,
+   "hi": 22000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/7639d72d-d486-412a-b2d8-a2112f734171",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/110"
+  },
+  {
+   "invnr": 111,
+   "lo": 22001,
+   "hi": 22200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/9221b939-d4ba-4f90-8b79-d7756b7c7ed5",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/111"
+  },
+  {
+   "invnr": 112,
+   "lo": 22201,
+   "hi": 22400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/c398cbed-ce63-48b8-93e4-f73bc6a06e0f",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/112"
+  },
+  {
+   "invnr": 113,
+   "lo": 22401,
+   "hi": 22600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/11a77a2c-5b35-4402-b709-d4e52f830634",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/113"
+  },
+  {
+   "invnr": 114,
+   "lo": 22601,
+   "hi": 22800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/5aa27220-ded9-4208-a038-ac8678b3e597",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/114"
+  },
+  {
+   "invnr": 115,
+   "lo": 22801,
+   "hi": 23000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/64485f0a-fd2c-4274-bcec-7290905a04e9",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/115"
+  },
+  {
+   "invnr": 116,
+   "lo": 23001,
+   "hi": 23200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/949af4a9-d958-49cb-86a2-d07ae5535ff4",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/116"
+  },
+  {
+   "invnr": 117,
+   "lo": 23201,
+   "hi": 23400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/58dbf41f-1773-450b-b9cd-4205b790bc4c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/117"
+  },
+  {
+   "invnr": 118,
+   "lo": 23401,
+   "hi": 23600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/8b9cfe5b-7227-4780-a6c3-92ccdee27aa3",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/118"
+  },
+  {
+   "invnr": 119,
+   "lo": 23601,
+   "hi": 23800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/3b23cd98-1d59-4368-91cb-a10d034ebf7c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/119"
+  },
+  {
+   "invnr": 120,
+   "lo": 23801,
+   "hi": 24000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/eac1ac72-80a3-43c2-868e-55b59c0a01c0",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/120"
+  },
+  {
+   "invnr": 121,
+   "lo": 24001,
+   "hi": 24200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/e2c0e417-2531-4c83-bb24-bf701d946709",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/121"
+  },
+  {
+   "invnr": 122,
+   "lo": 24201,
+   "hi": 24400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/177ec109-5a77-445b-b501-8a7fe55f07c8",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/122"
+  },
+  {
+   "invnr": 123,
+   "lo": 24401,
+   "hi": 24600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/9c80184d-1498-472f-a156-bc7bdc0716e4",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/123"
+  },
+  {
+   "invnr": 124,
+   "lo": 24601,
+   "hi": 24800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/b48ca4bd-14e7-48e5-b3cd-4af208fbd040",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/124"
+  },
+  {
+   "invnr": 125,
+   "lo": 24801,
+   "hi": 25000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/0980ee8a-4b7b-4f34-b4e1-929676dfd840",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/125"
+  },
+  {
+   "invnr": 126,
+   "lo": 25001,
+   "hi": 25200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/b3e82369-9c8a-4a0a-ae57-c3cf41e199bb",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/126"
+  },
+  {
+   "invnr": 127,
+   "lo": 25201,
+   "hi": 25400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/8570abb2-8fa3-479f-9ea8-0abccea0a107",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/127"
+  },
+  {
+   "invnr": 128,
+   "lo": 25401,
+   "hi": 25600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/ac3d9ddb-c844-4fcf-9ad1-585f9b974b94",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/128"
+  },
+  {
+   "invnr": 129,
+   "lo": 25601,
+   "hi": 25800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/7d3193ba-e6d5-41bf-84f9-9cb69ca290ec",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/129"
+  },
+  {
+   "invnr": 130,
+   "lo": 25801,
+   "hi": 26000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/6426d153-30c7-46c9-a176-8b0a3e946b6d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/130"
+  },
+  {
+   "invnr": 131,
+   "lo": 26001,
+   "hi": 26200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/ea38defb-f152-4afb-932b-5b236c7bac36",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/131"
+  },
+  {
+   "invnr": 132,
+   "lo": 26201,
+   "hi": 26400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/38d0b3ec-fc74-45dd-81d5-29a3e772661c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/132"
+  },
+  {
+   "invnr": 133,
+   "lo": 26401,
+   "hi": 26600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/4d0d9281-785c-4c9c-988b-d02f865be1f1",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/133"
+  },
+  {
+   "invnr": 134,
+   "lo": 26601,
+   "hi": 26800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/11fd70e6-9bce-4dac-9a9a-5c87d51b29c5",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/134"
+  },
+  {
+   "invnr": 135,
+   "lo": 26801,
+   "hi": 27000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/ba26b599-700d-4a1c-ac12-34fe7d1f8a20",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/135"
+  },
+  {
+   "invnr": 136,
+   "lo": 27001,
+   "hi": 27200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/aaac89c1-b8e8-4ca4-9d97-24fc1223207a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/136"
+  },
+  {
+   "invnr": 137,
+   "lo": 27201,
+   "hi": 27400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/3a1d5db4-b686-4e14-8ad7-876a6b7ee513",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/137"
+  },
+  {
+   "invnr": 138,
+   "lo": 27401,
+   "hi": 27600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/93057dda-bd95-4327-acdb-4e156830886e",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/138"
+  },
+  {
+   "invnr": 139,
+   "lo": 27601,
+   "hi": 27800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/e3223597-325f-47b6-9da0-fa7b05aa29bf",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/139"
+  },
+  {
+   "invnr": 140,
+   "lo": 27801,
+   "hi": 28000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/b53fefff-a9fb-4236-9931-43c3115af5b9",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/140"
+  },
+  {
+   "invnr": 141,
+   "lo": 28001,
+   "hi": 28200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/8a66a4ff-3ced-4cfd-a82e-98105e63609b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/141"
+  },
+  {
+   "invnr": 142,
+   "lo": 28201,
+   "hi": 28400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/80572d5c-dbb8-46a6-bf96-eb0e5da41319",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/142"
+  },
+  {
+   "invnr": 143,
+   "lo": 28401,
+   "hi": 28600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/e2940123-960f-453c-9fac-edeab6e74c51",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/143"
+  },
+  {
+   "invnr": 144,
+   "lo": 28601,
+   "hi": 28800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/84f2011d-a218-4ef3-9679-a71a8683813a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/144"
+  },
+  {
+   "invnr": 145,
+   "lo": 28801,
+   "hi": 29000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/bff8ea04-c6fb-4fb6-9fdc-53fb38fab404",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/145"
+  },
+  {
+   "invnr": 146,
+   "lo": 29001,
+   "hi": 29200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/3feb3f43-31a9-4426-8de2-7287b4ba447c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/146"
+  },
+  {
+   "invnr": 147,
+   "lo": 29201,
+   "hi": 29400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/33118299-ead3-4078-9412-8e727101bb8d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/147"
+  },
+  {
+   "invnr": 148,
+   "lo": 29401,
+   "hi": 29600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/afb1dd28-8ed2-4616-bfe2-4be61509d259",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/148"
+  },
+  {
+   "invnr": 149,
+   "lo": 29601,
+   "hi": 29800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/cce4f565-ed6a-47c8-9e21-ae34887e62f5",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/149"
+  },
+  {
+   "invnr": 150,
+   "lo": 29801,
+   "hi": 30000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/a8e41240-1c37-4a29-8354-a5657ea70239",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/150"
+  },
+  {
+   "invnr": 151,
+   "lo": 30001,
+   "hi": 30200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/6aab98a4-d31a-4eda-9720-b6f67aafbbb1",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/151"
+  },
+  {
+   "invnr": 152,
+   "lo": 30201,
+   "hi": 30400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/f1c26f74-7ed6-4486-9ced-c16bc0920084",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/152"
+  },
+  {
+   "invnr": 153,
+   "lo": 30401,
+   "hi": 30600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/fded03db-2320-46c6-94bb-8eb8c5a8d7c8",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/153"
+  },
+  {
+   "invnr": 154,
+   "lo": 30601,
+   "hi": 30800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/2067d8f2-63ee-4e6d-b31d-f479ac1229ca",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/154"
+  },
+  {
+   "invnr": 155,
+   "lo": 30801,
+   "hi": 31000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/c7a30a74-5f6e-4a3a-95ec-839ffa4fffa5",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/155"
+  },
+  {
+   "invnr": 156,
+   "lo": 31001,
+   "hi": 31200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/bbf70c07-7b42-4f44-968d-c485692f8d5b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/156"
+  },
+  {
+   "invnr": 157,
+   "lo": 31201,
+   "hi": 31400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/22a6bbb6-24a0-4481-909b-32a7277b75f2",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/157"
+  },
+  {
+   "invnr": 158,
+   "lo": 31401,
+   "hi": 31600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/7ccda551-0e85-4a2d-afa4-f4e584b7b2db",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/158"
+  },
+  {
+   "invnr": 159,
+   "lo": 31601,
+   "hi": 31800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/ddbd79fd-9e83-4b4f-b364-6e5cf63e5d42",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/159"
+  },
+  {
+   "invnr": 160,
+   "lo": 31801,
+   "hi": 32000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/964bd71e-91c6-4133-acbc-e45aa4b90500",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/160"
+  },
+  {
+   "invnr": 161,
+   "lo": 32001,
+   "hi": 32200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/0eb4b3e9-03b0-436f-840e-75f42d16a4a3",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/161"
+  },
+  {
+   "invnr": 162,
+   "lo": 32201,
+   "hi": 32400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/1afbde72-d422-410b-bd7d-db167cfcb111",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/162"
+  },
+  {
+   "invnr": 163,
+   "lo": 32401,
+   "hi": 32600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/2a30ad54-f3ce-4c3f-9fa8-018986fe5773",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/163"
+  },
+  {
+   "invnr": 164,
+   "lo": 32601,
+   "hi": 32800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/4e293c17-3ce9-4648-82c5-b8aa2d3ec92d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/164"
+  },
+  {
+   "invnr": 165,
+   "lo": 32801,
+   "hi": 33000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/d200135f-40b8-455b-a45a-27615ffc3bfa",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/165"
+  },
+  {
+   "invnr": 166,
+   "lo": 33001,
+   "hi": 33200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/3f1d7d34-667a-4e6c-920d-6101be811b35",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/166"
+  },
+  {
+   "invnr": 167,
+   "lo": 33201,
+   "hi": 33400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/3aa80092-e06b-4769-8add-abe6bcca372f",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/167"
+  },
+  {
+   "invnr": 168,
+   "lo": 33401,
+   "hi": 33600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/ea4104f5-c198-4161-83d2-35dd57cde2bb",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/168"
+  },
+  {
+   "invnr": 169,
+   "lo": 33601,
+   "hi": 33800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/05b4894e-5192-4612-980d-d76d48db4b30",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/169"
+  },
+  {
+   "invnr": 170,
+   "lo": 33801,
+   "hi": 34000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/296a854b-bcef-4406-aed7-0979aaadeddb",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/170"
+  },
+  {
+   "invnr": 171,
+   "lo": 34001,
+   "hi": 34200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/2173910a-4258-4849-ae6a-8568b640a1d7",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/171"
+  },
+  {
+   "invnr": 172,
+   "lo": 34201,
+   "hi": 34400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/58d08b20-898b-444f-bb07-7796d1e013e8",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/172"
+  },
+  {
+   "invnr": 173,
+   "lo": 34401,
+   "hi": 34600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/5b315ddc-d69f-4e5a-a08a-66b341937af3",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/173"
+  },
+  {
+   "invnr": 174,
+   "lo": 34601,
+   "hi": 34800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/fc99c42d-648c-4257-b277-5212aa00abe2",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/174"
+  },
+  {
+   "invnr": 175,
+   "lo": 34801,
+   "hi": 35000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/87d9bbea-6f94-419a-a05f-7cd780710e8c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/175"
+  },
+  {
+   "invnr": 176,
+   "lo": 35001,
+   "hi": 35200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/6c7a0992-5d49-4fc5-9c96-9eb1d3c849b5",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/176"
+  },
+  {
+   "invnr": 177,
+   "lo": 35201,
+   "hi": 35400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/fe252649-5224-4a81-b11c-8fc3f1f0fdf5",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/177"
+  },
+  {
+   "invnr": 178,
+   "lo": 35401,
+   "hi": 35600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/d951b721-58ee-4a0a-a11e-c622e7a422a1",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/178"
+  },
+  {
+   "invnr": 179,
+   "lo": 35601,
+   "hi": 35800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/53bc7b40-9d60-4fc7-99d3-30596453f40f",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/179"
+  },
+  {
+   "invnr": 180,
+   "lo": 35801,
+   "hi": 36000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/2fa33eb9-7887-409d-9db9-44727df1410c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/180"
+  },
+  {
+   "invnr": 181,
+   "lo": 36001,
+   "hi": 36200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/0c449e11-bff5-4591-a44c-7c83e88dd388",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/181"
+  },
+  {
+   "invnr": 182,
+   "lo": 36201,
+   "hi": 36400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/3043f53f-331a-490e-b4aa-ede6a741849d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/182"
+  },
+  {
+   "invnr": 183,
+   "lo": 36401,
+   "hi": 36600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/5c130929-fb7d-4cfc-810e-8b61a8624e85",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/183"
+  },
+  {
+   "invnr": 184,
+   "lo": 36601,
+   "hi": 36800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/d193ad57-75e0-43e1-ac15-0ad1c7a15f62",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/184"
+  },
+  {
+   "invnr": 185,
+   "lo": 36801,
+   "hi": 37000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/9151bae1-ab97-4d28-8755-6cdcfb07a0be",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/185"
+  },
+  {
+   "invnr": 186,
+   "lo": 37001,
+   "hi": 37200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/4ba98b99-48a6-4c0d-95c2-08bd6cea6449",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/186"
+  },
+  {
+   "invnr": 187,
+   "lo": 37201,
+   "hi": 37400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/95064f6e-94c3-4863-9df4-bc9b9294464c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/187"
+  },
+  {
+   "invnr": 188,
+   "lo": 37401,
+   "hi": 37600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/d90186d7-8e98-40fe-9bdf-fe142b8e336b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/188"
+  },
+  {
+   "invnr": 189,
+   "lo": 37601,
+   "hi": 37800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/0f1e175d-bc54-46cb-8903-9cfa1e37769c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/189"
+  },
+  {
+   "invnr": 190,
+   "lo": 37801,
+   "hi": 38000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/394906bc-3a3d-4418-9a42-df95f8480a72",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/190"
+  },
+  {
+   "invnr": 191,
+   "lo": 38001,
+   "hi": 38200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/8c8e76cb-4270-4723-8bc3-2b96f5f11ab1",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/191"
+  },
+  {
+   "invnr": 192,
+   "lo": 38201,
+   "hi": 38400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/0a88117a-416e-4a06-8074-11f5cdbd07be",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/192"
+  },
+  {
+   "invnr": 193,
+   "lo": 38401,
+   "hi": 38600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/dc2c8fff-69ff-4a86-992f-70e1d99f2e50",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/193"
+  },
+  {
+   "invnr": 194,
+   "lo": 38601,
+   "hi": 38800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/1a00b160-644a-4f84-a20c-4e6a91b63e9b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/194"
+  },
+  {
+   "invnr": 195,
+   "lo": 38801,
+   "hi": 39000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/89fcdbc5-7d24-4cb8-b0f3-191cf1c5d707",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/195"
+  },
+  {
+   "invnr": 196,
+   "lo": 39001,
+   "hi": 39200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/8264ec7c-f1f3-4255-8e33-a79e9a03dbe9",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/196"
+  },
+  {
+   "invnr": 197,
+   "lo": 39201,
+   "hi": 39400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/f71a75ea-7e56-4a56-9631-6fb5080aae17",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/197"
+  },
+  {
+   "invnr": 198,
+   "lo": 39401,
+   "hi": 39600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/f12de216-97b0-4ea5-aef2-07b2063ea1c6",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/198"
+  },
+  {
+   "invnr": 199,
+   "lo": 39601,
+   "hi": 39800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/8fcc3d6e-0ffc-481c-b773-fa59d19511ac",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/199"
+  },
+  {
+   "invnr": 200,
+   "lo": 39801,
+   "hi": 40000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/4190275b-c5f7-44d7-9bf9-993aba38f291",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/200"
+  },
+  {
+   "invnr": 201,
+   "lo": 40001,
+   "hi": 40200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/c02b7f22-4bbf-4183-93d0-19c14e9e37c2",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/201"
+  },
+  {
+   "invnr": 202,
+   "lo": 40201,
+   "hi": 40400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/bc02fbd9-2a26-48d4-ac5a-82292c676985",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/202"
+  },
+  {
+   "invnr": 203,
+   "lo": 40401,
+   "hi": 40600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/3b1cb0d2-c7b1-45c2-8f85-6a4b18aecf57",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/203"
+  },
+  {
+   "invnr": 204,
+   "lo": 40601,
+   "hi": 40800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/01e2a6af-0ecd-4ddd-a251-61dd4ecd2890",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/204"
+  },
+  {
+   "invnr": 205,
+   "lo": 40801,
+   "hi": 41000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/72b4c624-e850-4c57-aee0-8e7816dfd124",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/205"
+  },
+  {
+   "invnr": 206,
+   "lo": 41001,
+   "hi": 41200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/c709f702-9979-4cff-86f4-255e18f188fb",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/206"
+  },
+  {
+   "invnr": 207,
+   "lo": 41201,
+   "hi": 41400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/09ba3293-3de2-4358-8ea1-8f0d5651b94e",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/207"
+  },
+  {
+   "invnr": 208,
+   "lo": 41401,
+   "hi": 41600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/5313d1a3-ca32-40ff-92b3-532dd0e86e92",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/208"
+  },
+  {
+   "invnr": 209,
+   "lo": 41601,
+   "hi": 41800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/57673c71-1beb-49be-ab8a-2855c326fc87",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/209"
+  },
+  {
+   "invnr": 210,
+   "lo": 41801,
+   "hi": 42000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/08599373-a9b3-400c-97a0-422eb4aaa4d5",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/210"
+  },
+  {
+   "invnr": 211,
+   "lo": 42001,
+   "hi": 42200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/dfb797e3-f23c-4d6e-8644-136cba364f5d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/211"
+  },
+  {
+   "invnr": 212,
+   "lo": 42201,
+   "hi": 42400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/ebacfb58-b432-4ccc-83cf-c0843ad449ea",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/212"
+  },
+  {
+   "invnr": 213,
+   "lo": 42401,
+   "hi": 42600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/8e9cac9d-22da-4f4d-a689-c0f0ba7ad136",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/213"
+  },
+  {
+   "invnr": 214,
+   "lo": 42601,
+   "hi": 42800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/241bad3b-7a91-4836-bf3f-c43f853b1e94",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/214"
+  },
+  {
+   "invnr": 215,
+   "lo": 42801,
+   "hi": 43000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/f1589cdb-43fc-472a-b9b4-6db8afca0487",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/215"
+  },
+  {
+   "invnr": 216,
+   "lo": 43001,
+   "hi": 43200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/83a358eb-0192-4477-b2a6-1caaf681bf68",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/216"
+  },
+  {
+   "invnr": 217,
+   "lo": 43201,
+   "hi": 43400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/5141db86-d914-4c65-a7d7-72a7ebd4064d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/217"
+  },
+  {
+   "invnr": 218,
+   "lo": 43401,
+   "hi": 43600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/947e7e65-eca0-4043-8a8c-91015b2454fc",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/218"
+  },
+  {
+   "invnr": 219,
+   "lo": 43601,
+   "hi": 43800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/da3b47cc-1f3b-438b-8ba6-ffcb5f35fcb9",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/219"
+  },
+  {
+   "invnr": 220,
+   "lo": 43801,
+   "hi": 44000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/feef1597-abbb-4a5a-9993-1658269ec0e1",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/220"
+  },
+  {
+   "invnr": 221,
+   "lo": 44001,
+   "hi": 44200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/748516b1-1864-4a1e-95d9-517248a9fad8",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/221"
+  },
+  {
+   "invnr": 222,
+   "lo": 44201,
+   "hi": 44400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/56ca3725-e8f1-49f4-bed1-9f62b84600a0",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/222"
+  },
+  {
+   "invnr": 223,
+   "lo": 44401,
+   "hi": 44600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/93b723f5-3ed1-4e11-8693-1078cb9bc05e",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/223"
+  },
+  {
+   "invnr": 224,
+   "lo": 44601,
+   "hi": 44800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/80348a05-807d-4163-8db3-2549bbc8a688",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/224"
+  },
+  {
+   "invnr": 225,
+   "lo": 44801,
+   "hi": 45000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/d6d8d072-811d-4531-a90b-7fd46f934c67",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/225"
+  },
+  {
+   "invnr": 226,
+   "lo": 45001,
+   "hi": 45200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/5a450e18-49ea-4010-bcab-d226a82c9be6",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/226"
+  },
+  {
+   "invnr": 227,
+   "lo": 45201,
+   "hi": 45400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/878b0f34-80a0-4e08-9ef8-e0a9b961da0c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/227"
+  },
+  {
+   "invnr": 228,
+   "lo": 45401,
+   "hi": 45600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/53b59a3e-7cb7-49d3-bb29-2b111a1ef296",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/228"
+  },
+  {
+   "invnr": 229,
+   "lo": 45601,
+   "hi": 45800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/8b7afacf-3538-4928-bdc2-d9766bfa17b6",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/229"
+  },
+  {
+   "invnr": 230,
+   "lo": 45801,
+   "hi": 46000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/34c8507c-291f-4010-b50c-552735f07a43",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/230"
+  },
+  {
+   "invnr": 231,
+   "lo": 46001,
+   "hi": 46200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/08d4369f-602f-4547-b9ac-c1074bdab5e4",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/231"
+  },
+  {
+   "invnr": 232,
+   "lo": 46201,
+   "hi": 46400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/ec259e0e-c709-42ae-9485-bc71d4e70aa0",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/232"
+  },
+  {
+   "invnr": 233,
+   "lo": 46401,
+   "hi": 46600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/7c5ffb89-4d7c-4151-bf64-ac158c11800f",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/233"
+  },
+  {
+   "invnr": 234,
+   "lo": 46601,
+   "hi": 46800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/b51365ff-ca13-43e7-b5fb-6f9a219fb768",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/234"
+  },
+  {
+   "invnr": 235,
+   "lo": 46801,
+   "hi": 47000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/df88bd89-e4c8-4c5d-b8f0-da766ecc11ff",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/235"
+  },
+  {
+   "invnr": 236,
+   "lo": 47001,
+   "hi": 47200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/64268d79-91da-4f96-bdb9-ed91b745e3d0",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/236"
+  },
+  {
+   "invnr": 237,
+   "lo": 47201,
+   "hi": 47400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/fb2c1a13-f86e-4e97-a479-a8a3405b5de7",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/237"
+  },
+  {
+   "invnr": 238,
+   "lo": 47401,
+   "hi": 47600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/497844bc-f4ac-44ae-af1c-a1b7930b8bfa",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/238"
+  },
+  {
+   "invnr": 239,
+   "lo": 47601,
+   "hi": 47800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/f7af93d2-16bb-4700-8c10-d1f10422651e",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/239"
+  },
+  {
+   "invnr": 240,
+   "lo": 47801,
+   "hi": 48000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/3270856b-43be-4f33-ac42-db0944703416",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/240"
+  },
+  {
+   "invnr": 241,
+   "lo": 48001,
+   "hi": 48200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/63f31fd4-69a8-4240-93ff-c22b175b16e9",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/241"
+  },
+  {
+   "invnr": 242,
+   "lo": 48201,
+   "hi": 48400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/d8004a98-7871-4be8-821f-a09261bb7489",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/242"
+  },
+  {
+   "invnr": 243,
+   "lo": 48401,
+   "hi": 48600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/b950b2f0-ab6c-47ee-8ebf-08e28f7ce66e",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/243"
+  },
+  {
+   "invnr": 244,
+   "lo": 48601,
+   "hi": 48800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/a7d90266-81b9-4657-8847-f3cf1c5d9d9f",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/244"
+  },
+  {
+   "invnr": 245,
+   "lo": 48801,
+   "hi": 49000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/0772082e-3165-4422-ad93-db9d76a93a0f",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/245"
+  },
+  {
+   "invnr": 246,
+   "lo": 49001,
+   "hi": 49200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/fd012a83-9e56-426c-acc7-4e1acd896fe7",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/246"
+  },
+  {
+   "invnr": 247,
+   "lo": 49201,
+   "hi": 49400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/69e67bb6-adac-474f-9079-d5640478e4e6",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/247"
+  },
+  {
+   "invnr": 248,
+   "lo": 49401,
+   "hi": 49600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/40342110-5375-430b-b6dd-f240966dcf39",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/248"
+  },
+  {
+   "invnr": 249,
+   "lo": 49601,
+   "hi": 49800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/43049586-5f62-45da-98dd-a9e617010a4c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/249"
+  },
+  {
+   "invnr": 250,
+   "lo": 49801,
+   "hi": 50000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/9a85e47e-bdd4-4b0e-b51c-da7ef18c370c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/250"
+  },
+  {
+   "invnr": 251,
+   "lo": 50001,
+   "hi": 50200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/fbaaf526-4b8f-4980-8a13-be0ada2b9ed4",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/251"
+  },
+  {
+   "invnr": 252,
+   "lo": 50201,
+   "hi": 50400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/99260601-946e-44a9-9b19-be055a70cf7b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/252"
+  },
+  {
+   "invnr": 254,
+   "lo": 50601,
+   "hi": 50800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/fc9dab6b-8720-40ef-9648-9bc92d26d980",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/254"
+  },
+  {
+   "invnr": 255,
+   "lo": 50801,
+   "hi": 51000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/52ce135c-6d81-44ba-93a3-9242fd743c4a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/255"
+  },
+  {
+   "invnr": 256,
+   "lo": 51001,
+   "hi": 51200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/31d50272-4dec-433e-b746-b9cb8225d63c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/256"
+  },
+  {
+   "invnr": 257,
+   "lo": 51201,
+   "hi": 51400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/92e65365-1865-4ac3-a38b-5ee31d3ebc9d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/257"
+  },
+  {
+   "invnr": 258,
+   "lo": 51401,
+   "hi": 51600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/b7051555-65a2-4b7d-9d80-26034d745abe",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/258"
+  },
+  {
+   "invnr": 259,
+   "lo": 51601,
+   "hi": 51800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/a7267d67-cde8-4ce3-9dcd-bf4acd95a77e",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/259"
+  },
+  {
+   "invnr": 260,
+   "lo": 51801,
+   "hi": 52000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/3167e4e9-15b3-40fc-8806-652d98632d7c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/260"
+  },
+  {
+   "invnr": 261,
+   "lo": 52001,
+   "hi": 52200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/4459f549-7c01-4e07-b91b-b7af26a3f80a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/261"
+  },
+  {
+   "invnr": 262,
+   "lo": 52201,
+   "hi": 52400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/32b0eeb1-829e-4eb4-8665-e7b6bc0dae56",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/262"
+  },
+  {
+   "invnr": 263,
+   "lo": 52401,
+   "hi": 52600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/cddaae21-8e53-485f-8365-cadf03c9d9ca",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/263"
+  },
+  {
+   "invnr": 264,
+   "lo": 52601,
+   "hi": 52800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/143c3d35-4235-4be4-9140-103ee6d66d22",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/264"
+  },
+  {
+   "invnr": 265,
+   "lo": 52801,
+   "hi": 53000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/f2584045-5f42-429c-a805-83b939d90c04",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/265"
+  },
+  {
+   "invnr": 266,
+   "lo": 53001,
+   "hi": 53200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/384751d3-724a-4d73-ae15-0e95190d6ad5",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/266"
+  },
+  {
+   "invnr": 267,
+   "lo": 53201,
+   "hi": 53400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/e2dcad87-5b07-436e-864e-169aae46690c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/267"
+  },
+  {
+   "invnr": 268,
+   "lo": 53401,
+   "hi": 53600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/7c0ee3cd-c032-4b74-b2f8-93630720c4a1",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/268"
+  },
+  {
+   "invnr": 269,
+   "lo": 53601,
+   "hi": 53800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/6fc58333-c95c-4eb0-ac42-35aa2b03f17a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/269"
+  },
+  {
+   "invnr": 270,
+   "lo": 53801,
+   "hi": 54000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/5c717daa-bb9e-4fb0-b58b-e59eda575fe0",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/270"
+  },
+  {
+   "invnr": 271,
+   "lo": 54001,
+   "hi": 54200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/6150cb97-221f-4e0b-9f15-6a5778fc88bb",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/271"
+  },
+  {
+   "invnr": 272,
+   "lo": 54201,
+   "hi": 54400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/4700ab79-92da-4f83-a9b1-4482b60f141a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/272"
+  },
+  {
+   "invnr": 273,
+   "lo": 54401,
+   "hi": 54600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/79b5a10c-4a04-4568-b0af-4bbcdeb33722",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/273"
+  },
+  {
+   "invnr": 274,
+   "lo": 54601,
+   "hi": 54800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/407f7207-47ee-4341-a02c-6f0638933bce",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/274"
+  },
+  {
+   "invnr": 275,
+   "lo": 54801,
+   "hi": 55000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/77f7abac-cc65-485e-8ae2-90b95f3170a0",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/275"
+  },
+  {
+   "invnr": 276,
+   "lo": 55001,
+   "hi": 55200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/eeda7788-5704-459a-b9e2-12ca6756de02",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/276"
+  },
+  {
+   "invnr": 277,
+   "lo": 55201,
+   "hi": 55400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/785b16e2-3722-479a-a51a-d1613f49eb6d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/277"
+  },
+  {
+   "invnr": 278,
+   "lo": 55401,
+   "hi": 55600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/8e0402d5-65d3-4dd1-b2dc-d34f830b9e6b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/278"
+  },
+  {
+   "invnr": 279,
+   "lo": 55601,
+   "hi": 55800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/1b9375c5-bc74-4a19-b7b4-343e1a33a7fd",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/279"
+  },
+  {
+   "invnr": 280,
+   "lo": 55801,
+   "hi": 56000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/36ec3c38-66c3-4ec4-be17-87fa025fd10d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/280"
+  },
+  {
+   "invnr": 281,
+   "lo": 56001,
+   "hi": 56200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/e1087598-cdb8-442a-8ea6-bff5c3f51d5d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/281"
+  },
+  {
+   "invnr": 282,
+   "lo": 56201,
+   "hi": 56400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/819c5ed7-0e9d-4834-ba7a-bf83b309b02d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/282"
+  },
+  {
+   "invnr": 283,
+   "lo": 56401,
+   "hi": 56600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/2d21d469-47c9-4aa8-9e01-51ad450f1979",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/283"
+  },
+  {
+   "invnr": 284,
+   "lo": 56601,
+   "hi": 56800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/095c8aba-ea9a-4ee4-945c-6c27d2bf78ff",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/284"
+  },
+  {
+   "invnr": 285,
+   "lo": 56801,
+   "hi": 57000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/936dad35-6595-459b-869e-b994415d0366",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/285"
+  },
+  {
+   "invnr": 286,
+   "lo": 57001,
+   "hi": 57200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/5aa0c9d2-92e5-4d36-b29f-7aa21267fa2f",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/286"
+  },
+  {
+   "invnr": 287,
+   "lo": 57201,
+   "hi": 57400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/4a995e2a-a3cd-48c7-9f2f-e5732c16b636",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/287"
+  },
+  {
+   "invnr": 288,
+   "lo": 57401,
+   "hi": 57600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/3bec0158-598e-46df-bca9-c8911f537275",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/288"
+  },
+  {
+   "invnr": 289,
+   "lo": 57601,
+   "hi": 57800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/95950f4f-8ea7-4b16-8e17-74bec65cb186",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/289"
+  },
+  {
+   "invnr": 290,
+   "lo": 57801,
+   "hi": 58000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/97d9c092-15b6-402e-8050-569efcc2c72c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/290"
+  },
+  {
+   "invnr": 291,
+   "lo": 58001,
+   "hi": 58200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/32fb9ef5-64bc-474d-888f-35ad15b70a24",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/291"
+  },
+  {
+   "invnr": 292,
+   "lo": 58201,
+   "hi": 58400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/89a498db-abb8-4560-a424-7bf37e10514a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/292"
+  },
+  {
+   "invnr": 293,
+   "lo": 58401,
+   "hi": 58600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/5c54060c-41f7-49bd-82e0-eabd1cfded73",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/293"
+  },
+  {
+   "invnr": 294,
+   "lo": 58601,
+   "hi": 58800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/5f9a137a-bcdf-4dda-be7f-58bf8f4c0844",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/294"
+  },
+  {
+   "invnr": 295,
+   "lo": 58801,
+   "hi": 59000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/2ad757fa-7f92-4ec6-84e9-f999a4da9477",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/295"
+  },
+  {
+   "invnr": 296,
+   "lo": 59001,
+   "hi": 59200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/73f79a03-0e42-4de8-8f6d-2b7b8cfd71f6",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/296"
+  },
+  {
+   "invnr": 297,
+   "lo": 59201,
+   "hi": 59400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/8d0a4884-2e9f-428b-83be-cef2dc3fab0a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/297"
+  },
+  {
+   "invnr": 298,
+   "lo": 59401,
+   "hi": 59600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/a4051b76-b52e-4438-8d74-c2df5be62938",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/298"
+  },
+  {
+   "invnr": 299,
+   "lo": 59601,
+   "hi": 59800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/ac04280f-d6dc-4fca-a126-b33d78620560",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/299"
+  },
+  {
+   "invnr": 300,
+   "lo": 59801,
+   "hi": 60000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/0ca6a4f5-943b-479f-a027-e7798617b664",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/300"
+  },
+  {
+   "invnr": 301,
+   "lo": 60001,
+   "hi": 60200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/cbcd7334-dd63-4c6a-8a39-1f08fb6cec87",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/301"
+  },
+  {
+   "invnr": 302,
+   "lo": 60201,
+   "hi": 60400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/245741eb-e5f7-4b3d-90e1-9ca62c56a86a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/302"
+  },
+  {
+   "invnr": 303,
+   "lo": 60401,
+   "hi": 60600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/f4627819-6a25-49bb-9e69-b6cedbcb92ca",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/303"
+  },
+  {
+   "invnr": 304,
+   "lo": 60601,
+   "hi": 60800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/506a46ce-f57b-4436-85b1-80223d9e3d97",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/304"
+  },
+  {
+   "invnr": 305,
+   "lo": 60801,
+   "hi": 61000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/b502f211-830b-49af-8a42-332bc4e2a36b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/305"
+  },
+  {
+   "invnr": 306,
+   "lo": 61001,
+   "hi": 61200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/95f54589-7cf9-40df-87a2-3a3166e9a1f2",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/306"
+  },
+  {
+   "invnr": 307,
+   "lo": 61201,
+   "hi": 61400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/b04bb167-d459-40a0-97b2-c6c5a8e61695",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/307"
+  },
+  {
+   "invnr": 308,
+   "lo": 61401,
+   "hi": 61600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/fa78ad5e-8abe-4403-9607-45e92f5bc71a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/308"
+  },
+  {
+   "invnr": 309,
+   "lo": 61601,
+   "hi": 61800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/b3f358d3-934a-414e-93e5-7a7321d40e94",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/309"
+  },
+  {
+   "invnr": 310,
+   "lo": 61801,
+   "hi": 62000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/9455da93-bf6f-4250-b7be-5b42096968b9",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/310"
+  },
+  {
+   "invnr": 311,
+   "lo": 62001,
+   "hi": 62200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/0f3f0c5a-d4e4-4e30-b976-61a4cb8a94d3",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/311"
+  },
+  {
+   "invnr": 312,
+   "lo": 62201,
+   "hi": 62400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/afba6806-0a5c-4dc3-aa26-e460bdbe045a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/312"
+  },
+  {
+   "invnr": 313,
+   "lo": 62401,
+   "hi": 62600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/c572416a-a341-487e-8cd3-65fb3044aa82",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/313"
+  },
+  {
+   "invnr": 314,
+   "lo": 62601,
+   "hi": 62800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/93442004-2830-4a72-8e5a-4e815d49816f",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/314"
+  },
+  {
+   "invnr": 315,
+   "lo": 62801,
+   "hi": 63000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/d5425155-bd00-4297-b0aa-6c67fbe24bfd",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/315"
+  },
+  {
+   "invnr": 316,
+   "lo": 63001,
+   "hi": 63200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/9d3ea97e-36c6-4fa6-8acc-c32cd47b3c75",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/316"
+  },
+  {
+   "invnr": 317,
+   "lo": 63201,
+   "hi": 63400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/e71876e2-0357-4330-a00e-fe9273b1ddf5",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/317"
+  },
+  {
+   "invnr": 318,
+   "lo": 63401,
+   "hi": 63600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/352a83f5-edab-43d6-bdbe-1cd38158a9b8",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/318"
+  },
+  {
+   "invnr": 319,
+   "lo": 63601,
+   "hi": 63800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/ea539d00-6c6a-45a7-a742-762aac20679b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/319"
+  },
+  {
+   "invnr": 320,
+   "lo": 63801,
+   "hi": 64000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/1bb20dfb-030e-4aba-a8c9-244713dca887",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/320"
+  },
+  {
+   "invnr": 321,
+   "lo": 64001,
+   "hi": 64200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/7ca040ef-d84f-4182-a6c9-a17870969915",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/321"
+  },
+  {
+   "invnr": 322,
+   "lo": 64201,
+   "hi": 64400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/8e52670f-55dd-41ab-8cdc-40e472979674",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/322"
+  },
+  {
+   "invnr": 323,
+   "lo": 64401,
+   "hi": 64600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/0f3ac64e-87c6-42fa-a774-0a9bfeefe8b4",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/323"
+  },
+  {
+   "invnr": 324,
+   "lo": 64601,
+   "hi": 64800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/ac8b4f2f-0868-4491-a3b6-7b512850a04a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/324"
+  },
+  {
+   "invnr": 325,
+   "lo": 64801,
+   "hi": 65000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/2af33241-77e2-4be1-99e9-07e895fd230a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/325"
+  },
+  {
+   "invnr": 326,
+   "lo": 65001,
+   "hi": 65200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/58c18bd7-fd94-4545-889e-7e6615044f98",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/326"
+  },
+  {
+   "invnr": 327,
+   "lo": 65201,
+   "hi": 65400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/de913f0f-a935-4bb3-9b49-84afcdc7559b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/327"
+  },
+  {
+   "invnr": 328,
+   "lo": 65401,
+   "hi": 65600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/e370a770-21f9-45ad-a8c6-86523c63e39d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/328"
+  },
+  {
+   "invnr": 329,
+   "lo": 65601,
+   "hi": 65800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/519c2c1d-63ed-469c-95e0-adc87253c60d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/329"
+  },
+  {
+   "invnr": 330,
+   "lo": 65801,
+   "hi": 66000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/979b0ad6-ce52-4384-a8b9-e1c1f64e1bb0",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/330"
+  },
+  {
+   "invnr": 331,
+   "lo": 66001,
+   "hi": 66200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/c7bfa8b0-bf11-4d14-b7c5-4afb237a2561",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/331"
+  },
+  {
+   "invnr": 332,
+   "lo": 66201,
+   "hi": 66400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/cf882a18-0e3c-4ec6-9716-9f2dc6625608",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/332"
+  },
+  {
+   "invnr": 333,
+   "lo": 66401,
+   "hi": 66600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/96e2e6f5-6c12-4c7d-801d-604f693be9aa",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/333"
+  },
+  {
+   "invnr": 334,
+   "lo": 66601,
+   "hi": 66800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/eb2e8aa9-cc35-47c9-bebc-00f14101061a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/334"
+  },
+  {
+   "invnr": 335,
+   "lo": 66801,
+   "hi": 67000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/19a93813-8e9b-4578-8e31-b19ee05fcfce",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/335"
+  },
+  {
+   "invnr": 336,
+   "lo": 67001,
+   "hi": 67200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/ae8908e5-c0f1-4acf-99d4-aff0c6813b0a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/336"
+  },
+  {
+   "invnr": 337,
+   "lo": 67201,
+   "hi": 67400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/f302b1fe-156a-4286-854b-d91cec7f91a1",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/337"
+  },
+  {
+   "invnr": 338,
+   "lo": 67401,
+   "hi": 67600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/280666cf-6c38-4a47-a153-245fe781124a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/338"
+  },
+  {
+   "invnr": 339,
+   "lo": 67601,
+   "hi": 67800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/5b343033-d48c-4e68-9596-3434095ba834",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/339"
+  },
+  {
+   "invnr": 340,
+   "lo": 67801,
+   "hi": 68000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/851c950a-9db8-425e-b492-c977b631734f",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/340"
+  },
+  {
+   "invnr": 341,
+   "lo": 68001,
+   "hi": 68200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/5449353c-7c4c-4818-9898-44612a851097",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/341"
+  },
+  {
+   "invnr": 342,
+   "lo": 68201,
+   "hi": 68400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/986de9c7-7973-4c8b-84fd-55d16a43674c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/342"
+  },
+  {
+   "invnr": 343,
+   "lo": 68401,
+   "hi": 68600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/877dc00d-df79-4c88-a969-73e297858600",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/343"
+  },
+  {
+   "invnr": 344,
+   "lo": 68601,
+   "hi": 68800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/c2b26b36-1117-45b7-9234-946356e54701",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/344"
+  },
+  {
+   "invnr": 345,
+   "lo": 68801,
+   "hi": 69000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/30c20900-84e5-4017-8b34-178a37ec7d2e",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/345"
+  },
+  {
+   "invnr": 346,
+   "lo": 69001,
+   "hi": 69200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/26bdda4c-97b0-4530-8377-673e652794ca",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/346"
+  },
+  {
+   "invnr": 347,
+   "lo": 69201,
+   "hi": 69400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/e04bb36b-df6d-4e6d-877b-7a9c6ab501d3",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/347"
+  },
+  {
+   "invnr": 348,
+   "lo": 69401,
+   "hi": 69600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/fa677e3c-af87-4632-9540-1730b3a7c302",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/348"
+  },
+  {
+   "invnr": 349,
+   "lo": 69601,
+   "hi": 9800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/19e4efe9-4ab5-49a0-a161-6ff54d6cf047",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/349"
+  },
+  {
+   "invnr": 350,
+   "lo": 69801,
+   "hi": 70000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/20d66322-bd3c-4ef6-9802-af20bb563565",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/350"
+  },
+  {
+   "invnr": 351,
+   "lo": 70001,
+   "hi": 70200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/36832e3e-7ac8-4e04-a17e-63dbf9b5ce89",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/351"
+  },
+  {
+   "invnr": 352,
+   "lo": 70201,
+   "hi": 70400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/3a3ff930-4cec-4bec-8c00-f3884371f7c5",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/352"
+  },
+  {
+   "invnr": 353,
+   "lo": 70401,
+   "hi": 70600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/9fc6d37d-5cf1-460f-99bc-15266934b8b4",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/353"
+  },
+  {
+   "invnr": 354,
+   "lo": 70601,
+   "hi": 70800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/97a5f2a4-1b90-46e2-8d97-d68e991b9aae",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/354"
+  },
+  {
+   "invnr": 355,
+   "lo": 70801,
+   "hi": 71000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/ef12845e-6f76-4a24-976d-53942420f357",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/355"
+  },
+  {
+   "invnr": 356,
+   "lo": 71001,
+   "hi": 71200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/5fe2475c-dfe1-47e7-aeef-8bb9bb301b21",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/356"
+  },
+  {
+   "invnr": 357,
+   "lo": 71201,
+   "hi": 71400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/30867957-607e-411a-9ab7-d7c801477d5a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/357"
+  },
+  {
+   "invnr": 358,
+   "lo": 71401,
+   "hi": 71600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/f04cbef7-5ac2-4b60-8c42-9d15ef716406",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/358"
+  },
+  {
+   "invnr": 359,
+   "lo": 71601,
+   "hi": 71800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/955c5406-19af-429a-9dd3-0fbc12d2caea",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/359"
+  },
+  {
+   "invnr": 360,
+   "lo": 71801,
+   "hi": 72000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/f3bae5e4-ad17-46f6-a7e6-547f74e3b7d5",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/360"
+  },
+  {
+   "invnr": 361,
+   "lo": 72001,
+   "hi": 72200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/9caa4286-b008-4222-9d2b-d64c60b46e6a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/361"
+  },
+  {
+   "invnr": 362,
+   "lo": 72201,
+   "hi": 72400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/098fca07-5211-4cab-9eaa-e5990b977b96",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/362"
+  },
+  {
+   "invnr": 363,
+   "lo": 72401,
+   "hi": 72600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/7b1b583c-e5ae-406b-8724-3b733326755f",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/363"
+  },
+  {
+   "invnr": 364,
+   "lo": 72601,
+   "hi": 72800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/e21a57b0-548d-469f-82ae-b826cb83343c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/364"
+  },
+  {
+   "invnr": 365,
+   "lo": 72801,
+   "hi": 73000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/55470120-0092-4223-a845-9dc4d373a4c6",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/365"
+  },
+  {
+   "invnr": 366,
+   "lo": 73001,
+   "hi": 73200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/a50988fc-15ea-4958-9eba-6f7f1f4c3466",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/366"
+  },
+  {
+   "invnr": 367,
+   "lo": 73201,
+   "hi": 73400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/253a19f1-a74a-4c26-b3e3-524ce5504a66",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/367"
+  },
+  {
+   "invnr": 368,
+   "lo": 73401,
+   "hi": 73600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/6fe8135c-76e0-4295-8dc6-fbe24cb69338",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/368"
+  },
+  {
+   "invnr": 369,
+   "lo": 73601,
+   "hi": 73800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/0594a30e-f24e-4695-8fcd-cadd4ed7ba5d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/369"
+  },
+  {
+   "invnr": 370,
+   "lo": 73801,
+   "hi": 74000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/cd0ab788-770e-47e0-ae73-d5a1aa1ae39d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/370"
+  },
+  {
+   "invnr": 371,
+   "lo": 74001,
+   "hi": 74200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/60f2d40d-73e5-46f0-b15c-b272bfadd4e2",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/371"
+  },
+  {
+   "invnr": 372,
+   "lo": 74201,
+   "hi": 74400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/35d90ac9-ab17-42f8-931d-17d12c17174a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/372"
+  },
+  {
+   "invnr": 373,
+   "lo": 74401,
+   "hi": 74600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/4b738b60-07da-4bd7-8a06-47a81ec684ea",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/373"
+  },
+  {
+   "invnr": 374,
+   "lo": 74601,
+   "hi": 74800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/57bf4d07-3e48-4d8f-8e79-0bb8787f7485",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/374"
+  },
+  {
+   "invnr": 375,
+   "lo": 74801,
+   "hi": 75000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/996f8f98-1edf-4e2e-a6b0-dd6e0ebb6e3f",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/375"
+  },
+  {
+   "invnr": 376,
+   "lo": 75001,
+   "hi": 75200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/d90d2e84-7cf5-4984-910c-13ed1f1f2e4c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/376"
+  },
+  {
+   "invnr": 377,
+   "lo": 75201,
+   "hi": 75400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/a326e3af-46dc-414a-b5e5-6eaf17484e32",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/377"
+  },
+  {
+   "invnr": 378,
+   "lo": 75401,
+   "hi": 75600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/33dd1fb9-bc24-4fcc-9949-ab33ce25fffe",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/378"
+  },
+  {
+   "invnr": 379,
+   "lo": 75601,
+   "hi": 75800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/5d2626e0-0e3f-4e25-9972-4f511fe441e9",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/379"
+  },
+  {
+   "invnr": 380,
+   "lo": 75801,
+   "hi": 76000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/70f30eb1-fe8a-412e-8c1b-ff5a9eb699c9",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/380"
+  },
+  {
+   "invnr": 381,
+   "lo": 76001,
+   "hi": 76200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/1852471e-beaa-40d5-a55a-f1d8a7bb32c2",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/381"
+  },
+  {
+   "invnr": 382,
+   "lo": 76201,
+   "hi": 76400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/32836e7b-34ee-4624-811e-3532351fab54",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/382"
+  },
+  {
+   "invnr": 383,
+   "lo": 76401,
+   "hi": 76600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/56516681-68a3-498b-b548-c8e2fc9e1602",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/383"
+  },
+  {
+   "invnr": 384,
+   "lo": 76601,
+   "hi": 76800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/24cddd71-699e-439c-af7a-9308b5c5fc45",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/384"
+  },
+  {
+   "invnr": 385,
+   "lo": 76801,
+   "hi": 77000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/edcd5a2c-16bb-41d9-9836-9a15b432d3ba",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/385"
+  },
+  {
+   "invnr": 386,
+   "lo": 77001,
+   "hi": 77200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/9ed6870a-02e7-43e4-8e9f-ce0b889c1817",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/386"
+  },
+  {
+   "invnr": 387,
+   "lo": 77201,
+   "hi": 77400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/d47cbf9c-1fb1-4084-8077-94d7af6d40bb",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/387"
+  },
+  {
+   "invnr": 388,
+   "lo": 77401,
+   "hi": 77600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/e5ba5004-447d-46a0-8351-77658d30d75d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/388"
+  },
+  {
+   "invnr": 389,
+   "lo": 77601,
+   "hi": 77800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/1e40f233-94bf-4bf6-af42-1dd0f31fbe46",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/389"
+  },
+  {
+   "invnr": 390,
+   "lo": 77801,
+   "hi": 78000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/1e8214b2-b62f-4897-ae1a-7b32587e542e",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/390"
+  },
+  {
+   "invnr": 391,
+   "lo": 78001,
+   "hi": 78200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/77cd66bb-243a-493e-92ef-b1961c3938f8",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/391"
+  },
+  {
+   "invnr": 392,
+   "lo": 78201,
+   "hi": 78400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/e93e675d-4959-4343-8d3c-689ca9fa85c9",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/392"
+  },
+  {
+   "invnr": 393,
+   "lo": 78401,
+   "hi": 78600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/c4be5c58-9f06-496a-b322-f30bf5a72c44",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/393"
+  },
+  {
+   "invnr": 394,
+   "lo": 78601,
+   "hi": 78800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/a9def6e7-fd56-450b-81b9-bcee7eccb83f",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/394"
+  },
+  {
+   "invnr": 395,
+   "lo": 78801,
+   "hi": 79000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/3ca74ce9-e7eb-4ce8-9020-393b0a1376ed",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/395"
+  },
+  {
+   "invnr": 396,
+   "lo": 79001,
+   "hi": 79200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/6b0f2323-3495-40d6-90c8-50ce596acf79",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/396"
+  },
+  {
+   "invnr": 397,
+   "lo": 79201,
+   "hi": 79400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/9efbca61-0b05-4067-8ba8-8671ec5db811",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/397"
+  },
+  {
+   "invnr": 398,
+   "lo": 79401,
+   "hi": 79600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/8f9c68be-ab51-42f9-b796-8323367f81e8",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/398"
+  },
+  {
+   "invnr": 399,
+   "lo": 79601,
+   "hi": 79800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/fa08282e-38f0-4c7f-b206-f468d5458503",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/399"
+  },
+  {
+   "invnr": 400,
+   "lo": 79801,
+   "hi": 80000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/1bbb1589-87bc-4cba-bd6e-3945179e5780",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/400"
+  },
+  {
+   "invnr": 401,
+   "lo": 80001,
+   "hi": 80200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/e1499c57-e80f-4aab-a9e5-f89b411bfcad",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/401"
+  },
+  {
+   "invnr": 402,
+   "lo": 80201,
+   "hi": 80400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/0cfa3486-51f3-4f31-a158-80e95802a042",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/402"
+  },
+  {
+   "invnr": 403,
+   "lo": 80401,
+   "hi": 80600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/5c2296db-0a52-451b-bde5-4651400a9180",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/403"
+  },
+  {
+   "invnr": 404,
+   "lo": 80601,
+   "hi": 80800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/2285f0f3-2da4-4d6d-bbab-79aa56de8714",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/404"
+  },
+  {
+   "invnr": 405,
+   "lo": 80801,
+   "hi": 81000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/7bc4f983-87c1-4c5e-b21e-335b5d870cfc",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/405"
+  },
+  {
+   "invnr": 406,
+   "lo": 81001,
+   "hi": 81200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/5cb9f66e-7ad4-453c-8537-66c301d5f26e",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/406"
+  },
+  {
+   "invnr": 407,
+   "lo": 81201,
+   "hi": 81400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/3a0df702-fce7-425b-bc90-b72c50da350d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/407"
+  },
+  {
+   "invnr": 408,
+   "lo": 81401,
+   "hi": 81600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/9f27c10b-0b75-4e03-aa52-1d13cb35e3c1",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/408"
+  },
+  {
+   "invnr": 409,
+   "lo": 81601,
+   "hi": 81800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/5053fe10-198d-488b-b606-5f385df34342",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/409"
+  },
+  {
+   "invnr": 410,
+   "lo": 81801,
+   "hi": 82000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/313db1cb-af15-41b6-a037-ec7a90dd5196",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/410"
+  },
+  {
+   "invnr": 411,
+   "lo": 82001,
+   "hi": 82200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/996ef727-3bff-4a17-9bdf-730b5d0bbf43",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/411"
+  },
+  {
+   "invnr": 412,
+   "lo": 82201,
+   "hi": 82400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/48000000-eb27-470f-9a6f-c96d77186c2e",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/412"
+  },
+  {
+   "invnr": 413,
+   "lo": 82401,
+   "hi": 82600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/f45b60b2-a092-4b4b-b133-88e34eeaa1b2",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/413"
+  },
+  {
+   "invnr": 414,
+   "lo": 82601,
+   "hi": 82800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/ab9f62aa-00a9-49b5-82d6-8de73067fa62",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/414"
+  },
+  {
+   "invnr": 415,
+   "lo": 82801,
+   "hi": 83000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/d04d4548-1212-43e1-8cf4-81a8c94ef705",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/415"
+  },
+  {
+   "invnr": 416,
+   "lo": 83001,
+   "hi": 83200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/7bb8e349-4106-4b27-9072-23fccc480f4a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/416"
+  },
+  {
+   "invnr": 417,
+   "lo": 83201,
+   "hi": 83400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/da135687-c9db-41b3-a669-98015e67be2b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/417"
+  },
+  {
+   "invnr": 418,
+   "lo": 83401,
+   "hi": 83600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/fb80f760-cfa4-46bd-9df0-a290021185ab",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/418"
+  },
+  {
+   "invnr": 419,
+   "lo": 83601,
+   "hi": 83800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/ff18b71a-a926-40f4-872a-109da2d2c163",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/419"
+  },
+  {
+   "invnr": 420,
+   "lo": 83801,
+   "hi": 84000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/ed7844e4-1a09-42b7-930e-1e6e57c50b14",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/420"
+  },
+  {
+   "invnr": 421,
+   "lo": 84001,
+   "hi": 84200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/84831ec8-1243-4cad-8782-1e1da814395f",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/421"
+  },
+  {
+   "invnr": 422,
+   "lo": 84201,
+   "hi": 84400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/fc786e94-1218-4e30-9d7e-fc90d75dd476",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/422"
+  },
+  {
+   "invnr": 423,
+   "lo": 84401,
+   "hi": 84600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/3c4987ed-6180-45ae-a76a-b200b82152fb",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/423"
+  },
+  {
+   "invnr": 424,
+   "lo": 84601,
+   "hi": 84800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/a7e2ff6a-b72a-4d64-8257-6174b855b9b4",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/424"
+  },
+  {
+   "invnr": 425,
+   "lo": 84801,
+   "hi": 85000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/2da44782-c486-4550-a4fb-457521cd2199",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/425"
+  },
+  {
+   "invnr": 426,
+   "lo": 85001,
+   "hi": 85200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/b810b3f5-f870-4d94-a8e4-b69af6e65553",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/426"
+  },
+  {
+   "invnr": 427,
+   "lo": 85201,
+   "hi": 85400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/a4728e35-ff0c-44fa-bb64-6fd25102ce36",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/427"
+  },
+  {
+   "invnr": 428,
+   "lo": 85401,
+   "hi": 85600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/d2e5f4d7-be31-48f9-9075-559d0491597f",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/428"
+  },
+  {
+   "invnr": 429,
+   "lo": 85601,
+   "hi": 85800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/72e01141-8717-418b-a78d-52237a340921",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/429"
+  },
+  {
+   "invnr": 430,
+   "lo": 85801,
+   "hi": 86000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/b9296a82-8d8b-4d2f-a0bd-cf8f28aa4feb",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/430"
+  },
+  {
+   "invnr": 431,
+   "lo": 86001,
+   "hi": 86200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/5c2cc967-8781-4163-b37e-e911e33b2e5a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/431"
+  },
+  {
+   "invnr": 432,
+   "lo": 86201,
+   "hi": 86400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/9cb1a2b4-8f94-442b-97e4-f12b2267a341",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/432"
+  },
+  {
+   "invnr": 433,
+   "lo": 86401,
+   "hi": 86600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/41fddb94-4da4-45c9-94dd-b4551ea52ef4",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/433"
+  },
+  {
+   "invnr": 434,
+   "lo": 86601,
+   "hi": 86800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/b7f6d927-f912-45cd-88f3-091851b18c10",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/434"
+  },
+  {
+   "invnr": 435,
+   "lo": 86801,
+   "hi": 87000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/80cb4530-2d8a-46ca-ad6e-42562dc9f10d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/435"
+  },
+  {
+   "invnr": 436,
+   "lo": 87001,
+   "hi": 87200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/b3cdc0f0-3904-4f32-aed4-a7b9c52d1d97",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/436"
+  },
+  {
+   "invnr": 437,
+   "lo": 87201,
+   "hi": 87400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/35d67f40-c7ad-4d78-bbff-976c25bcce06",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/437"
+  },
+  {
+   "invnr": 438,
+   "lo": 87401,
+   "hi": 87600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/6da44e24-2cac-4b23-b8f1-42bb785bfec3",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/438"
+  },
+  {
+   "invnr": 439,
+   "lo": 87601,
+   "hi": 87800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/a4526854-4093-4337-941d-3deff203fc5d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/439"
+  },
+  {
+   "invnr": 440,
+   "lo": 87801,
+   "hi": 88000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/eff8f18c-5c7e-45d3-b3f2-627e40a9ff01",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/440"
+  },
+  {
+   "invnr": 441,
+   "lo": 88001,
+   "hi": 88200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/3fb366cf-4810-49ae-8bfd-7c548c8b396c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/441"
+  },
+  {
+   "invnr": 442,
+   "lo": 88201,
+   "hi": 88400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/51756eb4-74e0-464b-835b-6fa422e83854",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/442"
+  },
+  {
+   "invnr": 443,
+   "lo": 88401,
+   "hi": 88600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/6a78c1c3-d472-4668-948e-9b11ceae00f7",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/443"
+  },
+  {
+   "invnr": 444,
+   "lo": 88601,
+   "hi": 88800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/e278d5e9-a0d3-4179-adae-73cb3c20cef9",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/444"
+  },
+  {
+   "invnr": 445,
+   "lo": 88801,
+   "hi": 89000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/b64d68a5-d312-4e60-b0f3-8408b5fbc304",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/445"
+  },
+  {
+   "invnr": 446,
+   "lo": 89001,
+   "hi": 89200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/ecd28b31-0cf5-4645-b314-8c8586a0c876",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/446"
+  },
+  {
+   "invnr": 447,
+   "lo": 89201,
+   "hi": 89400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/d414d550-0025-4ba1-89e7-df057b67cdfa",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/447"
+  },
+  {
+   "invnr": 448,
+   "lo": 89401,
+   "hi": 89600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/9412420e-555a-42b9-8261-a0844eadb20e",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/448"
+  },
+  {
+   "invnr": 449,
+   "lo": 89601,
+   "hi": 89800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/bcf84050-5136-4fd1-aac7-1ead204074c5",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/449"
+  },
+  {
+   "invnr": 450,
+   "lo": 89801,
+   "hi": 90000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/0c3fe792-2774-4183-af2a-b9fbe833759d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/450"
+  },
+  {
+   "invnr": 451,
+   "lo": 90001,
+   "hi": 90200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/0166e493-bf14-40ab-904a-0a62a6374489",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/451"
+  },
+  {
+   "invnr": 452,
+   "lo": 90201,
+   "hi": 90400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/6aa0d5b1-b63e-443d-8154-923d71fb7162",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/452"
+  },
+  {
+   "invnr": 453,
+   "lo": 90401,
+   "hi": 90600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/e2ee27e1-33d4-454d-a733-9ac2a40b1ee1",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/453"
+  },
+  {
+   "invnr": 454,
+   "lo": 90601,
+   "hi": 90800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/f100bcfe-bf94-4b22-a0fa-039de1090bd9",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/454"
+  },
+  {
+   "invnr": 455,
+   "lo": 90801,
+   "hi": 91000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/7857c365-9bb2-486a-afa7-fae0ed1a0be8",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/455"
+  },
+  {
+   "invnr": 456,
+   "lo": 91001,
+   "hi": 91200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/777d0cc3-3f50-44fd-bf7e-7c3cc2a806c4",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/456"
+  },
+  {
+   "invnr": 457,
+   "lo": 91201,
+   "hi": 91400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/4b96360b-7b29-4915-ac4e-11e730de4a55",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/457"
+  },
+  {
+   "invnr": 458,
+   "lo": 91401,
+   "hi": 91600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/8b9ab345-a26d-485c-bc52-e11462d65c70",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/458"
+  },
+  {
+   "invnr": 459,
+   "lo": 91601,
+   "hi": 91800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/94bf6549-f934-442c-a2d0-9cf4003f9d30",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/459"
+  },
+  {
+   "invnr": 460,
+   "lo": 91801,
+   "hi": 92000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/a8234773-8117-43af-ad75-c86251e2ffdc",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/460"
+  },
+  {
+   "invnr": 461,
+   "lo": 92001,
+   "hi": 92200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/88c86214-f9c7-4841-8e34-f0aa55e331f9",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/461"
+  },
+  {
+   "invnr": 462,
+   "lo": 92201,
+   "hi": 92400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/53b8086a-827d-4b40-9dbc-74ce80552854",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/462"
+  },
+  {
+   "invnr": 463,
+   "lo": 92401,
+   "hi": 92600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/9ffa583d-36f1-4776-a3fc-24d63cf50689",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/463"
+  },
+  {
+   "invnr": 464,
+   "lo": 92601,
+   "hi": 92800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/6e975410-622f-44b0-af27-88a287dfd352",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/464"
+  },
+  {
+   "invnr": 465,
+   "lo": 92801,
+   "hi": 93000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/cba40fbb-caf1-4aed-b969-120a654ae9cd",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/465"
+  },
+  {
+   "invnr": 466,
+   "lo": 93001,
+   "hi": 93200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/6986ebc3-24ca-45a6-a887-24884c411299",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/466"
+  },
+  {
+   "invnr": 467,
+   "lo": 93201,
+   "hi": 93400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/a75ec2bc-32ad-4ff2-a200-0bb5f5cb60ff",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/467"
+  },
+  {
+   "invnr": 468,
+   "lo": 93401,
+   "hi": 93600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/c78fd2de-5a25-47d9-ae26-c593640ddf88",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/468"
+  },
+  {
+   "invnr": 469,
+   "lo": 93601,
+   "hi": 93800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/1b1fb176-764b-4965-b0f6-2ca37eba1021",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/469"
+  },
+  {
+   "invnr": 470,
+   "lo": 93801,
+   "hi": 94000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/133c6c18-b687-45b1-90df-60acf1a3c8df",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/470"
+  },
+  {
+   "invnr": 471,
+   "lo": 94001,
+   "hi": 94200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/a62f4ad5-a697-4752-bbe4-1b4f81a52075",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/471"
+  },
+  {
+   "invnr": 472,
+   "lo": 94201,
+   "hi": 94400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/7b7ec7b0-12cd-4ff4-b6e1-98e58135587c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/472"
+  },
+  {
+   "invnr": 473,
+   "lo": 94401,
+   "hi": 94600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/c55ef71c-2354-4957-920c-1d7af287a09e",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/473"
+  },
+  {
+   "invnr": 474,
+   "lo": 94601,
+   "hi": 94800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/285121de-09cb-49cf-b7df-4cdefc3c75b4",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/474"
+  },
+  {
+   "invnr": 475,
+   "lo": 94801,
+   "hi": 95000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/c107b10a-83f3-4dca-9fcb-21824a4ac3a9",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/475"
+  },
+  {
+   "invnr": 476,
+   "lo": 95001,
+   "hi": 95200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/d5b0c338-35e7-43c8-843d-ef14e0890516",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/476"
+  },
+  {
+   "invnr": 477,
+   "lo": 95201,
+   "hi": 95400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/3efc6ceb-2bc9-46e7-9fab-80d3587c0a9a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/477"
+  },
+  {
+   "invnr": 478,
+   "lo": 95401,
+   "hi": 95600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/46862dbf-4ac9-4fdd-baac-8b234c14b058",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/478"
+  },
+  {
+   "invnr": 479,
+   "lo": 95601,
+   "hi": 95800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/2e6ca4f7-da2c-490b-9c9b-58e41cd6ba9e",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/479"
+  },
+  {
+   "invnr": 480,
+   "lo": 95801,
+   "hi": 96000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/e2ea8aaa-0999-49c0-9371-c676ae50b3f6",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/480"
+  },
+  {
+   "invnr": 481,
+   "lo": 96001,
+   "hi": 96200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/23386005-7ac5-4c98-9883-12c93af7f801",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/481"
+  },
+  {
+   "invnr": 482,
+   "lo": 96201,
+   "hi": 96400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/a89d2db9-caf5-4c53-bd06-18ade6888b26",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/482"
+  },
+  {
+   "invnr": 483,
+   "lo": 96401,
+   "hi": 96600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/efa6d589-9bba-4f2f-89f6-d6102618e1b6",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/483"
+  },
+  {
+   "invnr": 484,
+   "lo": 96601,
+   "hi": 96800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/55553504-8cd1-4fd3-af40-764b003ab7c1",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/484"
+  },
+  {
+   "invnr": 485,
+   "lo": 96801,
+   "hi": 97000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/e4c24b87-4cfa-436d-aba7-4b0c493a6521",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/485"
+  },
+  {
+   "invnr": 486,
+   "lo": 97001,
+   "hi": 97200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/74064512-8eef-4c0a-9b30-27dcb89a42b7",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/486"
+  },
+  {
+   "invnr": 487,
+   "lo": 97201,
+   "hi": 97400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/0157fb96-1637-429a-b814-f3486299401b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/487"
+  },
+  {
+   "invnr": 488,
+   "lo": 97401,
+   "hi": 97600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/fe404b2b-c0c5-4749-a433-9a97ddb9340b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/488"
+  },
+  {
+   "invnr": 489,
+   "lo": 97601,
+   "hi": 97800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/ee6e3a88-3534-4e0d-ba42-9d9fdc2fa20b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/489"
+  },
+  {
+   "invnr": 490,
+   "lo": 97801,
+   "hi": 98000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/40bad416-c8b2-4da8-a4a8-ed83926b6be3",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/490"
+  },
+  {
+   "invnr": 491,
+   "lo": 98001,
+   "hi": 98200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/54cc3378-c08e-48c2-81fa-94b94c3b812d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/491"
+  },
+  {
+   "invnr": 492,
+   "lo": 98201,
+   "hi": 98400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/1dc04606-f93e-421a-96c5-ee78abaa111c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/492"
+  },
+  {
+   "invnr": 493,
+   "lo": 98401,
+   "hi": 98600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/97f96bf9-15fd-4141-953c-fcd6b754503f",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/493"
+  },
+  {
+   "invnr": 494,
+   "lo": 98601,
+   "hi": 98800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/5a4c86a2-be96-40fa-8666-fdd70e4e06f7",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/494"
+  },
+  {
+   "invnr": 495,
+   "lo": 98801,
+   "hi": 99000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/f51099f7-c95c-4efc-abd0-c4718e0283b0",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/495"
+  },
+  {
+   "invnr": 496,
+   "lo": 99001,
+   "hi": 99200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/afa3d239-b4d5-43f8-b426-387e258ffe98",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/496"
+  },
+  {
+   "invnr": 497,
+   "lo": 99201,
+   "hi": 99400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/d96373ff-98ee-4213-9ac2-41e4cdeef8ad",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/497"
+  },
+  {
+   "invnr": 498,
+   "lo": 99401,
+   "hi": 99600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/05b48b02-ab36-47d3-9cdd-19d8ec434761",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/498"
+  },
+  {
+   "invnr": 499,
+   "lo": 99601,
+   "hi": 99800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/60a7921e-4c0c-4895-bbf2-2340be7de22a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/499"
+  },
+  {
+   "invnr": 500,
+   "lo": 99801,
+   "hi": 100000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/6dedf07f-4150-4479-90ee-84fec13172dc",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/500"
+  },
+  {
+   "invnr": 501,
+   "lo": 100001,
+   "hi": 100200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/4f0a6f00-3699-4bde-9435-669080956c15",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/501"
+  },
+  {
+   "invnr": 502,
+   "lo": 100201,
+   "hi": 100400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/05c98920-c434-4db5-8c57-3e2a719a4ad4",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/502"
+  },
+  {
+   "invnr": 503,
+   "lo": 100401,
+   "hi": 100600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/8705852b-be8b-4734-9809-0dd2e1eca0bd",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/503"
+  },
+  {
+   "invnr": 504,
+   "lo": 100601,
+   "hi": 100800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/750266bb-8379-4dd4-b7d9-3070288612ab",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/504"
+  },
+  {
+   "invnr": 505,
+   "lo": 100801,
+   "hi": 101000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/3efcce58-2da9-4dde-99a1-2e05862cc297",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/505"
+  },
+  {
+   "invnr": 506,
+   "lo": 101001,
+   "hi": 101200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/b673bc43-9957-4a99-8040-0a90362d4f8f",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/506"
+  },
+  {
+   "invnr": 507,
+   "lo": 101201,
+   "hi": 101400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/a267d1df-f3cb-4d73-b092-ab9ff5ea2c97",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/507"
+  },
+  {
+   "invnr": 508,
+   "lo": 101401,
+   "hi": 101600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/7c2218fd-d153-4a3d-a0b8-1ac9a455f543",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/508"
+  },
+  {
+   "invnr": 509,
+   "lo": 101601,
+   "hi": 101800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/0934a9fe-619e-42a4-8337-5b0edefcfb89",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/509"
+  },
+  {
+   "invnr": 510,
+   "lo": 101801,
+   "hi": 102000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/ea522c12-f8aa-4dfc-80f5-c51353f15fca",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/510"
+  },
+  {
+   "invnr": 511,
+   "lo": 102001,
+   "hi": 102200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/74487be5-9cfa-4aed-9d99-aac5d74de9d9",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/511"
+  },
+  {
+   "invnr": 512,
+   "lo": 102201,
+   "hi": 102400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/b257f7fd-4782-40eb-b633-2e1f8ea56049",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/512"
+  },
+  {
+   "invnr": 513,
+   "lo": 102401,
+   "hi": 102600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/76e425e4-04aa-494e-8e01-3f2be45bf2ea",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/513"
+  },
+  {
+   "invnr": 514,
+   "lo": 102601,
+   "hi": 102800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/cf0ffaf6-8bdd-4115-99de-ca44eb809058",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/514"
+  },
+  {
+   "invnr": 515,
+   "lo": 102801,
+   "hi": 103000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/e6f007aa-2023-49d1-a6c3-3c3a52f87125",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/515"
+  },
+  {
+   "invnr": 516,
+   "lo": 103001,
+   "hi": 103200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/e7b66d92-59d7-4bf9-ac75-8556fe92072e",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/516"
+  },
+  {
+   "invnr": 517,
+   "lo": 103201,
+   "hi": 103400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/a118b12c-0e1f-4ef3-9f74-3efad0dfe906",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/517"
+  },
+  {
+   "invnr": 518,
+   "lo": 103401,
+   "hi": 103600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/a5f15fc9-2b22-4113-a825-4738ff091667",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/518"
+  },
+  {
+   "invnr": 519,
+   "lo": 103601,
+   "hi": 103800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/21ca2810-6750-4551-a3c2-9633853dd19f",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/519"
+  },
+  {
+   "invnr": 520,
+   "lo": 103801,
+   "hi": 104000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/b9ac9787-b964-4180-a8e1-c7d90e0d6c1b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/520"
+  },
+  {
+   "invnr": 521,
+   "lo": 104001,
+   "hi": 104200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/5bd30396-cc5b-461a-9dc4-88280fe95601",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/521"
+  },
+  {
+   "invnr": 522,
+   "lo": 104201,
+   "hi": 104400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/6ed820b5-4538-4b6e-a5eb-850dfcd1e571",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/522"
+  },
+  {
+   "invnr": 523,
+   "lo": 104401,
+   "hi": 104600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/b881637b-0bce-4d04-9992-f71e2391bdbe",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/523"
+  },
+  {
+   "invnr": 524,
+   "lo": 104601,
+   "hi": 104800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/504238f1-c27b-4184-a5e8-d5c14fcdaae7",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/524"
+  },
+  {
+   "invnr": 525,
+   "lo": 104801,
+   "hi": 105000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/2ee5fd91-0b75-4cd2-956b-99ce82b7b9cb",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/525"
+  },
+  {
+   "invnr": 526,
+   "lo": 105001,
+   "hi": 105200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/0b679f7f-ff85-4194-9343-cd4b0d70bf29",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/526"
+  },
+  {
+   "invnr": 527,
+   "lo": 105201,
+   "hi": 105400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/bcced5f1-0d69-4413-9001-872fd0db0151",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/527"
+  },
+  {
+   "invnr": 528,
+   "lo": 105401,
+   "hi": 105600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/d5f143b2-a5ed-499c-b1f3-ea627e34ba27",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/528"
+  },
+  {
+   "invnr": 529,
+   "lo": 105601,
+   "hi": 105800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/767e65c9-b387-494c-a64f-5694c6b092e0",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/529"
+  },
+  {
+   "invnr": 530,
+   "lo": 105801,
+   "hi": 106000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/fd0978ae-8012-423d-8d59-26cabb2e9d5e",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/530"
+  },
+  {
+   "invnr": 531,
+   "lo": 106001,
+   "hi": 106200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/a8af854c-7f79-4939-9b96-ec12cde49599",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/531"
+  },
+  {
+   "invnr": 532,
+   "lo": 106201,
+   "hi": 106400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/363da2fd-7d7c-42d9-b97a-c2c0da0900e3",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/532"
+  },
+  {
+   "invnr": 533,
+   "lo": 106401,
+   "hi": 106600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/6222733e-6cdc-45df-a3de-c67f2fa62b84",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/533"
+  },
+  {
+   "invnr": 534,
+   "lo": 106601,
+   "hi": 106800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/2f166d40-7d08-44c4-b70b-9a672ecb471f",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/534"
+  },
+  {
+   "invnr": 535,
+   "lo": 106801,
+   "hi": 107000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/c77cee05-060c-4d06-bc78-4f564be1a10e",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/535"
+  },
+  {
+   "invnr": 536,
+   "lo": 107001,
+   "hi": 107200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/dcf58b4b-8195-4e95-979b-d8ce21d63e0e",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/536"
+  },
+  {
+   "invnr": 537,
+   "lo": 107201,
+   "hi": 107400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/f4bc3a76-4bd2-4cf8-a869-63738393fa17",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/537"
+  },
+  {
+   "invnr": 538,
+   "lo": 107401,
+   "hi": 107600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/e6ed4fc3-1c7f-4fd9-9433-c4aa47e0509d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/538"
+  },
+  {
+   "invnr": 540,
+   "lo": 107801,
+   "hi": 108000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/d8454745-3940-47c1-94d9-77bad2453517",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/540"
+  },
+  {
+   "invnr": 541,
+   "lo": 108001,
+   "hi": 108200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/d6d67083-3d69-4d6a-8e88-a9b480eac165",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/541"
+  },
+  {
+   "invnr": 542,
+   "lo": 108201,
+   "hi": 108400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/7bb07986-6a89-4386-acdc-664ea2ae4534",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/542"
+  },
+  {
+   "invnr": 543,
+   "lo": 108401,
+   "hi": 108600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/52aba781-b52d-400b-937a-10fa549f1797",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/543"
+  },
+  {
+   "invnr": 544,
+   "lo": 108601,
+   "hi": 108800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/f5ec91d1-b04b-4de1-a327-3b0aab082790",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/544"
+  },
+  {
+   "invnr": 545,
+   "lo": 108801,
+   "hi": 109000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/2e4e8eac-bf96-4cf8-941a-6698acbeed3a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/545"
+  },
+  {
+   "invnr": 546,
+   "lo": 109001,
+   "hi": 109200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/70a6d2e8-1673-44c4-9ce2-65d92fa32437",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/546"
+  },
+  {
+   "invnr": 547,
+   "lo": 109201,
+   "hi": 109400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/715a6f57-ca05-43cc-8b0a-3d38ef53de78",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/547"
+  },
+  {
+   "invnr": 548,
+   "lo": 109401,
+   "hi": 109600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/c4cce3de-9b9f-4ad1-8b01-c8a8ac94bc5c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/548"
+  },
+  {
+   "invnr": 549,
+   "lo": 109601,
+   "hi": 109800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/8efc2be7-3d84-4f4f-b572-65b74cd5f28a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/549"
+  },
+  {
+   "invnr": 550,
+   "lo": 109801,
+   "hi": 110000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/9108bb48-3c9b-480c-8a93-c26170b5b799",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/550"
+  },
+  {
+   "invnr": 551,
+   "lo": 110001,
+   "hi": 110200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/f74499c5-fd26-47e8-9638-98e27314302b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/551"
+  },
+  {
+   "invnr": 552,
+   "lo": 110201,
+   "hi": 110400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/e35acf45-2a18-4d2d-9c2b-7f33bdcf617c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/552"
+  },
+  {
+   "invnr": 553,
+   "lo": 110401,
+   "hi": 110600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/8d2558d1-bdde-4d0c-9309-568174c7a94f",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/553"
+  },
+  {
+   "invnr": 554,
+   "lo": 110601,
+   "hi": 110800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/b00585d7-6d45-478a-a7fa-7f5159d7662b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/554"
+  },
+  {
+   "invnr": 555,
+   "lo": 110801,
+   "hi": 111000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/bae9a681-b963-4ef9-9975-ab4ce6fab569",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/555"
+  },
+  {
+   "invnr": 556,
+   "lo": 111001,
+   "hi": 111200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/00898b69-4650-48b7-a6d9-8184cc41b820",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/556"
+  },
+  {
+   "invnr": 557,
+   "lo": 111201,
+   "hi": 111400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/5b59a4d0-1cd1-474d-8bb2-b472b83e8653",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/557"
+  },
+  {
+   "invnr": 558,
+   "lo": 111401,
+   "hi": 111600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/7cffdb99-0edd-4b1d-8d23-01c3643a7aaf",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/558"
+  },
+  {
+   "invnr": 559,
+   "lo": 111601,
+   "hi": 111800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/628da975-cc4b-488f-96cf-4eac107a248b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/559"
+  },
+  {
+   "invnr": 560,
+   "lo": 111801,
+   "hi": 112000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/d1508003-4136-4ac6-af1a-85be3b65ad07",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/560"
+  },
+  {
+   "invnr": 590,
+   "lo": 111801,
+   "hi": 118000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/61c93fbb-0624-4da7-8453-83dd9187545a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/590"
+  },
+  {
+   "invnr": 561,
+   "lo": 112001,
+   "hi": 112200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/e121fd64-0231-44ff-ac7b-4381f2e500df",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/561"
+  },
+  {
+   "invnr": 562,
+   "lo": 112201,
+   "hi": 112400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/be70c8f0-74aa-4d48-8fb6-27dc4530730b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/562"
+  },
+  {
+   "invnr": 563,
+   "lo": 112401,
+   "hi": 112600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/7d43bbe9-cc3a-48ce-8766-436ffc53b413",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/563"
+  },
+  {
+   "invnr": 564,
+   "lo": 112601,
+   "hi": 112800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/cfc9671f-7f0d-4429-acc1-82eb73c62b46",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/564"
+  },
+  {
+   "invnr": 565,
+   "lo": 112801,
+   "hi": 113000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/eb16e282-53c7-4d3a-bbbe-b1c45ff5897a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/565"
+  },
+  {
+   "invnr": 566,
+   "lo": 113001,
+   "hi": 113200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/525e034c-4b18-465e-bfda-24a52d96876a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/566"
+  },
+  {
+   "invnr": 567,
+   "lo": 113201,
+   "hi": 113400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/51965230-2463-4e56-8449-6c1607a5df49",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/567"
+  },
+  {
+   "invnr": 568,
+   "lo": 113401,
+   "hi": 113600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/73b2299a-d239-46e0-888f-4669520cbf79",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/568"
+  },
+  {
+   "invnr": 569,
+   "lo": 113601,
+   "hi": 113800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/248ee09c-2251-4d35-894e-9560cbfa1b96",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/569"
+  },
+  {
+   "invnr": 570,
+   "lo": 113801,
+   "hi": 114000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/b6f116f6-be97-4bcd-bbe0-4b5a7b74a69b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/570"
+  },
+  {
+   "invnr": 571,
+   "lo": 114001,
+   "hi": 114200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/e7b0e304-4138-4633-ac4d-ab056359dc47",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/571"
+  },
+  {
+   "invnr": 572,
+   "lo": 114201,
+   "hi": 114400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/9463d7be-654b-42f0-be61-c213278834e6",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/572"
+  },
+  {
+   "invnr": 573,
+   "lo": 114401,
+   "hi": 114600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/499943ec-ca20-4c3d-a8ec-be3eed14e790",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/573"
+  },
+  {
+   "invnr": 574,
+   "lo": 114601,
+   "hi": 114800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/b0d22282-198a-478d-b46f-afc56704471c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/574"
+  },
+  {
+   "invnr": 575,
+   "lo": 114801,
+   "hi": 115000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/f92cf324-cdcf-4b65-874d-56c166bee329",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/575"
+  },
+  {
+   "invnr": 576,
+   "lo": 115001,
+   "hi": 115200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/104d67d7-f2e6-41a6-9bc0-6519406b67e5",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/576"
+  },
+  {
+   "invnr": 577,
+   "lo": 115201,
+   "hi": 115400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/13557a03-93c8-4dec-84f7-c4fb12b40ac3",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/577"
+  },
+  {
+   "invnr": 578,
+   "lo": 115401,
+   "hi": 115600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/ff541b60-8d10-4c4a-83ff-866155ab225d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/578"
+  },
+  {
+   "invnr": 579,
+   "lo": 115601,
+   "hi": 115800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/171735bf-3ae7-4348-9de9-bbded043c86e",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/579"
+  },
+  {
+   "invnr": 580,
+   "lo": 115801,
+   "hi": 116000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/6168fe60-79c3-40be-8796-972c39c1eb18",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/580"
+  },
+  {
+   "invnr": 581,
+   "lo": 116001,
+   "hi": 116200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/3d6fedfc-cb4e-4b0e-b396-9af4b2a1ad11",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/581"
+  },
+  {
+   "invnr": 582,
+   "lo": 116201,
+   "hi": 116400,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/baae304e-5684-43f6-8c94-9053fe689f57",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/582"
+  },
+  {
+   "invnr": 583,
+   "lo": 116401,
+   "hi": 116600,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/c91b65d1-1b57-4bde-9564-5a36dae45b19",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/583"
+  },
+  {
+   "invnr": 584,
+   "lo": 116601,
+   "hi": 116800,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/03b1c8b1-382d-4d9f-b3de-f43cd3068bd7",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/584"
+  },
+  {
+   "invnr": 585,
+   "lo": 116801,
+   "hi": 117000,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/319bdc37-46a5-4d87-8387-8da479e2eab5",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/585"
+  },
+  {
+   "invnr": 586,
+   "lo": 117001,
+   "hi": 117200,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/0ef692ca-ea42-4db1-8e85-2b41aeee6062",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/586"
+  },
+  {
+   "invnr": 591,
+   "lo": 118001,
+   "hi": 118100,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/6abead4f-5181-4d46-9e31-b31bde42b2e5",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/591"
+  },
+  {
+   "invnr": 592,
+   "lo": 118101,
+   "hi": 118139,
+   "serie": "A1.1",
+   "handle": "http://hdl.handle.net/10648/23299e0f-e918-41f1-8352-4babe33c1a5c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/592"
+  },
+  {
+   "invnr": 613,
+   "lo": 650,
+   "hi": 720,
+   "serie": "A1.2",
+   "handle": "http://hdl.handle.net/10648/f8c79a4f-0a4b-44b9-91ed-6fca7536b68b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/613"
+  },
+  {
+   "invnr": 593,
+   "lo": 28001,
+   "hi": 42000,
+   "serie": "A1.2",
+   "handle": "http://hdl.handle.net/10648/cbaf4237-6c8a-47e9-96c2-d92040cab51d",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/593"
+  },
+  {
+   "invnr": 594,
+   "lo": 42001,
+   "hi": 61000,
+   "serie": "A1.2",
+   "handle": "http://hdl.handle.net/10648/1726251f-512e-4beb-bc79-6d7c9db27e54",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/594"
+  },
+  {
+   "invnr": 595,
+   "lo": 61001,
+   "hi": 80000,
+   "serie": "A1.2",
+   "handle": "http://hdl.handle.net/10648/93b1c680-2853-4c38-8133-6c857554e1a2",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/595"
+  },
+  {
+   "invnr": 596,
+   "lo": 80001,
+   "hi": 87000,
+   "serie": "A1.2",
+   "handle": "http://hdl.handle.net/10648/7582c98f-757b-4bfd-b7f2-2febaa4f23ac",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/596"
+  },
+  {
+   "invnr": 597,
+   "lo": 87001,
+   "hi": 90000,
+   "serie": "A1.2",
+   "handle": "http://hdl.handle.net/10648/98d80b2d-977e-4019-9aef-68c706dde54b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/597"
+  },
+  {
+   "invnr": 598,
+   "lo": 90001,
+   "hi": 100000,
+   "serie": "A1.2",
+   "handle": "http://hdl.handle.net/10648/52cf94c1-0f7a-43cd-8a0f-eee816678b97",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/598"
+  },
+  {
+   "invnr": 599,
+   "lo": 100001,
+   "hi": 108000,
+   "serie": "A1.2",
+   "handle": "http://hdl.handle.net/10648/b9f93afc-83e9-4eda-9297-83694cfdba83",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/599"
+  },
+  {
+   "invnr": 600,
+   "lo": 108001,
+   "hi": 109300,
+   "serie": "A1.2",
+   "handle": "http://hdl.handle.net/10648/cb195579-4323-4bb2-814c-b2c693400d3a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/600"
+  },
+  {
+   "invnr": 601,
+   "lo": 109301,
+   "hi": 109700,
+   "serie": "A1.2",
+   "handle": "http://hdl.handle.net/10648/1726b595-e74f-4b19-97e0-9510673e3d9b",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/601"
+  },
+  {
+   "invnr": 602,
+   "lo": 109701,
+   "hi": 110300,
+   "serie": "A1.2",
+   "handle": "http://hdl.handle.net/10648/0d5aa2a7-0f88-4e58-a398-eb212e898fa1",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/602"
+  },
+  {
+   "invnr": 603,
+   "lo": 110301,
+   "hi": 111000,
+   "serie": "A1.2",
+   "handle": "http://hdl.handle.net/10648/016823d3-50ac-4fb7-a9fe-90c3fbbfe67a",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/603"
+  },
+  {
+   "invnr": 604,
+   "lo": 111001,
+   "hi": 111700,
+   "serie": "A1.2",
+   "handle": "http://hdl.handle.net/10648/6cbce1f0-0bbc-493e-bce9-43d621b195e2",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/604"
+  },
+  {
+   "invnr": 605,
+   "lo": 111701,
+   "hi": 112500,
+   "serie": "A1.2",
+   "handle": "http://hdl.handle.net/10648/72073690-41fe-4fe7-b397-3caddeb9491f",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/605"
+  },
+  {
+   "invnr": 606,
+   "lo": 112501,
+   "hi": 113500,
+   "serie": "A1.2",
+   "handle": "http://hdl.handle.net/10648/cf69a4e0-e31c-4e63-9912-1f1f49f109db",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/606"
+  },
+  {
+   "invnr": 607,
+   "lo": 113501,
+   "hi": 114000,
+   "serie": "A1.2",
+   "handle": "http://hdl.handle.net/10648/a61f18c9-f6e4-407e-81cd-b9fc8cdc8f39",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/607"
+  },
+  {
+   "invnr": 608,
+   "lo": 114001,
+   "hi": 114600,
+   "serie": "A1.2",
+   "handle": "http://hdl.handle.net/10648/5ffa8c08-13c4-4ec7-9eb1-8c476e7707e2",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/608"
+  },
+  {
+   "invnr": 609,
+   "lo": 114601,
+   "hi": 115100,
+   "serie": "A1.2",
+   "handle": "http://hdl.handle.net/10648/25dc1800-703f-434a-a82c-982d2fe02ee4",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/609"
+  },
+  {
+   "invnr": 610,
+   "lo": 115101,
+   "hi": 115500,
+   "serie": "A1.2",
+   "handle": "http://hdl.handle.net/10648/ab906a83-1c57-4840-a6dd-d7c4abdff794",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/610"
+  },
+  {
+   "invnr": 611,
+   "lo": 115501,
+   "hi": 116000,
+   "serie": "A1.2",
+   "handle": "http://hdl.handle.net/10648/7f175727-67ba-437b-8b02-eaad26f3c2b2",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/611"
+  },
+  {
+   "invnr": 612,
+   "lo": 116001,
+   "hi": 118068,
+   "serie": "A1.2",
+   "handle": "http://hdl.handle.net/10648/5d3c5746-90c5-46fd-a7c7-fe35440b093c",
+   "url": "https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02/invnr/612"
+  }
+ ]
+}

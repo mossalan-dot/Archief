@@ -1,0 +1,5 @@
+# gedownloade scans en volledige (regenereerbare) tussenbestanden
+scans/
+klapper_manifest.json
+kaarten.jsonl
+# de .sample-bestanden en dossiermap.json blijven wel in git (demo-data)

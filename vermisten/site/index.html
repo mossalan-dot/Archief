@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Namenindex Vermiste Personen · Commissie Aangifte Overlijden Vermisten</title>
+<meta name="description" content="Doorzoekbare namenindex op de klapper van de Commissie tot het doen van Aangifte van Overlijden van Vermisten (Nationaal Archief 2.09.34.02), met verwijzing naar de onderliggende VP-dossiers.">
+<style>
+  :root{--bg:#eef0f2;--panel:#fff;--ink:#232a31;--muted:#6b7480;--line:#dde1e5;
+        --accent:#4a5a6a;--accent-dark:#33414e;--hi:#8a99a8;--warn:#8a6d3b;--warnbg:#fbf6ea}
+  *{box-sizing:border-box}
+  html,body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:22px 16px 60px}
+  header h1{margin:0;font-size:22px;letter-spacing:-.01em;font-weight:700}
+  header .sub{color:var(--muted);font-size:13.5px;margin-top:4px}
+  .srcline{font-size:12.5px;color:var(--muted);margin:8px 0 0}
+  .srcline a{color:var(--accent);text-decoration:none;font-weight:500}.srcline a:hover{text-decoration:underline}
+  .note{margin:16px 0;padding:11px 14px;background:var(--warnbg);border:1px solid #eadfc2;border-radius:10px;font-size:12.8px;color:var(--warn)}
+  .note b{color:#6d5628}
+  .searchbar{position:sticky;top:0;z-index:5;background:var(--bg);padding:14px 0 10px;margin-top:6px}
+  .searchbar input{width:100%;font:inherit;font-size:15px;padding:12px 14px;border:1px solid var(--line);border-radius:11px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+  .count{font-size:12.5px;color:var(--muted);margin:2px 2px 12px}.count b{color:var(--accent);font-variant-numeric:tabular-nums}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:14px 16px;margin-bottom:11px;box-shadow:0 1px 3px rgba(0,0,0,.04);display:flex;gap:14px}
+  .card .thumb{flex:none;width:104px}
+  .card .thumb a{display:block;border:1px solid var(--line);border-radius:7px;overflow:hidden;background:#f3f5f6}
+  .card .thumb img{display:block;width:100%;height:auto}
+  .card .thumb .zoom{font-size:11px;color:var(--accent);text-decoration:none;display:block;text-align:center;margin-top:4px}
+  .card .body{flex:1;min-width:0}
+  .nm{font-size:16.5px;font-weight:700;letter-spacing:-.01em}
+  .nm .vn{font-weight:500;color:var(--ink)}
+  .meta{font-size:13px;color:var(--ink);margin-top:5px}
+  .meta .k{color:var(--muted)}
+  .fields{margin-top:8px;display:grid;grid-template-columns:auto 1fr;gap:2px 12px;font-size:12.8px}
+  .fields .k{color:var(--muted);white-space:nowrap}
+  .links{margin-top:11px;display:flex;flex-wrap:wrap;gap:7px}
+  .links a{font-size:12.5px;text-decoration:none;padding:6px 11px;border-radius:8px;border:1px solid var(--line);color:var(--accent);background:#f7f9fa;font-weight:500}
+  .links a.prim{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .links a:hover{filter:brightness(.97)}
+  .unsure{font-size:11px;color:var(--muted);margin-top:6px;font-style:italic}
+  .empty{text-align:center;color:var(--muted);padding:40px 0;font-size:14px}
+  footer{margin-top:26px;padding-top:16px;border-top:1px solid var(--line);font-size:12.3px;color:var(--muted)}
+  footer a{color:var(--accent);text-decoration:none}footer a:hover{text-decoration:underline}
+  mark{background:#e7edb8;color:inherit;border-radius:2px}
+  @media(max-width:520px){.card{flex-direction:column}.card .thumb{width:150px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Namenindex Vermiste Personen</h1>
+    <div class="sub">Klapper op de VP-dossiers van de <b>Commissie tot het doen van Aangifte van Overlijden van Vermisten</b>, 1949–1962.</div>
+    <div class="srcline">Bron: Nationaal Archief, toegang
+      <a id="bronlink" href="https://www.nationaalarchief.nl/onderzoeken/archief/2.09.34.02" target="_blank" rel="noopener">2.09.34.02</a>
+      · de kaarten zijn gedigitaliseerd maar (nog) niet doorzoekbaar op naam.</div>
+  </header>
+
+  <div class="note" id="scope">
+    <b>Proefopzet.</b> Deze index is opgebouwd uit een handmatig geverifieerde steekproef
+    uit inv.nr 614 (“Aa – Adelaar”). De volledige klapper (inv.nr 614–744, ~115.000 kaarten)
+    wordt met de pijplijn in deze repo machinaal uitgelezen. De meeste geregistreerden zijn
+    slachtoffers van de Tweede Wereldoorlog; behandel deze gegevens met respect.
+  </div>
+
+  <div class="searchbar">
+    <input id="q" type="search" autocomplete="off" placeholder="Zoek op achternaam, voornaam, geboorteplaats, adres of dossiernummer…">
+  </div>
+  <div class="count" id="count"></div>
+  <div id="results"></div>
+
+  <footer>
+    Elke treffer verwijst naar (1) de <b>klapperkaart</b>-scan en (2) het <b>onderliggende VP-dossier</b>
+    in serie A, waarvan het inventarisnummer uit het dossiernummer op de kaart is afgeleid.
+    Broncode &amp; pijplijn: zie de map <code>vermisten/</code>. Gegevens © Nationaal Archief
+    (open data); afgeleide index vrij herbruikbaar met bronvermelding.
+  </footer>
+</div>
+
+<script>
+const esc = s => (s||"").replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function hl(s, q){ s = esc(s); if(!q) return s;
+  try{ return s.replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig'),'<mark>$1</mark>'); }catch(e){ return s; } }
+
+let DATA = [];
+const $ = id => document.getElementById(id);
+
+function row(k, v, q){ return v ? `<div class="k">${k}</div><div>${hl(v,q)}</div>` : ""; }
+
+function render(list, q){
+  const res = $("results");
+  if(!list.length){ res.innerHTML = `<div class="empty">Geen treffers${q?` voor “${esc(q)}”`:''}.</div>`; return; }
+  res.innerHTML = list.map(r => {
+    const naam = `${hl(r.naam,q)}${r.voornamen?`, <span class="vn">${hl(r.voornamen,q)}</span>`:''}`;
+    const geb = [r.geboren_datum, r.geboren_plaats].filter(Boolean).join(" te ");
+    const fields =
+      row("Ouders", [r.vader, r.moeder].filter(Boolean).join(" & "), q) +
+      row("Gehuwd met", r.gehuwd_met, q) +
+      row("Beroep", r.beroep, q) +
+      row("Adres", r.adres, q) +
+      row("Staatscourant", r.staatscourant, q) +
+      row("Dossiernr", r.dossiernr, q);
+    const dossier = r.dossier_url
+      ? `<a class="prim" href="${r.dossier_url}" target="_blank" rel="noopener">Onderliggend dossier — inv.nr ${r.dossier_invnr}</a>`
+      : "";
+    const kaart = r.kaart_scan
+      ? `<a href="${r.kaart_scan}" target="_blank" rel="noopener">Bekijk klapperkaart</a>` : "";
+    const thumb = r.kaart_thumb
+      ? `<div class="thumb"><a href="${r.kaart_scan}" target="_blank" rel="noopener"><img loading="lazy" src="${r.kaart_thumb}" alt="klapperkaart ${esc(r.naam)}"></a><a class="zoom" href="${r.kaart_scan}" target="_blank" rel="noopener">vergroten</a></div>` : "";
+    const unsure = (r.onzeker&&r.onzeker.length) ? `<div class="unsure">Onzeker gelezen: ${r.onzeker.map(esc).join(", ")}.</div>` : "";
+    return `<div class="card">${thumb}<div class="body">
+        <div class="nm">${naam}</div>
+        ${geb?`<div class="meta"><span class="k">geb.</span> ${hl(geb,q)}</div>`:''}
+        <div class="fields">${fields}</div>${unsure}
+        <div class="links">${dossier}${kaart}</div>
+      </div></div>`;
+  }).join("");
+}
+
+function search(q){
+  q = (q||"").trim();
+  const nq = q.toLowerCase();
+  const list = !nq ? DATA : DATA.filter(r =>
+    [r.naam,r.voornamen,r.geboren_plaats,r.adres,r.dossiernr,r.vader,r.moeder,r.gehuwd_met]
+      .some(v => (v||"").toLowerCase().includes(nq)));
+  $("count").innerHTML = `<b>${list.length.toLocaleString('nl')}</b> van ${DATA.length.toLocaleString('nl')} kaarten`;
+  render(list, q);
+}
+
+fetch("kaarten.json").then(r=>r.json()).then(d=>{
+  DATA = d.kaarten || [];
+  if(d.bron) $("bronlink").href = d.bron;
+  search("");
+}).catch(e=>{ $("results").innerHTML = `<div class="empty">Kon <code>kaarten.json</code> niet laden.</div>`; });
+
+$("q").addEventListener("input", e => search(e.target.value));
+</script>
+</body>
+</html>
