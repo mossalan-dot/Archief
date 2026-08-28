@@ -55,8 +55,8 @@
   </header>
 
   <div class="note" id="scope">
-    <b>Proefopzet.</b> Deze index is opgebouwd uit een handmatig geverifieerde steekproef
-    uit inv.nr 614 (“Aa – Adelaar”). De volledige klapper (inv.nr 614–744, ~115.000 kaarten)
+    <b>Proefopzet.</b> Deze index is een handmatig geverifieerde steekproef uit het begin van
+    inv.nr 614 (“Aa – Adelaar”). De volledige klapper (inv.nr 614–744, ~115.000 kaarten)
     wordt met de pijplijn in deze repo machinaal uitgelezen. De meeste geregistreerden zijn
     slachtoffers van de Tweede Wereldoorlog; behandel deze gegevens met respect.
   </div>
@@ -97,6 +97,7 @@ function render(list, q){
       row("Beroep", r.beroep, q) +
       row("Adres", r.adres, q) +
       row("Staatscourant", r.staatscourant, q) +
+      row("Aantekening", r.aantekening, q) +
       row("Dossiernr", r.dossiernr, q);
     const dossier = r.dossier_url
       ? `<a class="prim" href="${r.dossier_url}" target="_blank" rel="noopener">Onderliggend dossier — inv.nr ${r.dossier_invnr}</a>`
@@ -119,7 +120,7 @@ function search(q){
   q = (q||"").trim();
   const nq = q.toLowerCase();
   const list = !nq ? DATA : DATA.filter(r =>
-    [r.naam,r.voornamen,r.geboren_plaats,r.adres,r.dossiernr,r.vader,r.moeder,r.gehuwd_met]
+    [r.naam,r.voornamen,r.geboren_plaats,r.adres,r.dossiernr,r.vader,r.moeder,r.gehuwd_met,r.aantekening]
       .some(v => (v||"").toLowerCase().includes(nq)));
   $("count").innerHTML = `<b>${list.length.toLocaleString('nl')}</b> van ${DATA.length.toLocaleString('nl')} kaarten`;
   render(list, q);

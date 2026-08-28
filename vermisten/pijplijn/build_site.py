@@ -23,16 +23,25 @@ def load_jsonl(path: Path):
     return [json.loads(l) for l in path.read_text(encoding="utf-8").splitlines() if l.strip()]
 
 
-def resolve_dossier(dossiernr, staatscourant, intervallen):
-    """dossiernr -> onderliggend inv.nr. Bij overlap A1.1/A1.2 wint A1.1 zodra een
-    Staatscourant-datum is ingevuld (dan is er aangifte van overlijden gedaan)."""
+def aangifte_gedaan(staatscourant, aantekening):
+    """Is er aangifte van overlijden gedaan? Dan hoort het dossier in serie A1.1.
+    Signaal: een echte Staatscourant-datum, of een aanwezige overlijdensakte."""
+    sc = str(staatscourant).strip().lower()
+    if sc and "onvindbaar" not in sc:
+        return True
+    return "acte" in str(aantekening).lower() or "overleden" in str(aantekening).lower()
+
+
+def resolve_dossier(dossiernr, staatscourant, aantekening, intervallen):
+    """dossiernr -> onderliggend inv.nr. Bij overlap A1.1/A1.2 wint A1.1 zodra er
+    aangifte van overlijden is gedaan."""
     if not str(dossiernr).isdigit():
         return None
     nr = int(dossiernr)
     hits = [x for x in intervallen if x["lo"] <= nr <= x["hi"]]
     if not hits:
         return None
-    prefer = "A1.1" if str(staatscourant).strip() else "A1.2"
+    prefer = "A1.1" if aangifte_gedaan(staatscourant, aantekening) else "A1.2"
     hits.sort(key=lambda x: (x["serie"] != prefer, x["serie"]))
     return hits[0]
 
@@ -65,6 +74,7 @@ def main():
             "gehuwd_met": " ".join(x for x in (r.get("gehuwd_met_voornamen", ""), r.get("gehuwd_met_naam", "")) if x),
             "adres": r.get("woonplaats_adres", ""),
             "staatscourant": r.get("staatscourant", ""),
+            "aantekening": r.get("aantekening", ""),
             "dossiernr": r.get("dossiernr", ""),
             "invnr_klapper": m.get("invnr"),
             "alfabetvak": m.get("alfabetvak", ""),
@@ -72,7 +82,7 @@ def main():
             "kaart_thumb": m.get("thumb_url", ""),
             "onzeker": r.get("onzeker", []),
         }
-        d = resolve_dossier(rec["dossiernr"], rec["staatscourant"], intervallen)
+        d = resolve_dossier(rec["dossiernr"], rec["staatscourant"], rec["aantekening"], intervallen)
         if d:
             rec["dossier_invnr"] = d["invnr"]
             rec["dossier_serie"] = d["serie"]

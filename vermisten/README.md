@@ -68,10 +68,16 @@ python3 build_site.py --manifest klapper_manifest.json
 
 ## Stand van zaken
 
-`site/kaarten.json` bevat nu een **handmatig geverifieerde steekproef** uit inv.nr 614
-(“Aa – Adelaar”), zodat de zoekpagina werkt en de aanpak controleerbaar is. De
-volledige uitlezing (`extract_cards.py` over alle inv.nrs) is de opschaalstap; die
-kost een OCR-run over ~115.000 kaarten.
+`site/kaarten.json` bevat nu een **handmatig geverifieerde steekproef van 40 kaarten**
+uit inv.nr 614 (“Aa – Adelaar”), verspreid over het alfabetvak, zodat de zoekpagina werkt
+en de aanpak controleerbaar is. De volledige uitlezing (`extract_cards.py` over alle
+inv.nrs) is de opschaalstap; die kost een OCR-run over ~115.000 kaarten.
+
+Naast de standaardvelden legt de steekproef ook een **aantekening** vast waar de kaart
+géén Staatscourant-datum draagt maar een stempel *“Overlijdens-acte aanwezig”* met
+akte-verwijzing, of een bijzondere notitie (bv. een deportatie-/convooiverwijzing als
+*“Mechelen, Convooi XVII/117”*, of een rechterlijke overlijdensvaststelling). Die
+aanwijzing bepaalt mede of het dossier in serie A1.1 (aangifte gedaan) of A1.2 valt.
 
 ## Ethiek & bron
 
