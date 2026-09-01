@@ -51,7 +51,10 @@ def canon(raw):
         if k.lower() == name.lower(): return k, v
     return None, None
 
-R = json.load(open(f"{BASE}/repat_reizen.json", encoding='utf-8'))
+import sys
+FILE = sys.argv[1] if len(sys.argv) > 1 else f"{BASE}/repat_reizen.json"
+if not os.path.isabs(FILE): FILE = f"{BASE}/{FILE}"
+R = json.load(open(FILE, encoding='utf-8'))
 mis = set()
 for r in R:
     for fld, ll in (("van","van_ll"), ("via","via_ll"), ("naar","naar_ll")):
@@ -62,7 +65,7 @@ for r in R:
     # jaar-sanity
     if r.get("jaar") and not (1945 <= r["jaar"] <= 1965): r["jaar"] = None
 
-json.dump(R, open(f"{BASE}/repat_reizen.json", "w", encoding='utf-8'), ensure_ascii=False, indent=1)
+json.dump(R, open(FILE, "w", encoding='utf-8'), ensure_ascii=False, indent=1)
 plot = sum(1 for r in R if r.get("van_ll") and r.get("naar_ll"))
 print(f"reizen: {len(R)} | plotbaar (van+naar coord): {plot}")
 print(f"ongegeocodeerd (rest, meestal ruis): {sorted(mis)}")

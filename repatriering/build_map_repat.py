@@ -4,12 +4,18 @@
 Routes: van -> (Suez indien Indië<->Europa zonder via) -> naar. Tijdslider per jaar, klik = detail."""
 import json, os, re
 from collections import Counter
-BASE = os.path.dirname(os.path.abspath(__file__)); SITE = f"{BASE}/site"
-R = json.load(open(f"{BASE}/repat_reizen.json", encoding='utf-8'))
+BASE = os.path.dirname(os.path.abspath(__file__)); SITE = BASE   # top-level layout
+SOURCES = ["repat_reizen.json", "troepen_reizen.json"]          # meerdere passagierslijst-bronnen
 SUEZ = [29.9668, 32.5498]
 
 def is_azie(ll): return ll and ll[1] > 60
 def is_europa(ll): return ll and ll[1] < 40 and ll[0] > 35
+
+R = []
+for fn in SOURCES:
+    p = f"{BASE}/{fn}"
+    if os.path.exists(p):
+        R += json.load(open(p, encoding='utf-8'))
 
 routes = []
 for r in R:
@@ -19,17 +25,25 @@ for r in R:
     if r.get("via_ll"): path.append(r["via_ll"])
     elif (is_azie(v) and is_europa(a)) or (is_europa(v) and is_azie(a)): path.append(SUEZ)   # via Suez
     path.append(a)
-    richting = "thuis" if is_europa(a) else ("uit" if is_europa(v) else "overig")
+    # richting: troepenverschepingen (2.13.103) tonen we richting-neutraal;
+    # voor de NRK-reizen leiden we thuis/uit af uit de geografie.
+    if r.get("richting") == "troepen":
+        richting = "troepen"
+    else:
+        richting = "thuis" if is_europa(a) else ("uit" if is_europa(v) else "overig")
     routes.append({"p": [[round(y,3),round(x,3)] for y,x in path], "s": r.get("schip"),
-        "vn": r.get("van_naam"), "nn": r.get("naar_naam"), "vi": r.get("via_naam"),
-        "vd": r.get("van_datum"), "ad": r.get("naar_datum"), "n": r.get("aantal"),
-        "j": r.get("jaar"), "inv": r.get("invnr"), "m": r.get("mets"), "r": richting})
+        "vn": r.get("van_naam") or r.get("van"), "nn": r.get("naar_naam") or r.get("naar"),
+        "vi": r.get("via_naam"), "vd": r.get("van_datum"), "ad": r.get("naar_datum"),
+        "n": r.get("aantal"), "j": r.get("jaar"), "inv": r.get("invnr"), "m": r.get("mets"),
+        "r": richting, "t": r.get("toegang", "2.19.277"), "b": r.get("bron", "")})
 
 jaren = sorted({x["j"] for x in routes if x["j"]})
-top_schip = Counter(x["s"] for x in routes if x["s"]).most_common(1)[0]
+bronnen = Counter(x["b"] for x in routes)
 tot_pers = sum(x["n"] for x in routes if x["n"])
+os.makedirs(SITE, exist_ok=True)
 json.dump(routes, open(f"{SITE}/data.json", "w", encoding='utf-8'), ensure_ascii=False, separators=(",", ":"))
-print(f"routes: {len(routes)} | jaren {jaren[0]}-{jaren[-1]} | schepen {len(set(x['s'] for x in routes))} | pers(bekend) {tot_pers:,}")
+print(f"routes: {len(routes)} | jaren {jaren[0]}-{jaren[-1]} | schepen {len(set(x['s'] for x in routes if x['s']))} | pers(bekend) {tot_pers:,}")
+for b, n in bronnen.most_common(): print(f"  bron: {b or '(onbekend)'}: {n}")
 
 HTML = r"""<!DOCTYPE html>
 <html lang="nl">
@@ -53,7 +67,11 @@ HTML = r"""<!DOCTYPE html>
     background:var(--panel);border:1px solid var(--line);border-radius:0 0 12px 12px;box-shadow:0 4px 20px rgba(0,0,0,.09)}
   .pad{padding:13px 15px}
   h1{font-size:15.5px;margin:0 0 2px}
-  .lead{font-size:11.5px;color:var(--muted);margin:0 0 11px;line-height:1.5}
+  .lead{font-size:11.5px;color:var(--muted);margin:0 0 9px;line-height:1.5}
+  .search{position:relative;margin:0 0 10px}
+  .search input{width:100%;font:inherit;font-size:12.5px;padding:7px 26px 7px 10px;border:1px solid var(--line);border-radius:8px;background:#fff}
+  .search .clr{position:absolute;right:7px;top:50%;transform:translateY(-50%);border:0;background:none;color:var(--muted);cursor:pointer;font-size:15px;line-height:1;display:none}
+  .search.has .clr{display:block}
   .yr{display:flex;align-items:center;gap:9px;margin:2px 0 4px}
   .yr input{flex:1}
   .yrlab{font-size:13px;font-weight:700;color:var(--accent);min-width:96px;text-align:right;font-variant-numeric:tabular-nums}
@@ -79,49 +97,62 @@ HTML = r"""<!DOCTYPE html>
 <nav class="ptabs"><a class="on">🗺️ Kaart</a><a href="inzichten.html">📊 Inzichten</a><a href="over.html">ℹ️ Over</a><a href="https://archief.alanmoss.nl/">← Archief</a></nav>
 <div class="panel"><div class="pad">
   <h1>🚢 Repatriëring uit Indië</h1>
-  <p class="lead">De schepen die na de oorlog en de dekolonisatie Nederlanders en militairen van Indonesië naar Nederland brachten, 1945–1962.</p>
+  <p class="lead">De schepen die na de oorlog en de dekolonisatie Nederlanders en militairen tussen Indonesië en Nederland vervoerden, 1945–1962. Passagierslijsten van het NRK (2.19.277) en de troepenverschepingen (2.13.103).</p>
+  <div class="search" id="searchwrap"><input id="q" type="search" autocomplete="off" placeholder="Zoek op scheepsnaam…"><button class="clr" id="clr" title="wissen">×</button></div>
   <div class="yr"><button class="play" id="play">▶</button><input type="range" id="slider" min="0" max="__NJ__" value="__NJ__"><span class="yrlab" id="yrlab"></span></div>
   <div class="rowbtwn"><span>__J0__</span><span>alle jaren</span></div>
   <div class="stat" id="stat"></div>
-  <div class="nav"><span class="src">Bron: <a href="https://www.nationaalarchief.nl/onderzoeken/archief/2.19.277" target="_blank" rel="noopener">NA, NRK 2.19.277</a> · openbaar</span></div>
+  <div class="nav"><span class="src">Bronnen: <a href="https://www.nationaalarchief.nl/onderzoeken/archief/2.19.277" target="_blank" rel="noopener">NRK 2.19.277</a> · <a href="https://www.nationaalarchief.nl/onderzoeken/archief/2.13.103" target="_blank" rel="noopener">Troepenverschepingen 2.13.103</a> · openbaar</span></div>
 </div></div>
 <div class="legend"><div style="font-weight:600;margin-bottom:4px;color:#444">route</div>
   <div><i style="background:#12707f"></i>naar Nederland (thuis)</div>
   <div><i style="background:#c0603a"></i>naar Indië / overig</div>
+  <div><i style="background:#5a6b9c"></i>troepenverschepingen (richting niet vermeld)</div>
   <div style="margin-top:4px;color:#888">dikte ~ aantal opvarenden · klik voor detail</div></div>
 <a class="fbk" href="mailto:mossalan@gmail.com?subject=Repatri%C3%ABringskaart%3A%20feedback%20of%20bugmelding" title="Feedback of een fout melden">✉︎ Feedback</a>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const BUILD='__BUILD__', JAREN=__JAREN__, NA='https://www.nationaalarchief.nl/onderzoeken/archief/2.19.277/invnr/';
+const BUILD='__BUILD__', JAREN=__JAREN__, NAB='https://www.nationaalarchief.nl/onderzoeken/archief/';
 const fmt=n=>n.toLocaleString('nl-NL'), esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const map=L.map('map',{zoomControl:false,worldCopyJump:false}).setView([18,72],3);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{attribution:'© OpenStreetMap, © CARTO · data: NA 2.19.277',subdomains:'abcd',maxZoom:12}).addTo(map);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{attribution:'© OpenStreetMap, © CARTO · data: NA 2.19.277 & 2.13.103',subdomains:'abcd',maxZoom:12}).addTo(map);
 const gLine=L.layerGroup().addTo(map), gHit=L.layerGroup().addTo(map);
-let DATA=null, yearMax=JAREN[JAREN.length-1];
-const COL={thuis:'#12707f',uit:'#c0603a',overig:'#c0603a'};
+let DATA=null, yearMax=JAREN[JAREN.length-1], shipQ='';
+const COL={thuis:'#12707f',uit:'#c0603a',overig:'#c0603a',troepen:'#5a6b9c'};
 function wt(n){ return n? Math.max(1.2,Math.min(7,Math.sqrt(n)/7)) : 1.2; }
 function reisPopup(d){
   const route=[d.vn,d.vi,d.nn].filter(Boolean).join(' → ');
+  const na=(d.t||'2.19.277');
   return `<b>${esc(d.s||'onbekend schip')}</b><br>${esc(route)}`+
+    `${d.r==='troepen'?'<br><span style="color:#5a6b9c">troepenverschepingen · richting niet vermeld</span>':''}`+
     `${d.vd?`<br><span style="color:#888">vertrek ${esc(d.vd)}${d.ad?' · aankomst '+esc(d.ad):''}</span>`:''}`+
     `${d.n?`<br>${fmt(d.n)} opvarenden`:''}`+
-    (d.inv?`<br><a href="${NA}${encodeURIComponent(d.inv)}/" target="_blank" rel="noopener" style="font-size:12px">passagierslijst bij het NA →</a>`:'');
+    (d.inv?`<br><a href="${NAB}${na}/invnr/${encodeURIComponent(d.inv)}/" target="_blank" rel="noopener" style="font-size:12px">passagierslijst bij het NA →</a>`:'')+
+    `${d.b?`<br><span style="color:#aaa;font-size:11px">${esc(d.b)}</span>`:''}`;
+}
+function visible(d){
+  if(d.j && d.j>yearMax) return false;
+  if(shipQ && !(d.s||'').toLowerCase().includes(shipQ)) return false;
+  return true;
 }
 function render(){
   if(!DATA) return;
   gLine.clearLayers(); gHit.clearLayers();
-  let n=0, pers=0;
+  let n=0, pers=0, bounds=[];
   DATA.forEach(d=>{
-    if(d.j && d.j>yearMax) return;
-    n++; if(d.n) pers+=d.n;
+    if(!visible(d)) return;
+    n++; if(d.n) pers+=d.n; if(shipQ) bounds=bounds.concat(d.p);
     const col=COL[d.r]||'#c0603a';
-    L.polyline(d.p,{color:col,weight:wt(d.n),opacity:.34,lineCap:'round'}).addTo(gLine);
+    L.polyline(d.p,{color:col,weight:wt(d.n),opacity:shipQ?.6:.34,lineCap:'round'}).addTo(gLine);
     const hit=L.polyline(d.p,{color:col,weight:12,opacity:0}).addTo(gHit);
     hit.bindPopup(reisPopup(d),{maxWidth:250});
     hit.on('mouseover',function(){this._l&&this._l.remove();this._l=L.polyline(d.p,{color:col,weight:wt(d.n)+2,opacity:.85}).addTo(gLine);});
     hit.on('mouseout',function(){this._l&&this._l.remove();this._l=null;});
   });
-  document.getElementById('stat').innerHTML=`<b>${fmt(n)}</b> reizen${yearMax<JAREN[JAREN.length-1]?` t/m <b>${yearMax}</b>`:''} · <b>${fmt(pers)}</b> opvarenden <span style="color:#aaa">(waar geteld)</span>`;
+  if(shipQ && bounds.length) map.fitBounds(bounds,{padding:[40,40],maxZoom:5});
+  const nschepen=new Set(); DATA.forEach(d=>{ if(visible(d)&&d.s) nschepen.add(d.s); });
+  document.getElementById('stat').innerHTML=`<b>${fmt(n)}</b> reizen${yearMax<JAREN[JAREN.length-1]?` t/m <b>${yearMax}</b>`:''}`+
+    `${shipQ?` · <b>${nschepen.size}</b> schepen`:''} · <b>${fmt(pers)}</b> opvarenden <span style="color:#aaa">(waar geteld)</span>`;
 }
 const slider=document.getElementById('slider'), yrlab=document.getElementById('yrlab');
 function setYear(i){ yearMax=+i>=JAREN.length? JAREN[JAREN.length-1]:JAREN[+i];
@@ -134,12 +165,15 @@ document.getElementById('play').addEventListener('click',function(){
   timer=setInterval(()=>{ i++; if(i>JAREN.length){clearInterval(timer);timer=null;this.textContent='▶';return;}
     slider.value=i; setYear(i); },700);
 });
+const q=document.getElementById('q'), searchwrap=document.getElementById('searchwrap');
+q.addEventListener('input',e=>{ shipQ=e.target.value.trim().toLowerCase(); searchwrap.classList.toggle('has',!!shipQ); render(); });
+document.getElementById('clr').addEventListener('click',()=>{ q.value=''; shipQ=''; searchwrap.classList.remove('has'); map.setView([18,72],3); render(); });
 fetch('data.json?v='+BUILD).then(r=>r.json()).then(d=>{DATA=d; setYear(JAREN.length); });
 </script>
 </body>
 </html>"""
 HTML = (HTML.replace("__NJ__", str(len(jaren))).replace("__J0__", str(jaren[0]))
-        .replace("__JAREN__", json.dumps(jaren)).replace("__BUILD__", "20260818-1"))
+        .replace("__JAREN__", json.dumps(jaren)).replace("__BUILD__", "20260901-1"))
 os.makedirs(SITE, exist_ok=True)
 open(f"{SITE}/index.html", "w", encoding='utf-8').write(HTML)
-print("geschreven: site/index.html + data.json")
+print("geschreven: index.html + data.json")

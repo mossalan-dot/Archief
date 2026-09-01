@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inzichten — Repatriëring uit Indië 1945–1962</title>
+<script>window.goatcounter={path:function(p){return location.host+p}}</script>
+<script data-goatcounter="https://stats.alanmoss.nl/count" async src="https://stats.alanmoss.nl/count.js"></script>
+<style>
+  :root{--accent:#12707f;--accent2:#c0603a;--troepen:#5a6b9c;--ink:#1b2a2f;--muted:#5f7178;--line:#dbe3e5;--bg:#eef1f2;--panel:#fbfcfc}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+  .ptabs{display:flex;gap:2px;background:#fff;padding:8px 12px;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+  .ptabs a{padding:6px 10px;border-radius:7px;text-decoration:none;color:#5a6b74;font-size:13px;font-weight:600}
+  .ptabs a.on{background:var(--accent);color:#fff}
+  .wrap{max-width:900px;margin:0 auto;padding:22px 18px 60px}
+  h1{font-size:23px;margin:.1em 0}
+  .lead{color:var(--muted);font-size:14px;margin:2px 0 16px}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0 22px}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .kpi b{display:block;font-size:23px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .kpi span{font-size:11.5px;color:var(--muted)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:14px 0}
+  .card h2{font-size:16px;margin:0 0 2px;color:var(--accent)}
+  .card p.sub{font-size:12px;color:var(--muted);margin:0 0 10px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:680px){.grid2{grid-template-columns:1fr}}
+  svg{display:block;width:100%;height:auto;overflow:visible}
+  .ax{stroke:#d9dfe1;stroke-width:1}
+  .axlab{font-size:10px;fill:#9aa4a9}
+  .blab{font-size:11px;fill:var(--ink)}
+  .bval{font-size:11px;fill:var(--muted);font-variant-numeric:tabular-nums}
+  .lg{font-size:11.5px;color:var(--muted);margin-top:6px}
+  .lg i{display:inline-block;width:11px;height:11px;border-radius:3px;vertical-align:-1px;margin:0 3px 0 10px}
+  .foot{margin-top:26px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+  .foot a{color:var(--accent)}
+</style>
+</head>
+<body>
+<nav class="ptabs">
+  <a href="index.html">🚢 Kaart</a><a class="on">📊 Inzichten</a><a href="over.html">ℹ️ Over</a><a href="https://archief.alanmoss.nl/">← Archief</a>
+</nav>
+<div class="wrap">
+  <h1>Inzichten — Repatriëring uit Indië, 1945–1962</h1>
+  <p class="lead">De schepen die na de oorlog en de dekolonisatie mensen tussen Indonesië en Nederland vervoerden, in cijfers. Twee bronnen: de NRK-passagierslijsten (2.19.277) en de troepenverschepingen (2.13.103).</p>
+  <div class="kpis" id="kpis"></div>
+
+  <div class="card">
+    <h2>Reizen per jaar</h2>
+    <p class="sub">Aantal geregistreerde overtochten, gestapeld per bron.</p>
+    <div id="c_year"></div>
+    <div class="lg"><i style="background:var(--accent)"></i>NRK 2.19.277<i style="background:var(--troepen)"></i>Troepenverschepingen 2.13.103</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>Meest gevaren schepen</h2>
+      <p class="sub">Naar aantal geregistreerde overtochten.</p>
+      <div id="c_ship"></div>
+    </div>
+    <div class="card">
+      <h2>Drukste vertrek- en aankomsthavens</h2>
+      <p class="sub">Waar de reizen vertrokken en aankwamen.</p>
+      <div id="c_haven"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Opvarenden per jaar</h2>
+    <p class="sub">Waar het aantal opvarenden is geteld (vooral de NRK-lijsten; bij de troepenverschepingen staan de aantallen niet in de inventaris).</p>
+    <div id="c_pers"></div>
+  </div>
+
+  <p class="foot">Bronnen: Nationaal Archief, <a href="https://www.nationaalarchief.nl/onderzoeken/archief/2.19.277" target="_blank" rel="noopener">NRK-Informatiebureau 2.19.277</a> en <a href="https://www.nationaalarchief.nl/onderzoeken/archief/2.13.103" target="_blank" rel="noopener">Troepenverschepingen 2.13.103</a> (openbaar). Zie <a href="over.html">Over</a> voor de methode. Onderdeel van de <a href="https://archief.alanmoss.nl/">archiefkaarten</a>.</p>
+</div>
+<script>
+const A='#12707f', T='#5a6b9c', A2='#c0603a';
+const nl=n=>Math.round(n).toLocaleString('nl');
+const esc=s=>(s==null?'':''+s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function svg(w,h){return `<svg viewBox="0 0 ${w} ${h}">`;}
+
+fetch('data.json?v=20260901-1').then(r=>r.json()).then(D=>{
+  const years=[...new Set(D.filter(d=>d.j).map(d=>d.j))].sort((a,b)=>a-b);
+  const schepen=new Set(D.map(d=>d.s).filter(Boolean));
+  const pers=D.reduce((s,d)=>s+(d.n||0),0);
+  const isT=d=>d.r==='troepen';
+
+  document.getElementById('kpis').innerHTML=[
+    ['🚢',nl(D.length),'geregistreerde reizen'],
+    ['⚓',nl(schepen.size),'verschillende schepen'],
+    ['👥',nl(pers),'opvarenden (waar geteld)'],
+    ['📅',years[0]+'–'+years[years.length-1],'tijdvak'],
+    ['🗂️','2','bronnen'],
+  ].map(k=>`<div class="kpi"><b>${k[1]}</b><span>${k[2]}</span></div>`).join('');
+
+  // --- reizen per jaar, gestapeld per bron (NRK + troepen) ---
+  (function(){ const W=860,H=220,pl=40,pr=12,pt=12,pb=26, iw=W-pl-pr, ih=H-pt-pb;
+    const nrk={},tr={}; D.forEach(d=>{ if(!d.j) return; (isT(d)?tr:nrk)[d.j]=((isT(d)?tr:nrk)[d.j]||0)+1; });
+    const tot=y=>(nrk[y]||0)+(tr[y]||0); const mx=Math.max(...years.map(tot),1);
+    const bw=iw/years.length, gap=Math.min(6,bw*0.2);
+    let g=svg(W,H);
+    for(let i=0;i<=4;i++){ const v=mx*i/4,yy=pt+ih-(v/mx)*ih; g+=`<line class="ax" x1="${pl}" y1="${yy}" x2="${W-pr}" y2="${yy}"/><text class="axlab" x="${pl-6}" y="${yy+3}" text-anchor="end">${nl(v)}</text>`; }
+    years.forEach((y,i)=>{ const x=pl+i*bw+gap/2, w=bw-gap;
+      const hN=(nrk[y]||0)/mx*ih, hT=(tr[y]||0)/mx*ih;
+      g+=`<rect x="${x}" y="${pt+ih-hN}" width="${w}" height="${hN}" fill="${A}"><title>${y}: ${nl(nrk[y]||0)} NRK</title></rect>`;
+      g+=`<rect x="${x}" y="${pt+ih-hN-hT}" width="${w}" height="${hT}" fill="${T}"><title>${y}: ${nl(tr[y]||0)} troepen</title></rect>`;
+      if(y%1===0 && (years.length<=18||y%2===0)) g+=`<text class="axlab" x="${x+w/2}" y="${H-8}" text-anchor="middle">${(''+y).slice(2)}</text>`; });
+    document.getElementById('c_year').innerHTML=g+'</svg>';
+  })();
+
+  // --- horizontale bars helper ---
+  function hbars(el,items,color){ const n=items.length, rh=22, W=420, lab=124, pr=54, iw=W-lab-pr, H=n*rh+6;
+    const mx=Math.max(...items.map(i=>i[1]),1);
+    let g=svg(W,H);
+    items.forEach((it,i)=>{ const y=i*rh+3, bw=Math.max(1,it[1]/mx*iw);
+      g+=`<text class="blab" x="${lab-6}" y="${y+14}" text-anchor="end">${esc(it[0]).slice(0,22)}</text>`;
+      g+=`<rect x="${lab}" y="${y+4}" width="${bw.toFixed(1)}" height="14" rx="2" fill="${color}"/>`;
+      g+=`<text class="bval" x="${lab+bw+5}" y="${y+14}">${nl(it[1])}</text>`; });
+    document.getElementById(el).innerHTML=g+'</svg>';
+  }
+  const shipCount={}; D.forEach(d=>{ if(d.s) shipCount[d.s]=(shipCount[d.s]||0)+1; });
+  hbars('c_ship',Object.entries(shipCount).sort((a,b)=>b[1]-a[1]).slice(0,12),A);
+
+  const haven={}; D.forEach(d=>{ [d.vn,d.nn].forEach(h=>{ if(h) haven[h]=(haven[h]||0)+1; }); });
+  hbars('c_haven',Object.entries(haven).sort((a,b)=>b[1]-a[1]).slice(0,12),A2);
+
+  // --- opvarenden per jaar (waar geteld) ---
+  (function(){ const per={}; D.forEach(d=>{ if(d.j&&d.n) per[d.j]=(per[d.j]||0)+d.n; });
+    const ys=years, mx=Math.max(...ys.map(y=>per[y]||0),1);
+    const W=860,H=200,pl=54,pr=12,pt=12,pb=26, iw=W-pl-pr, ih=H-pt-pb, bw=iw/ys.length, gap=Math.min(6,bw*0.2);
+    let g=svg(W,H);
+    for(let i=0;i<=4;i++){ const v=mx*i/4,yy=pt+ih-(v/mx)*ih; g+=`<line class="ax" x1="${pl}" y1="${yy}" x2="${W-pr}" y2="${yy}"/><text class="axlab" x="${pl-6}" y="${yy+3}" text-anchor="end">${nl(v)}</text>`; }
+    ys.forEach((y,i)=>{ const x=pl+i*bw+gap/2, w=bw-gap, h=(per[y]||0)/mx*ih;
+      g+=`<rect x="${x}" y="${pt+ih-h}" width="${w}" height="${h}" fill="${A}"><title>${y}: ${nl(per[y]||0)}</title></rect>`;
+      if(years.length<=18||y%2===0) g+=`<text class="axlab" x="${x+w/2}" y="${H-8}" text-anchor="middle">${(''+y).slice(2)}</text>`; });
+    document.getElementById('c_pers').innerHTML=g+'</svg>';
+  })();
+}).catch(e=>{document.querySelector('.wrap').insertAdjacentHTML('beforeend','<p style="color:#a3312d">Kon de data niet laden.</p>');});
+</script>
+</body>
+</html>
