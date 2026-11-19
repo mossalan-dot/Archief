@@ -1,0 +1,2048 @@
+{
+ "n_verhalen": 210,
+ "n_vertellers": 118,
+ "woorden": 412409,
+ "themas": {
+  "Emoties": [
+   {
+    "label": "schaamte",
+    "totaal": 76,
+    "verhalen": 45,
+    "vertellers": 36,
+    "per10k": 1.8,
+    "ref_per10k": 0.3
+   },
+   {
+    "label": "schuld(gevoel)",
+    "totaal": 121,
+    "verhalen": 56,
+    "vertellers": 45,
+    "per10k": 2.9,
+    "ref_per10k": 0.3
+   },
+   {
+    "label": "angst",
+    "totaal": 327,
+    "verhalen": 107,
+    "vertellers": 69,
+    "per10k": 7.9,
+    "ref_per10k": 10.0
+   },
+   {
+    "label": "woede / boosheid",
+    "totaal": 151,
+    "verhalen": 78,
+    "vertellers": 55,
+    "per10k": 3.7,
+    "ref_per10k": 1.4
+   },
+   {
+    "label": "verdriet",
+    "totaal": 276,
+    "verhalen": 92,
+    "vertellers": 63,
+    "per10k": 6.7,
+    "ref_per10k": 4.5
+   },
+   {
+    "label": "eenzaamheid",
+    "totaal": 42,
+    "verhalen": 29,
+    "vertellers": 23,
+    "per10k": 1.0,
+    "ref_per10k": 0.4
+   },
+   {
+    "label": "haat / afkeer",
+    "totaal": 49,
+    "verhalen": 37,
+    "vertellers": 28,
+    "per10k": 1.2,
+    "ref_per10k": 0.8
+   },
+   {
+    "label": "liefde",
+    "totaal": 95,
+    "verhalen": 50,
+    "vertellers": 42,
+    "per10k": 2.3,
+    "ref_per10k": 0.7
+   },
+   {
+    "label": "loyaliteit",
+    "totaal": 37,
+    "verhalen": 27,
+    "vertellers": 19,
+    "per10k": 0.9,
+    "ref_per10k": 0.6
+   },
+   {
+    "label": "onbegrip / verwarring",
+    "totaal": 45,
+    "verhalen": 33,
+    "vertellers": 28,
+    "per10k": 1.1,
+    "ref_per10k": 1.2
+   },
+   {
+    "label": "begrip",
+    "totaal": 54,
+    "verhalen": 38,
+    "vertellers": 30,
+    "per10k": 1.3,
+    "ref_per10k": 0.4
+   },
+   {
+    "label": "vergeving / verzoening",
+    "totaal": 42,
+    "verhalen": 23,
+    "vertellers": 17,
+    "per10k": 1.0,
+    "ref_per10k": 0.2
+   },
+   {
+    "label": "opluchting / rust",
+    "totaal": 38,
+    "verhalen": 31,
+    "vertellers": 24,
+    "per10k": 0.9,
+    "ref_per10k": 4.7
+   },
+   {
+    "label": "trauma / therapie",
+    "totaal": 138,
+    "verhalen": 57,
+    "vertellers": 46,
+    "per10k": 3.3,
+    "ref_per10k": 0.3
+   },
+   {
+    "label": "trots",
+    "totaal": 57,
+    "verhalen": 38,
+    "vertellers": 30,
+    "per10k": 1.4,
+    "ref_per10k": 1.9
+   }
+  ],
+  "Zwijgen & spreken": [
+   {
+    "label": "zwijgen",
+    "totaal": 94,
+    "verhalen": 50,
+    "vertellers": 40,
+    "per10k": 2.3,
+    "ref_per10k": 1.1
+   },
+   {
+    "label": "geheim",
+    "totaal": 43,
+    "verhalen": 29,
+    "vertellers": 25,
+    "per10k": 1.0,
+    "ref_per10k": 1.3
+   },
+   {
+    "label": "taboe",
+    "totaal": 15,
+    "verhalen": 9,
+    "vertellers": 9,
+    "per10k": 0.4,
+    "ref_per10k": 0.1
+   },
+   {
+    "label": "er werd niet over gepraat",
+    "totaal": 27,
+    "verhalen": 24,
+    "vertellers": 24,
+    "per10k": 0.7,
+    "ref_per10k": 0.3
+   },
+   {
+    "label": "vragen stellen",
+    "totaal": 4,
+    "verhalen": 4,
+    "vertellers": 4,
+    "per10k": 0.1,
+    "ref_per10k": 0.0
+   }
+  ],
+  "Stigma & uitsluiting": [
+   {
+    "label": "gepest / uitgescholden",
+    "totaal": 134,
+    "verhalen": 64,
+    "vertellers": 46,
+    "per10k": 3.2,
+    "ref_per10k": 0.8
+   },
+   {
+    "label": "scheldwoorden (moffen-, NSB-kind, landverrader)",
+    "totaal": 82,
+    "verhalen": 51,
+    "vertellers": 40,
+    "per10k": 2.0,
+    "ref_per10k": 5.5
+   },
+   {
+    "label": "buitengesloten / anders",
+    "totaal": 14,
+    "verhalen": 12,
+    "vertellers": 12,
+    "per10k": 0.3,
+    "ref_per10k": 0.1
+   },
+   {
+    "label": "school / juf / meester",
+    "totaal": 1067,
+    "verhalen": 141,
+    "vertellers": 88,
+    "per10k": 25.9,
+    "ref_per10k": 8.6
+   }
+  ],
+  "Gebeurtenissen na 1945": [
+   {
+    "label": "arrestatie / opgepakt",
+    "totaal": 154,
+    "verhalen": 82,
+    "vertellers": 57,
+    "per10k": 3.7,
+    "ref_per10k": 6.3
+   },
+   {
+    "label": "kamp / internering",
+    "totaal": 646,
+    "verhalen": 136,
+    "vertellers": 88,
+    "per10k": 15.7,
+    "ref_per10k": 13.1
+   },
+   {
+    "label": "kaalgeschoren / Dolle Dinsdag / Bijltjesdag",
+    "totaal": 79,
+    "verhalen": 56,
+    "vertellers": 48,
+    "per10k": 1.9,
+    "ref_per10k": 2.6
+   },
+   {
+    "label": "tehuis / pleeggezin",
+    "totaal": 236,
+    "verhalen": 74,
+    "vertellers": 51,
+    "per10k": 5.7,
+    "ref_per10k": 3.3
+   },
+   {
+    "label": "proces / tribunaal / veroordeeld",
+    "totaal": 182,
+    "verhalen": 80,
+    "vertellers": 57,
+    "per10k": 4.4,
+    "ref_per10k": 0.8
+   },
+   {
+    "label": "bezit afgenomen / armoede",
+    "totaal": 44,
+    "verhalen": 32,
+    "vertellers": 28,
+    "per10k": 1.1,
+    "ref_per10k": 0.7
+   },
+   {
+    "label": "emigratie",
+    "totaal": 23,
+    "verhalen": 12,
+    "vertellers": 12,
+    "per10k": 0.6,
+    "ref_per10k": 0.8
+   }
+  ],
+  "De \"foute\" daad": [
+   {
+    "label": "NSB",
+    "totaal": 654,
+    "verhalen": 129,
+    "vertellers": 83,
+    "per10k": 15.9,
+    "ref_per10k": 4.1
+   },
+   {
+    "label": "Waffen-SS / Oostfront",
+    "totaal": 269,
+    "verhalen": 73,
+    "vertellers": 52,
+    "per10k": 6.5,
+    "ref_per10k": 1.7
+   },
+   {
+    "label": "Jeugdstorm / Hitlerjugend",
+    "totaal": 132,
+    "verhalen": 41,
+    "vertellers": 26,
+    "per10k": 3.2,
+    "ref_per10k": 0.8
+   },
+   {
+    "label": "Landwacht / politie",
+    "totaal": 319,
+    "verhalen": 98,
+    "vertellers": 55,
+    "per10k": 7.7,
+    "ref_per10k": 2.5
+   },
+   {
+    "label": "collaboratie / verraad",
+    "totaal": 110,
+    "verhalen": 59,
+    "vertellers": 44,
+    "per10k": 2.7,
+    "ref_per10k": 1.0
+   },
+   {
+    "label": "Joden / Jodenvervolging",
+    "totaal": 270,
+    "verhalen": 81,
+    "vertellers": 58,
+    "per10k": 6.5,
+    "ref_per10k": 2.2
+   },
+   {
+    "label": "Duits(er) / Duitsland",
+    "totaal": 925,
+    "verhalen": 149,
+    "vertellers": 91,
+    "per10k": 22.4,
+    "ref_per10k": 46.2
+   },
+   {
+    "label": "verzet (als contrast)",
+    "totaal": 135,
+    "verhalen": 71,
+    "vertellers": 54,
+    "per10k": 3.3,
+    "ref_per10k": 8.1
+   }
+  ],
+  "Zoeken & weten": [
+   {
+    "label": "archief / CABR / dossier",
+    "totaal": 153,
+    "verhalen": 57,
+    "vertellers": 44,
+    "per10k": 3.7,
+    "ref_per10k": 0.5
+   },
+   {
+    "label": "Werkgroep Herkenning / lotgenoten",
+    "totaal": 140,
+    "verhalen": 41,
+    "vertellers": 35,
+    "per10k": 3.4,
+    "ref_per10k": 0.3
+   },
+   {
+    "label": "brieven / dagboek / foto",
+    "totaal": 360,
+    "verhalen": 107,
+    "vertellers": 69,
+    "per10k": 8.7,
+    "ref_per10k": 10.1
+   },
+   {
+    "label": "waarheid / weten",
+    "totaal": 110,
+    "verhalen": 63,
+    "vertellers": 46,
+    "per10k": 2.7,
+    "ref_per10k": 1.0
+   }
+  ]
+ },
+ "familie": [
+  {
+   "label": "vader",
+   "verhalen": 159,
+   "totaal": 1383
+  },
+  {
+   "label": "moeder",
+   "verhalen": 151,
+   "totaal": 1070
+  },
+  {
+   "label": "opa / grootvader",
+   "verhalen": 36,
+   "totaal": 94
+  },
+  {
+   "label": "oma / grootmoeder",
+   "verhalen": 36,
+   "totaal": 99
+  },
+  {
+   "label": "oom/tante",
+   "verhalen": 40,
+   "totaal": 107
+  }
+ ],
+ "fout_aanhalingstekens": 61,
+ "fout_totaal": 244,
+ "kenmerkend": [
+  {
+   "woord": "moe",
+   "ll": 159.2,
+   "n": 341,
+   "ref": 6,
+   "vertellers": 10
+  },
+  {
+   "woord": "nsb",
+   "ll": 121.6,
+   "n": 291,
+   "ref": 8,
+   "vertellers": 62
+  },
+  {
+   "woord": "kind",
+   "ll": 89.7,
+   "n": 366,
+   "ref": 29,
+   "vertellers": 77
+  },
+  {
+   "woord": "verleden",
+   "ll": 72.8,
+   "n": 176,
+   "ref": 5,
+   "vertellers": 63
+  },
+  {
+   "woord": "school",
+   "ll": 69.0,
+   "n": 561,
+   "ref": 80,
+   "vertellers": 84
+  },
+  {
+   "woord": "heb",
+   "ll": 68.2,
+   "n": 1201,
+   "ref": 241,
+   "vertellers": 108
+  },
+  {
+   "woord": "vader",
+   "ll": 65.2,
+   "n": 1910,
+   "ref": 441,
+   "vertellers": 109
+  },
+  {
+   "woord": "lid",
+   "ll": 55.4,
+   "n": 215,
+   "ref": 16,
+   "vertellers": 63
+  },
+  {
+   "woord": "kinderen",
+   "ll": 54.1,
+   "n": 918,
+   "ref": 182,
+   "vertellers": 99
+  },
+  {
+   "woord": "tante",
+   "ll": 45.5,
+   "n": 371,
+   "ref": 53,
+   "vertellers": 46
+  },
+  {
+   "woord": "politieke",
+   "ll": 41.5,
+   "n": 137,
+   "ref": 8,
+   "vertellers": 36
+  },
+  {
+   "woord": "trein",
+   "ll": 40.7,
+   "n": 262,
+   "ref": 32,
+   "vertellers": 42
+  },
+  {
+   "woord": "klas",
+   "ll": 40.4,
+   "n": 147,
+   "ref": 10,
+   "vertellers": 39
+  },
+  {
+   "woord": "schuld",
+   "ll": 32.8,
+   "n": 68,
+   "ref": 1,
+   "vertellers": 30
+  },
+  {
+   "woord": "keuze",
+   "ll": 32.7,
+   "n": 77,
+   "ref": 2,
+   "vertellers": 38
+  },
+  {
+   "woord": "moeder",
+   "ll": 30.3,
+   "n": 1516,
+   "ref": 389,
+   "vertellers": 102
+  },
+  {
+   "woord": "deutsche",
+   "ll": 29.8,
+   "n": 50,
+   "ref": 0,
+   "vertellers": 7
+  },
+  {
+   "woord": "dochter",
+   "ll": 29.6,
+   "n": 165,
+   "ref": 18,
+   "vertellers": 56
+  },
+  {
+   "woord": "ouders",
+   "ll": 29.4,
+   "n": 651,
+   "ref": 140,
+   "vertellers": 95
+  },
+  {
+   "woord": "mama",
+   "ll": 29.4,
+   "n": 86,
+   "ref": 4,
+   "vertellers": 12
+  },
+  {
+   "woord": "dingen",
+   "ll": 29.1,
+   "n": 183,
+   "ref": 22,
+   "vertellers": 60
+  },
+  {
+   "woord": "m'n",
+   "ll": 28.8,
+   "n": 168,
+   "ref": 19,
+   "vertellers": 16
+  },
+  {
+   "woord": "gepest",
+   "ll": 28.6,
+   "n": 48,
+   "ref": 0,
+   "vertellers": 23
+  },
+  {
+   "woord": "voelde",
+   "ll": 28.5,
+   "n": 200,
+   "ref": 26,
+   "vertellers": 61
+  },
+  {
+   "woord": "leren",
+   "ll": 28.4,
+   "n": 126,
+   "ref": 11,
+   "vertellers": 50
+  },
+  {
+   "woord": "fout",
+   "ll": 28.3,
+   "n": 103,
+   "ref": 7,
+   "vertellers": 46
+  },
+  {
+   "woord": "papa",
+   "ll": 27.9,
+   "n": 102,
+   "ref": 7,
+   "vertellers": 16
+  },
+  {
+   "woord": "herkenning",
+   "ll": 27.2,
+   "n": 58,
+   "ref": 1,
+   "vertellers": 23
+  },
+  {
+   "woord": "oma",
+   "ll": 27.1,
+   "n": 236,
+   "ref": 35,
+   "vertellers": 43
+  },
+  {
+   "woord": "herinneren",
+   "ll": 26.9,
+   "n": 133,
+   "ref": 13,
+   "vertellers": 48
+  },
+  {
+   "woord": "mezelf",
+   "ll": 26.8,
+   "n": 66,
+   "ref": 2,
+   "vertellers": 32
+  },
+  {
+   "woord": "politiek",
+   "ll": 24.9,
+   "n": 54,
+   "ref": 1,
+   "vertellers": 26
+  },
+  {
+   "woord": "werkgroep",
+   "ll": 24.5,
+   "n": 41,
+   "ref": 0,
+   "vertellers": 21
+  },
+  {
+   "woord": "juf",
+   "ll": 24.4,
+   "n": 69,
+   "ref": 3,
+   "vertellers": 13
+  },
+  {
+   "woord": "denk",
+   "ll": 24.4,
+   "n": 170,
+   "ref": 22,
+   "vertellers": 62
+  },
+  {
+   "woord": "best",
+   "ll": 23.9,
+   "n": 99,
+   "ref": 8,
+   "vertellers": 47
+  },
+  {
+   "woord": "achtergrond",
+   "ll": 23.3,
+   "n": 51,
+   "ref": 1,
+   "vertellers": 34
+  },
+  {
+   "woord": "foute",
+   "ll": 22.8,
+   "n": 85,
+   "ref": 6,
+   "vertellers": 39
+  },
+  {
+   "woord": "leuk",
+   "ll": 22.1,
+   "n": 95,
+   "ref": 8,
+   "vertellers": 36
+  },
+  {
+   "woord": "bewaker",
+   "ll": 22.1,
+   "n": 37,
+   "ref": 0,
+   "vertellers": 13
+  },
+  {
+   "woord": "geboren",
+   "ll": 21.7,
+   "n": 125,
+   "ref": 14,
+   "vertellers": 59
+  },
+  {
+   "woord": "bezoek",
+   "ll": 21.5,
+   "n": 134,
+   "ref": 16,
+   "vertellers": 53
+  },
+  {
+   "woord": "geloof",
+   "ll": 21.1,
+   "n": 87,
+   "ref": 7,
+   "vertellers": 25
+  },
+  {
+   "woord": "zwijgen",
+   "ll": 21.0,
+   "n": 47,
+   "ref": 1,
+   "vertellers": 28
+  },
+  {
+   "woord": "boos",
+   "ll": 21.0,
+   "n": 47,
+   "ref": 1,
+   "vertellers": 22
+  },
+  {
+   "woord": "meester",
+   "ll": 20.5,
+   "n": 46,
+   "ref": 1,
+   "vertellers": 15
+  },
+  {
+   "woord": "dossier",
+   "ll": 20.3,
+   "n": 61,
+   "ref": 3,
+   "vertellers": 31
+  },
+  {
+   "woord": "joden",
+   "ll": 19.0,
+   "n": 93,
+   "ref": 9,
+   "vertellers": 38
+  },
+  {
+   "woord": "boek",
+   "ll": 18.9,
+   "n": 98,
+   "ref": 10,
+   "vertellers": 35
+  },
+  {
+   "woord": "mussert",
+   "ll": 18.5,
+   "n": 31,
+   "ref": 0,
+   "vertellers": 16
+  },
+  {
+   "woord": "archief",
+   "ll": 18.3,
+   "n": 50,
+   "ref": 2,
+   "vertellers": 29
+  },
+  {
+   "woord": "vroeger",
+   "ll": 17.8,
+   "n": 74,
+   "ref": 6,
+   "vertellers": 41
+  },
+  {
+   "woord": "hoefde",
+   "ll": 17.8,
+   "n": 49,
+   "ref": 2,
+   "vertellers": 24
+  },
+  {
+   "woord": "opleiding",
+   "ll": 17.7,
+   "n": 62,
+   "ref": 4,
+   "vertellers": 32
+  },
+  {
+   "woord": "zuster",
+   "ll": 17.4,
+   "n": 104,
+   "ref": 12,
+   "vertellers": 26
+  },
+  {
+   "woord": "paul",
+   "ll": 16.8,
+   "n": 47,
+   "ref": 2,
+   "vertellers": 9
+  },
+  {
+   "woord": "begrip",
+   "ll": 16.8,
+   "n": 47,
+   "ref": 2,
+   "vertellers": 28
+  },
+  {
+   "woord": "waffen-ss",
+   "ll": 16.7,
+   "n": 28,
+   "ref": 0,
+   "vertellers": 14
+  },
+  {
+   "woord": "positie",
+   "ll": 16.7,
+   "n": 28,
+   "ref": 0,
+   "vertellers": 11
+  },
+  {
+   "woord": "overheid",
+   "ll": 16.7,
+   "n": 28,
+   "ref": 0,
+   "vertellers": 14
+  },
+  {
+   "woord": "las",
+   "ll": 16.4,
+   "n": 53,
+   "ref": 3,
+   "vertellers": 30
+  },
+  {
+   "woord": "barak",
+   "ll": 15.9,
+   "n": 52,
+   "ref": 3,
+   "vertellers": 15
+  },
+  {
+   "woord": "zoon",
+   "ll": 15.7,
+   "n": 161,
+   "ref": 26,
+   "vertellers": 53
+  },
+  {
+   "woord": "alleen",
+   "ll": 15.6,
+   "n": 518,
+   "ref": 123,
+   "vertellers": 92
+  },
+  {
+   "woord": "trouwen",
+   "ll": 15.5,
+   "n": 37,
+   "ref": 1,
+   "vertellers": 20
+  },
+  {
+   "woord": "joods",
+   "ll": 15.5,
+   "n": 37,
+   "ref": 1,
+   "vertellers": 21
+  },
+  {
+   "woord": "denkt",
+   "ll": 15.5,
+   "n": 26,
+   "ref": 0,
+   "vertellers": 18
+  },
+  {
+   "woord": "praten",
+   "ll": 15.4,
+   "n": 160,
+   "ref": 26,
+   "vertellers": 59
+  },
+  {
+   "woord": "liefde",
+   "ll": 15.4,
+   "n": 63,
+   "ref": 5,
+   "vertellers": 33
+  },
+  {
+   "woord": "gesproken",
+   "ll": 15.2,
+   "n": 98,
+   "ref": 12,
+   "vertellers": 56
+  },
+  {
+   "woord": "therapie",
+   "ll": 14.9,
+   "n": 25,
+   "ref": 0,
+   "vertellers": 13
+  },
+  {
+   "woord": "slechte",
+   "ll": 14.9,
+   "n": 50,
+   "ref": 3,
+   "vertellers": 29
+  },
+  {
+   "woord": "leidster",
+   "ll": 14.9,
+   "n": 25,
+   "ref": 0,
+   "vertellers": 7
+  },
+  {
+   "woord": "kleuterschool",
+   "ll": 14.9,
+   "n": 25,
+   "ref": 0,
+   "vertellers": 17
+  },
+  {
+   "woord": "kleinkinderen",
+   "ll": 14.9,
+   "n": 25,
+   "ref": 0,
+   "vertellers": 20
+  },
+  {
+   "woord": "nou",
+   "ll": 14.8,
+   "n": 137,
+   "ref": 21,
+   "vertellers": 40
+  },
+  {
+   "woord": "slecht",
+   "ll": 14.6,
+   "n": 82,
+   "ref": 9,
+   "vertellers": 43
+  },
+  {
+   "woord": "leeftijd",
+   "ll": 14.6,
+   "n": 101,
+   "ref": 13,
+   "vertellers": 45
+  },
+  {
+   "woord": "der",
+   "ll": 14.5,
+   "n": 173,
+   "ref": 30,
+   "vertellers": 43
+  },
+  {
+   "woord": "geaccepteerd",
+   "ll": 14.3,
+   "n": 24,
+   "ref": 0,
+   "vertellers": 17
+  },
+  {
+   "woord": "kennen",
+   "ll": 14.2,
+   "n": 71,
+   "ref": 7,
+   "vertellers": 39
+  },
+  {
+   "woord": "jeugdstorm",
+   "ll": 14.2,
+   "n": 76,
+   "ref": 8,
+   "vertellers": 22
+  },
+  {
+   "woord": "jeugd",
+   "ll": 14.2,
+   "n": 81,
+   "ref": 9,
+   "vertellers": 44
+  },
+  {
+   "woord": "leerde",
+   "ll": 14.1,
+   "n": 60,
+   "ref": 5,
+   "vertellers": 26
+  },
+  {
+   "woord": "partij",
+   "ll": 14.0,
+   "n": 54,
+   "ref": 4,
+   "vertellers": 23
+  },
+  {
+   "woord": "hekel",
+   "ll": 13.9,
+   "n": 34,
+   "ref": 1,
+   "vertellers": 21
+  },
+  {
+   "woord": "schrijven",
+   "ll": 13.8,
+   "n": 75,
+   "ref": 8,
+   "vertellers": 35
+  },
+  {
+   "woord": "werken",
+   "ll": 13.7,
+   "n": 158,
+   "ref": 27,
+   "vertellers": 50
+  },
+  {
+   "woord": "tribunaal",
+   "ll": 13.7,
+   "n": 23,
+   "ref": 0,
+   "vertellers": 12
+  },
+  {
+   "woord": "psychiater",
+   "ll": 13.7,
+   "n": 23,
+   "ref": 0,
+   "vertellers": 11
+  },
+  {
+   "woord": "leiding",
+   "ll": 13.7,
+   "n": 59,
+   "ref": 5,
+   "vertellers": 22
+  },
+  {
+   "woord": "gevoel",
+   "ll": 13.7,
+   "n": 154,
+   "ref": 26,
+   "vertellers": 56
+  },
+  {
+   "woord": "erkenning",
+   "ll": 13.7,
+   "n": 23,
+   "ref": 0,
+   "vertellers": 13
+  },
+  {
+   "woord": "wereldoorlog",
+   "ll": 13.5,
+   "n": 84,
+   "ref": 10,
+   "vertellers": 37
+  },
+  {
+   "woord": "oostenrijk",
+   "ll": 13.4,
+   "n": 33,
+   "ref": 1,
+   "vertellers": 13
+  },
+  {
+   "woord": "gevraagd",
+   "ll": 13.4,
+   "n": 93,
+   "ref": 12,
+   "vertellers": 47
+  },
+  {
+   "woord": "mening",
+   "ll": 13.2,
+   "n": 40,
+   "ref": 2,
+   "vertellers": 18
+  },
+  {
+   "woord": "vrijlating",
+   "ll": 13.1,
+   "n": 22,
+   "ref": 0,
+   "vertellers": 13
+  },
+  {
+   "woord": "vergeven",
+   "ll": 13.1,
+   "n": 22,
+   "ref": 0,
+   "vertellers": 11
+  },
+  {
+   "woord": "lidmaatschap",
+   "ll": 13.0,
+   "n": 46,
+   "ref": 3,
+   "vertellers": 25
+  },
+  {
+   "woord": "waarheid",
+   "ll": 12.8,
+   "n": 32,
+   "ref": 1,
+   "vertellers": 23
+  },
+  {
+   "woord": "allebei",
+   "ll": 12.8,
+   "n": 32,
+   "ref": 1,
+   "vertellers": 19
+  },
+  {
+   "woord": "tehuis",
+   "ll": 12.7,
+   "n": 39,
+   "ref": 2,
+   "vertellers": 18
+  },
+  {
+   "woord": "opa",
+   "ll": 12.6,
+   "n": 197,
+   "ref": 38,
+   "vertellers": 43
+  },
+  {
+   "woord": "waffen",
+   "ll": 12.5,
+   "n": 21,
+   "ref": 0,
+   "vertellers": 10
+  },
+  {
+   "woord": "visite",
+   "ll": 12.5,
+   "n": 21,
+   "ref": 0,
+   "vertellers": 10
+  },
+  {
+   "woord": "onderwijs",
+   "ll": 12.5,
+   "n": 21,
+   "ref": 0,
+   "vertellers": 10
+  },
+  {
+   "woord": "leven",
+   "ll": 12.5,
+   "n": 413,
+   "ref": 98,
+   "vertellers": 88
+  },
+  {
+   "woord": "keuzes",
+   "ll": 12.5,
+   "n": 21,
+   "ref": 0,
+   "vertellers": 14
+  },
+  {
+   "woord": "thuis",
+   "ll": 12.4,
+   "n": 416,
+   "ref": 99,
+   "vertellers": 81
+  },
+  {
+   "woord": "vrijgelaten",
+   "ll": 12.3,
+   "n": 31,
+   "ref": 1,
+   "vertellers": 22
+  },
+  {
+   "woord": "vriendinnetjes",
+   "ll": 12.3,
+   "n": 31,
+   "ref": 1,
+   "vertellers": 12
+  },
+  {
+   "woord": "ruzie",
+   "ll": 12.3,
+   "n": 31,
+   "ref": 1,
+   "vertellers": 19
+  },
+  {
+   "woord": "zussen",
+   "ll": 12.2,
+   "n": 38,
+   "ref": 2,
+   "vertellers": 19
+  },
+  {
+   "woord": "zaal",
+   "ll": 12.2,
+   "n": 50,
+   "ref": 4,
+   "vertellers": 13
+  },
+  {
+   "woord": "veroordeeld",
+   "ll": 12.2,
+   "n": 38,
+   "ref": 2,
+   "vertellers": 28
+  },
+  {
+   "woord": "hamburg",
+   "ll": 12.2,
+   "n": 38,
+   "ref": 2,
+   "vertellers": 18
+  },
+  {
+   "woord": "dacht",
+   "ll": 12.2,
+   "n": 207,
+   "ref": 41,
+   "vertellers": 63
+  },
+  {
+   "woord": "pijn",
+   "ll": 12.0,
+   "n": 55,
+   "ref": 5,
+   "vertellers": 23
+  },
+  {
+   "woord": "geleerd",
+   "ll": 12.0,
+   "n": 55,
+   "ref": 5,
+   "vertellers": 26
+  }
+ ],
+ "frequent": [
+  {
+   "woord": "vader",
+   "n": 1910,
+   "vertellers": 109
+  },
+  {
+   "woord": "moeder",
+   "n": 1516,
+   "vertellers": 102
+  },
+  {
+   "woord": "heb",
+   "n": 1201,
+   "vertellers": 108
+  },
+  {
+   "woord": "kinderen",
+   "n": 918,
+   "vertellers": 99
+  },
+  {
+   "woord": "like",
+   "n": 877,
+   "vertellers": 1
+  },
+  {
+   "woord": "ouders",
+   "n": 651,
+   "vertellers": 95
+  },
+  {
+   "woord": "oorlog",
+   "n": 615,
+   "vertellers": 96
+  },
+  {
+   "woord": "huis",
+   "n": 615,
+   "vertellers": 90
+  },
+  {
+   "woord": "school",
+   "n": 561,
+   "vertellers": 84
+  },
+  {
+   "woord": "alleen",
+   "n": 518,
+   "vertellers": 92
+  },
+  {
+   "woord": "man",
+   "n": 457,
+   "vertellers": 81
+  },
+  {
+   "woord": "thuis",
+   "n": 416,
+   "vertellers": 81
+  },
+  {
+   "woord": "leven",
+   "n": 413,
+   "vertellers": 88
+  },
+  {
+   "woord": "moesten",
+   "n": 404,
+   "vertellers": 63
+  },
+  {
+   "woord": "familie",
+   "n": 371,
+   "vertellers": 79
+  },
+  {
+   "woord": "tante",
+   "n": 371,
+   "vertellers": 46
+  },
+  {
+   "woord": "kind",
+   "n": 366,
+   "vertellers": 77
+  },
+  {
+   "woord": "moe",
+   "n": 341,
+   "vertellers": 10
+  },
+  {
+   "woord": "duitse",
+   "n": 337,
+   "vertellers": 65
+  },
+  {
+   "woord": "duitsland",
+   "n": 315,
+   "vertellers": 76
+  },
+  {
+   "woord": "broer",
+   "n": 301,
+   "vertellers": 63
+  },
+  {
+   "woord": "nsb",
+   "n": 291,
+   "vertellers": 62
+  },
+  {
+   "woord": "nederland",
+   "n": 279,
+   "vertellers": 64
+  },
+  {
+   "woord": "kamp",
+   "n": 275,
+   "vertellers": 60
+  },
+  {
+   "woord": "gezin",
+   "n": 273,
+   "vertellers": 64
+  },
+  {
+   "woord": "vroeg",
+   "n": 272,
+   "vertellers": 65
+  },
+  {
+   "woord": "trein",
+   "n": 262,
+   "vertellers": 42
+  },
+  {
+   "woord": "vrouw",
+   "n": 248,
+   "vertellers": 68
+  },
+  {
+   "woord": "kregen",
+   "n": 242,
+   "vertellers": 54
+  },
+  {
+   "woord": "oma",
+   "n": 236,
+   "vertellers": 43
+  },
+  {
+   "woord": "vertelde",
+   "n": 233,
+   "vertellers": 64
+  },
+  {
+   "woord": "buiten",
+   "n": 229,
+   "vertellers": 58
+  },
+  {
+   "woord": "net",
+   "n": 226,
+   "vertellers": 64
+  },
+  {
+   "woord": "zal",
+   "n": 223,
+   "vertellers": 65
+  },
+  {
+   "woord": "eten",
+   "n": 222,
+   "vertellers": 51
+  },
+  {
+   "woord": "werk",
+   "n": 218,
+   "vertellers": 60
+  },
+  {
+   "woord": "lid",
+   "n": 215,
+   "vertellers": 63
+  },
+  {
+   "woord": "jongens",
+   "n": 211,
+   "vertellers": 37
+  },
+  {
+   "woord": "dacht",
+   "n": 207,
+   "vertellers": 63
+  },
+  {
+   "woord": "pas",
+   "n": 205,
+   "vertellers": 69
+  },
+  {
+   "woord": "oom",
+   "n": 203,
+   "vertellers": 36
+  },
+  {
+   "woord": "anders",
+   "n": 200,
+   "vertellers": 62
+  },
+  {
+   "woord": "voelde",
+   "n": 200,
+   "vertellers": 61
+  },
+  {
+   "woord": "opa",
+   "n": 197,
+   "vertellers": 43
+  },
+  {
+   "woord": "laten",
+   "n": 197,
+   "vertellers": 67
+  },
+  {
+   "woord": "verhaal",
+   "n": 194,
+   "vertellers": 65
+  },
+  {
+   "woord": "straat",
+   "n": 193,
+   "vertellers": 44
+  },
+  {
+   "woord": "echter",
+   "n": 191,
+   "vertellers": 54
+  },
+  {
+   "woord": "binnen",
+   "n": 190,
+   "vertellers": 55
+  },
+  {
+   "woord": "zus",
+   "n": 188,
+   "vertellers": 48
+  },
+  {
+   "woord": "dingen",
+   "n": 183,
+   "vertellers": 60
+  },
+  {
+   "woord": "enige",
+   "n": 182,
+   "vertellers": 59
+  },
+  {
+   "woord": "moment",
+   "n": 182,
+   "vertellers": 60
+  },
+  {
+   "woord": "heen",
+   "n": 178,
+   "vertellers": 56
+  },
+  {
+   "woord": "verleden",
+   "n": 176,
+   "vertellers": 63
+  },
+  {
+   "woord": "nederlandse",
+   "n": 175,
+   "vertellers": 49
+  },
+  {
+   "woord": "der",
+   "n": 173,
+   "vertellers": 43
+  },
+  {
+   "woord": "enkele",
+   "n": 172,
+   "vertellers": 49
+  },
+  {
+   "woord": "den",
+   "n": 172,
+   "vertellers": 52
+  },
+  {
+   "woord": "plaats",
+   "n": 172,
+   "vertellers": 53
+  },
+  {
+   "woord": "bed",
+   "n": 171,
+   "vertellers": 46
+  },
+  {
+   "woord": "denk",
+   "n": 170,
+   "vertellers": 62
+  },
+  {
+   "woord": "m'n",
+   "n": 168,
+   "vertellers": 16
+  },
+  {
+   "woord": "tweede",
+   "n": 167,
+   "vertellers": 55
+  },
+  {
+   "woord": "dochter",
+   "n": 165,
+   "vertellers": 56
+  },
+  {
+   "woord": "hoofd",
+   "n": 164,
+   "vertellers": 54
+  },
+  {
+   "woord": "mei",
+   "n": 164,
+   "vertellers": 51
+  },
+  {
+   "woord": "liep",
+   "n": 163,
+   "vertellers": 40
+  },
+  {
+   "woord": "begon",
+   "n": 161,
+   "vertellers": 54
+  },
+  {
+   "woord": "zoon",
+   "n": 161,
+   "vertellers": 53
+  },
+  {
+   "woord": "gelukkig",
+   "n": 161,
+   "vertellers": 51
+  },
+  {
+   "woord": "praten",
+   "n": 160,
+   "vertellers": 59
+  },
+  {
+   "woord": "staat",
+   "n": 160,
+   "vertellers": 54
+  },
+  {
+   "woord": "amsterdam",
+   "n": 158,
+   "vertellers": 41
+  },
+  {
+   "woord": "werken",
+   "n": 158,
+   "vertellers": 50
+  },
+  {
+   "woord": "vertellen",
+   "n": 157,
+   "vertellers": 68
+  },
+  {
+   "woord": "bleek",
+   "n": 157,
+   "vertellers": 54
+  },
+  {
+   "woord": "geworden",
+   "n": 155,
+   "vertellers": 61
+  },
+  {
+   "woord": "mochten",
+   "n": 155,
+   "vertellers": 46
+  },
+  {
+   "woord": "gevoel",
+   "n": 154,
+   "vertellers": 56
+  },
+  {
+   "woord": "uiteindelijk",
+   "n": 152,
+   "vertellers": 69
+  },
+  {
+   "woord": "volgende",
+   "n": 152,
+   "vertellers": 45
+  },
+  {
+   "woord": "dood",
+   "n": 151,
+   "vertellers": 55
+  },
+  {
+   "woord": "terecht",
+   "n": 150,
+   "vertellers": 58
+  },
+  {
+   "woord": "bang",
+   "n": 150,
+   "vertellers": 52
+  },
+  {
+   "woord": "langs",
+   "n": 148,
+   "vertellers": 46
+  },
+  {
+   "woord": "kant",
+   "n": 147,
+   "vertellers": 51
+  },
+  {
+   "woord": "zeer",
+   "n": 147,
+   "vertellers": 49
+  },
+  {
+   "woord": "klas",
+   "n": 147,
+   "vertellers": 39
+  },
+  {
+   "woord": "lopen",
+   "n": 143,
+   "vertellers": 50
+  },
+  {
+   "woord": "gauw",
+   "n": 143,
+   "vertellers": 25
+  },
+  {
+   "woord": "blij",
+   "n": 142,
+   "vertellers": 53
+  },
+  {
+   "woord": "gegaan",
+   "n": 142,
+   "vertellers": 56
+  },
+  {
+   "woord": "zeker",
+   "n": 141,
+   "vertellers": 63
+  },
+  {
+   "woord": "mogelijk",
+   "n": 141,
+   "vertellers": 51
+  },
+  {
+   "woord": "eind",
+   "n": 139,
+   "vertellers": 54
+  },
+  {
+   "woord": "gekomen",
+   "n": 139,
+   "vertellers": 65
+  },
+  {
+   "woord": "lange",
+   "n": 139,
+   "vertellers": 43
+  },
+  {
+   "woord": "politieke",
+   "n": 137,
+   "vertellers": 36
+  },
+  {
+   "woord": "nou",
+   "n": 137,
+   "vertellers": 40
+  },
+  {
+   "woord": "grond",
+   "n": 135,
+   "vertellers": 43
+  },
+  {
+   "woord": "bezoek",
+   "n": 134,
+   "vertellers": 53
+  },
+  {
+   "woord": "houden",
+   "n": 133,
+   "vertellers": 55
+  },
+  {
+   "woord": "meisjes",
+   "n": 133,
+   "vertellers": 36
+  },
+  {
+   "woord": "herinneren",
+   "n": 133,
+   "vertellers": 48
+  },
+  {
+   "woord": "maanden",
+   "n": 132,
+   "vertellers": 57
+  },
+  {
+   "woord": "begin",
+   "n": 131,
+   "vertellers": 59
+  },
+  {
+   "woord": "via",
+   "n": 131,
+   "vertellers": 60
+  },
+  {
+   "woord": "naam",
+   "n": 131,
+   "vertellers": 52
+  },
+  {
+   "woord": "contact",
+   "n": 130,
+   "vertellers": 65
+  },
+  {
+   "woord": "snel",
+   "n": 130,
+   "vertellers": 60
+  },
+  {
+   "woord": "soort",
+   "n": 129,
+   "vertellers": 49
+  },
+  {
+   "woord": "buurt",
+   "n": 129,
+   "vertellers": 45
+  },
+  {
+   "woord": "beter",
+   "n": 129,
+   "vertellers": 54
+  },
+  {
+   "woord": "boerderij",
+   "n": 129,
+   "vertellers": 28
+  },
+  {
+   "woord": "weken",
+   "n": 128,
+   "vertellers": 51
+  },
+  {
+   "woord": "deel",
+   "n": 128,
+   "vertellers": 41
+  },
+  {
+   "woord": "duitsers",
+   "n": 127,
+   "vertellers": 49
+  },
+  {
+   "woord": "woonde",
+   "n": 126,
+   "vertellers": 47
+  },
+  {
+   "woord": "kijken",
+   "n": 126,
+   "vertellers": 50
+  },
+  {
+   "woord": "weinig",
+   "n": 126,
+   "vertellers": 56
+  },
+  {
+   "woord": "vanaf",
+   "n": 126,
+   "vertellers": 45
+  },
+  {
+   "woord": "leren",
+   "n": 126,
+   "vertellers": 50
+  },
+  {
+   "woord": "liet",
+   "n": 125,
+   "vertellers": 36
+  },
+  {
+   "woord": "geboren",
+   "n": 125,
+   "vertellers": 59
+  },
+  {
+   "woord": "mannen",
+   "n": 124,
+   "vertellers": 46
+  },
+  {
+   "woord": "jan",
+   "n": 124,
+   "vertellers": 24
+  },
+  {
+   "woord": "hand",
+   "n": 123,
+   "vertellers": 48
+  },
+  {
+   "woord": "vrij",
+   "n": 123,
+   "vertellers": 49
+  },
+  {
+   "woord": "zoveel",
+   "n": 123,
+   "vertellers": 48
+  },
+  {
+   "woord": "gebracht",
+   "n": 122,
+   "vertellers": 53
+  },
+  {
+   "woord": "ergens",
+   "n": 122,
+   "vertellers": 48
+  },
+  {
+   "woord": "zodat",
+   "n": 120,
+   "vertellers": 40
+  },
+  {
+   "woord": "genoeg",
+   "n": 120,
+   "vertellers": 46
+  },
+  {
+   "woord": "vragen",
+   "n": 119,
+   "vertellers": 51
+  },
+  {
+   "woord": "naast",
+   "n": 119,
+   "vertellers": 48
+  },
+  {
+   "woord": "per",
+   "n": 118,
+   "vertellers": 40
+  },
+  {
+   "woord": "mevrouw",
+   "n": 117,
+   "vertellers": 21
+  },
+  {
+   "woord": "groep",
+   "n": 117,
+   "vertellers": 36
+  },
+  {
+   "woord": "vrouwen",
+   "n": 117,
+   "vertellers": 37
+  },
+  {
+   "woord": "zusje",
+   "n": 117,
+   "vertellers": 37
+  },
+  {
+   "woord": "begreep",
+   "n": 117,
+   "vertellers": 45
+  },
+  {
+   "woord": "duidelijk",
+   "n": 116,
+   "vertellers": 47
+  },
+  {
+   "woord": "hield",
+   "n": 115,
+   "vertellers": 46
+  },
+  {
+   "woord": "stonden",
+   "n": 115,
+   "vertellers": 42
+  },
+  {
+   "woord": "vele",
+   "n": 115,
+   "vertellers": 48
+  },
+  {
+   "woord": "laat",
+   "n": 115,
+   "vertellers": 56
+  },
+  {
+   "woord": "week",
+   "n": 115,
+   "vertellers": 44
+  },
+  {
+   "woord": "gezeten",
+   "n": 114,
+   "vertellers": 50
+  },
+  {
+   "woord": "joodse",
+   "n": 114,
+   "vertellers": 42
+  }
+ ],
+ "positie": {
+  "schaamte": [
+   24,
+   21,
+   31
+  ],
+  "angst": [
+   117,
+   102,
+   108
+  ],
+  "woede / boosheid": [
+   42,
+   55,
+   54
+  ],
+  "verdriet": [
+   87,
+   84,
+   105
+  ],
+  "haat / afkeer": [
+   12,
+   17,
+   20
+  ],
+  "liefde": [
+   24,
+   34,
+   37
+  ],
+  "begrip": [
+   10,
+   13,
+   31
+  ],
+  "vergeving / verzoening": [
+   4,
+   11,
+   27
+  ],
+  "opluchting / rust": [
+   9,
+   14,
+   15
+  ],
+  "trauma / therapie": [
+   35,
+   51,
+   52
+  ],
+  "schuld(gevoel)": [
+   15,
+   47,
+   59
+  ],
+  "eenzaamheid": [
+   11,
+   12,
+   19
+  ]
+ }
+}

@@ -1,0 +1,260 @@
+<title>Kinderen van 'foute' ouders</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500;600;700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Lay-out: één leeskolom als een archiefdossier; grafieken en citaten breken iets breder uit. */
+:root{
+  --papier:#eef0ec; --vlak:#f8f9f6; --inkt:#1f2a2e; --zacht:#5a6a6e; --lijn:#c9d0cc;
+  --cabr:#9b3b2a; --bevr:#6d8a93; --label:#e4d9b8;
+  --kop:"Archivo Narrow","Arial Narrow",Arial,sans-serif;
+  --tekst:Literata,Georgia,"Times New Roman",serif;
+  --data:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --papier:#161c1e; --vlak:#1e2629; --inkt:#e3e7e4; --zacht:#9aa8aa; --lijn:#34403f;
+  --cabr:#e07a62; --bevr:#8fb1bb; --label:#4a4430; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --papier:#161c1e; --vlak:#1e2629; --inkt:#e3e7e4; --zacht:#9aa8aa; --lijn:#34403f;
+  --cabr:#e07a62; --bevr:#8fb1bb; --label:#4a4430; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--papier);color:var(--inkt);font:17px/1.6 var(--tekst);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+main{max-width:780px;margin:0 auto;padding-block:40px 80px;display:flex;flex-direction:column;gap:56px}
+h1,h2,h3{font-family:var(--kop);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(2.1rem,6vw,3.2rem);font-weight:700;letter-spacing:-.01em}
+h2{font-size:1.6rem;font-weight:600;margin-bottom:12px}
+h3{font-size:1.15rem;font-weight:600}
+p{margin:0 0 12px;max-width:66ch}
+a{color:inherit;text-decoration-color:var(--cabr);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--cabr);outline-offset:2px}
+.etiket{display:inline-block;font:500 .78rem var(--data);letter-spacing:.08em;text-transform:uppercase;
+  background:var(--label);padding:3px 8px;border-radius:2px;margin-bottom:14px}
+.lead{font-size:1.15rem;color:var(--inkt)}
+.meta{font:.82rem/1.5 var(--data);color:var(--zacht)}
+.cijfers{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--lijn);border:1px solid var(--lijn);margin-top:20px}
+.cijfers div{background:var(--vlak);padding:12px 14px}
+.cijfers b{display:block;font:500 1.5rem var(--data);font-variant-numeric:tabular-nums}
+.cijfers span{font:.8rem var(--data);color:var(--zacht)}
+.inzicht{border-top:1px solid var(--lijn);padding-top:20px;display:grid;grid-template-columns:3.2rem 1fr;gap:4px 16px}
+.inzicht .nr{font:500 .85rem var(--data);color:var(--cabr);padding-top:4px}
+.inzicht > div{min-width:0}
+.inzicht h3{margin-bottom:8px}
+.stat{font-family:var(--data);font-size:.88em;font-variant-numeric:tabular-nums;white-space:nowrap}
+blockquote{margin:10px 0 14px;padding:2px 0 2px 16px;border-left:3px solid var(--cabr);font-style:italic;max-width:62ch}
+blockquote cite{display:block;font:normal .78rem/1.4 var(--data);color:var(--zacht);margin-top:4px}
+.legenda{display:flex;flex-wrap:wrap;gap:16px;font:.8rem var(--data);color:var(--zacht);margin:4px 0 10px}
+.legenda i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.grafiek{overflow-x:auto;background:var(--vlak);border:1px solid var(--lijn);padding:12px 8px}
+.grafiek svg{display:block;width:100%;min-width:560px;height:auto}
+.grafiek text{font-family:var(--data);fill:var(--inkt)}
+.grafiek .z{fill:var(--zacht)}
+.boog{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.boog figure{margin:0;background:var(--vlak);border:1px solid var(--lijn);padding:10px 12px}
+.boog figcaption{font:600 .95rem var(--kop);margin-bottom:6px}
+.boog svg{display:block;width:100%;height:auto}
+.boog text{font:10px var(--data);fill:var(--zacht)}
+.woorden{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:baseline}
+.woorden span{font-family:var(--tekst);padding:2px 6px;border-bottom:1px solid var(--lijn);cursor:default}
+.woorden span small{font:.68rem var(--data);color:var(--zacht);margin-left:4px}
+details{border-top:1px solid var(--lijn);padding:10px 0}
+summary{font:600 1.05rem var(--kop);cursor:pointer}
+table{border-collapse:collapse;width:100%;font:.82rem var(--data);font-variant-numeric:tabular-nums;margin-top:8px}
+th,td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--lijn)}
+th{color:var(--zacht);font-weight:500}
+td.n,th.n{text-align:right}
+.tabelwrap{overflow-x:auto}
+ul.kant{padding-left:1.1rem;margin:0}
+ul.kant li{margin-bottom:8px;max-width:66ch}
+@media (prefers-reduced-motion:no-preference){.woorden span{transition:background .15s}.woorden span:hover{background:var(--label)}}
+</style>
+
+<main>
+<header>
+  <div class="etiket">CABR · Verhalenarchief Nationaal Archief</div>
+  <h1>Kinderen van 'foute' ouders</h1>
+  <p class="lead">Wat 210 verhalen in het Verhalenarchief van het Nationaal Archief vertellen over opgroeien met een vader of moeder die na de oorlog als collaborateur werd vervolgd. Geteld, vergeleken en teruggelezen.</p>
+  <div class="cijfers">
+    <div><b>210</b><span>verhalen met tekst</span></div>
+    <div><b>118</b><span>vertellers</span></div>
+    <div><b>412.000</b><span>woorden</span></div>
+    <div><b>2008–2014</b><span>ingezonden</span></div>
+  </div>
+  <p class="meta" style="margin-top:12px">Ter vergelijking: de 345 verhalen in de categorie <i>65 Jaar Bevrijding</i> uit hetzelfde archief (144.000 woorden). Cijfers "per 10k" zijn vermeldingen per 10.000 woorden. "Vertellers" telt elke schrijver één keer, ook als die een reeks van zeven delen instuurde.</p>
+</header>
+
+<section>
+  <h2>Wat opvalt</h2>
+
+  <div class="inzicht"><div class="nr">01</div><div>
+    <h3>Ik, niet wij</h3>
+    <p>Het scherpste verschil met de bevrijdingsverhalen zit niet in een emotiewoord maar in een voornaamwoord. <span class="stat">ik</span> komt anderhalf keer zo vaak voor <span class="stat">(245 tegen 169 per 10k)</span>, <span class="stat">wij/we</span> half zo vaak <span class="stat">(69 tegen 135)</span>, <span class="stat">ons/onze</span> ook half zo vaak <span class="stat">(36 tegen 72)</span>. De bevrijding is een verhaal van een straat, een dorp, een land. Dit zijn verhalen van iemand die er alleen voor stond.</p>
+  </div></div>
+
+  <div class="inzicht"><div class="nr">02</div><div>
+    <h3>Schaamte en schuld horen bij elkaar, en zijn van het kind</h3>
+    <p>Schaamte staat bij <span class="stat">36 van de 118</span> vertellers (6× zo vaak als in de bevrijdingsverhalen), schuld bij <span class="stat">45</span> (10×). Ze verschijnen vaak als paar: "schaamte en schuld". Wat terugkomt is dat het kind draagt wat de ouder niet draagt. Ouders schamen zich in deze teksten zelden; kinderen doen het plaatsvervangend.</p>
+    <blockquote>Hij schaamde zich er niet voor, hij was er juist trots op.<cite><a href="https://www.nationaalarchief.nl/beleven/verhalenarchief/mijn-verhaal-als-dochter-van-een-nsber-en-een-duitse-moeder">Mijn verhaal als dochter van een NSB'er en een Duitse moeder</a></cite></blockquote>
+    <blockquote>Het voelt nu niet meer alsof ik, plaatsvervangend, ook schuldig ben.<cite><a href="https://www.nationaalarchief.nl/beleven/verhalenarchief/dat-ellendige-systeem-was-hem-meer-waard-dan-ik">"Dat ellendige systeem was hem meer waard dan ik"</a></cite></blockquote>
+    <blockquote>Door dertig jaar een grote schaamte en diepe haat voor mijn overleden vader mee te torsen, heb ik mezelf en mijn familie flink tekort gedaan.<cite><a href="https://www.nationaalarchief.nl/beleven/verhalenarchief/hoe-de-oorlog-mijn-leven-beinvloed-heeft">Hoe de oorlog mijn leven beïnvloed heeft</a></cite></blockquote>
+  </div></div>
+
+  <div class="inzicht"><div class="nr">03</div><div>
+    <h3>Het zwijgen, en "waarom"</h3>
+    <p><span class="stat">40</span> vertellers schrijven over zwijgen (2× zo vaak), en twee woorden verraden de toon: <span class="stat">nooit</span> (1,6×) en <span class="stat">waarom</span> (2,6×). Het zwijgen is dubbel: thuis wordt er niet over gepraat, en buiten de deur zwijgt het kind om niet herkend te worden.</p>
+    <blockquote>Hoe ga ik vertellen over wat nooit gezegd wordt en hoe krijg je te weten waarover altijd gezwegen is?<cite><a href="https://www.nationaalarchief.nl/beleven/verhalenarchief/zuivering-begin-jaren-60">Zuivering begin jaren 60</a></cite></blockquote>
+    <blockquote>Dit zwijgen heb ik bijna 60 jaar volgehouden en dan, door een onverwachte situatie, werd alles weer actueel en het was als een zweer die openbrak.<cite><a href="https://www.nationaalarchief.nl/beleven/verhalenarchief/eindpunt-amsterdam-het-opbouwen-van-een-nieuw-leven">Eindpunt Amsterdam: het opbouwen van een nieuw leven</a></cite></blockquote>
+  </div></div>
+
+  <div class="inzicht"><div class="nr">04</div><div>
+    <h3>De school is de plek van het stigma</h3>
+    <p>School, juf, meester en klas staan bij <span class="stat">88 van de 118</span> vertellers, drie keer zo vaak als bij de bevrijding. <span class="stat">gepest</span> komt 48 keer voor, in de bevrijdingsverhalen geen enkele keer. De volwassene die het kind aanwijst is vaak de leerkracht zelf.</p>
+    <blockquote>De juf vertelde over de landverraders die zes miljoen Joden hadden vermoord en keek mij beschuldigend aan.<cite><a href="https://www.nationaalarchief.nl/beleven/verhalenarchief/deel-3-het-kind-de-school-en-de-vader">Deel 3. Het kind, de school en de vader</a></cite></blockquote>
+    <blockquote>De andere kinderen liepen met een grote boog om me heen en scholden me uit voor NSB-kind, terwijl ik niet eens wist wat dat betekende.<cite><a href="https://www.nationaalarchief.nl/beleven/verhalenarchief/kind-in-oorlogstijd">Kind in oorlogstijd</a></cite></blockquote>
+  </div></div>
+
+  <div class="inzicht"><div class="nr">05</div><div>
+    <h3>Het is meestal een vaderverhaal, en een "keuze"</h3>
+    <p>In zinnen waarin een familielid met NSB, SS, lidmaatschap of een veroordeling in verband wordt gebracht, gaat het in <span class="stat">60</span> verhalen om de vader, in <span class="stat">34</span> om de moeder, in <span class="stat">16</span> om beide ouders en in <span class="stat">7</span> om een grootouder. Opvallend vaak spreken kinderen over de <span class="stat">keuze</span> van hun ouder: 77 keer, tegen 2 keer in de bevrijdingsverhalen. Daarmee leggen ze de verantwoordelijkheid waar die hoort, en benoemen ze tegelijk dat zij er niet voor kozen.</p>
+    <blockquote>Eigenlijk heb ik levenslang! Omdat mijn vader een NSB'er was. Zo heb ik dat ook altijd gevoeld.<cite><a href="https://www.nationaalarchief.nl/beleven/verhalenarchief/eigenlijk-heb-ik-levenslang-omdat-mijn-vader-een-nsber-was-zo-heb-ik-dat">"Eigenlijk heb ik levenslang!" (interview)</a></cite></blockquote>
+  </div></div>
+
+  <div class="inzicht"><div class="nr">06</div><div>
+    <h3>"Fout" staat tussen aanhalingstekens</h3>
+    <p>Het woord zelf komt vier keer zo vaak voor als bij de bevrijding, en een kwart van de keren <span class="stat">(61 van 244)</span> staat het tussen aanhalingstekens, zoals ook in de naam van de categorie. Het label wordt gebruikt en tegelijk op afstand gezet. Eén verteller vat het mechanisme samen:</p>
+    <blockquote>eenmaal 'fout', altijd 'fout', waardoor hun straf, ook voor hun familie, in feite omgezet werd in levenslang.<cite><a href="https://www.nationaalarchief.nl/beleven/verhalenarchief/deel-4-mijn-vader">Deel 4. Mijn vader</a></cite></blockquote>
+  </div></div>
+
+  <div class="inzicht"><div class="nr">07</div><div>
+    <h3>Liefde maakt het moeilijker, niet makkelijker</h3>
+    <p>Liefde wordt drie keer zo vaak genoemd als bij de bevrijding, haat en afkeer anderhalf keer. Die twee staan vaak in hetzelfde verhaal, soms in dezelfde zin. Het kind moet een ouder die het liefheeft tegelijk zien als iemand die aan de verkeerde kant stond.</p>
+    <blockquote>Mijn lieve vader, moest ik hem nu ineens haten?<cite><a href="https://www.nationaalarchief.nl/beleven/verhalenarchief/geboren-na-de-oorlog">Geboren ná de oorlog</a></cite></blockquote>
+    <blockquote>Mijn opa en oma fout? Die lieve mensen […] Mocht ik dit relativeren? Moest ik oordelen?<cite><a href="https://www.nationaalarchief.nl/beleven/verhalenarchief/mijn-opa">Mijn opa</a></cite></blockquote>
+  </div></div>
+
+  <div class="inzicht"><div class="nr">08</div><div>
+    <h3>De Jodenvervolging is de maatstaf</h3>
+    <p>Joden en de Jodenvervolging worden drie keer zo vaak genoemd als in de bevrijdingsverhalen <span class="stat">(58 vertellers)</span>. Niet als achtergrond maar als het ijkpunt waaraan de ouder wordt gemeten. Een paar vertellers beschrijven dat ze zich gingen identificeren met de slachtoffers.</p>
+    <blockquote>Ik heb wel schaamte voor mijn vader gevoeld en wilde zijn 'schuld' wegnemen door me te identificeren met Joden.<cite><a href="https://www.nationaalarchief.nl/beleven/verhalenarchief/een-kwartje-voor-hitlers-verjaardag">Een kwartje voor Hitlers verjaardag</a></cite></blockquote>
+  </div></div>
+
+  <div class="inzicht"><div class="nr">09</div><div>
+    <h3>Het dossier als keerpunt</h3>
+    <p>Archief, dossier en CABR komen bij <span class="stat">44</span> vertellers voor, zeven keer zo vaak als bij de bevrijding. Lotgenoten (vooral de Werkgroep Herkenning) bij <span class="stat">35</span>. Het dossier inzien wordt beschreven als lichamelijke ervaring, en soms als het moment waarop het oordeel over de ouder verschuift, in beide richtingen.</p>
+    <blockquote>Toen ik bij het archief in Den Haag wegging, begon ik vreselijk te beven, een heel raar gevoel.<cite><a href="https://www.nationaalarchief.nl/beleven/verhalenarchief/mijn-leven-als-gevolg-van-de-oorlog">Mijn leven als gevolg van de oorlog</a></cite></blockquote>
+    <blockquote>Sinds Joop een bezoek heeft gebracht aan het Nationaal Archief in Den Haag, eind november 2010, is hij milder over zijn vader gaan denken.<cite><a href="https://www.nationaalarchief.nl/beleven/verhalenarchief/ik-voel-me-zo-joods">'Ik voel me zo Joods'</a></cite></blockquote>
+  </div></div>
+
+  <div class="inzicht"><div class="nr">10</div><div>
+    <h3>Verhalen eindigen bij begrip, maar de schaamte gaat mee</h3>
+    <p>Splits je elk verhaal in drie gelijke delen, dan verschuift de taal. Woorden voor vergeving en verzoening staan zes keer zo vaak in het laatste deel als in het eerste, begrip drie keer, schuld vier keer. Schaamte en angst verschuiven nauwelijks. Het schrijven zelf lijkt een weg naar begrip, zonder dat de schaamte verdwijnt. Vergeven is ook geen vanzelfsprekend eindpunt:</p>
+    <blockquote>Ik zal m'n vader dit nooit kunnen vergeven, want dat staat voor mij gelijk aan vergeten.<cite><a href="https://www.nationaalarchief.nl/beleven/verhalenarchief/vergeven-staat-gelijk-aan-vergeten-dat-kan-ik-niet">'Vergeven staat gelijk aan vergeten: dat kan ik niet'</a></cite></blockquote>
+  </div></div>
+
+  <div class="inzicht"><div class="nr">11</div><div>
+    <h3>Angst is juist níet hoger</h3>
+    <p>Angst is de enige grote emotie die in de bevrijdingsverhalen vaker voorkomt <span class="stat">(10,0 tegen 7,9 per 10k)</span>. Daar is angst de angst van de oorlog zelf: bombardementen, razzia's, onderduiken. Hier is het verdriet <span class="stat">(1,5×)</span>, woede <span class="stat">(2,6×)</span> en de psychische nasleep: trauma, therapie, psychiater en depressie samen elf keer zo vaak. Opluchting en rust komen juist vijf keer minder voor. De bevrijding bracht deze kinderen geen bevrijding.</p>
+  </div></div>
+</section>
+
+<section>
+  <h2>Emoties naast elkaar</h2>
+  <p>Vermeldingen per 10.000 woorden, gesorteerd op hoeveel vaker ze voorkomen in de CABR-verhalen. Het getal rechts is het aantal van de 118 vertellers dat het woord gebruikt.</p>
+  <div class="legenda"><span><i style="background:var(--cabr)"></i>Kinderen over 'foute' ouders</span><span><i style="background:var(--bevr)"></i>65 Jaar Bevrijding</span></div>
+  <div class="grafiek" id="g-emo"></div>
+</section>
+
+<section>
+  <h2>Waar in het verhaal</h2>
+  <p>Elk verhaal in drie gelijke delen: begin, midden, eind. De staafjes tonen hoe de vermeldingen over die delen verdeeld zijn.</p>
+  <div class="boog" id="g-boog"></div>
+</section>
+
+<section>
+  <h2>Kenmerkende woorden</h2>
+  <p>Woorden die in deze verhalen veel vaker voorkomen dan in de bevrijdingsverhalen (log-likelihood), met minstens zes vertellers. Groter is sterker kenmerkend. Het kleine getal: aantal keer hier / aantal keer bij de bevrijding.</p>
+  <div class="woorden" id="g-woorden"></div>
+</section>
+
+<section>
+  <h2>Alle thema's</h2>
+  <div id="g-themas"></div>
+</section>
+
+<section>
+  <h2>Hoe dit gemaakt is</h2>
+  <p>De verhalen zijn opgehaald via de zoekdienst van de website van het Nationaal Archief (tabblad Verhalenarchief, categorie <i>Kinderen over 'foute' ouders</i>). Per thema is een lijst met woordvormen opgesteld, die in alle teksten is geteld. De citaten zijn daarna teruggezocht en in hun verhaal nagelezen.</p>
+  <ul class="kant">
+    <li><b>Woorden tellen is geen lezen.</b> "Kwaad" kan boosheid zijn of "goed en kwaad", "school" ook een opleiding later in het leven. De cijfers wijzen een richting, de citaten laten zien wat er staat.</li>
+    <li><b>Een paar schrijvers wegen zwaar.</b> De drie langste inzenders leverden samen een vijfde van alle woorden. Daarom staat bij elk thema hoeveel vertellers het noemen; dat getal is robuuster dan de frequentie.</li>
+    <li><b>Niet alles is eerste persoon.</b> In 2011 interviewden studenten van de Universiteit Utrecht kinderen van foute ouders; die verhalen staan in de derde persoon en drukken het aandeel "ik" juist omlaag.</li>
+    <li><b>Wie schreef, koos daarvoor.</b> Dit zijn mensen die hun verhaal wilden vertellen, vaak na therapie of via de Werkgroep Herkenning. Wie het nooit een plek gaf, staat er niet in.</li>
+    <li><b>De vergelijking is niet zuiver op alles.</b> Bij "scheldwoorden" scoren de bevrijdingsverhalen hoger, omdat daar "moffen" voor de bezetter wordt gebruikt. Zulke thema's staan wel in de tabel maar niet bij de inzichten.</li>
+  </ul>
+  <p class="meta">Opgehaald op 19 november 2026. Scripts en ruwe tellingen staan in de map <code>cabr-verhalen</code> van het project Archief.</p>
+</section>
+</main>
+
+<script>
+const D={"emoties":[{"l":"schaamte","v":36,"a":1.8,"b":0.3},{"l":"schuld(gevoel)","v":45,"a":2.9,"b":0.3},{"l":"angst","v":69,"a":7.9,"b":10.0},{"l":"woede / boosheid","v":55,"a":3.7,"b":1.4},{"l":"verdriet","v":63,"a":6.7,"b":4.5},{"l":"eenzaamheid","v":23,"a":1.0,"b":0.4},{"l":"haat / afkeer","v":28,"a":1.2,"b":0.8},{"l":"liefde","v":42,"a":2.3,"b":0.7},{"l":"loyaliteit","v":19,"a":0.9,"b":0.6},{"l":"onbegrip / verwarring","v":28,"a":1.1,"b":1.2},{"l":"begrip","v":30,"a":1.3,"b":0.4},{"l":"vergeving / verzoening","v":17,"a":1.0,"b":0.2},{"l":"opluchting / rust","v":24,"a":0.9,"b":4.7},{"l":"trauma / therapie","v":46,"a":3.3,"b":0.3},{"l":"trots","v":30,"a":1.4,"b":1.9}],"themas":{"Zwijgen & spreken":[{"l":"zwijgen","v":40,"a":2.3,"b":1.1},{"l":"geheim","v":25,"a":1.0,"b":1.3},{"l":"taboe","v":9,"a":0.4,"b":0.1},{"l":"er werd niet over gepraat","v":24,"a":0.7,"b":0.3},{"l":"vragen stellen","v":4,"a":0.1,"b":0.0}],"Stigma & uitsluiting":[{"l":"gepest / uitgescholden","v":46,"a":3.2,"b":0.8},{"l":"scheldwoorden (moffen-, NSB-kind, landverrader)","v":40,"a":2.0,"b":5.5},{"l":"buitengesloten / anders","v":12,"a":0.3,"b":0.1},{"l":"school / juf / meester","v":88,"a":25.9,"b":8.6}],"Gebeurtenissen na 1945":[{"l":"arrestatie / opgepakt","v":57,"a":3.7,"b":6.3},{"l":"kamp / internering","v":88,"a":15.7,"b":13.1},{"l":"kaalgeschoren / Dolle Dinsdag / Bijltjesdag","v":48,"a":1.9,"b":2.6},{"l":"tehuis / pleeggezin","v":51,"a":5.7,"b":3.3},{"l":"proces / tribunaal / veroordeeld","v":57,"a":4.4,"b":0.8},{"l":"bezit afgenomen / armoede","v":28,"a":1.1,"b":0.7},{"l":"emigratie","v":12,"a":0.6,"b":0.8}],"De \"foute\" daad":[{"l":"NSB","v":83,"a":15.9,"b":4.1},{"l":"Waffen-SS / Oostfront","v":52,"a":6.5,"b":1.7},{"l":"Jeugdstorm / Hitlerjugend","v":26,"a":3.2,"b":0.8},{"l":"Landwacht / politie","v":55,"a":7.7,"b":2.5},{"l":"collaboratie / verraad","v":44,"a":2.7,"b":1.0},{"l":"Joden / Jodenvervolging","v":58,"a":6.5,"b":2.2},{"l":"Duits(er) / Duitsland","v":91,"a":22.4,"b":46.2},{"l":"verzet (als contrast)","v":54,"a":3.3,"b":8.1}],"Zoeken & weten":[{"l":"archief / CABR / dossier","v":44,"a":3.7,"b":0.5},{"l":"Werkgroep Herkenning / lotgenoten","v":35,"a":3.4,"b":0.3},{"l":"brieven / dagboek / foto","v":69,"a":8.7,"b":10.1},{"l":"waarheid / weten","v":46,"a":2.7,"b":1.0}]},"positie":{"schaamte":[24,21,31],"angst":[117,102,108],"woede / boosheid":[42,55,54],"verdriet":[87,84,105],"haat / afkeer":[12,17,20],"liefde":[24,34,37],"begrip":[10,13,31],"vergeving / verzoening":[4,11,27],"opluchting / rust":[9,14,15],"trauma / therapie":[35,51,52],"schuld(gevoel)":[15,47,59],"eenzaamheid":[11,12,19]},"woorden":[{"w":"nsb","n":291,"r":8,"v":62},{"w":"kind","n":366,"r":29,"v":77},{"w":"verleden","n":176,"r":5,"v":63},{"w":"school","n":561,"r":80,"v":84},{"w":"vader","n":1910,"r":441,"v":109},{"w":"lid","n":215,"r":16,"v":63},{"w":"kinderen","n":918,"r":182,"v":99},{"w":"tante","n":371,"r":53,"v":46},{"w":"politieke","n":137,"r":8,"v":36},{"w":"trein","n":262,"r":32,"v":42},{"w":"klas","n":147,"r":10,"v":39},{"w":"schuld","n":68,"r":1,"v":30},{"w":"keuze","n":77,"r":2,"v":38},{"w":"moeder","n":1516,"r":389,"v":102},{"w":"deutsche","n":50,"r":0,"v":7},{"w":"dochter","n":165,"r":18,"v":56},{"w":"ouders","n":651,"r":140,"v":95},{"w":"mama","n":86,"r":4,"v":12},{"w":"gepest","n":48,"r":0,"v":23},{"w":"voelde","n":200,"r":26,"v":61},{"w":"leren","n":126,"r":11,"v":50},{"w":"fout","n":103,"r":7,"v":46},{"w":"papa","n":102,"r":7,"v":16},{"w":"herkenning","n":58,"r":1,"v":23},{"w":"oma","n":236,"r":35,"v":43},{"w":"herinneren","n":133,"r":13,"v":48},{"w":"mezelf","n":66,"r":2,"v":32},{"w":"politiek","n":54,"r":1,"v":26},{"w":"werkgroep","n":41,"r":0,"v":21},{"w":"juf","n":69,"r":3,"v":13},{"w":"achtergrond","n":51,"r":1,"v":34},{"w":"foute","n":85,"r":6,"v":39},{"w":"bewaker","n":37,"r":0,"v":13},{"w":"geboren","n":125,"r":14,"v":59},{"w":"bezoek","n":134,"r":16,"v":53},{"w":"geloof","n":87,"r":7,"v":25},{"w":"zwijgen","n":47,"r":1,"v":28},{"w":"boos","n":47,"r":1,"v":22},{"w":"meester","n":46,"r":1,"v":15},{"w":"dossier","n":61,"r":3,"v":31},{"w":"joden","n":93,"r":9,"v":38},{"w":"boek","n":98,"r":10,"v":35},{"w":"mussert","n":31,"r":0,"v":16},{"w":"archief","n":50,"r":2,"v":29},{"w":"vroeger","n":74,"r":6,"v":41},{"w":"opleiding","n":62,"r":4,"v":32},{"w":"zuster","n":104,"r":12,"v":26},{"w":"begrip","n":47,"r":2,"v":28}]};
+const NS='http://www.w3.org/2000/svg';
+function el(t,a,txt){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;return e}
+const fmt=n=>n.toLocaleString('nl-NL',{maximumFractionDigits:1});
+
+// Emoties: dumbbell
+(function(){
+  const rows=D.emoties.map(r=>({...r,ratio:r.b?r.a/r.b:99})).sort((x,y)=>y.ratio-x.ratio);
+  const W=740,L=190,R=150,rh=28,top=26,H=top+rows.length*rh+10;
+  const max=Math.ceil(Math.max(...rows.flatMap(r=>[r.a,r.b])));
+  const x=v=>L+(v/max)*(W-L-R);
+  const s=el('svg',{viewBox:`0 0 ${W} ${H}`,role:'img','aria-label':'Emoties per 10.000 woorden, CABR-verhalen tegenover bevrijdingsverhalen'});
+  for(let t=0;t<=max;t+=2){s.append(el('line',{x1:x(t),x2:x(t),y1:top-6,y2:H-8,stroke:'var(--lijn)'}));s.append(el('text',{x:x(t),y:14,'text-anchor':'middle','font-size':10,class:'z'},t))}
+  s.append(el('text',{x:W-R+34,y:14,'font-size':10,class:'z'},'×'));s.append(el('text',{x:W-R+84,y:14,'font-size':10,class:'z'},'vertellers'));
+  rows.forEach((r,i)=>{const y=top+i*rh+rh/2;
+    s.append(el('text',{x:L-10,y:y+4,'text-anchor':'end','font-size':12},r.l));
+    s.append(el('line',{x1:x(r.a),x2:x(r.b),y1:y,y2:y,stroke:'var(--zacht)','stroke-width':1.5}));
+    s.append(el('circle',{cx:x(r.b),cy:y,r:5,fill:'var(--bevr)'}));
+    s.append(el('circle',{cx:x(r.a),cy:y,r:6,fill:'var(--cabr)'}));
+    const rt=r.ratio>=1?fmt(r.ratio)+'×':'÷'+fmt(r.b/r.a);
+    s.append(el('text',{x:W-R+34,y:y+4,'font-size':12},rt));
+    s.append(el('text',{x:W-R+84,y:y+4,'font-size':12,class:'z'},r.v));
+  });
+  document.getElementById('g-emo').append(s);
+})();
+
+// Boog
+(function(){
+  const host=document.getElementById('g-boog');
+  const order=['vergeving / verzoening','begrip','schuld(gevoel)','eenzaamheid','haat / afkeer','liefde','trauma / therapie','opluchting / rust','woede / boosheid','schaamte','verdriet','angst'];
+  order.forEach(k=>{const b=D.positie[k];if(!b)return;const tot=b.reduce((a,c)=>a+c,0);
+    const f=document.createElement('figure');const c=document.createElement('figcaption');c.textContent=k;f.append(c);
+    const W=150,H=74,bw=36,g=12,m=Math.max(...b);
+    const s=el('svg',{viewBox:`0 0 ${W} ${H+16}`,role:'img','aria-label':`${k}: begin ${b[0]}, midden ${b[1]}, eind ${b[2]}`});
+    b.forEach((v,i)=>{const h=v/m*(H-14),xx=6+i*(bw+g);
+      s.append(el('rect',{x:xx,y:H-h,width:bw,height:h,fill:i===2?'var(--cabr)':'var(--zacht)',opacity:i===2?1:.45}));
+      s.append(el('text',{x:xx+bw/2,y:H-h-3,'text-anchor':'middle'},Math.round(v/tot*100)+'%'));
+      s.append(el('text',{x:xx+bw/2,y:H+12,'text-anchor':'middle'},['begin','midden','eind'][i]));});
+    f.append(s);host.append(f);});
+})();
+
+// Woorden
+(function(){
+  const host=document.getElementById('g-woorden');
+  const ws=D.woorden;const mx=Math.log(ws[0].n/(ws[0].r+1)),mn=Math.log(ws[ws.length-1].n/(ws[ws.length-1].r+1));
+  ws.forEach((w,i)=>{const sc=Math.log(w.n/(w.r+1));const sz=.85+1.1*Math.max(0,1-i/ws.length);
+    const sp=document.createElement('span');sp.style.fontSize=sz.toFixed(2)+'rem';sp.title=`${w.n}× in ${w.v} vertellers · ${w.r}× bij de bevrijding`;
+    sp.textContent=w.w;const sm=document.createElement('small');sm.textContent=`${w.n}/${w.r}`;sp.append(sm);host.append(sp);});
+})();
+
+// Thema-tabellen
+(function(){
+  const host=document.getElementById('g-themas');
+  Object.entries(D.themas).forEach(([g,L],i)=>{
+    const d=document.createElement('details');if(i===0)d.open=true;
+    d.innerHTML=`<summary>${g}</summary><div class="tabelwrap"><table><thead><tr><th>thema</th><th class="n">vertellers</th><th class="n">per 10k</th><th class="n">bevrijding</th><th class="n">verhouding</th></tr></thead><tbody></tbody></table></div>`;
+    const tb=d.querySelector('tbody');
+    [...L].sort((a,b)=>b.v-a.v).forEach(r=>{const tr=document.createElement('tr');
+      const rt=r.b?(r.a>=r.b?fmt(r.a/r.b)+'×':'÷'+fmt(r.b/r.a)):'—';
+      [r.l,r.v,fmt(r.a),fmt(r.b),rt].forEach((v,j)=>{const td=document.createElement('td');if(j)td.className='n';td.textContent=v;tr.append(td)});tb.append(tr)});
+    host.append(d);});
+})();
+</script>
